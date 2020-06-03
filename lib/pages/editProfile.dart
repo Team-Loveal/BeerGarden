@@ -53,6 +53,7 @@ class _EditProfileState extends State<EditProfile> {
                     ),
                     Center(
                       child: Row(
+
                         children: <Widget>[
                           Expanded(
                             child: Text(

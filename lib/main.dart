@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lovealapp/pages/editProfile.dart';
 import 'package:lovealapp/pages/uploadphoto.dart';
+import 'package:lovealapp/pages/login.dart';
 
 //main function is the first function that fires when dart file starts
 void main() {
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Loveal',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark(),
+      theme: ThemeData.light(),
       //what widget should load on the home screen
       home: EditProfile(),
       //wh: upload_pat widget should load on the home screen
