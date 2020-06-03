@@ -20,7 +20,10 @@ class _SignUpState extends State<SignUp> {
               Text('Sign Up', style: TextStyle(
                 color: Colors.pinkAccent,
                 fontSize: 70
-
+              )),
+              Text('Please sign up to find your match' , style: TextStyle(
+                color: Colors.pinkAccent,
+                fontSize: 35
               ))
             ],
           )
