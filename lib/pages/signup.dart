@@ -44,6 +44,7 @@ class _SignUpState extends State<SignUp> {
               child: TextField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
+                  prefixIcon: Icon(MdiIcons.email),
                   labelText: 'Email',
                   labelStyle: TextStyle(fontWeight: FontWeight.bold)),
                   )
@@ -55,6 +56,7 @@ class _SignUpState extends State<SignUp> {
                   obscureText: true,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(),
+                      prefixIcon: Icon(MdiIcons.key),
                       labelText: 'Password',
                       labelStyle: TextStyle(fontWeight: FontWeight.bold)),
                 )
