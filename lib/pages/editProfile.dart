@@ -23,10 +23,60 @@ class _EditProfileState extends State<EditProfile> {
               ),
               Container(
                 child: Column(
-//                  children: <Widget>[
-////                    CircleAvatar(backgroundImage: Image.asset('images/blank.jpg'),),
-////                  ],
-//                ),
+                  children: <Widget>[
+//                    Image.asset('images/blank.jpg'),
+                    CircleAvatar(
+                      radius: 50,
+                      backgroundImage: AssetImage('images/blank.jpg'),
+                      backgroundColor: Colors.white,
+                    ),
+                    Text(
+                      'Edit Profile Picture',
+                      style: TextStyle(
+                        color: Colors.pink,
+                        fontSize: 25,
+                      ),
+                    ),
+                    Text(
+                      'Nickname',
+                      style: TextStyle(
+                        color: Colors.orange[200],
+                        fontSize: 20,
+                      ),
+                    ),
+                    Text(
+                      'Location',
+                      style: TextStyle(
+                        color: Colors.orange[200],
+                        fontSize: 20,
+                      ),
+                    ),
+                    Center(
+                      child: Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: Text(
+                              'Age',
+                              style: TextStyle(
+                                color: Colors.orange[200],
+                                fontSize: 20,
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Text(
+                              'Age',
+                              style: TextStyle(
+                                color: Colors.orange[200],
+                                fontSize: 20,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
             ],
           ),

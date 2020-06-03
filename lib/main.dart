@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lovealapp/pages/editProfile.dart';
-
+import 'package:lovealapp/pages/uploadphoto.dart';
 
 //main function is the first function that fires when dart file starts
 void main() {
@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.dark(),
       //what widget should load on the home screen
       home: EditProfile(),
+      //wh: upload_pat widget should load on the home screen
     );
   }
 }
