@@ -67,6 +67,11 @@ class _EditProfileState extends State<EditProfile> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
+                          Container(
+                            child: DropdownButton<String>(
+//                              items: 'one',
+                            ),
+                          ),
                           Padding(
                             padding: EdgeInsets.only(right: 70),
                             child: Text(
