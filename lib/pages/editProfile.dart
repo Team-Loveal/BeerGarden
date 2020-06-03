@@ -10,8 +10,10 @@ class _EditProfileState extends State<EditProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Center(
+        child: Padding(
+          padding: EdgeInsets.all(30),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               Text(
                 'Edit Profile',
@@ -21,41 +23,52 @@ class _EditProfileState extends State<EditProfile> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              CircleAvatar(
+                radius: 60,
+                backgroundImage: AssetImage('images/blank.jpg'),
+                backgroundColor: Colors.white,
+              ),
+              Text(
+                'Edit Profile Picture',
+                style: TextStyle(
+                  color: Colors.pink,
+                  fontSize: 25,
+                ),
+              ),
               Container(
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-//                    Image.asset('images/blank.jpg'),
-                    CircleAvatar(
-                      radius: 50,
-                      backgroundImage: AssetImage('images/blank.jpg'),
-                      backgroundColor: Colors.white,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      textDirection: TextDirection.ltr,
+                      children: <Widget>[
+                        TextField(
+                          style: TextStyle(
+                              color: Colors.red, fontWeight: FontWeight.w300),
+                          decoration: InputDecoration(
+                            labelText: 'Nickname',
+                          ),
+                          autofocus: true,
+                          keyboardType: TextInputType.text,
+                        ),
+                        TextField(
+                          style: TextStyle(
+                              color: Colors.red, fontWeight: FontWeight.w300),
+                          decoration: InputDecoration(
+                            labelText: 'Location',
+                          ),
+                          autofocus: true,
+                          keyboardType: TextInputType.text,
+                        ),
+                      ],
                     ),
-                    Text(
-                      'Edit Profile Picture',
-                      style: TextStyle(
-                        color: Colors.pink,
-                        fontSize: 25,
-                      ),
-                    ),
-                    Text(
-                      'Nickname',
-                      style: TextStyle(
-                        color: Colors.orange[200],
-                        fontSize: 20,
-                      ),
-                    ),
-                    Text(
-                      'Location',
-                      style: TextStyle(
-                        color: Colors.orange[200],
-                        fontSize: 20,
-                      ),
-                    ),
-                    Center(
+                    Container(
                       child: Row(
-
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
-                          Expanded(
+                          Padding(
+                            padding: EdgeInsets.only(right: 70),
                             child: Text(
                               'Age',
                               style: TextStyle(
@@ -64,17 +77,28 @@ class _EditProfileState extends State<EditProfile> {
                               ),
                             ),
                           ),
-                          Expanded(
-                            child: Text(
-                              'Age',
-                              style: TextStyle(
-                                color: Colors.orange[200],
-                                fontSize: 20,
-                              ),
+                          Text(
+                            'Gender',
+                            style: TextStyle(
+                              color: Colors.orange[200],
+                              fontSize: 20,
                             ),
                           ),
                         ],
                       ),
+                    ),
+                    RaisedButton(
+                      child: Text(
+                        'Save',
+                        style: TextStyle(
+                          color: Colors.grey[900],
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      color: Colors.pinkAccent,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      onPressed: () => {},
                     )
                   ],
                 ),
