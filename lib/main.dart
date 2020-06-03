@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lovealapp/pages/signin.dart';
+import 'package:lovealapp/pages/messagesList.dart';
+import 'package:lovealapp/pages/uploadphoto.dart';
 import 'package:lovealapp/pages/login.dart';
 
 //main function is the first function that fires when dart file starts
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData.light(),
       //what widget should load on the home screen
-      home: Login(),
+      home: Messages(),
     );
   }
 }
