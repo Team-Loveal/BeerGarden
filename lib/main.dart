@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lovealapp/pages/signin.dart';
+import 'package:lovealapp/pages/editProfile.dart';
+
 
 //main function is the first function that fires when dart file starts
 void main() {
@@ -16,7 +17,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
       //what widget should load on the home screen
-      home: SignIn(),
+      home: EditProfile(),
     );
   }
 }
+
+
