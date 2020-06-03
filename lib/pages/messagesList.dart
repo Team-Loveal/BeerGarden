@@ -29,13 +29,15 @@ class _MessagesState extends State<Messages> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                CircleAvatar(
-                  radius: 40,
-                  backgroundColor: Color(0xffFDCF09),
+                Expanded(
                   child: CircleAvatar(
-                      radius: 25,
-                      backgroundImage: NetworkImage(
-                          'https://mymodernmet.com/wp/wp-content/uploads/2017/01/animal-selfies-5.jpg')),
+                    backgroundColor: Colors.pinkAccent,
+                    radius: 50,
+                    child: CircleAvatar(
+                        radius: 23,
+                        backgroundImage: NetworkImage(
+                            'https://mymodernmet.com/wp/wp-content/uploads/2017/01/animal-selfies-5.jpg')),
+                  ),
                 ),
                 Expanded(
                   flex: 3,
@@ -59,13 +61,15 @@ class _MessagesState extends State<Messages> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                CircleAvatar(
-                  radius: 40,
-                  backgroundColor: Color(0xffFDCF09),
+                Expanded(
                   child: CircleAvatar(
-                      radius: 25,
-                      backgroundImage: NetworkImage(
-                          'https://mymodernmet.com/wp/wp-content/uploads/2017/01/animal-selfies-5.jpg')),
+                    backgroundColor: Colors.pinkAccent,
+                    radius: 50,
+                    child: CircleAvatar(
+                        radius: 23,
+                        backgroundImage: NetworkImage(
+                            'https://mymodernmet.com/wp/wp-content/uploads/2017/01/animal-selfies-5.jpg')),
+                  ),
                 ),
                 Expanded(
                   flex: 3,
@@ -89,13 +93,15 @@ class _MessagesState extends State<Messages> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                CircleAvatar(
-                  radius: 40,
-                  backgroundColor: Color(0xffFDCF09),
+                Expanded(
                   child: CircleAvatar(
-                      radius: 25,
-                      backgroundImage: NetworkImage(
-                          'https://mymodernmet.com/wp/wp-content/uploads/2017/01/animal-selfies-5.jpg')),
+                    backgroundColor: Colors.pinkAccent,
+                    radius: 50,
+                    child: CircleAvatar(
+                        radius: 23,
+                        backgroundImage: NetworkImage(
+                            'https://mymodernmet.com/wp/wp-content/uploads/2017/01/animal-selfies-5.jpg')),
+                  ),
                 ),
                 Expanded(
                   flex: 3,
