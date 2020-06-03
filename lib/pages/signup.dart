@@ -79,15 +79,72 @@ class _SignUpState extends State<SignUp> {
                   mainAxisAlignment: MainAxisAlignment.center,
                 )
               )
-            )
-
-
+            ),
+            Container(
+                alignment: Alignment.center,
+                margin: EdgeInsets.fromLTRB(0, 50, 0, 10),
+                child: Text('Sign up with',
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 12,
+                    ))),
+            Container(
+                child: Row(
+                  children: <Widget>[
+                    RawMaterialButton(
+                      onPressed: () {},
+                      fillColor: Colors.white,
+                      child: Icon(
+                        MdiIcons.facebook,
+                        size: 40,
+                        color: Color.fromARGB(255, 66, 103, 178),
+                      ),
+                      shape: CircleBorder(),
+                    ),
+                    RawMaterialButton(
+                      onPressed: () {},
+                      fillColor: Colors.white,
+                      child: Icon(
+                        MdiIcons.google,
+                        size: 40,
+                        color: Color.fromARGB(255, 234, 67, 53),
+                      ),
+                      shape: CircleBorder(),
+                    ),
+                    RawMaterialButton(
+                      onPressed: () {},
+                      fillColor: Colors.white,
+                      child: Icon(
+                        MdiIcons.twitter,
+                        size: 40,
+                        color: Color.fromARGB(255, 29,161,242),
+                      ),
+                      shape: CircleBorder(),
+                    ),
+                  ],
+                  mainAxisAlignment: MainAxisAlignment.center,
+                )),
+            Container(
+                padding: EdgeInsets.only(top: 10),
+                child: Row(
+                  children: <Widget>[
+                    Text("Already have an account?",
+                        style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey,
+                            fontWeight: FontWeight.bold)),
+                    FlatButton(
+                        onPressed: () {},
+                        textColor: Colors.pink,
+                        child: Text(
+                          'Sign in',
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        )),
+                  ],
+                  mainAxisAlignment: MainAxisAlignment.center,
+                )),
           ],
-
-        )
-
-        
-      )
-    );
+        )));
   }
 }
