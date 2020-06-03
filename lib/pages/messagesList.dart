@@ -29,11 +29,13 @@ class _MessagesState extends State<Messages> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Expanded(
-                  child: Image(
-                    image: NetworkImage(
-                        'https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_1280.png'),
-                  ),
+                CircleAvatar(
+                  radius: 40,
+                  backgroundColor: Color(0xffFDCF09),
+                  child: CircleAvatar(
+                      radius: 25,
+                      backgroundImage: NetworkImage(
+                          'https://mymodernmet.com/wp/wp-content/uploads/2017/01/animal-selfies-5.jpg')),
                 ),
                 Expanded(
                   flex: 3,
@@ -57,11 +59,13 @@ class _MessagesState extends State<Messages> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Expanded(
-                  child: Image(
-                    image: NetworkImage(
-                        'https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_1280.png'),
-                  ),
+                CircleAvatar(
+                  radius: 40,
+                  backgroundColor: Color(0xffFDCF09),
+                  child: CircleAvatar(
+                      radius: 25,
+                      backgroundImage: NetworkImage(
+                          'https://mymodernmet.com/wp/wp-content/uploads/2017/01/animal-selfies-5.jpg')),
                 ),
                 Expanded(
                   flex: 3,
@@ -85,11 +89,13 @@ class _MessagesState extends State<Messages> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Expanded(
-                  child: Image(
-                    image: NetworkImage(
-                        'https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_1280.png'),
-                  ),
+                CircleAvatar(
+                  radius: 40,
+                  backgroundColor: Color(0xffFDCF09),
+                  child: CircleAvatar(
+                      radius: 25,
+                      backgroundImage: NetworkImage(
+                          'https://mymodernmet.com/wp/wp-content/uploads/2017/01/animal-selfies-5.jpg')),
                 ),
                 Expanded(
                   flex: 3,
@@ -113,11 +119,13 @@ class _MessagesState extends State<Messages> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Expanded(
-                  child: Image(
-                    image: NetworkImage(
-                        'https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_1280.png'),
-                  ),
+                CircleAvatar(
+                  radius: 40,
+                  backgroundColor: Color(0xffFDCF09),
+                  child: CircleAvatar(
+                      radius: 25,
+                      backgroundImage: NetworkImage(
+                          'https://mymodernmet.com/wp/wp-content/uploads/2017/01/animal-selfies-5.jpg')),
                 ),
                 Expanded(
                   flex: 3,
@@ -141,11 +149,13 @@ class _MessagesState extends State<Messages> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Expanded(
-                  child: Image(
-                    image: NetworkImage(
-                        'https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_1280.png'),
-                  ),
+                CircleAvatar(
+                  radius: 40,
+                  backgroundColor: Color(0xffFDCF09),
+                  child: CircleAvatar(
+                      radius: 25,
+                      backgroundImage: NetworkImage(
+                          'https://mymodernmet.com/wp/wp-content/uploads/2017/01/animal-selfies-5.jpg')),
                 ),
                 Expanded(
                   flex: 3,
@@ -169,11 +179,13 @@ class _MessagesState extends State<Messages> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Expanded(
-                  child: Image(
-                    image: NetworkImage(
-                        'https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_1280.png'),
-                  ),
+                CircleAvatar(
+                  radius: 40,
+                  backgroundColor: Color(0xffFDCF09),
+                  child: CircleAvatar(
+                      radius: 25,
+                      backgroundImage: NetworkImage(
+                          'https://mymodernmet.com/wp/wp-content/uploads/2017/01/animal-selfies-5.jpg')),
                 ),
                 Expanded(
                   flex: 3,
@@ -197,11 +209,13 @@ class _MessagesState extends State<Messages> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Expanded(
-                  child: Image(
-                    image: NetworkImage(
-                        'https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_1280.png'),
-                  ),
+                CircleAvatar(
+                  radius: 40,
+                  backgroundColor: Color(0xffFDCF09),
+                  child: CircleAvatar(
+                      radius: 25,
+                      backgroundImage: NetworkImage(
+                          'https://mymodernmet.com/wp/wp-content/uploads/2017/01/animal-selfies-5.jpg')),
                 ),
                 Expanded(
                   flex: 3,
@@ -225,11 +239,13 @@ class _MessagesState extends State<Messages> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Expanded(
-                  child: Image(
-                    image: NetworkImage(
-                        'https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_1280.png'),
-                  ),
+                CircleAvatar(
+                  radius: 40,
+                  backgroundColor: Color(0xffFDCF09),
+                  child: CircleAvatar(
+                      radius: 25,
+                      backgroundImage: NetworkImage(
+                          'https://mymodernmet.com/wp/wp-content/uploads/2017/01/animal-selfies-5.jpg')),
                 ),
                 Expanded(
                   flex: 3,
@@ -253,11 +269,13 @@ class _MessagesState extends State<Messages> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Expanded(
-                  child: Image(
-                    image: NetworkImage(
-                        'https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_1280.png'),
-                  ),
+                CircleAvatar(
+                  radius: 40,
+                  backgroundColor: Color(0xffFDCF09),
+                  child: CircleAvatar(
+                      radius: 25,
+                      backgroundImage: NetworkImage(
+                          'https://mymodernmet.com/wp/wp-content/uploads/2017/01/animal-selfies-5.jpg')),
                 ),
                 Expanded(
                   flex: 3,
@@ -281,11 +299,13 @@ class _MessagesState extends State<Messages> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Expanded(
-                  child: Image(
-                    image: NetworkImage(
-                        'https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_1280.png'),
-                  ),
+                CircleAvatar(
+                  radius: 40,
+                  backgroundColor: Color(0xffFDCF09),
+                  child: CircleAvatar(
+                      radius: 25,
+                      backgroundImage: NetworkImage(
+                          'https://mymodernmet.com/wp/wp-content/uploads/2017/01/animal-selfies-5.jpg')),
                 ),
                 Expanded(
                   flex: 3,
@@ -309,11 +329,13 @@ class _MessagesState extends State<Messages> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Expanded(
-                  child: Image(
-                    image: NetworkImage(
-                        'https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_1280.png'),
-                  ),
+                CircleAvatar(
+                  radius: 40,
+                  backgroundColor: Color(0xffFDCF09),
+                  child: CircleAvatar(
+                      radius: 25,
+                      backgroundImage: NetworkImage(
+                          'https://mymodernmet.com/wp/wp-content/uploads/2017/01/animal-selfies-5.jpg')),
                 ),
                 Expanded(
                   flex: 3,
@@ -337,11 +359,13 @@ class _MessagesState extends State<Messages> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Expanded(
-                  child: Image(
-                    image: NetworkImage(
-                        'https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_1280.png'),
-                  ),
+                CircleAvatar(
+                  radius: 40,
+                  backgroundColor: Color(0xffFDCF09),
+                  child: CircleAvatar(
+                      radius: 25,
+                      backgroundImage: NetworkImage(
+                          'https://mymodernmet.com/wp/wp-content/uploads/2017/01/animal-selfies-5.jpg')),
                 ),
                 Expanded(
                   flex: 3,
