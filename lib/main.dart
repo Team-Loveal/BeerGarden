@@ -4,6 +4,8 @@ import 'package:lovealapp/pages/uploadphoto.dart';
 import 'package:lovealapp/pages/login.dart';
 import 'package:lovealapp/pages/welcome.dart';
 import 'package:lovealapp/pages/signin.dart';
+import 'package:lovealapp/pages/signup.dart';
+import 'package:lovealapp/pages/profilePreview.dart';
 
 //main function is the first function that fires when dart file starts
 void main() {

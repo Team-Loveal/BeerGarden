@@ -20,43 +20,49 @@ class _WelcomeState extends State<Welcome> {
         body: SafeArea(
           child: Center(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.end,
-             // mainAxisSize: MainAxisSize.max,
+             // crossAxisAlignment: CrossAxisAlignment.center,
+             // mainAxisAlignment: MainAxisAlignment.center,
+              //mainAxisSize: MainAxisSize.max,
              // mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
+                Spacer(flex: 2),
                 Text('Welcome to Loveal', style: TextStyle(
                     fontSize: 45
                 ),),
                 Text('A dating app for ugly people', style: TextStyle(
                     fontSize: 20
                 )),
+                Spacer(flex:4),
                 MaterialButton(
                   child: Text('Login',
                       style: TextStyle(
                         color: Colors.grey[900],
                         fontWeight: FontWeight.bold,
+                          fontSize: 20
                       )),
                   color: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
                   onPressed: () => {},
-                  minWidth: 100,
+                  minWidth: 250
 
                 ),
-                RaisedButton(
+                MaterialButton(
                   child: Text('Signup',
                       style: TextStyle(
                         color: Colors.grey[900],
                         fontWeight: FontWeight.bold,
+                          fontSize: 20
                       )),
                   color: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
                   onPressed: () => {},
-                )
+                  minWidth: 250
+                ),
+                Spacer(flex: 1)
               ],
 
             )
