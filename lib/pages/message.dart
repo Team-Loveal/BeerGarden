@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 //for chat bubble
+//https://github.com/vi-k/bubble
 import 'package:bubble/bubble.dart';
 
 String _name = 'Ugly Jeff';
@@ -103,7 +104,6 @@ class _MessageState extends State<Message> {
 class ChatMessage extends StatelessWidget {
   ChatMessage({this.text});
   final String text;
-  //replace with text variable for the real thing
 
   @override
   Widget build(BuildContext context) {
@@ -129,28 +129,6 @@ class ChatMessage extends StatelessWidget {
           ),
         ],
       ),
-//      child: SizedBox(
-//        height: 400,
-//        child: ListView(
-//          padding: EdgeInsets.all(8.0),
-//          children: [
-//            Bubble(
-//              nip: BubbleNip.leftTop,
-//              color: Colors.pinkAccent,
-//              margin: BubbleEdges.only(top: 8.0),
-//              child: Text(text, style: TextStyle(color: Colors.black87)),
-//            ),
-//            Bubble(
-//              margin: BubbleEdges.only(top: 8.0),
-//              nip: BubbleNip.rightTop,
-//              color: Colors.yellowAccent,
-//              child: Text("Hello",
-//                  style: TextStyle(color: Colors.black87),
-//                  textAlign: TextAlign.right),
-//            ),
-//          ],
-//        ),
-//      ),
     );
   }
 }
