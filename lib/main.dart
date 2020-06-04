@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData.light(),
       //what widget should load on the home screen
-      home: Login(),
+      home: SignUp(),
     );
   }
 }
