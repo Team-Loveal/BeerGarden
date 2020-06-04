@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lovealapp/pages/editProfile.dart';
 import 'package:lovealapp/pages/uploadphoto.dart';
 import 'package:lovealapp/pages/login.dart';
+import 'package:lovealapp/pages/message.dart';
 import 'package:lovealapp/pages/welcome.dart';
 import 'package:lovealapp/pages/signin.dart';
 import 'package:lovealapp/pages/signup.dart';
@@ -21,9 +22,7 @@ class MyApp extends StatelessWidget {
       title: 'Loveal',
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
-      //what widget should load on the home screen
-      home: Welcome(),
-      //wh: upload_pat widget should load on the home screen
+      home: Message(),
     );
   }
 }
