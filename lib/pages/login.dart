@@ -38,6 +38,7 @@ class _LoginState extends State<Login> {
                     child: TextField(
                       decoration: InputDecoration(
                           border: OutlineInputBorder(),
+                          prefixIcon: Icon(MdiIcons.email),
                           labelText: 'Email',
                           labelStyle: TextStyle(fontWeight: FontWeight.bold)),
                     )),
@@ -48,6 +49,7 @@ class _LoginState extends State<Login> {
                       obscureText: true,
                       decoration: InputDecoration(
                           border: OutlineInputBorder(),
+                          prefixIcon: Icon(MdiIcons.key),
                           labelText: 'Password',
                           labelStyle: TextStyle(fontWeight: FontWeight.bold)),
                     )),
@@ -97,7 +99,7 @@ class _LoginState extends State<Login> {
                       child: Icon(
                         MdiIcons.facebook,
                         size: 40,
-                        color: Colors.blue,
+                        color: Color.fromARGB(255, 66, 103, 178),
                       ),
                       shape: CircleBorder(),
                     ),
@@ -107,7 +109,17 @@ class _LoginState extends State<Login> {
                       child: Icon(
                         MdiIcons.google,
                         size: 40,
-                        color: Colors.red,
+                        color: Color.fromARGB(255, 234, 67, 53),
+                      ),
+                      shape: CircleBorder(),
+                    ),
+                    RawMaterialButton(
+                      onPressed: () {},
+                      fillColor: Colors.white,
+                      child: Icon(
+                        MdiIcons.twitter,
+                        size: 40,
+                        color: Color.fromARGB(255, 29, 161, 242),
                       ),
                       shape: CircleBorder(),
                     ),
