@@ -1,9 +1,11 @@
 import 'dart:ui';
-
-import 'package:flutter/foundation.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'package:flutter/foundation.dart';
+
 class CreateProfile extends StatefulWidget {
+
   @override
   _CreateProfileState createState() => _CreateProfileState();
 }
@@ -11,7 +13,7 @@ class CreateProfile extends StatefulWidget {
 class _CreateProfileState extends State<CreateProfile> {
   String age = '20 - 29';
   String gender = 'Female';
-  List<bool> isSelected = List.generate(10, (_) => false);
+  List<bool> isSelected = List.generate(2, (_) => false);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,30 +90,56 @@ class _CreateProfileState extends State<CreateProfile> {
                 ),
                 keyboardType: TextInputType.text,
               ),
-              ToggleButtons(
-                children: <Widget>[
-                  Text("murder"),
-                  Text("dance murder"),
-                  Text("pancakes"),
-                  Text("yodle"),
-                  Text("sky diving"),
-                  Text("turtles"),
-                  Text("watching harry potter"),
-                  Text("1 person dance parties"),
-                  Text("sleep"),
-                  Text("swimming")
+              Wrap(
+                children: [
+                  FilterChip(
+                    label: Text('Popcorn'),
+                    selected: false,
+                    onSelected: (bool selected) {
+                      setState(() {});
+                    },
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  FilterChip(
+                    label: Text('Coke'),
+                    labelStyle: TextStyle(
+                        color: widget.isSelected ? Colors.black : Colors.white),
+                    selected: widget.isSelected,
+                    onSelected: (bool selected) {
+                      setState(() {
+                        widget.isSelected = !widget.isSelected;
+                      });
+                    },
+                    selectedColor: Theme.of(context).accentColor,
+                    checkmarkColor: Colors.black,
+                  ),
                 ],
-                onPressed: (int index) {
-                  setState(() {
-                    isSelected[index] = !isSelected[index];
-                  });
-                },
-                isSelected: isSelected,
               )
-            ],
+                ],
+              )
+//              ToggleButtons(
+//                children: <Widget>[
+//                  Text("murder"),
+//                  Text("dance murder"),
+//                  Text("pancakes"),
+//                  Text("yodle"),
+//                  Text("sky diving"),
+//                  Text("turtles"),
+//                  Text("watching harry potter"),
+//                  Text("1 person dance parties"),
+//                  Text("sleep"),
+//                  Text("swimming")
+//                ],
+//                onPressed: (int index) {
+//                  setState(() {
+//                    isSelected[index] = !isSelected[index];
+//                  });
+//                },
+//                isSelected: isSelected,
+              ),
           ),
-        ),
-      ),
     );
   }
 }
