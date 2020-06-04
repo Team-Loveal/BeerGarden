@@ -12,6 +12,16 @@ class _EditProfileState extends State<EditProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Edit Profile',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 40,
+            fontWeight: FontWeight.bold,
+        ),
+      ),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -21,24 +31,6 @@ class _EditProfileState extends State<EditProfile> {
               children: <Widget>[
                 Column(
                   children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        BackButtonIcon(),
-                        Expanded(
-                          child: Center(
-                            child: Text(
-                              'Edit Profile',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 40,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
                     Padding(
                       padding: EdgeInsets.all(10),
                       child: CircleAvatar(
