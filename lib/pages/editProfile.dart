@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class EditProfile extends StatefulWidget {
+  String age = '20 - 29';
   @override
   _EditProfileState createState() => _EditProfileState();
 }
@@ -13,13 +14,13 @@ class _EditProfileState extends State<EditProfile> {
         child: Padding(
           padding: EdgeInsets.all(30),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              Padding(
-                padding: EdgeInsets.all(20),
-                child: Column(
-                  children: <Widget>[
-                    Text(
+              Column(
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Text(
                       'Edit Profile',
                       style: TextStyle(
                         color: Colors.white,
@@ -27,22 +28,27 @@ class _EditProfileState extends State<EditProfile> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    CircleAvatar(
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(10),
+                    child: CircleAvatar(
                       radius: 60,
                       backgroundImage: AssetImage('images/blank.jpg'),
                       backgroundColor: Colors.white,
                     ),
-                    Text(
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Text(
                       'Edit Profile Picture',
                       style: TextStyle(
                         color: Colors.pink,
                         fontSize: 25,
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-
               Container(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -71,33 +77,41 @@ class _EditProfileState extends State<EditProfile> {
                         ),
                       ],
                     ),
-                    Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          Container(
-                            child: DropdownButton<String>(
-//                              items: 'one',
+                    Padding(
+                      padding: EdgeInsets.only(top: 20),
+                      child: Container(
+                        child: Row(
+                          children: <Widget>[
+//                          Container(
+//                            child: DropdownButton<String>(
+////                              items: 'one',
+//                            ),
+//                          ),
+                            Padding(
+                              padding: EdgeInsets.only(right: 70),
+                              child: Text(
+                                'Age',
+                                style: TextStyle(
+                                  color: Colors.orange[200],
+                                  fontSize: 20,
+                                ),
+                              ),
                             ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(right: 70),
-                            child: Text(
-                              'Age',
+//                            Container(
+////                              child: DropdownButton<String>(
+////                                value: chosenValue,
+////                                items: <String>['Male', 'Female', 'Other'],
+////                              ),
+//                            )
+                            Text(
+                              'Gender',
                               style: TextStyle(
                                 color: Colors.orange[200],
                                 fontSize: 20,
                               ),
                             ),
-                          ),
-                          Text(
-                            'Gender',
-                            style: TextStyle(
-                              color: Colors.orange[200],
-                              fontSize: 20,
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                     RaisedButton(
