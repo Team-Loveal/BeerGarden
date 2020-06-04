@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lovealapp/pages/messagesList.dart';
+import 'package:lovealapp/pages/editProfile.dart';
 import 'package:lovealapp/pages/uploadphoto.dart';
 import 'package:lovealapp/pages/login.dart';
 import 'package:lovealapp/pages/signup.dart';
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Loveal',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.light(),
+      theme: ThemeData.dark(),
       //what widget should load on the home screen
       home: ProfilePreview(),
     );
