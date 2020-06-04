@@ -119,11 +119,7 @@ class _LoginState extends State<Login> {
                       child: Icon(
                         MdiIcons.twitter,
                         size: 40,
-<<<<<<< HEAD
                         color: Color.fromARGB(255, 29, 161, 242),
-=======
-                        color: Color.fromARGB(255, 29,161,242),
->>>>>>> 8234c3b606fc82e69b2e5ade9168b24072f36a40
                       ),
                       shape: CircleBorder(),
                     ),

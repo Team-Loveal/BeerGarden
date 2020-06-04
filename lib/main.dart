@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:lovealapp/pages/editProfile.dart';
 import 'package:lovealapp/pages/uploadphoto.dart';
 import 'package:lovealapp/pages/login.dart';
+import 'package:lovealapp/pages/welcome.dart';
+import 'package:lovealapp/pages/signin.dart';
 import 'package:lovealapp/pages/signup.dart';
 import 'package:lovealapp/pages/profilePreview.dart';
 
@@ -20,7 +22,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
       //what widget should load on the home screen
-      home: ProfilePreview(),
+      home: Welcome(),
+      //wh: upload_pat widget should load on the home screen
     );
   }
 }
