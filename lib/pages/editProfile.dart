@@ -15,26 +15,34 @@ class _EditProfileState extends State<EditProfile> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              Text(
-                'Edit Profile',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 40,
-                  fontWeight: FontWeight.bold,
+              Padding(
+                padding: EdgeInsets.all(20),
+                child: Column(
+                  children: <Widget>[
+                    Text(
+                      'Edit Profile',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    CircleAvatar(
+                      radius: 60,
+                      backgroundImage: AssetImage('images/blank.jpg'),
+                      backgroundColor: Colors.white,
+                    ),
+                    Text(
+                      'Edit Profile Picture',
+                      style: TextStyle(
+                        color: Colors.pink,
+                        fontSize: 25,
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              CircleAvatar(
-                radius: 60,
-                backgroundImage: AssetImage('images/blank.jpg'),
-                backgroundColor: Colors.white,
-              ),
-              Text(
-                'Edit Profile Picture',
-                style: TextStyle(
-                  color: Colors.pink,
-                  fontSize: 25,
-                ),
-              ),
+
               Container(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
