@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 class EditProfile extends StatefulWidget {
-  String age = '20 - 29';
   @override
   _EditProfileState createState() => _EditProfileState();
 }
 
 class _EditProfileState extends State<EditProfile> {
+  String age = '20 - 29';
+  String gender = 'Gender';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +52,7 @@ class _EditProfileState extends State<EditProfile> {
               ),
               Container(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -97,17 +98,25 @@ class _EditProfileState extends State<EditProfile> {
                                 ),
                               ),
                             ),
-//                            Container(
-////                              child: DropdownButton<String>(
-////                                value: chosenValue,
-////                                items: <String>['Male', 'Female', 'Other'],
-////                              ),
-//                            )
-                            Text(
-                              'Gender',
-                              style: TextStyle(
-                                color: Colors.orange[200],
-                                fontSize: 20,
+                            Container(
+                              child: DropdownButton<String>(
+                                value: gender,
+                                icon: Icon(Icons.arrow_downward),
+                                iconSize: 24,
+                                elevation: 16,
+                                onChanged: (String newValue){
+                                  setState(() {
+                                    gender = newValue;
+                                  });
+                                },
+                                items: <String>['Gender', 'Female', 'Male', 'Other']
+                                .map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                      value: value,
+                                    child: Text(value),
+                                  );
+                                })
+                                .toList(),
                               ),
                             ),
                           ],
