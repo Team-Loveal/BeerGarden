@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+//for chat bubble
+import 'package:bubble/bubble.dart';
 
 String _name = 'Ugly Jeff';
 
@@ -8,7 +10,6 @@ class Message extends StatefulWidget {
 }
 
 class _MessageState extends State<Message> {
-
   //MESSAGE INPUT AND SEND
   Widget _buildTextInput() {
     return Container(
@@ -30,15 +31,13 @@ class _MessageState extends State<Message> {
 
           //SEND BUTTON
           //icons inherit their color and style from IconTheme widget
-          IconTheme(
-            data: IconThemeData(color: Theme.of(context).accentColor),
-            child: Container(
-              margin: EdgeInsets.symmetric(horizontal: 4.0),
-              child: IconButton(
-                  icon: const Icon(Icons.send),
-                  onPressed: () => _handleSubmitted(_textController.text)),
-            ),
-          )
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 4.0),
+            child: IconButton(
+                color: Colors.pinkAccent,
+                icon: const Icon(Icons.send),
+                onPressed: () => _handleSubmitted(_textController.text)),
+          ),
         ],
       ),
     );
@@ -79,10 +78,10 @@ class _MessageState extends State<Message> {
           //LIST OF MESSAGES
           children: <Widget>[
             Flexible(
-//builds a list on demand by providing a function that is called once per item in the list
-            //the function returns a new widget at each call
+              //builds a list on demand by providing a function that is called once per item in the list
+              //the function returns a new widget at each call
               //the builder automatically detects mutations of its children parameter and initiates a rebuild
-              //parameters passed in customize the list contents and apperance
+              //parameters passed in customize the list contents and appearance
               child: ListView.builder(
                 padding: EdgeInsets.all(8.0),
                 reverse: true,
@@ -93,8 +92,7 @@ class _MessageState extends State<Message> {
             Divider(height: 1.0),
             //INPUT MESSAGE FIELD
             Container(
-              decoration:
-                  BoxDecoration(color: Theme.of(context).cardColor),
+              decoration: BoxDecoration(color: Theme.of(context).cardColor),
               child: _buildTextInput(),
             ),
           ],
@@ -105,35 +103,54 @@ class _MessageState extends State<Message> {
 class ChatMessage extends StatelessWidget {
   ChatMessage({this.text});
   final String text;
+  //replace with text variable for the real thing
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        Container(
-          margin: EdgeInsets.symmetric(vertical: 10.0),
-          child: Row(
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 5.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            margin: const EdgeInsets.only(right: 16.0),
+            child: CircleAvatar(child: Text(_name[0])),
+          ),
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              //AVATAR
-              Container(
-                margin: const EdgeInsets.only(right: 16.0),
-                child: CircleAvatar(child: Text(_name[0])),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(_name, style: Theme.of(context).textTheme.headline4),
-                  Container(
-                    margin: EdgeInsets.only(top: 5.0),
-                    child: Text(text),
-                  ),
-                ],
-              ),
+            Bubble(
+              nip: BubbleNip.leftTop,
+              color: Colors.pinkAccent,
+              margin: BubbleEdges.only(top: 8.0),
+              child: Text(text, style: TextStyle(color: Colors.black87)),
+            ),
             ],
           ),
-        ),
-      ],
+        ],
+      ),
+//      child: SizedBox(
+//        height: 400,
+//        child: ListView(
+//          padding: EdgeInsets.all(8.0),
+//          children: [
+//            Bubble(
+//              nip: BubbleNip.leftTop,
+//              color: Colors.pinkAccent,
+//              margin: BubbleEdges.only(top: 8.0),
+//              child: Text(text, style: TextStyle(color: Colors.black87)),
+//            ),
+//            Bubble(
+//              margin: BubbleEdges.only(top: 8.0),
+//              nip: BubbleNip.rightTop,
+//              color: Colors.yellowAccent,
+//              child: Text("Hello",
+//                  style: TextStyle(color: Colors.black87),
+//                  textAlign: TextAlign.right),
+//            ),
+//          ],
+//        ),
+//      ),
     );
   }
 }
