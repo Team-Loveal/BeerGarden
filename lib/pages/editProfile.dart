@@ -7,7 +7,8 @@ class EditProfile extends StatefulWidget {
 
 class _EditProfileState extends State<EditProfile> {
   String age = '20 - 29';
-  String gender = 'Gender';
+  String gender = 'Female';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,58 +84,90 @@ class _EditProfileState extends State<EditProfile> {
                       child: Container(
                         child: Row(
                           children: <Widget>[
-//                          Container(
-//                            child: DropdownButton<String>(
-////                              items: 'one',
-//                            ),
-//                          ),
                             Padding(
                               padding: EdgeInsets.only(right: 70),
-                              child: Text(
-                                'Age',
-                                style: TextStyle(
-                                  color: Colors.orange[200],
-                                  fontSize: 20,
+                              child: Container(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
+                                      'Age',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                    DropdownButton<String>(
+                                      value: age,
+                                      iconSize: 24,
+                                      onChanged: (String newValue) {
+                                        setState(() {
+                                          age = newValue;
+                                        });
+                                      },
+                                      items: <String>['20 - 29', '30 - 39', '40 - 49', '50 - 59', '60 - 69']
+                                          .map<DropdownMenuItem<String>>(
+                                              (String value) {
+                                            return DropdownMenuItem<String>(
+                                              value: value,
+                                              child: Text(value),
+                                            );
+                                          }).toList(),
+                                    ),
+                                  ],
                                 ),
-                              ),
+                              )
                             ),
                             Container(
-                              child: DropdownButton<String>(
-                                value: gender,
-                                icon: Icon(Icons.arrow_downward),
-                                iconSize: 24,
-                                elevation: 16,
-                                onChanged: (String newValue){
-                                  setState(() {
-                                    gender = newValue;
-                                  });
-                                },
-                                items: <String>['Gender', 'Female', 'Male', 'Other']
-                                .map<DropdownMenuItem<String>>((String value) {
-                                  return DropdownMenuItem<String>(
-                                      value: value,
-                                    child: Text(value),
-                                  );
-                                })
-                                .toList(),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Text(
+                                    'Gender',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                  DropdownButton<String>(
+                                    value: gender,
+                                    iconSize: 24,
+                                    onChanged: (String newValue) {
+                                      setState(() {
+                                        gender = newValue;
+                                      });
+                                    },
+                                    items: <String>['Female', 'Male', 'Other']
+                                        .map<DropdownMenuItem<String>>(
+                                            (String value) {
+                                      return DropdownMenuItem<String>(
+                                        value: value,
+                                        child: Text(value),
+                                      );
+                                    }).toList(),
+                                  ),
+                                ],
                               ),
                             ),
                           ],
                         ),
                       ),
                     ),
-                    RaisedButton(
-                      child: Text(
-                        'Save',
-                        style: TextStyle(
-                          color: Colors.grey[900],
-                          fontWeight: FontWeight.bold,
+                    Padding(
+                      padding: EdgeInsets.only(top: 20),
+                      child: RaisedButton(
+                        child: Text(
+                          'Save',
+                          style: TextStyle(
+                            color: Colors.grey[900],
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
+                        color: Colors.pinkAccent,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                        onPressed: () => {},
                       ),
-                      color: Colors.pinkAccent,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)),
-                      onPressed: () => {},
                     )
                   ],
                 ),
