@@ -7,6 +7,7 @@ import 'package:lovealapp/pages/welcome.dart';
 import 'package:lovealapp/pages/signin.dart';
 import 'package:lovealapp/pages/signup.dart';
 import 'package:lovealapp/pages/profilePreview.dart';
+import 'package:lovealapp/pages/wrapper.dart';
 
 //main function is the first function that fires when dart file starts
 void main() {
@@ -22,7 +23,8 @@ class MyApp extends StatelessWidget {
       title: 'Loveal',
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
-      home: Welcome(),
+      home: Wrapper(),
+//      home: Welcome(),
       routes: {
         '/signup':(_) => SignUp(),
         '/login':(_) => Login()
@@ -30,3 +32,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+//If user is logged in, home will be matchedProfile page
+//If use isn't logged in home will be Welcome()

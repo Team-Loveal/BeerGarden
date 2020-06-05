@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/animation.dart';
+import 'package:lovealapp/services/auth.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:lovealapp/pages/login.dart';
+import "package:lovealapp/services/auth.dart";
 
 class SignUp extends StatefulWidget {
   @override
@@ -10,6 +12,9 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+
+  final AuthService _auth = AuthService();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,7 +88,17 @@ class _SignUpState extends State<SignUp> {
                     child: Row(
                   children: <Widget>[
                     RawMaterialButton(
-                      onPressed: () {},
+                      //TEST WITH ANON SIGN UP
+                      onPressed: () async {
+                        print(Text("CLICKED"));
+                        dynamic result = await _auth.signInAnon();
+                        if(result == null) {
+                          print('error signing in')
+                        } else {
+                          print("signed in");
+                          print(result);
+                        }
+                      },
                       fillColor: Colors.white,
                       child: Icon(
                         MdiIcons.facebook,
