@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lovealapp/services/auth.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:lovealapp/pages/signup.dart';
 
@@ -8,6 +9,13 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+
+  final AuthService _auth = AuthService();
+
+  //text field state
+  String email = "";
+  String password = "";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,6 +23,7 @@ class _LoginState extends State<Login> {
             padding: EdgeInsets.all(20),
             child: ListView(
               children: <Widget>[
+                //May need to add button to switch to Sign Up
                 Container(
                     alignment: Alignment.bottomLeft,
                     padding: EdgeInsets.fromLTRB(20, 60, 20, 5),
@@ -37,6 +46,9 @@ class _LoginState extends State<Login> {
                     height: 55,
                     padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
                     child: TextField(
+                      onChanged:(val) {
+                        setState(() => email = val);
+                      },
                       decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           prefixIcon: Icon(MdiIcons.email),
@@ -47,6 +59,9 @@ class _LoginState extends State<Login> {
                     height: 55,
                     padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
                     child: TextField(
+                      onChanged:(val) {
+                        setState(() => password = val);
+                      },
                       obscureText: true,
                       decoration: InputDecoration(
                           border: OutlineInputBorder(),
@@ -71,7 +86,10 @@ class _LoginState extends State<Login> {
                 Container(
                     padding: EdgeInsets.fromLTRB(180, 0, 20, 0),
                     child: RaisedButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          print(email);
+                          print(password);
+                        },
                         textColor: Colors.white,
                         color: Colors.pink,
                         shape: RoundedRectangleBorder(

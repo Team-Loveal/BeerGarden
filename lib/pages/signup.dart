@@ -12,8 +12,9 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-
   final AuthService _auth = AuthService();
+  //identify form
+  final _formKey = GlobalKey<FormState>();
 
   //text field state
   String email = "";
@@ -26,6 +27,7 @@ class _SignUpState extends State<SignUp> {
             padding: EdgeInsets.all(20),
             child: ListView(
               children: <Widget>[
+                //May need to add button to switch to Login
                 Container(
                   alignment: Alignment.bottomLeft,
                   padding: EdgeInsets.fromLTRB(20, 60, 20, 5),
@@ -43,10 +45,12 @@ class _SignUpState extends State<SignUp> {
                             fontSize: 14,
                             fontWeight: FontWeight.bold))),
                 Container(
+                    key: _formKey,
                     height: 55,
                     padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
                     child: TextField(
-                      onChanged:(val) {
+                      //validator: (val) => val.isEmpty ? 'Enter an email' : null,
+                      onChanged: (val) {
                         setState(() => email = val);
                       },
                       decoration: InputDecoration(
@@ -59,7 +63,8 @@ class _SignUpState extends State<SignUp> {
                     height: 55,
                     padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
                     child: TextField(
-                      onChanged:(val) {
+                      //validator: (val) => val.isEmpty ? 'Enter an email' : null,
+                      onChanged: (val) {
                         setState(() => password = val);
                       },
                       obscureText: true,
@@ -73,8 +78,10 @@ class _SignUpState extends State<SignUp> {
                     padding: EdgeInsets.fromLTRB(170, 10, 20, 0),
                     child: RaisedButton(
                         onPressed: () async {
-                          print(email);
-                          print(password);
+                          if (_formKey.currentState.validate()) {
+                            print(email);
+                            print(password);
+                          }
                         },
                         textColor: Colors.white,
                         color: Colors.pink,
@@ -105,7 +112,7 @@ class _SignUpState extends State<SignUp> {
                       onPressed: () async {
                         print(Text("CLICKED"));
                         dynamic result = await _auth.signInAnon();
-                        if(result == null) {
+                        if (result == null) {
                           print('error signing in');
                         } else {
                           print("signed in");
@@ -153,9 +160,8 @@ class _SignUpState extends State<SignUp> {
                                 color: Colors.grey,
                                 fontWeight: FontWeight.bold)),
                         FlatButton(
-                            onPressed: () => {
-                              Navigator.of(context).pushNamed('/login')
-                            },
+                            onPressed: () =>
+                                {Navigator.of(context).pushNamed('/login')},
                             textColor: Colors.pink,
                             child: Text(
                               'Login',

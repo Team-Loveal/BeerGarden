@@ -3,6 +3,7 @@ import 'package:lovealapp/models/user.dart';
 import 'package:lovealapp/pages/welcome.dart';
 import 'package:lovealapp/pages/match.dart';
 import 'package:provider/provider.dart';
+import 'package:lovealapp/pages/navigationHome.dart';
 
 //listen for auth changes provided by stream declared in auth.dart
 class Wrapper extends StatelessWidget {
@@ -14,7 +15,7 @@ class Wrapper extends StatelessWidget {
     if(user == null) {
       return Welcome();
     } else {
-      return Match();
+      return NavigationHome();
     }
 
   }
