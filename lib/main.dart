@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lovealapp/pages/editProfile.dart';
+import 'package:lovealapp/pages/navigationHome.dart';
 import 'package:lovealapp/pages/uploadphoto.dart';
 import 'package:lovealapp/pages/login.dart';
 import 'package:lovealapp/pages/message.dart';
@@ -23,7 +24,8 @@ class MyApp extends StatelessWidget {
       title: 'Loveal',
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
-      home: Welcome(),
+//      home: Welcome(),
+    home: NavigationHome(),
       routes: {'/signup': (_) => SignUp(), '/login': (_) => Login()},
     );
   }

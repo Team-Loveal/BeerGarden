@@ -390,18 +390,6 @@ class _MessagesState extends State<Messages> {
           ),
         ]),
       ),
-      bottomNavigationBar: BottomNavigationBar(currentIndex: 1, items: [
-        BottomNavigationBarItem(
-          icon: new Icon(Icons.favorite),
-          title: new Text('Match'),
-        ),
-        BottomNavigationBarItem(
-          icon: new Icon(Icons.message),
-          title: new Text('Messages'),
-        ),
-        BottomNavigationBarItem(
-            icon: Icon(Icons.person), title: Text('Profile'))
-      ]),
     );
   }
 }
