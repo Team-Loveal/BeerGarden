@@ -8,6 +8,8 @@ import 'package:lovealapp/pages/welcome.dart';
 import 'package:lovealapp/pages/signin.dart';
 import 'package:lovealapp/pages/signup.dart';
 import 'package:lovealapp/pages/profilePreview.dart';
+import 'package:lovealapp/pages/match.dart';
+import 'package:lovealapp/pages/forgotpassword.dart';
 
 //main function is the first function that fires when dart file starts
 void main() {
@@ -29,9 +31,9 @@ class MyApp extends StatelessWidget {
       home: CreateProfile(),
       routes: {
         '/signup':(_) => SignUp(),
-        '/login':(_) => Login()
+        '/login':(_) => Login(),
+        '/forgotpassword': (_) => ForgotPassword()
       },
-
     );
   }
 }

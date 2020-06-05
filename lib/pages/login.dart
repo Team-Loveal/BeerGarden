@@ -58,7 +58,9 @@ class _LoginState extends State<Login> {
                   alignment: Alignment.bottomLeft,
                   padding: EdgeInsets.fromLTRB(10, 0, 20, 0),
                   child: FlatButton(
-                    onPressed: () {},
+                    onPressed: () => {
+                      Navigator.of(context).pushNamed('/forgotpassword')
+                    },
                     textColor: Colors.pink,
                     child: Text(
                       'Forgot password',
@@ -125,7 +127,6 @@ class _LoginState extends State<Login> {
                       shape: CircleBorder(),
                     ),
                   ],
-
                   mainAxisAlignment: MainAxisAlignment.center,
                 )),
                 Container(
