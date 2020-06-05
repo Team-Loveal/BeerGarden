@@ -93,7 +93,7 @@ class _SignUpState extends State<SignUp> {
                         print(Text("CLICKED"));
                         dynamic result = await _auth.signInAnon();
                         if(result == null) {
-                          print('error signing in')
+                          print('error signing in');
                         } else {
                           print("signed in");
                           print(result);
