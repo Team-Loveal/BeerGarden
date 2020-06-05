@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lovealapp/pages/createProfile.dart';
 import 'package:lovealapp/pages/editProfile.dart';
+import 'package:lovealapp/pages/navigationHome.dart';
 import 'package:lovealapp/pages/uploadphoto.dart';
 import 'package:lovealapp/pages/login.dart';
 import 'package:lovealapp/pages/message.dart';
