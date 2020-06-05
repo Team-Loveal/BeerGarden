@@ -6,6 +6,8 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:lovealapp/pages/login.dart';
 import "package:lovealapp/services/auth.dart";
 
+//If you're going to add validator functionality, you must change the TextFields to TextFormField and Container to Form
+
 class SignUp extends StatefulWidget {
   @override
   _SignUpState createState() => _SignUpState();
@@ -13,12 +15,11 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   final AuthService _auth = AuthService();
-  //identify form
-  final _formKey = GlobalKey<FormState>();
 
   //text field state
   String email = "";
   String password = "";
+  String error = '';
 
   @override
   Widget build(BuildContext context) {
@@ -45,11 +46,9 @@ class _SignUpState extends State<SignUp> {
                             fontSize: 14,
                             fontWeight: FontWeight.bold))),
                 Container(
-                    key: _formKey,
                     height: 55,
                     padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
                     child: TextField(
-                      //validator: (val) => val.isEmpty ? 'Enter an email' : null,
                       onChanged: (val) {
                         setState(() => email = val);
                       },
@@ -63,7 +62,6 @@ class _SignUpState extends State<SignUp> {
                     height: 55,
                     padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
                     child: TextField(
-                      //validator: (val) => val.isEmpty ? 'Enter an email' : null,
                       onChanged: (val) {
                         setState(() => password = val);
                       },
@@ -78,9 +76,11 @@ class _SignUpState extends State<SignUp> {
                     padding: EdgeInsets.fromLTRB(170, 10, 20, 0),
                     child: RaisedButton(
                         onPressed: () async {
-                          if (_formKey.currentState.validate()) {
-                            print(email);
-                            print(password);
+                          print(email);
+                          print(password);
+                          dynamic result = await _auth.registerWithEmailAndPassword(email, password);
+                          if(result == null) {
+                            setState(() => error = 'Please supply a valid email');
                           }
                         },
                         textColor: Colors.white,
@@ -96,6 +96,9 @@ class _SignUpState extends State<SignUp> {
                           ],
                           mainAxisAlignment: MainAxisAlignment.center,
                         ))),
+                Container(
+                  child: Text(error, style: TextStyle(color: Colors.red, fontSize: 14.0)),
+                ),
                 Container(
                     alignment: Alignment.center,
                     margin: EdgeInsets.fromLTRB(0, 80, 0, 10),

@@ -15,6 +15,7 @@ class _LoginState extends State<Login> {
   //text field state
   String email = "";
   String password = "";
+  String error = '';
 
   @override
   Widget build(BuildContext context) {
