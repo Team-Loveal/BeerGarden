@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:lovealapp/models/user.dart';
 import 'package:lovealapp/pages/welcome.dart';
-import 'package:lovealapp/pages/matchedProfile.dart';
+import 'package:lovealapp/pages/match.dart';
+import 'package:provider/provider.dart';
 
+//listen for auth changes provided by stream declared in auth.dart
 class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    //return matched profile or welcome
-    return Welcome();
+    //receive user from provider stream
+    final user = Provider.of<User>(context);
+
+    if(user == null) {
+      return Welcome();
+    } else {
+      return Match();
+    }
+
   }
 }

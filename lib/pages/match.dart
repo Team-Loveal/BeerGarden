@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/basic.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:lovealapp/services/auth.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'dart:ui';
 
@@ -12,17 +13,31 @@ class Match extends StatefulWidget {
 class _MatchState extends State<Match> {
   @override
   Widget build(BuildContext context) {
+
+    final AuthService _auth = AuthService();
     return Scaffold(
       body: ListView(
         children: <Widget>[
           Container(
               margin:
                   const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-              child: Text("Today's Match",
-                  style: TextStyle(
-                    fontSize: 40.0,
-                    fontWeight: FontWeight.bold,
-                  ))),
+              child: Row(
+                children: <Widget>[
+                  Text("Today's Match",
+                      style: TextStyle(
+                        fontSize: 40.0,
+                        fontWeight: FontWeight.bold,
+                      )),
+                  //Adding logout icon to header
+                  FlatButton.icon(
+                    icon: Icon(Icons.person),
+                    label: Text("logout"),
+                    onPressed: () async {
+                        await _auth.signOut();
+                    },
+                  ),
+                ],
+              )),
           Container(
             margin: EdgeInsets.symmetric(horizontal: 30.0),
             // width: 380,

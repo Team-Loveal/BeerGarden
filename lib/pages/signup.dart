@@ -15,6 +15,10 @@ class _SignUpState extends State<SignUp> {
 
   final AuthService _auth = AuthService();
 
+  //text field state
+  String email = "";
+  String password = "";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,6 +46,9 @@ class _SignUpState extends State<SignUp> {
                     height: 55,
                     padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
                     child: TextField(
+                      onChanged:(val) {
+                        setState(() => email = val);
+                      },
                       decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           prefixIcon: Icon(MdiIcons.email),
@@ -52,6 +59,9 @@ class _SignUpState extends State<SignUp> {
                     height: 55,
                     padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
                     child: TextField(
+                      onChanged:(val) {
+                        setState(() => password = val);
+                      },
                       obscureText: true,
                       decoration: InputDecoration(
                           border: OutlineInputBorder(),
@@ -62,7 +72,10 @@ class _SignUpState extends State<SignUp> {
                 Container(
                     padding: EdgeInsets.fromLTRB(170, 10, 20, 0),
                     child: RaisedButton(
-                        onPressed: () => {},
+                        onPressed: () async {
+                          print(email);
+                          print(password);
+                        },
                         textColor: Colors.white,
                         color: Colors.pink,
                         shape: RoundedRectangleBorder(
@@ -96,7 +109,7 @@ class _SignUpState extends State<SignUp> {
                           print('error signing in');
                         } else {
                           print("signed in");
-                          print(result);
+                          print(result.uid);
                         }
                       },
                       fillColor: Colors.white,
