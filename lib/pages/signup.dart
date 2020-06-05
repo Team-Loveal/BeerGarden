@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/animation.dart';
+import 'package:lovealapp/services/auth.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:lovealapp/pages/login.dart';
+import "package:lovealapp/services/auth.dart";
 
 class SignUp extends StatefulWidget {
   @override
@@ -10,6 +12,14 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  final AuthService _auth = AuthService();
+  //identify form
+  final _formKey = GlobalKey<FormState>();
+
+  //text field state
+  String email = "";
+  String password = "";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,6 +27,7 @@ class _SignUpState extends State<SignUp> {
             padding: EdgeInsets.all(20),
             child: ListView(
               children: <Widget>[
+                //May need to add button to switch to Login
                 Container(
                   alignment: Alignment.bottomLeft,
                   padding: EdgeInsets.fromLTRB(20, 60, 20, 5),
@@ -34,9 +45,14 @@ class _SignUpState extends State<SignUp> {
                             fontSize: 14,
                             fontWeight: FontWeight.bold))),
                 Container(
+                    key: _formKey,
                     height: 55,
                     padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
                     child: TextField(
+                      //validator: (val) => val.isEmpty ? 'Enter an email' : null,
+                      onChanged: (val) {
+                        setState(() => email = val);
+                      },
                       decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           prefixIcon: Icon(MdiIcons.email),
@@ -47,6 +63,10 @@ class _SignUpState extends State<SignUp> {
                     height: 55,
                     padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
                     child: TextField(
+                      //validator: (val) => val.isEmpty ? 'Enter an email' : null,
+                      onChanged: (val) {
+                        setState(() => password = val);
+                      },
                       obscureText: true,
                       decoration: InputDecoration(
                           border: OutlineInputBorder(),
@@ -57,7 +77,12 @@ class _SignUpState extends State<SignUp> {
                 Container(
                     padding: EdgeInsets.fromLTRB(170, 10, 20, 0),
                     child: RaisedButton(
-                        onPressed: () => {},
+                        onPressed: () async {
+                          if (_formKey.currentState.validate()) {
+                            print(email);
+                            print(password);
+                          }
+                        },
                         textColor: Colors.white,
                         color: Colors.pink,
                         shape: RoundedRectangleBorder(
@@ -83,7 +108,17 @@ class _SignUpState extends State<SignUp> {
                     child: Row(
                   children: <Widget>[
                     RawMaterialButton(
-                      onPressed: () {},
+                      //TEST WITH ANON SIGN UP
+                      onPressed: () async {
+                        print(Text("CLICKED"));
+                        dynamic result = await _auth.signInAnon();
+                        if (result == null) {
+                          print('error signing in');
+                        } else {
+                          print("signed in");
+                          print(result.uid);
+                        }
+                      },
                       fillColor: Colors.white,
                       child: Icon(
                         MdiIcons.facebook,
@@ -125,9 +160,8 @@ class _SignUpState extends State<SignUp> {
                                 color: Colors.grey,
                                 fontWeight: FontWeight.bold)),
                         FlatButton(
-                            onPressed: () => {
-                              Navigator.of(context).pushNamed('/login')
-                            },
+                            onPressed: () =>
+                                {Navigator.of(context).pushNamed('/login')},
                             textColor: Colors.pink,
                             child: Text(
                               'Login',
