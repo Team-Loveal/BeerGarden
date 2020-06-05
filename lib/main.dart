@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/signup': (_) => SignUp(),
         '/login': (_) => Login(),
+        '/forgotpassword': (_) => ForgotPassword()
       }
     );
   }
