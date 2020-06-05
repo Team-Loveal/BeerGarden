@@ -125,7 +125,6 @@ class _LoginState extends State<Login> {
                       shape: CircleBorder(),
                     ),
                   ],
-
                   mainAxisAlignment: MainAxisAlignment.center,
                 )),
                 Container(

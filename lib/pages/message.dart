@@ -119,12 +119,12 @@ class ChatMessage extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-            Bubble(
-              nip: BubbleNip.leftTop,
-              color: Colors.pinkAccent,
-              margin: BubbleEdges.only(top: 8.0),
-              child: Text(text, style: TextStyle(color: Colors.black87)),
-            ),
+              Bubble(
+                nip: BubbleNip.leftTop,
+                color: Colors.pinkAccent,
+                margin: BubbleEdges.only(top: 8.0),
+                child: Text(text, style: TextStyle(color: Colors.black87)),
+              ),
             ],
           ),
         ],
