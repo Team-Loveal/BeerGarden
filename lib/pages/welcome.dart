@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lovealapp/pages/signup.dart';
 
 class Welcome extends StatefulWidget {
   @override
@@ -44,7 +45,9 @@ class _WelcomeState extends State<Welcome> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  onPressed: () => {},
+                  onPressed: () => {
+                    Navigator.of(context).pushNamed('/login')
+                  },
                   minWidth: 250
 
                 ),
@@ -59,7 +62,9 @@ class _WelcomeState extends State<Welcome> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  onPressed: () => {},
+                  onPressed: () => {
+                    Navigator.of(context).pushNamed('/signup')
+                  },
                   minWidth: 250
                 ),
                 Spacer(flex: 1)
