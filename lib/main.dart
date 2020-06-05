@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:lovealapp/pages/editProfile.dart';
 import 'package:lovealapp/pages/uploadphoto.dart';
 import 'package:lovealapp/pages/login.dart';
+import 'package:lovealapp/pages/message.dart';
+import 'package:lovealapp/pages/welcome.dart';
+import 'package:lovealapp/pages/signin.dart';
 import 'package:lovealapp/pages/signup.dart';
 import 'package:lovealapp/pages/profilePreview.dart';
 import 'package:lovealapp/pages/match.dart';
@@ -19,9 +22,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Loveal',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.light(),
-      //what widget should load on the home screen
-      home: Match(),
+      theme: ThemeData.dark(),
+      home: Welcome(),
+      routes: {'/signup': (_) => SignUp(), '/login': (_) => Login()},
     );
   }
 }

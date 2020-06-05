@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:lovealapp/pages/signup.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -136,7 +137,9 @@ class _LoginState extends State<Login> {
                                 color: Colors.grey,
                                 fontWeight: FontWeight.bold)),
                         FlatButton(
-                            onPressed: () {},
+                            onPressed: () => {
+                              Navigator.of(context).pushNamed('/signup')
+                            },
                             textColor: Colors.pink,
                             child: Text(
                               'Sign up',

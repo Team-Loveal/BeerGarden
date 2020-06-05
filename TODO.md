@@ -3,7 +3,7 @@ Our awesome TODO list
 MVP for next Wednesday
 [ ] Complete the basic UI tasks from github
 [ ] Add functionality to the UI
-    [ ] Welcome page Login connects to the login screen.
+    [X] Welcome page Login connects to the login screen.
     [ ] Able to input email and password and login, the button leads to the todays match screen
     [ ] Welcome page signup button links to the signup page. Allow signup by email//facebook
     [ ] Signup button leads to create a choose a nickname/ upload a photo/ create a profile page

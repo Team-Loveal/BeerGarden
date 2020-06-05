@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/animation.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:lovealapp/pages/login.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -124,7 +125,9 @@ class _SignUpState extends State<SignUp> {
                                 color: Colors.grey,
                                 fontWeight: FontWeight.bold)),
                         FlatButton(
-                            onPressed: () {},
+                            onPressed: () => {
+                              Navigator.of(context).pushNamed('/login')
+                            },
                             textColor: Colors.pink,
                             child: Text(
                               'Login',
