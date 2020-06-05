@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
       //what widget should load on the home screen
 //      home: CreateProfile(),
       //wh: upload_pat widget should load on the home screen
-      home: CreateProfile(),
+      home: NavigationHome(),
       routes: {
         '/signup':(_) => SignUp(),
         '/login':(_) => Login(),
