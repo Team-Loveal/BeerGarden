@@ -18,7 +18,7 @@ class AuthService {
     return _auth.onAuthStateChanged.map(_userFromFirebaseUser);
   }
 
-  //sign in anon
+  //sign in anon but prob won't use it
   Future signInAnon() async {
     try {
       AuthResult result = await _auth.signInAnonymously();
@@ -31,7 +31,16 @@ class AuthService {
   }
 
   //sign in with email and password
-
+  Future signIWithEmailAndPassword(String email, String password) async {
+    try {
+      AuthResult result = await _auth.signInWithEmailAndPassword(email: email, password: password);
+      FirebaseUser user = result.user;
+      return _userFromFirebaseUser(user);
+    } catch(e){
+      print(e.toString());
+      return null;
+    }
+  }
   //register with email and password
   Future registerWithEmailAndPassword(String email, String password) async {
     try {
