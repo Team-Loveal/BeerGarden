@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
         title: 'Loveal',
         debugShowCheckedModeBanner: false,
         theme: ThemeData.dark(),
-        home: Wrapper(),
+        home: Welcome(),
         routes: {
           '/signup': (_) => SignUp(),
           '/login': (_) => Login(),
