@@ -1,6 +1,7 @@
 import 'dart:ui';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:chips_choice/chips_choice.dart';
+
 
 import 'package:flutter/foundation.dart';
 
@@ -13,6 +14,24 @@ class CreateProfile extends StatefulWidget {
 class _CreateProfileState extends State<CreateProfile> {
   String age = '20 - 29';
   String gender = 'Female';
+//  List<bool> isSelected;
+//
+//  @override
+//  void initState() {
+//    super.initState();
+//    isSelected = [
+//      true,
+//      false,
+//      true,
+//      false,
+//      false,
+//      false,
+//      false,
+//      false,
+//      false,
+//      false
+//    ];
+//  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,25 +108,32 @@ class _CreateProfileState extends State<CreateProfile> {
                 ),
                 keyboardType: TextInputType.text,
               ),
-          ToggleButtons(
-            children: <Widget>[
-              Text("murder"),
-              Text("dance murder"),
-              Text("pancakes"),
-              Text("yodle"),
-              Text("sky diving"),
-              Text("turtles"),
-              Text("watching harry potter"),
-              Text("1 person dance parties"),
-              Text("sleep"),
-              Text("swimming")
-            ],
-            onPressed: (int index) {
-              setState(() {
-                isSelected[index] = !isSelected[index];
-              });
-            },
-            isSelected: isSelected,
+              TextField(
+                decoration: InputDecoration(
+                  labelText: 'What are your interests?'
+                ),
+                keyboardType: TextInputType.text,
+              )
+//          ToggleButtons(
+//            children: <Widget>[
+//              Text("murder"),
+//              Text("dance murder"),
+//              Text("pancakes"),
+//              Text("yodle"),
+//              Text("sky diving"),
+//              Text("turtles"),
+//              Text("watching harry potter"),
+//              Text("1 person dance parties"),
+//              Text("sleep"),
+//              Text("swimming")
+//            ],
+//            onPressed: (int index) {
+//              setState(() {
+//                isSelected[index] = !isSelected[index];
+//              });
+//            },
+//            isSelected: isSelected,
+//          ),
                 ],
               )
               ),
