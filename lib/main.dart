@@ -3,6 +3,9 @@ import 'package:lovealapp/pages/createProfile.dart';
 import 'package:lovealapp/pages/editProfile.dart';
 import 'package:lovealapp/pages/uploadphoto.dart';
 import 'package:lovealapp/pages/login.dart';
+import 'package:lovealapp/pages/message.dart';
+import 'package:lovealapp/pages/welcome.dart';
+import 'package:lovealapp/pages/signin.dart';
 import 'package:lovealapp/pages/signup.dart';
 import 'package:lovealapp/pages/profilePreview.dart';
 
