@@ -4,6 +4,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:lovealapp/pages/login.dart';
 import 'package:lovealapp/services/auth.dart';
+import 'dart:async';
 
 class ForgotPassword extends StatefulWidget {
   @override
@@ -15,7 +16,13 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   String emailAddy = '';
 
   void onPressed() async {
-    print('emailAddy');
+    setState(() {
+      _warning = 'A password has been sent to $emailAddy';
+    });
+    showAlert();
+    Timer(Duration(seconds: 5), () {
+      {Navigator.of(context).pushNamed('/login');}
+    });
     FirebaseAuth mAuth = FirebaseAuth.instance;
 
     await mAuth.sendPasswordResetEmail(email: emailAddy);
@@ -33,6 +40,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             padding: EdgeInsets.all(20),
             child: ListView(
               children: <Widget>[
+                showAlert(),
                 Container(
                     alignment: Alignment.bottomLeft,
                     padding: EdgeInsets.fromLTRB(20, 60, 20, 5),
@@ -68,13 +76,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 Container(
                     padding: EdgeInsets.fromLTRB(180, 0, 20, 0),
                     child: RaisedButton(
-                        onPressed: ()  {
-                          onPressed();
-                        // print(emailstring)
-                        //  FirebaseAuth mAuth = FirebaseAuth.instance;
-
-                         // await mAuth.sendPasswordResetEmail(email: email);
-                         // submit();
+                        onPressed: () => {
+                         // {Navigator.of(context).pushNamed('/login')},
+                          onPressed(),
                         },
                         textColor: Colors.white,
                         color: Colors.pink,
@@ -113,65 +117,55 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     )),
               ],
             ))
-
-
-
-
     );
   }
 }
-
-
-
-//  Possibly delete below
-
 String _warning;
 
-Widget showAlert(){
-  if (_warning != null) {
-    return Container(
-      color: Colors.amberAccent,
-      width: double.infinity,
-      padding: EdgeInsets.all(8.0),
-      child: Row(
-        children: <Widget>[
-          Padding(
-            padding:const EdgeInsets.only(right: 8.0),
-            child: Icon(Icons.error_outline),
-          ),
-         // Expanded(
-          //  child: AutoSizeText(
-           //   _warning,
-           //   maxLines: 3,
-         //  ),
-         // ),
-          Padding(
-            padding: const EdgeInsets.only(left: 8.0),
-            child: IconButton(
-              icon: Icon(Icons.close),
-              onPressed: () {
-               // setState(() {
-               //   _warning = null;
-               //
-             //   }
-               // );
-              },
-            )
-          )
-        ]
-      ),
-    );
-  }
-  return SizedBox(
-    height: 0,
-  );
+class showAlert extends StatefulWidget {
+  @override
+  _showAlertState createState() => _showAlertState();
 }
 
-//void submit() async  {
- //  final FirebaseAuth _auth = FirebaseAuth.instance;
-//  return _auth.sendPasswordResetEmail(email: email)
-
-
-//}
-
-// AutoSizeText buildHeader
+class _showAlertState extends State<showAlert> {
+  @override
+  Widget build(BuildContext context) {
+    if (_warning != null) {
+    return Container(
+        color: Colors.amberAccent,
+        width: double.infinity,
+        padding: EdgeInsets.all(8.0),
+        child: Row(
+            children: <Widget>[
+              Padding(
+                padding:const EdgeInsets.only(right: 8.0),
+                child: Icon(Icons.error_outline),
+              ),
+              Expanded(
+                child: Text(_warning,
+                  style: TextStyle(
+                    color: Colors.cyan,
+                  ),
+                  maxLines: 3,
+                ),
+              ),
+              Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: IconButton(
+                    icon: Icon(Icons.close),
+                    onPressed: () {
+                      setState(() {
+                        _warning = null;
+                      });
+                    },
+                  )
+              )
+            ]
+        ),
+      );
+    }
+    return SizedBox(
+      height: 0,
+    );
+  }
+}
