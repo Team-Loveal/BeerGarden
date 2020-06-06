@@ -5,6 +5,9 @@ import 'package:lovealapp/services/auth.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:lovealapp/pages/login.dart';
 import "package:lovealapp/services/auth.dart";
+import 'package:lovealapp/shared/loading.dart';
+
+//If you're going to add validator functionality, you must change the TextFields to TextFormField and Container to Form
 
 class SignUp extends StatefulWidget {
   @override
@@ -13,16 +16,18 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   final AuthService _auth = AuthService();
-  //identify form
-  final _formKey = GlobalKey<FormState>();
 
   //text field state
   String email = "";
   String password = "";
+  String error = '';
+
+  //for loading spinner
+  bool loading = false;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return loading ? Loading() : Scaffold(
         body: Padding(
             padding: EdgeInsets.all(20),
             child: ListView(
@@ -45,11 +50,9 @@ class _SignUpState extends State<SignUp> {
                             fontSize: 14,
                             fontWeight: FontWeight.bold))),
                 Container(
-                    key: _formKey,
                     height: 55,
                     padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
                     child: TextField(
-                      //validator: (val) => val.isEmpty ? 'Enter an email' : null,
                       onChanged: (val) {
                         setState(() => email = val);
                       },
@@ -63,7 +66,6 @@ class _SignUpState extends State<SignUp> {
                     height: 55,
                     padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
                     child: TextField(
-                      //validator: (val) => val.isEmpty ? 'Enter an email' : null,
                       onChanged: (val) {
                         setState(() => password = val);
                       },
@@ -78,9 +80,15 @@ class _SignUpState extends State<SignUp> {
                     padding: EdgeInsets.fromLTRB(170, 10, 20, 0),
                     child: RaisedButton(
                         onPressed: () async {
-                          if (_formKey.currentState.validate()) {
-                            print(email);
-                            print(password);
+                          setState(() => loading = true);
+                          dynamic result = await _auth.registerWithEmailAndPassword(email, password);
+                          if(result == null) {
+                            setState(() {
+                              error = 'Could not sign in with those credentials';
+                              loading = false;
+                            });
+                          } else {
+                            Navigator.of(context).pushNamed('/createProfile');
                           }
                         },
                         textColor: Colors.white,
@@ -97,6 +105,9 @@ class _SignUpState extends State<SignUp> {
                           mainAxisAlignment: MainAxisAlignment.center,
                         ))),
                 Container(
+                  child: Text(error, style: TextStyle(color: Colors.red, fontSize: 14.0)),
+                ),
+                Container(
                     alignment: Alignment.center,
                     margin: EdgeInsets.fromLTRB(0, 80, 0, 10),
                     child: Text('Sign up with',
@@ -108,16 +119,7 @@ class _SignUpState extends State<SignUp> {
                     child: Row(
                   children: <Widget>[
                     RawMaterialButton(
-                      //TEST WITH ANON SIGN UP
                       onPressed: () async {
-                        print(Text("CLICKED"));
-                        dynamic result = await _auth.signInAnon();
-                        if (result == null) {
-                          print('error signing in');
-                        } else {
-                          print("signed in");
-                          print(result.uid);
-                        }
                       },
                       fillColor: Colors.white,
                       child: Icon(

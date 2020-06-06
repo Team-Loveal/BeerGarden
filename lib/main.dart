@@ -12,6 +12,8 @@ import 'package:lovealapp/pages/wrapper.dart';
 import 'package:lovealapp/pages/match.dart';
 import 'package:lovealapp/pages/forgotpassword.dart';
 import 'package:lovealapp/services/auth.dart';
+import 'package:lovealapp/pages/createProfile.dart';
+
 
 //provide user data to Wrapper file
 import 'package:provider/provider.dart';
@@ -33,11 +35,12 @@ class MyApp extends StatelessWidget {
         title: 'Loveal',
         debugShowCheckedModeBanner: false,
         theme: ThemeData.dark(),
-        home: Welcome(),
+        home: Wrapper(),
         routes: {
           '/signup': (_) => SignUp(),
           '/login': (_) => Login(),
-          '/forgotpassword': (_) => ForgotPassword()
+          '/forgotpassword': (_) => ForgotPassword(),
+          '/createProfile': (_) => CreateProfile()
         }
       ),
     );
