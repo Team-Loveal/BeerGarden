@@ -33,7 +33,7 @@ class _UploadPhotoState extends State<UploadPhoto> {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 onPressed: () => {},
-              )
+              ),
             ],
           ),
         ),
