@@ -99,10 +99,12 @@ class _MessageState extends State<Message> {
                 // Navigator.pop(context);
               },
               icon: Icon(MdiIcons.arrowLeft)),
-          title: Text("Ugly Jeff", style: TextStyle(color: Colors.pinkAccent),
-            //  onPressed: (){
-            // TODO navigate to user profile
-       //   }
+          title: Text(
+            "Ugly Jeff",
+            style: TextStyle(color: Colors.pinkAccent),
+//            onPressed: () {
+//              // TODO navigate to user profile
+//            },
           ),
           elevation: 0.0,
           centerTitle: true,
