@@ -1,9 +1,11 @@
 import 'dart:ui';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:chips_choice/chips_choice.dart';
 
 
 import 'package:flutter/foundation.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class CreateProfile extends StatefulWidget {
 
@@ -14,24 +16,7 @@ class CreateProfile extends StatefulWidget {
 class _CreateProfileState extends State<CreateProfile> {
   String age = '20 - 29';
   String gender = 'Female';
-//  List<bool> isSelected;
-//
-//  @override
-//  void initState() {
-//    super.initState();
-//    isSelected = [
-//      true,
-//      false,
-//      true,
-//      false,
-//      false,
-//      false,
-//      false,
-//      false,
-//      false,
-//      false
-//    ];
-//  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -113,29 +98,31 @@ class _CreateProfileState extends State<CreateProfile> {
                   labelText: 'What are your interests?'
                 ),
                 keyboardType: TextInputType.text,
+              ),
+              Container(
+                padding: EdgeInsets.fromLTRB(30, 10, 20, 0),
+                child: RaisedButton(
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('/uploadphoto');
+                  },
+                  textColor: Colors.white,
+                  color: Colors.pink,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50)),
+                  child: Row(
+                    children: <Widget>[
+                      Text('GO TO UPLOAD PHOTO  ',
+                      style: TextStyle(
+                        fontSize: 18, fontWeight: FontWeight.bold)),
+                      Icon(MdiIcons.arrowRight, size: 18)
+                    ],
+                    mainAxisAlignment: MainAxisAlignment.center,
+                  ),
+                ),
+
               )
-//          ToggleButtons(
-//            children: <Widget>[
-//              Text("murder"),
-//              Text("dance murder"),
-//              Text("pancakes"),
-//              Text("yodle"),
-//              Text("sky diving"),
-//              Text("turtles"),
-//              Text("watching harry potter"),
-//              Text("1 person dance parties"),
-//              Text("sleep"),
-//              Text("swimming")
-//            ],
-//            onPressed: (int index) {
-//              setState(() {
-//                isSelected[index] = !isSelected[index];
-//              });
-//            },
-//            isSelected: isSelected,
-//          ),
                 ],
-              )
+              ),
               ),
           ),
     );
