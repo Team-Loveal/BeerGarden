@@ -43,19 +43,19 @@ class _UploadPhotoState extends State<UploadPhoto> {
               RaisedButton(
                 child: _image == null
                     ? Text(
-                        'Upload',
-                        style: TextStyle(
-                          color: Colors.grey[900],
-                          fontWeight: FontWeight.bold,
-                        ),
-                      )
+                  'Upload',
+                  style: TextStyle(
+                    color: Colors.grey[900],
+                    fontWeight: FontWeight.bold,
+                  ),
+                )
                     : Text(
-                        'Next',
-                        style: TextStyle(
-                          color: Colors.grey[900],
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                  'Next',
+                  style: TextStyle(
+                    color: Colors.grey[900],
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 color: Colors.pinkAccent,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
