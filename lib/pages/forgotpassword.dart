@@ -1,6 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:lovealapp/pages/login.dart';
+import 'package:lovealapp/services/auth.dart';
+import 'dart:async';
 
 class ForgotPassword extends StatefulWidget {
   @override
@@ -8,6 +12,27 @@ class ForgotPassword extends StatefulWidget {
 }
 
 class _ForgotPasswordState extends State<ForgotPassword> {
+
+  String emailAddy = '';
+
+  void onPressed() async {
+    setState(() {
+      _warning = 'A password has been sent to $emailAddy';
+    });
+    showAlert();
+    Timer(Duration(seconds: 5), () {
+      {Navigator.of(context).pushNamed('/login');}
+    });
+    FirebaseAuth mAuth = FirebaseAuth.instance;
+
+    await mAuth.sendPasswordResetEmail(email: emailAddy);
+  }
+
+  void onChanged(String value) {
+    setState(() {
+      emailAddy = value;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,6 +40,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             padding: EdgeInsets.all(20),
             child: ListView(
               children: <Widget>[
+                showAlert(),
                 Container(
                     alignment: Alignment.bottomLeft,
                     padding: EdgeInsets.fromLTRB(20, 60, 20, 5),
@@ -37,6 +63,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     height: 55,
                     padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
                     child: TextField(
+                      onChanged: (String value) {
+                        onChanged(value);
+                      },
                       decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           prefixIcon: Icon(MdiIcons.email),
@@ -47,7 +76,10 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 Container(
                     padding: EdgeInsets.fromLTRB(180, 0, 20, 0),
                     child: RaisedButton(
-                        onPressed: () => {},
+                        onPressed: () => {
+                         // {Navigator.of(context).pushNamed('/login')},
+                          onPressed(),
+                        },
                         textColor: Colors.white,
                         color: Colors.pink,
                         shape: RoundedRectangleBorder(
@@ -85,11 +117,55 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     )),
               ],
             ))
-
-
-
-
     );
   }
 }
+String _warning;
 
+class showAlert extends StatefulWidget {
+  @override
+  _showAlertState createState() => _showAlertState();
+}
+
+class _showAlertState extends State<showAlert> {
+  @override
+  Widget build(BuildContext context) {
+    if (_warning != null) {
+    return Container(
+        color: Colors.amberAccent,
+        width: double.infinity,
+        padding: EdgeInsets.all(8.0),
+        child: Row(
+            children: <Widget>[
+              Padding(
+                padding:const EdgeInsets.only(right: 8.0),
+                child: Icon(Icons.error_outline),
+              ),
+              Expanded(
+                child: Text(_warning,
+                  style: TextStyle(
+                    color: Colors.cyan,
+                  ),
+                  maxLines: 3,
+                ),
+              ),
+              Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: IconButton(
+                    icon: Icon(Icons.close),
+                    onPressed: () {
+                      setState(() {
+                        _warning = null;
+                      });
+                    },
+                  )
+              )
+            ]
+        ),
+      );
+    }
+    return SizedBox(
+      height: 0,
+    );
+  }
+}
