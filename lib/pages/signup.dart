@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/animation.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:lovealapp/services/auth.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:lovealapp/pages/login.dart';
+import "package:lovealapp/services/auth.dart";
 import 'package:lovealapp/shared/loading.dart';
 
 //If you're going to add validator functionality, you must change the TextFields to TextFormField and Container to Form
@@ -85,9 +86,10 @@ class _SignUpState extends State<SignUp> {
                         child: RaisedButton(
                             onPressed: () async {
                               setState(() => loading = true);
+                              String trimmedemail = email.trim();
                               dynamic result =
                                   await _auth.registerWithEmailAndPassword(
-                                      email, password);
+                                      trimmedemail, password);
                               if (result == null) {
                                 setState(() {
                                   error =
@@ -161,7 +163,6 @@ class _SignUpState extends State<SignUp> {
                       ],
                       mainAxisAlignment: MainAxisAlignment.center,
                     )),
-
                     Container(
                         padding: EdgeInsets.only(top: 10),
                         child: Row(
@@ -172,10 +173,11 @@ class _SignUpState extends State<SignUp> {
                                     color: Colors.grey,
                                     fontWeight: FontWeight.bold)),
                             FlatButton(
-                                onPressed: () {},
+                                onPressed: () =>
+                                    {Navigator.of(context).pushNamed('/login')},
                                 textColor: Colors.pink,
                                 child: Text(
-                                  'Sign in',
+                                  'Login',
                                   style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold),
