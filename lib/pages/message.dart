@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:bubble/bubble.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 String _name = 'Ugly Jeff'; // TODO replace with peer userName
 
@@ -18,7 +19,7 @@ class _MessageState extends State<Message> {
   void initState() {
     super.initState();
 
-    // hardcoded chatRoomID (userID-userID)
+    // TODO replace hardcoded chatRoomID (userID-userID)
     chatRoomID = "5WADFQiHEses3riWV9JxaYJNrGM2-b7fXewrdeaPJ814w5A0qvKo4cuH3";
   }
 
@@ -90,10 +91,17 @@ class _MessageState extends State<Message> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // TODO show the user profile on click
         // TODO add a return button to navigate back to messagesList
         appBar: AppBar(
-          title: Text("Ugly Jeff", style: TextStyle(color: Colors.pinkAccent)),
+          leading: IconButton(
+              onPressed: () {
+                // Navigator.pop(context);
+              },
+              icon: Icon(MdiIcons.arrowLeft)),
+          title: Text("Ugly Jeff", style: TextStyle(color: Colors.pinkAccent),
+              onPressed: () {
+            // TODO navigate to user profile
+          }),
           elevation: 0.0,
           centerTitle: true,
         ),
