@@ -47,5 +47,3 @@ class MyApp extends StatelessWidget {
   }
 }
 
-//If user is logged in, home will be matchedProfile page
-//If use isn't logged in home will be Welcome()
