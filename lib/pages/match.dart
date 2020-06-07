@@ -110,21 +110,27 @@ class _MatchState extends State<Match> {
               ],
             ),
           ),
-          Container(
-            margin: const EdgeInsets.fromLTRB(60, 5, 60, 0),
-            child: ButtonTheme(
-              height: 40.0,
-              child: RaisedButton(
-                  child: Text('MESSAGE',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      )),
-                  color: Colors.pink,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  onPressed: () => {}),
+          GestureDetector(
+            // Create chat room and send user to conversation screen
+            onTap: (){
+
+            },
+            child: Container(
+              margin: const EdgeInsets.fromLTRB(60, 5, 60, 0),
+              child: ButtonTheme(
+                height: 40.0,
+                child: RaisedButton(
+                    child: Text('MESSAGE',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        )),
+                    color: Colors.pink,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    onPressed: () => {}),
+              ),
             ),
           ),
         ],
