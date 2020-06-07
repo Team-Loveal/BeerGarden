@@ -31,6 +31,7 @@ class _CreateProfileState extends State<CreateProfile> {
 
   @override
   Widget build(BuildContext context) {
+    //this is providing the user object
     final user = Provider.of<User>(context);
     return loading
         ? Loading()
@@ -129,6 +130,7 @@ class _CreateProfileState extends State<CreateProfile> {
                         padding: EdgeInsets.fromLTRB(30, 10, 20, 0),
                         child: RaisedButton(
                           onPressed: () async {
+                            //write profile info into the db
                             await DatabaseService(uid: user.uid).updateUserData(
                                 nickname,
                                 location,

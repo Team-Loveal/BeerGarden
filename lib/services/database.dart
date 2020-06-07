@@ -35,8 +35,8 @@ class DatabaseService {
     });
   }
 
-  //notify when any documents change in the db
   //get users doc stream
+  //prob useful when populating user data in preview profile and edit profile
   Stream<QuerySnapshot> get userData {
     return usersCollection.snapshots();
   }
