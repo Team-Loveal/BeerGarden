@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lovealapp/pages/match.dart';
 import 'package:lovealapp/pages/message.dart';
+import 'package:lovealapp/pages/messagesList.dart';
 import 'package:lovealapp/pages/myProfile.dart';
 
 class NavigationHome extends StatefulWidget {
@@ -12,7 +13,7 @@ class _NavigationHomeState extends State<NavigationHome> {
   int _currentIndex = 0;
   final List<Widget> _children = [
     Match(),
-    Message(),
+    Messages(),
     MyProfile(),
   ];
 
