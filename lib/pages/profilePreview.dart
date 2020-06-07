@@ -68,28 +68,11 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                       ]),
                 ),
                 Expanded(
-//                  child: CircleAvatar(
-//                    radius: 70,
-//                    backgroundImage: FileImage(
-//                      profileImg),
-//                  ), // this works
-
-                child: Container(
-//                  width: 10,
-//                  height: 10,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: FileImage(
-                        profileImg
-                      ),
-                    ),
+                  child: CircleAvatar(
+                    radius: 70,
+                    backgroundImage: FileImage(
+                      profileImg),
                   ),
-                ),
-////                      backgroundImage: NetworkImage(
-////                          'https://mymodernmet.com/wp/wp-content/uploads/2017/01/animal-selfies-5.jpg')),
-//                ),
                 ),
               ],
             ),
