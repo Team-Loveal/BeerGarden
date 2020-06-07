@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:lovealapp/pages/message.dart';
-import 'package:lovealapp/pages/messagesList.dart';
-import 'package:lovealapp/pages/uploadphoto.dart';
-import 'package:lovealapp/pages/login.dart';
-import 'package:lovealapp/pages/signup.dart';
 import 'package:lovealapp/pages/editProfile.dart';
 import 'package:lovealapp/pages/navigationHome.dart';
+import 'package:lovealapp/pages/uploadphoto.dart';
+import 'package:lovealapp/pages/login.dart';
+import 'package:lovealapp/pages/message.dart';
 import 'package:lovealapp/pages/welcome.dart';
 import 'package:lovealapp/pages/signin.dart';
+import 'package:lovealapp/pages/signup.dart';
 import 'package:lovealapp/pages/profilePreview.dart';
 import 'package:lovealapp/pages/wrapper.dart';
 import 'package:lovealapp/pages/match.dart';
 import 'package:lovealapp/pages/forgotpassword.dart';
 import 'package:lovealapp/services/auth.dart';
 import 'package:lovealapp/pages/createProfile.dart';
+
 
 //provide user data to Wrapper file
 import 'package:provider/provider.dart';
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //Material App is a widget that has properties like title, theme etc.
-    return StreamProvider<User>.value(
+    return  StreamProvider<User>.value(
       value: AuthService().user,
       child: MaterialApp(
           title: 'Loveal',
@@ -41,8 +41,12 @@ class MyApp extends StatelessWidget {
             '/signup': (_) => SignUp(),
             '/login': (_) => Login(),
             '/forgotpassword': (_) => ForgotPassword(),
-            '/createProfile': (_) => CreateProfile()
+            '/createProfile': (_) => CreateProfile(),
+            '/uploadphoto': (_) => UploadPhoto(),
           }),
     );
   }
 }
+
+//If user is logged in, home will be matchedProfile page
+//If use isn't logged in home will be Welcome()
