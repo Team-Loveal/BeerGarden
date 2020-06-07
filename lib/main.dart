@@ -3,6 +3,7 @@ import 'package:lovealapp/pages/message.dart';
 import 'package:lovealapp/pages/messagesList.dart';
 import 'package:lovealapp/pages/uploadphoto.dart';
 import 'package:lovealapp/pages/login.dart';
+import 'package:lovealapp/pages/signup.dart';
 
 //main function is the first function that fires when dart file starts
 void main() {
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
       //what widget should load on the home screen
-      home: Message(),
+      home: SignUp(),
     );
   }
 }
