@@ -5,8 +5,6 @@ import 'package:lovealapp/pages/match.dart';
 import 'package:provider/provider.dart';
 import 'package:lovealapp/pages/navigationHome.dart';
 
-
-
 //listen for auth changes provided by stream declared in auth.dart
 class Wrapper extends StatelessWidget {
   @override
@@ -14,11 +12,10 @@ class Wrapper extends StatelessWidget {
     //receive user from provider stream
     final user = Provider.of<User>(context);
 
-    if(user == null) {
+    if (user == null) {
       return Welcome();
     } else {
       return NavigationHome();
     }
-
   }
 }
