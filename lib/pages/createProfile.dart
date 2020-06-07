@@ -18,8 +18,6 @@ class CreateProfile extends StatefulWidget {
 }
 
 class _CreateProfileState extends State<CreateProfile> {
-  final user = Provider.of<User>(context);
-
   String nickname;
   String location;
   String age;
@@ -33,6 +31,7 @@ class _CreateProfileState extends State<CreateProfile> {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<User>(context);
     return loading
         ? Loading()
         : Scaffold(

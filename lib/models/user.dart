@@ -6,7 +6,6 @@ class User {
 class UserData {
   final String uid;
   final String email;
-  final String password;
   final String nickname;
   final String location;
   final String age;
@@ -18,7 +17,6 @@ class UserData {
   UserData(
       {this.uid,
       this.email,
-      this.password,
       this.nickname,
       this.location,
       this.age,

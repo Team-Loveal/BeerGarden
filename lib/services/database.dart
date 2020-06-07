@@ -35,8 +35,9 @@ class DatabaseService {
     });
   }
 
+  //notify when any documents change in the db
   //get users doc stream
-  Stream<DocmentSnapshot> get userData {
-    return usersCollection.document(uid).snapshots();
+  Stream<QuerySnapshot> get userData {
+    return usersCollection.snapshots();
   }
 }
