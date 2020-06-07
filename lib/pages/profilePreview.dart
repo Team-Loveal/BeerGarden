@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lovealapp/pages/match.dart';
+import 'package:lovealapp/pages/navigationHome.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'dart:io';
 
@@ -21,7 +23,12 @@ class _ProfilePreviewState extends State<ProfilePreview> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => NavigationHome()),
+          );
+        },
         isExtended: true,
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         icon: Icon(Icons.check),
@@ -70,8 +77,7 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                 Expanded(
                   child: CircleAvatar(
                     radius: 70,
-                    backgroundImage: FileImage(
-                      profileImg),
+                    backgroundImage: FileImage(profileImg),
                   ),
                 ),
               ],
