@@ -1,16 +1,56 @@
-# lovealapp
+# Loveal
 
-A new Flutter application.
+(This was created during our time as students at Code Chrysalis.)
 
-## Getting Started
+There is hope for ugly people.
 
-This project is a starting point for a Flutter application.
+Find your true love:
+Available at the Google Play store:
+[Loveal](https://play.google.com/store/)
 
-A few resources to get you started if this is your first Flutter project:
+### Here's a preview of the welcome screen
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+![Welcome Screen](/images/splash.png)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### This is a preview of the result screen:
+
+![Loveal2](./kampai2.png)
+
+## Installation
+
+1. Please clone the repo
+
+2. Install packages
+
+```bash
+yarn install
+yarn start
+```
+
+3.  Create a profile
+
+4.  Get a match and chat away
+
+5.  Find true love
+
+## Built With
+
+- [Dart](https://dart.dev/)
+- [Flutter](https://flutter.dev/)
+- [Firebase](https://firebase.google.com/)
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
+## Authors
+
+- [Jeff Bentley](https://github.com/jbentleyjp)
+- [Garrett Chun](https://github.com/Kapakahi)
+- [Yuya Harada](https://github.com/yuya-h-29)
+- [Riku Kawano](https://github.com/rikukawano)
+- [Yurika Namba](https://github.com/yurikanamba)
