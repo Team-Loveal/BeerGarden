@@ -1,9 +1,16 @@
 import 'dart:ui';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:chips_choice/chips_choice.dart';
 import 'package:flutter/foundation.dart';
+import 'package:lovealapp/models/user.dart';
 import "package:lovealapp/services/auth.dart";
+import 'package:lovealapp/services/database.dart';
 import 'package:lovealapp/shared/loading.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:provider/provider.dart';
+
+//CHANGE LOCATION TO DROPDOWN OF PREFECTURES IN JAPAN
 
 class CreateProfile extends StatefulWidget {
   @override
@@ -11,7 +18,7 @@ class CreateProfile extends StatefulWidget {
 }
 
 class _CreateProfileState extends State<CreateProfile> {
-  final AuthService _auth = AuthService();
+  final user = Provider.of<User>(context);
 
   String nickname;
   String location;
@@ -24,26 +31,6 @@ class _CreateProfileState extends State<CreateProfile> {
   //for loading spinner
   bool loading = false;
 
-//  String age = '20 - 29';
-//  String gender = 'Female';
-//  List<bool> isSelected;
-//
-//  @override
-//  void initState() {
-//    super.initState();
-//    isSelected = [
-//      true,
-//      false,
-//      true,
-//      false,
-//      false,
-//      false,
-//      false,
-//      false,
-//      false,
-//      false
-//    ];
-//  }
   @override
   Widget build(BuildContext context) {
     return loading
@@ -138,27 +125,37 @@ class _CreateProfileState extends State<CreateProfile> {
                         decoration: InputDecoration(
                             labelText: 'What are your interests?'),
                         keyboardType: TextInputType.text,
+                      ),
+                      Container(
+                        padding: EdgeInsets.fromLTRB(30, 10, 20, 0),
+                        child: RaisedButton(
+                          onPressed: () async {
+                            await DatabaseService(uid: user.uid).updateUserData(
+                                nickname,
+                                location,
+                                age,
+                                gender,
+                                occupation,
+                                about,
+                                interests);
+                            Navigator.of(context).pushNamed('/uploadphoto');
+                          },
+                          textColor: Colors.white,
+                          color: Colors.pink,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(50)),
+                          child: Row(
+                            children: <Widget>[
+                              Text('GO TO UPLOAD PHOTO  ',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold)),
+                              Icon(MdiIcons.arrowRight, size: 18)
+                            ],
+                            mainAxisAlignment: MainAxisAlignment.center,
+                          ),
+                        ),
                       )
-//          ToggleButtons(
-//            children: <Widget>[
-//              Text("murder"),
-//              Text("dance murder"),
-//              Text("pancakes"),
-//              Text("yodle"),
-//              Text("sky diving"),
-//              Text("turtles"),
-//              Text("watching harry potter"),
-//              Text("1 person dance parties"),
-//              Text("sleep"),
-//              Text("swimming")
-//            ],
-//            onPressed: (int index) {
-//              setState(() {
-//                isSelected[index] = !isSelected[index];
-//              });
-//            },
-//            isSelected: isSelected,
-//          ),
                     ],
                   )),
             ),
