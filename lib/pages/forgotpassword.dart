@@ -13,20 +13,22 @@ class ForgotPassword extends StatefulWidget {
 
 class _ForgotPasswordState extends State<ForgotPassword> {
   String emailAddy = '';
+  final nameHolder = TextEditingController();
 
   void onPressed() async {
     setState(() {
       _warning = 'A password has been sent to $emailAddy';
     });
     showAlert();
+    clearTextInput();
     Timer(Duration(seconds: 5), () {
       {
         Navigator.of(context).pushNamed('/login');
       }
     });
+    String trimmedemailaddy = emailAddy.trim();
     FirebaseAuth mAuth = FirebaseAuth.instance;
-
-    await mAuth.sendPasswordResetEmail(email: emailAddy);
+    await mAuth.sendPasswordResetEmail(email: trimmedemailaddy);
   }
 
   void onChanged(String value) {
@@ -35,8 +37,13 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     });
   }
 
+  void clearTextInput() {
+    nameHolder.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
+    var _controller = TextEditingController();
     return Scaffold(
         body: Padding(
             padding: EdgeInsets.all(20),
@@ -65,6 +72,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     height: 55,
                     padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
                     child: TextField(
+                      controller: nameHolder,
                       onChanged: (String value) {
                         onChanged(value);
                       },
@@ -78,7 +86,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     padding: EdgeInsets.fromLTRB(180, 0, 20, 0),
                     child: RaisedButton(
                         onPressed: () => {
-                              // {Navigator.of(context).pushNamed('/login')},
                               onPressed(),
                             },
                         textColor: Colors.white,

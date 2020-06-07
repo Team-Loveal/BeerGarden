@@ -13,7 +13,6 @@ class Match extends StatefulWidget {
 class _MatchState extends State<Match> {
   @override
   Widget build(BuildContext context) {
-
     final AuthService _auth = AuthService();
     return Scaffold(
       body: ListView(
@@ -33,7 +32,7 @@ class _MatchState extends State<Match> {
                     icon: Icon(Icons.person),
                     label: Text("logout"),
                     onPressed: () async {
-                        await _auth.signOut();
+                      await _auth.signOut();
                     },
                   ),
                 ],
@@ -115,7 +114,7 @@ class _MatchState extends State<Match> {
             child: ButtonTheme(
               height: 40.0,
               child: RaisedButton(
-                  child: Text('MESSAGE',
+                  child: Text('Start a conversation',
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,

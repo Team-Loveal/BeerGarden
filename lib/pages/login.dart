@@ -90,7 +90,8 @@ class _LoginState extends State<Login> {
                     child: RaisedButton(
                         onPressed: () async {
                           setState(() => loading = true);
-                          dynamic result = await _auth.signIWithEmailAndPassword(email, password);
+                          String trimmedemail = email.trim();
+                          dynamic result = await _auth.signIWithEmailAndPassword(trimmedemail, password);
                           if(result == null) {
                             setState(() {
                               error = 'Could not sign in with those credentials';
