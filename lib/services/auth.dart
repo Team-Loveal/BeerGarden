@@ -1,9 +1,9 @@
 //for auth service
 import 'package:firebase_auth/firebase_auth.dart';
 import "package:lovealapp/models/user.dart";
+import 'package:lovealapp/services/database.dart';
 
 class AuthService {
-
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   //create user obj based on FirebaseUser
@@ -24,7 +24,7 @@ class AuthService {
       AuthResult result = await _auth.signInAnonymously();
       FirebaseUser user = result.user;
       return _userFromFirebaseUser(user);
-    } catch(e) {
+    } catch (e) {
       print(e.toString());
       return null;
     }
@@ -33,34 +33,46 @@ class AuthService {
   //sign in with email and password
   Future signIWithEmailAndPassword(String email, String password) async {
     try {
-      AuthResult result = await _auth.signInWithEmailAndPassword(email: email, password: password);
+      AuthResult result = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
       FirebaseUser user = result.user;
       return _userFromFirebaseUser(user);
-    } catch(e){
+    } catch (e) {
       print(e.toString());
       return null;
     }
   }
+
   //register with email and password
   Future registerWithEmailAndPassword(String email, String password) async {
     try {
-      AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+      AuthResult result = await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
       FirebaseUser user = result.user;
+
+      //create a new document for the user with the uid
+      await DatabaseService(uid: user.uid).updateUserData('Yurika', 'Tokyo',
+          '50-59', 'Female', 'Yodler', 'I am a hoot', 'yodeling');
+
       return _userFromFirebaseUser(user);
-    } catch(e){
+    } catch (e) {
       print(e.toString());
       return null;
     }
   }
 
   //sign out
-Future signOut() async {
+  Future signOut() async {
     try {
       return await _auth.signOut();
-    } catch(e) {
+    } catch (e) {
       print(e.toString());
       return null;
     }
-}
+  }
 
+  // reset password
+  Future sendPasswordResetEmail(String email) async {
+    return await _auth.sendPasswordResetEmail(email: email);
+  }
 }

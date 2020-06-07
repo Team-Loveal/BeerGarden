@@ -35,8 +35,10 @@ class MyApp extends StatelessWidget {
           title: 'Loveal',
           debugShowCheckedModeBanner: false,
           theme: ThemeData.dark(),
-          home: Wrapper(),
+          initialRoute: '/',
+          //home: Wrapper(),
           routes: {
+            '/': (BuildContext context) => Wrapper(),
             '/signup': (_) => SignUp(),
             '/login': (_) => Login(),
             '/forgotpassword': (_) => ForgotPassword(),
