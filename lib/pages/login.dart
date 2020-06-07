@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:lovealapp/services/auth.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:lovealapp/pages/signup.dart';
+import 'package:lovealapp/shared/loading.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -8,13 +9,24 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final AuthService _auth = AuthService();
+
+  //text field state
+  String email = "";
+  String password = "";
+  String error = '';
+
+  //for loading spinner
+  bool loading = false;
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return loading ? Loading() : Scaffold(
         body: Padding(
             padding: EdgeInsets.all(20),
             child: ListView(
               children: <Widget>[
+                //May need to add button to switch to Sign Up
                 Container(
                     alignment: Alignment.bottomLeft,
                     padding: EdgeInsets.fromLTRB(20, 60, 20, 5),
@@ -37,6 +49,9 @@ class _LoginState extends State<Login> {
                     height: 55,
                     padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
                     child: TextField(
+                      onChanged: (val) {
+                        setState(() => email = val);
+                      },
                       decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           prefixIcon: Icon(MdiIcons.email),
@@ -47,6 +62,9 @@ class _LoginState extends State<Login> {
                     height: 55,
                     padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
                     child: TextField(
+                      onChanged: (val) {
+                        setState(() => password = val);
+                      },
                       obscureText: true,
                       decoration: InputDecoration(
                           border: OutlineInputBorder(),
@@ -58,9 +76,8 @@ class _LoginState extends State<Login> {
                   alignment: Alignment.bottomLeft,
                   padding: EdgeInsets.fromLTRB(10, 0, 20, 0),
                   child: FlatButton(
-                    onPressed: () => {
-                      Navigator.of(context).pushNamed('/forgotpassword')
-                    },
+                    onPressed: () =>
+                        {Navigator.of(context).pushNamed('/forgotpassword')},
                     textColor: Colors.pink,
                     child: Text(
                       'Forgot password',
@@ -71,7 +88,20 @@ class _LoginState extends State<Login> {
                 Container(
                     padding: EdgeInsets.fromLTRB(180, 0, 20, 0),
                     child: RaisedButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          setState(() => loading = true);
+                          dynamic result = await _auth.signIWithEmailAndPassword(email, password);
+                          if(result == null) {
+                            setState(() {
+                              error = 'Could not sign in with those credentials';
+                              loading = false;
+                            });
+                          } else {
+                            //result.uid is the uid we will need for the db
+                            print(result.uid);
+                            Navigator.pop(context);
+                          }
+                        },
                         textColor: Colors.white,
                         color: Colors.pink,
                         shape: RoundedRectangleBorder(
@@ -85,6 +115,10 @@ class _LoginState extends State<Login> {
                           ],
                           mainAxisAlignment: MainAxisAlignment.center,
                         ))),
+                Container(
+                  child: Text(error,
+                      style: TextStyle(color: Colors.red, fontSize: 14.0)),
+                ),
                 Container(
                     alignment: Alignment.center,
                     margin: EdgeInsets.fromLTRB(0, 50, 0, 10),
@@ -139,9 +173,8 @@ class _LoginState extends State<Login> {
                                 color: Colors.grey,
                                 fontWeight: FontWeight.bold)),
                         FlatButton(
-                            onPressed: () => {
-                              Navigator.of(context).pushNamed('/signup')
-                            },
+                            onPressed: () =>
+                                {Navigator.of(context).pushNamed('/signup')},
                             textColor: Colors.pink,
                             child: Text(
                               'Sign up',

@@ -1,8 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/animation.dart';
+import 'package:lovealapp/services/auth.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:lovealapp/pages/login.dart';
+import "package:lovealapp/services/auth.dart";
+import 'package:lovealapp/shared/loading.dart';
+
+//If you're going to add validator functionality, you must change the TextFields to TextFormField and Container to Form
 
 class SignUp extends StatefulWidget {
   @override
@@ -10,13 +15,24 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  final AuthService _auth = AuthService();
+
+  //text field state
+  String email = "";
+  String password = "";
+  String error = '';
+
+  //for loading spinner
+  bool loading = false;
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return loading ? Loading() : Scaffold(
         body: Padding(
             padding: EdgeInsets.all(20),
             child: ListView(
               children: <Widget>[
+                //May need to add button to switch to Login
                 Container(
                   alignment: Alignment.bottomLeft,
                   padding: EdgeInsets.fromLTRB(20, 60, 20, 5),
@@ -37,6 +53,9 @@ class _SignUpState extends State<SignUp> {
                     height: 55,
                     padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
                     child: TextField(
+                      onChanged: (val) {
+                        setState(() => email = val);
+                      },
                       decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           prefixIcon: Icon(MdiIcons.email),
@@ -47,6 +66,9 @@ class _SignUpState extends State<SignUp> {
                     height: 55,
                     padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
                     child: TextField(
+                      onChanged: (val) {
+                        setState(() => password = val);
+                      },
                       obscureText: true,
                       decoration: InputDecoration(
                           border: OutlineInputBorder(),
@@ -57,7 +79,18 @@ class _SignUpState extends State<SignUp> {
                 Container(
                     padding: EdgeInsets.fromLTRB(170, 10, 20, 0),
                     child: RaisedButton(
-                        onPressed: () => {},
+                        onPressed: () async {
+                          setState(() => loading = true);
+                          dynamic result = await _auth.registerWithEmailAndPassword(email, password);
+                          if(result == null) {
+                            setState(() {
+                              error = 'Could not sign in with those credentials';
+                              loading = false;
+                            });
+                          } else {
+                            Navigator.of(context).pushNamed('/createProfile');
+                          }
+                        },
                         textColor: Colors.white,
                         color: Colors.pink,
                         shape: RoundedRectangleBorder(
@@ -72,6 +105,9 @@ class _SignUpState extends State<SignUp> {
                           mainAxisAlignment: MainAxisAlignment.center,
                         ))),
                 Container(
+                  child: Text(error, style: TextStyle(color: Colors.red, fontSize: 14.0)),
+                ),
+                Container(
                     alignment: Alignment.center,
                     margin: EdgeInsets.fromLTRB(0, 80, 0, 10),
                     child: Text('Sign up with',
@@ -83,7 +119,8 @@ class _SignUpState extends State<SignUp> {
                     child: Row(
                   children: <Widget>[
                     RawMaterialButton(
-                      onPressed: () {},
+                      onPressed: () async {
+                      },
                       fillColor: Colors.white,
                       child: Icon(
                         MdiIcons.facebook,
@@ -125,9 +162,8 @@ class _SignUpState extends State<SignUp> {
                                 color: Colors.grey,
                                 fontWeight: FontWeight.bold)),
                         FlatButton(
-                            onPressed: () => {
-                              Navigator.of(context).pushNamed('/login')
-                            },
+                            onPressed: () =>
+                                {Navigator.of(context).pushNamed('/login')},
                             textColor: Colors.pink,
                             child: Text(
                               'Login',

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:async';
 import 'dart:io';
+import 'package:lovealapp/pages/profilePreview.dart';
 
 class UploadPhoto extends StatefulWidget {
   @override
@@ -59,7 +60,9 @@ class _UploadPhotoState extends State<UploadPhoto> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
-                onPressed: () => {getImage()},
+                onPressed: _image == null ? () => {getImage()} : () => {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => ProfilePreview(profileImg: _image)))
+                },
               ),
             ],
           ),

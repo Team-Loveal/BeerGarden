@@ -7,7 +7,7 @@ MVP for next Wednesday
     [ ] Able to input email and password and login, the button leads to the todays match screen
     [ ] Welcome page signup button links to the signup page. Allow signup by email//facebook
     [ ] Signup button leads to create a choose a nickname/ upload a photo/ create a profile page
-    [ ] The 3 buttons on the bottom bar can toggle between matches, messages, and own profile
+    [X] The 3 buttons on the bottom bar can toggle between matches, messages, and own profile
     [ ] In the create profile screen, have all fields and drop down menus working and saving into the database
 [ ] Have a database
     [ ] Have all the proper connections and magic in the database

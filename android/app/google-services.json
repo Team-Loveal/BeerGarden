@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "894004108684",
+    "firebase_url": "https://loveal-61a0e.firebaseio.com",
+    "project_id": "loveal-61a0e",
+    "storage_bucket": "loveal-61a0e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:894004108684:android:dc7aef874df303b640caa9",
+        "android_client_info": {
+          "package_name": "yurikanamba.lovealapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "894004108684-0fl6alkmcs6mn2hame4no0ega37afqoi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAo-iTJ17942aA3rkw3NdxFbJtaq6TCwH4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "894004108684-0fl6alkmcs6mn2hame4no0ega37afqoi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
