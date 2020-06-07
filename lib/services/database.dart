@@ -25,7 +25,7 @@ class DatabaseService {
     Firestore.instance.collection("messages")
         .document(chatRoomID);
   }
-  
+
   }
 
   //get users stream

@@ -14,10 +14,10 @@ class Match extends StatefulWidget {
 class _MatchState extends State<Match> {
   @override
 
-  initializeChatroom(String userName) {
+ /* initializeChatroom(String userName) {
     List<String> users = [userName, myName;]
     databaseService.createChatroom();
-  }
+  }*/
 
 
   Widget build(BuildContext context) {
