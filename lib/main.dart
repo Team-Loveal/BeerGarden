@@ -36,7 +36,6 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: ThemeData.dark(),
           initialRoute: '/',
-          //home: Wrapper(),
           routes: {
             '/': (BuildContext context) => Wrapper(),
             '/signup': (_) => SignUp(),
@@ -47,4 +46,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

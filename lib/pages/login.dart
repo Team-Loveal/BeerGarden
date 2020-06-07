@@ -108,7 +108,8 @@ class _LoginState extends State<Login> {
                               } else {
                                 //result.uid is the uid we will need for the db
                                 print(result.uid);
-                                Navigator.pop(context);
+                                Navigator.of(context)
+                                    .popUntil((route) => route.isFirst);
                               }
                             },
                             textColor: Colors.white,
