@@ -32,18 +32,18 @@ class MyApp extends StatelessWidget {
     return  StreamProvider<User>.value(
       value: AuthService().user,
       child: MaterialApp(
-        title: 'Loveal',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData.dark(),
-        home: Wrapper(),
-        routes: {
-          '/signup': (_) => SignUp(),
-          '/login': (_) => Login(),
-          '/forgotpassword': (_) => ForgotPassword(),
-          '/createProfile': (_) => CreateProfile(),
-          '/uploadphoto': (_) => UploadPhoto(),
-        }
-      ),
+          title: 'Loveal',
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData.dark(),
+          initialRoute: '/',
+          routes: {
+            '/': (BuildContext context) => Wrapper(),
+            '/signup': (_) => SignUp(),
+            '/login': (_) => Login(),
+            '/forgotpassword': (_) => ForgotPassword(),
+            '/createProfile': (_) => CreateProfile(),
+            '/uploadphoto': (_) => UploadPhoto(),
+          }),
     );
   }
 }

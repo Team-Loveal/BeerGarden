@@ -12,7 +12,6 @@ class ForgotPassword extends StatefulWidget {
 }
 
 class _ForgotPasswordState extends State<ForgotPassword> {
-
   String emailAddy = '';
   final nameHolder = TextEditingController();
 
@@ -23,7 +22,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     showAlert();
     clearTextInput();
     Timer(Duration(seconds: 5), () {
-      {Navigator.of(context).pushNamed('/login');}
+      {
+        Navigator.of(context).pushNamed('/login');
+      }
     });
     String trimmedemailaddy = emailAddy.trim();
     FirebaseAuth mAuth = FirebaseAuth.instance;
@@ -36,7 +37,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     });
   }
 
-  void  clearTextInput() {
+  void clearTextInput() {
     nameHolder.clear();
   }
 
@@ -55,7 +56,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     child: Text(
                       'Forgot Password',
                       style:
-                      TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
                     )),
                 Container(
                     alignment: Alignment.bottomLeft,
@@ -81,13 +82,12 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                           labelText: 'Email',
                           labelStyle: TextStyle(fontWeight: FontWeight.bold)),
                     )),
-
                 Container(
                     padding: EdgeInsets.fromLTRB(180, 0, 20, 0),
                     child: RaisedButton(
                         onPressed: () => {
-                          onPressed(),
-                        },
+                              onPressed(),
+                            },
                         textColor: Colors.white,
                         color: Colors.pink,
                         shape: RoundedRectangleBorder(
@@ -111,9 +111,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                 color: Colors.grey,
                                 fontWeight: FontWeight.bold)),
                         FlatButton(
-                            onPressed: () => {
-                              Navigator.of(context).pushNamed('/login')
-                            },
+                            onPressed: () =>
+                                {Navigator.of(context).pushNamed('/login')},
                             textColor: Colors.pink,
                             child: Text(
                               'Sign in',
@@ -124,10 +123,10 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       mainAxisAlignment: MainAxisAlignment.center,
                     )),
               ],
-            ))
-    );
+            )));
   }
 }
+
 String _warning;
 
 class showAlert extends StatefulWidget {
@@ -139,37 +138,35 @@ class _showAlertState extends State<showAlert> {
   @override
   Widget build(BuildContext context) {
     if (_warning != null) {
-    return Container(
+      return Container(
         color: Colors.amberAccent,
         width: double.infinity,
         padding: EdgeInsets.all(8.0),
-        child: Row(
-            children: <Widget>[
-              Padding(
-                padding:const EdgeInsets.only(right: 8.0),
-                child: Icon(Icons.error_outline),
+        child: Row(children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: Icon(Icons.error_outline),
+          ),
+          Expanded(
+            child: Text(
+              _warning,
+              style: TextStyle(
+                color: Colors.cyan,
               ),
-              Expanded(
-                child: Text(_warning,
-                  style: TextStyle(
-                    color: Colors.cyan,
-                  ),
-                  maxLines: 3,
-                ),
-              ),
-              Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: IconButton(
-                    icon: Icon(Icons.close),
-                    onPressed: () {
-                      setState(() {
-                        _warning = null;
-                      });
-                    },
-                  )
-              )
-            ]
-        ),
+              maxLines: 3,
+            ),
+          ),
+          Padding(
+              padding: const EdgeInsets.only(left: 8.0),
+              child: IconButton(
+                icon: Icon(Icons.close),
+                onPressed: () {
+                  setState(() {
+                    _warning = null;
+                  });
+                },
+              ))
+        ]),
       );
     }
     return SizedBox(
