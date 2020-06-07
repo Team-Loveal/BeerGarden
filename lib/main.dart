@@ -14,7 +14,6 @@ import 'package:lovealapp/pages/forgotpassword.dart';
 import 'package:lovealapp/services/auth.dart';
 import 'package:lovealapp/pages/createProfile.dart';
 
-
 //provide user data to Wrapper file
 import 'package:provider/provider.dart';
 import "package:lovealapp/models/user.dart";
@@ -29,7 +28,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //Material App is a widget that has properties like title, theme etc.
-    return  StreamProvider<User>.value(
+    return StreamProvider<User>.value(
       value: AuthService().user,
       child: MaterialApp(
           title: 'Loveal',
@@ -47,6 +46,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-//If user is logged in, home will be matchedProfile page
-//If use isn't logged in home will be Welcome()

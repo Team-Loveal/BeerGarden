@@ -13,7 +13,6 @@ class Match extends StatefulWidget {
 class _MatchState extends State<Match> {
   @override
   Widget build(BuildContext context) {
-
     final AuthService _auth = AuthService();
     return Scaffold(
       body: ListView(
@@ -110,27 +109,21 @@ class _MatchState extends State<Match> {
               ],
             ),
           ),
-          GestureDetector(
-            // Create chat room and send user to conversation screen
-            onTap: (){
-
-            },
-            child: Container(
-              margin: const EdgeInsets.fromLTRB(60, 5, 60, 0),
-              child: ButtonTheme(
-                height: 40.0,
-                child: RaisedButton(
-                    child: Text('MESSAGE',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        )),
-                    color: Colors.pink,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    onPressed: () => {}),
-              ),
+          Container(
+            margin: const EdgeInsets.fromLTRB(60, 5, 60, 0),
+            child: ButtonTheme(
+              height: 40.0,
+              child: RaisedButton(
+                  child: Text('MESSAGE',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      )),
+                  color: Colors.pink,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  onPressed: () => {}),
             ),
           ),
         ],
