@@ -81,7 +81,8 @@ class _SignUpState extends State<SignUp> {
                     child: RaisedButton(
                         onPressed: () async {
                           setState(() => loading = true);
-                          dynamic result = await _auth.registerWithEmailAndPassword(email, password);
+                          String trimmedemail = email.trim();
+                          dynamic result = await _auth.registerWithEmailAndPassword(trimmedemail, password);
                           if(result == null) {
                             setState(() {
                               error = 'Could not sign in with those credentials';
