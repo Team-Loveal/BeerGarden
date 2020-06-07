@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:chat_list/chat_list.dart';
+
 //for chat bubble
 //https://github.com/vi-k/bubble
 import 'package:bubble/bubble.dart';
