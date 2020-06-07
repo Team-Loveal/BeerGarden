@@ -34,12 +34,14 @@ class MyApp extends StatelessWidget {
           title: 'Loveal',
           debugShowCheckedModeBanner: false,
           theme: ThemeData.dark(),
-          home: Message(),
+          initialRoute: '/',
           routes: {
+            '/': (BuildContext context) => Wrapper(),
             '/signup': (_) => SignUp(),
             '/login': (_) => Login(),
             '/forgotpassword': (_) => ForgotPassword(),
             '/createProfile': (_) => CreateProfile(),
+            '/uploadphoto': (_) => UploadPhoto(),
           }),
     );
   }
