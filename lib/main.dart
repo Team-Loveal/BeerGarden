@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         title: 'Loveal',
         debugShowCheckedModeBanner: false,
         theme: ThemeData.dark(),
-        home: CreateProfile(),
+        home: Wrapper(),
         routes: {
           '/signup': (_) => SignUp(),
           '/login': (_) => Login(),
