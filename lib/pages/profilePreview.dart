@@ -1,12 +1,22 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'dart:io';
 
 class ProfilePreview extends StatefulWidget {
+  final File profileImg;
+
+  ProfilePreview({Key key, @required this.profileImg}) : super(key: key);
+
   @override
-  _ProfilePreviewState createState() => _ProfilePreviewState();
+  _ProfilePreviewState createState() => _ProfilePreviewState(profileImg);
 }
 
 class _ProfilePreviewState extends State<ProfilePreview> {
+  final File profileImg;
+
+  _ProfilePreviewState(this.profileImg);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,9 +69,10 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                 ),
                 Expanded(
                   child: CircleAvatar(
-                      radius: 60,
-                      backgroundImage: NetworkImage(
-                          'https://mymodernmet.com/wp/wp-content/uploads/2017/01/animal-selfies-5.jpg')),
+                    radius: 70,
+                    backgroundImage: FileImage(
+                      profileImg),
+                  ),
                 ),
               ],
             ),
