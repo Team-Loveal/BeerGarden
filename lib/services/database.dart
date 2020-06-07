@@ -18,6 +18,14 @@ class DatabaseService {
       'about': about,
       'interests': interests,
     });
+
+  //Creating chat rooms
+    //This is probably wrong
+  createChatRoom(String chatRoomID) {
+    Firestore.instance.collection("messages")
+        .document(chatRoomID);
+  }
+  
   }
 
   //get users stream

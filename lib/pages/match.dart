@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/basic.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:lovealapp/services/auth.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:lovealapp/services/database.dart';
 import 'dart:ui';
 
 class Match extends StatefulWidget {
@@ -12,6 +13,13 @@ class Match extends StatefulWidget {
 
 class _MatchState extends State<Match> {
   @override
+
+  initializeChatroom(String userName) {
+    List<String> users = [userName, myName;]
+    databaseService.createChatroom();
+  }
+
+
   Widget build(BuildContext context) {
     final AuthService _auth = AuthService();
     return Scaffold(
@@ -114,7 +122,7 @@ class _MatchState extends State<Match> {
             child: ButtonTheme(
               height: 40.0,
               child: RaisedButton(
-                  child: Text('MESSAGE',
+                  child: Text('Start a conversation',
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,

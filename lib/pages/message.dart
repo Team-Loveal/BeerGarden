@@ -100,9 +100,10 @@ class _MessageState extends State<Message> {
               },
               icon: Icon(MdiIcons.arrowLeft)),
           title: Text("Ugly Jeff", style: TextStyle(color: Colors.pinkAccent),
-              onPressed: () {
+            //  onPressed: (){
             // TODO navigate to user profile
-          }),
+       //   }
+          ),
           elevation: 0.0,
           centerTitle: true,
         ),
