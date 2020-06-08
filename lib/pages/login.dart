@@ -95,10 +95,11 @@ class _LoginState extends State<Login> {
                         child: RaisedButton(
                             onPressed: () async {
                               setState(() => loading = true);
-                              String trimmedemail = email.trim();
+                              String trimmedEmail = email.trim();
+                              String trimmedPassword = password.trim();
                               dynamic result =
                                   await _auth.signIWithEmailAndPassword(
-                                      trimmedemail, password);
+                                      trimmedEmail, trimmedPassword);
                               if (result == null) {
                                 setState(() {
                                   error =
