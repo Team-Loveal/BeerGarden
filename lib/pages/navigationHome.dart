@@ -31,8 +31,10 @@ class _NavigationHomeState extends State<NavigationHome> {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<User>(context);
+
     return StreamProvider<UserData>.value(
-      value: DatabaseService().userData,
+      value: DatabaseService(uid: user.uid).userData,
       child: Scaffold(
         body: _children[_currentIndex],
         bottomNavigationBar: BottomNavigationBar(

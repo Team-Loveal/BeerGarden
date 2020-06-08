@@ -17,10 +17,9 @@ class _MyProfileState extends State<MyProfile> {
     //get userData from the DB
     final userData = Provider.of<UserData>(context);
     //get userID from auth
-    final user = Provider.of<User>(context);
+//    final user = Provider.of<User>(context);
 
-    print(user.uid);
-    print(userData.uid);
+    print('user data is ${userData.uid}');
 
     return Scaffold(
       body: ListView(
@@ -69,14 +68,14 @@ class _MyProfileState extends State<MyProfile> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text('John Smith, 28',
+                        Text('${userData.nickname}, ${userData.age}',
                             style: TextStyle(
                                 fontSize: 28, fontWeight: FontWeight.bold)),
                         Row(
                           children: <Widget>[
                             Icon(MdiIcons.mapMarker,
                                 size: 18, color: Colors.grey),
-                            Text('Tokyo, Japan',
+                            Text('${userData.location}, Japan',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.grey))
@@ -106,7 +105,7 @@ class _MyProfileState extends State<MyProfile> {
                         fontWeight: FontWeight.bold,
                       )),
                   SizedBox(height: 5),
-                  Text('High School Teacher', style: TextStyle(fontSize: 16))
+                  Text(userData.occupation, style: TextStyle(fontSize: 16))
                 ]),
           ),
           Container(
@@ -155,9 +154,7 @@ class _MyProfileState extends State<MyProfile> {
                         fontWeight: FontWeight.bold,
                       )),
                   SizedBox(height: 5),
-                  Text(
-                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                      style: TextStyle(fontSize: 16))
+                  Text(userData.about, style: TextStyle(fontSize: 16))
                 ]),
           ),
         ],
