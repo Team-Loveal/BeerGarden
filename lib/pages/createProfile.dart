@@ -131,33 +131,40 @@ class _CreateProfileState extends State<CreateProfile> {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 8),
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Container(
-                              child: Wrap(
-                                spacing: 5,
-                                runSpacing: 3,
-                                children: <Widget>[
-                                  filterChipWidget(
-                                    chipName: 'yodeling',
-                                  ),
-                                  filterChipWidget(
-                                    chipName: 'shopping',
-                                  ),
-                                  filterChipWidget(
-                                    chipName: 'making balloon animals',
-                                  ),
-                                  filterChipWidget(
-                                    chipName: 'cooking',
-                                  ),
-                                  filterChipWidget(
-                                    chipName: 'painting',
-                                  ),
-                                  filterChipWidget(
-                                    chipName: ' writing',
-                                  ),
-                                ],
-                              ),
+                          child: Container(
+                            child: Wrap(
+                              alignment: WrapAlignment.center,
+                              spacing: 5,
+                              runSpacing: 3,
+                              children: <Widget>[
+                                filterChipWidget(
+                                  chipName: 'yodeling',
+                                ),
+                                filterChipWidget(
+                                  chipName: 'shopping',
+                                ),
+                                filterChipWidget(
+                                  chipName: 'making balloon animals',
+                                ),
+                                filterChipWidget(
+                                  chipName: 'cooking',
+                                ),
+                                filterChipWidget(
+                                  chipName: 'painting',
+                                ),
+                                filterChipWidget(
+                                  chipName: 'writing',
+                                ),
+                                filterChipWidget(
+                                  chipName: 'sports',
+                                ),
+                                filterChipWidget(
+                                  chipName: 'movies',
+                                ),
+                                filterChipWidget(
+                                  chipName: 'traveling',
+                                ),
+                              ],
                             ),
                           ),
                         ),
@@ -222,6 +229,8 @@ class _filterChipWidgetState extends State<filterChipWidget> {
           _isSelected = isSelected;
         });
       },
+      selectedColor: Colors.pink[400],
+    checkmarkColor: Colors.white,
     );
   }
 }
