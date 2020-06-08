@@ -86,10 +86,11 @@ class _SignUpState extends State<SignUp> {
                         child: RaisedButton(
                             onPressed: () async {
                               setState(() => loading = true);
-                              String trimmedemail = email.trim();
+                              String trimmedEmail = email.trim();
+                              String trimmedPassword = password.trim();
                               dynamic result =
                                   await _auth.registerWithEmailAndPassword(
-                                      trimmedemail, password);
+                                      trimmedEmail, trimmedPassword);
                               if (result == null) {
                                 setState(() {
                                   error =
