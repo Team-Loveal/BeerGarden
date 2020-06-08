@@ -14,10 +14,19 @@ class Match extends StatefulWidget {
 class _MatchState extends State<Match> {
   @override
 
- /* initializeChatroom(String userName) {
-    List<String> users = [userName, myName;]
-    databaseService.createChatroom();
-  }*/
+  DatabaseService databaseService = new DatabaseService();
+  TextEditingController searchEditingController = new TextEditingController();
+  QuerySnapshot searchResultSnapshot;
+
+
+  // Create chatroom
+
+  initializeChatroom(String userName) {
+    String chatRoomId = getChatroomID(userName, Constants.myName);
+    //userName is the matched person's ID
+    List<String> users = [userName, Constants.myName];
+    databaseService.createChatroom(ChatroomID, user1, user2);
+  }
 
 
   Widget build(BuildContext context) {
@@ -117,25 +126,40 @@ class _MatchState extends State<Match> {
               ],
             ),
           ),
-          Container(
-            margin: const EdgeInsets.fromLTRB(60, 5, 60, 0),
-            child: ButtonTheme(
-              height: 40.0,
-              child: RaisedButton(
-                  child: Text('Start a conversation',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      )),
-                  color: Colors.pink,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  onPressed: () => {}),
+          GestureDetector(
+            onTap: () {
+
+            },
+            child: Container(
+              margin: const EdgeInsets.fromLTRB(60, 5, 60, 0),
+              child: ButtonTheme(
+                height: 40.0,
+                child: RaisedButton(
+                    child: Text('Start a conversation',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        )),
+                    color: Colors.pink,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    onPressed: () => {}),
+              ),
             ),
           ),
         ],
       ),
     );
+  }
+}
+
+//creating chat room ID so that ID room is user1ID-user2ID (and dont use user2ID-user1ID)
+
+getChatroomID(String user1, String user2) {
+  if (user1.substring(0, 1).codeUnitAt(0) > user2.substring(0, 1).codeUnitAt(0)) {
+    return "$user2\-$user1";
+  } else {
+    return "$user1\-$user2";
   }
 }
