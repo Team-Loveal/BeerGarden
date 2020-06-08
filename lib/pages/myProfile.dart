@@ -16,11 +16,6 @@ class _MyProfileState extends State<MyProfile> {
   Widget build(BuildContext context) {
     //get userData from the DB
     final userData = Provider.of<UserData>(context);
-    //get userID from auth
-//    final user = Provider.of<User>(context);
-
-    print('user data is ${userData.uid}');
-
     return Scaffold(
       body: ListView(
         children: <Widget>[
@@ -120,24 +115,99 @@ class _MyProfileState extends State<MyProfile> {
                         fontWeight: FontWeight.bold,
                       )),
                   SizedBox(height: 5),
-                  Row(
+                  Wrap(
                     children: <Widget>[
-                      Container(
-                          margin: EdgeInsets.only(right: 10),
-                          child: OutlineButton(
-                              child: Text("Yodeling",
-                                  style: TextStyle(color: Colors.pink)),
-                              onPressed: null,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0)))),
-                      Container(
-                          margin: EdgeInsets.only(right: 10),
-                          child: OutlineButton(
-                              child: Text("Skiing",
-                                  style: TextStyle(color: Colors.pink)),
-                              onPressed: null,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0)))),
+                      //WHEN REFACTORING CREATE SEPARATE WIDGET AND MAP THROUGH INTERESTS
+                      if (userData.yodeling)
+                        Container(
+                            margin: EdgeInsets.only(right: 10),
+                            child: OutlineButton(
+                                child: Text("Yodeling",
+                                    style: TextStyle(color: Colors.pink)),
+                                onPressed: null,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(10.0)))),
+                      if (userData.shopping)
+                        Container(
+                            margin: EdgeInsets.only(right: 10),
+                            child: OutlineButton(
+                                child: Text("Skiing",
+                                    style: TextStyle(color: Colors.pink)),
+                                onPressed: null,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(10.0)))),
+                      if (userData.makingBalloonAnimals)
+                        Container(
+                            margin: EdgeInsets.only(right: 10),
+                            child: OutlineButton(
+                                child: Text("makingBalloonAnimals",
+                                    style: TextStyle(color: Colors.pink)),
+                                onPressed: null,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(10.0)))),
+                      if (userData.cooking)
+                        Container(
+                            margin: EdgeInsets.only(right: 10),
+                            child: OutlineButton(
+                                child: Text("cooking",
+                                    style: TextStyle(color: Colors.pink)),
+                                onPressed: null,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(10.0)))),
+                      if (userData.painting)
+                        Container(
+                            margin: EdgeInsets.only(right: 10),
+                            child: OutlineButton(
+                                child: Text("painting",
+                                    style: TextStyle(color: Colors.pink)),
+                                onPressed: null,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(10.0)))),
+                      if (userData.movies)
+                        Container(
+                            margin: EdgeInsets.only(right: 10),
+                            child: OutlineButton(
+                                child: Text("movies",
+                                    style: TextStyle(color: Colors.pink)),
+                                onPressed: null,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(10.0)))),
+                      if (userData.sports)
+                        Container(
+                            margin: EdgeInsets.only(right: 10),
+                            child: OutlineButton(
+                                child: Text("sports",
+                                    style: TextStyle(color: Colors.pink)),
+                                onPressed: null,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(10.0)))),
+                      if (userData.writing)
+                        Container(
+                            margin: EdgeInsets.only(right: 10),
+                            child: OutlineButton(
+                                child: Text("writing",
+                                    style: TextStyle(color: Colors.pink)),
+                                onPressed: null,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(10.0)))),
+                      if (userData.drinking)
+                        Container(
+                            margin: EdgeInsets.only(right: 10),
+                            child: OutlineButton(
+                                child: Text("drinking",
+                                    style: TextStyle(color: Colors.pink)),
+                                onPressed: null,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(10.0)))),
                     ],
                   )
                 ]),

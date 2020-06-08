@@ -22,8 +22,22 @@ class DatabaseService {
   }
 
   //update user data when creating profile or editing profile
-  Future updateUserData(String nickname, String location, String age,
-      String gender, String occupation, String about, String interests, bool yodeling, bool shopping, bool makimngBalloonAnimals, bool cooking, bool painting, bool movies, bool sports, bool writing, bool drinking) async {
+  Future updateUserData(
+      String nickname,
+      String location,
+      String age,
+      String gender,
+      String occupation,
+      String about,
+      bool yodeling,
+      bool shopping,
+      bool makimngBalloonAnimals,
+      bool cooking,
+      bool painting,
+      bool movies,
+      bool sports,
+      bool writing,
+      bool drinking) async {
     return await usersCollection.document(uid).updateData({
       'nickname': nickname,
       'location': location,
@@ -31,9 +45,8 @@ class DatabaseService {
       'gender': gender,
       'occupation': occupation,
       'about': about,
-      "interests": interests,
-      'yodeling' : yodeling,
-      'shopping' : shopping,
+      'yodeling': yodeling,
+      'shopping': shopping,
       'makingBalloonAnimals': makimngBalloonAnimals,
       'cooking': cooking,
       'painting': painting,
@@ -55,7 +68,15 @@ class DatabaseService {
       gender: snapshot.data['gender'],
       occupation: snapshot.data['occupation'],
       about: snapshot.data['about'],
-      interests: snapshot.data['interests'],
+      yodeling: snapshot.data['yodeling'],
+      shopping: snapshot.data['shopping'],
+      makingBalloonAnimals: snapshot.data['makingBalloonAnimals'],
+      cooking: snapshot.data['cooking'],
+      painting: snapshot.data['painting'],
+      movies: snapshot.data['movies'],
+      sports: snapshot.data['sports'],
+      writing: snapshot.data['writing'],
+      drinking: snapshot.data['drinking'],
     );
   }
 
