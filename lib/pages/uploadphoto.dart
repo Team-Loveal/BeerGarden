@@ -90,6 +90,7 @@ class _UploadPhotoState extends State<UploadPhoto> {
               borderRadius: BorderRadius.circular(20),
             ),
             onPressed: () {
+//              String path = "userphotos/" + UUID + ".png";
               final StorageReference firebaseStorageRef = FirebaseStorage.instance.ref().child('myimg.jpg');
               final StorageUploadTask task = firebaseStorageRef.putFile(_image);
               Navigator.push(context, MaterialPageRoute(builder: (context) => ProfilePreview(profileImg: _image)));
