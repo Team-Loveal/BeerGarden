@@ -29,7 +29,9 @@ class _CreateProfileState extends State<CreateProfile> {
   //for loading spinner
   bool loading = false;
 
+
   @override
+
   Widget build(BuildContext context) {
     //this is providing the user object
     final user = Provider.of<User>(context);
@@ -37,129 +39,200 @@ class _CreateProfileState extends State<CreateProfile> {
         ? Loading()
         : Scaffold(
             body: SafeArea(
-              child: Padding(
-                  padding: const EdgeInsets.all(30),
-                  child: Column(
-                    children: <Widget>[
-                      TextField(
-                        onChanged: (val) {
-                          setState(() => nickname = val);
-                        },
-                        decoration: InputDecoration(
-                            labelText: 'Choose a nickname to display to users'),
-                        keyboardType: TextInputType.text,
-                      ),
-                      TextField(
-                        onChanged: (val) {
-                          setState(() => location = val);
-                        },
-                        decoration:
-                            InputDecoration(labelText: 'Enter your Location'),
-                        keyboardType: TextInputType.text,
-                      ),
-                      Row(
-                        children: <Widget>[
-                          Text('Age'),
-                          DropdownButton<String>(
-                            value: age,
-                            iconSize: 24,
-                            onChanged: (String newValue) {
-                              setState(() {
-                                age = newValue;
-                              });
-                            },
-                            items: <String>[
-                              '20 - 29',
-                              '30 - 39',
-                              '40 - 49',
-                              '50 - 59',
-                              '60 - 69'
-                            ].map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                          ),
-                          Text(
-                            "Gender",
-                          ),
-                          DropdownButton<String>(
-                            value: gender,
-                            iconSize: 24,
-                            onChanged: (String newValue) {
-                              setState(() {
-                                gender = newValue;
-                              });
-                            },
-                            items: <String>['Female', 'Male', 'Other']
-                                .map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                          ),
-                        ],
-                      ),
-                      TextField(
-                        onChanged: (val) {
-                          setState(() => occupation = val);
-                        },
-                        decoration:
-                            InputDecoration(labelText: 'Enter your occupation'),
-                        keyboardType: TextInputType.text,
-                      ),
-                      TextField(
-                        onChanged: (val) {
-                          setState(() => about = val);
-                        },
-                        decoration: InputDecoration(
-                            labelText: 'Share something about yourself'),
-                        keyboardType: TextInputType.text,
-                      ),
-                      TextField(
-                        onChanged: (val) {
-                          setState(() => interests = val);
-                        },
-                        decoration: InputDecoration(
-                            labelText: 'What are your interests?'),
-                        keyboardType: TextInputType.text,
-                      ),
-                      Container(
-                        padding: EdgeInsets.fromLTRB(30, 10, 20, 0),
-                        child: RaisedButton(
-                          onPressed: () async {
-                            //write profile info into the db
-                            await DatabaseService(uid: user.uid).updateUserData(
-                                nickname,
-                                location,
-                                age,
-                                gender,
-                                occupation,
-                                about,
-                                interests);
-                            Navigator.of(context).pushNamed('/uploadphoto');
+              child: SingleChildScrollView(
+                child: Padding(
+                    padding: const EdgeInsets.all(30),
+                    child: Column(
+                      children: <Widget>[
+                        TextField(
+                          onChanged: (val) {
+                            setState(() => nickname = val);
                           },
-                          textColor: Colors.white,
-                          color: Colors.pink,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(50)),
-                          child: Row(
-                            children: <Widget>[
-                              Text('GO TO UPLOAD PHOTO  ',
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold)),
-                              Icon(MdiIcons.arrowRight, size: 18)
-                            ],
-                            mainAxisAlignment: MainAxisAlignment.center,
+                          decoration: InputDecoration(
+                              labelText: 'Choose a nickname to display to users'),
+                          keyboardType: TextInputType.text,
+                        ),
+                        TextField(
+                          onChanged: (val) {
+                            setState(() => location = val);
+                          },
+                          decoration:
+                              InputDecoration(labelText: 'Enter your Location'),
+                          keyboardType: TextInputType.text,
+                        ),
+                        Row(
+                          children: <Widget>[
+                            Text('Age'),
+                            DropdownButton<String>(
+                              value: age,
+                              iconSize: 24,
+                              onChanged: (String newValue) {
+                                setState(() {
+                                  age = newValue;
+                                });
+                              },
+                              items: <String>[
+                                '20 - 29',
+                                '30 - 39',
+                                '40 - 49',
+                                '50 - 59',
+                                '60 - 69'
+                              ].map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
+                            ),
+                            Text(
+                              "Gender",
+                            ),
+                            DropdownButton<String>(
+                              value: gender,
+                              iconSize: 24,
+                              onChanged: (String newValue) {
+                                setState(() {
+                                  gender = newValue;
+                                });
+                              },
+                              items: <String>['Female', 'Male', 'Other']
+                                  .map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
+                            ),
+                          ],
+                        ),
+                        TextField(
+                          onChanged: (val) {
+                            setState(() => occupation = val);
+                          },
+                          decoration:
+                              InputDecoration(labelText: 'Enter your occupation'),
+                          keyboardType: TextInputType.text,
+                        ),
+                        TextField(
+                          onChanged: (val) {
+                            setState(() => about = val);
+                          },
+                          decoration: InputDecoration(
+                              labelText: 'Share something about yourself'),
+                          keyboardType: TextInputType.text,
+                        ),
+                        TextField(
+                          onChanged: (val) {
+                            setState(() => interests = val);
+                          },
+                          decoration: InputDecoration(
+                              labelText: 'What are your interests?'),
+                          keyboardType: TextInputType.text,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8),
+                          child: Container(
+                            child: Wrap(
+                              alignment: WrapAlignment.center,
+                              spacing: 5,
+                              runSpacing: 3,
+                              children: <Widget>[
+                                filterChipWidget(
+                                  chipName: 'yodeling',
+                                ),
+                                filterChipWidget(
+                                  chipName: 'shopping',
+                                ),
+                                filterChipWidget(
+                                  chipName: 'making balloon animals',
+                                ),
+                                filterChipWidget(
+                                  chipName: 'cooking',
+                                ),
+                                filterChipWidget(
+                                  chipName: 'painting',
+                                ),
+                                filterChipWidget(
+                                  chipName: 'writing',
+                                ),
+                                filterChipWidget(
+                                  chipName: 'sports',
+                                ),
+                                filterChipWidget(
+                                  chipName: 'movies',
+                                ),
+                                filterChipWidget(
+                                  chipName: 'traveling',
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                      )
-                    ],
-                  )),
+                        Container(
+                          padding: EdgeInsets.fromLTRB(30, 10, 20, 0),
+                          child: RaisedButton(
+                            onPressed: () async {
+                              //write profile info into the db
+                              await DatabaseService(uid: user.uid).updateUserData(
+                                  nickname,
+                                  location,
+                                  age,
+                                  gender,
+                                  occupation,
+                                  about,
+                                  interests);
+                              Navigator.of(context).pushNamed('/uploadphoto');
+                            },
+                            textColor: Colors.white,
+                            color: Colors.pink,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50)),
+                            child: Row(
+                              children: <Widget>[
+                                Text('GO TO UPLOAD PHOTO  ',
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold)),
+                                Icon(MdiIcons.arrowRight, size: 18)
+                              ],
+                              mainAxisAlignment: MainAxisAlignment.center,
+                            ),
+                          ),
+                        )
+                      ],
+                    )),
+              ),
             ),
           );
   }
 }
+
+
+class filterChipWidget extends StatefulWidget {
+  final String chipName;
+
+  filterChipWidget({Key key, this.chipName}) : super(key: key);
+
+  @override
+  _filterChipWidgetState createState() => _filterChipWidgetState();
+}
+
+class _filterChipWidgetState extends State<filterChipWidget> {
+  var _isSelected = false;
+  @override
+  Widget build(BuildContext context) {
+    return FilterChip(
+      label: Text(widget.chipName),
+      selected: _isSelected,
+      onSelected: (isSelected){
+        setState(() {
+          _isSelected = isSelected;
+        });
+      },
+      selectedColor: Colors.pink[400],
+    checkmarkColor: Colors.white,
+    );
+  }
+}
+
+
