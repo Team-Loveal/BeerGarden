@@ -26,12 +26,21 @@ class _CreateProfileState extends State<CreateProfile> {
   String about;
   String interests;
 
+  //for interests
+  bool yodeling = false;
+  bool shopping = false;
+  bool makingBalloonAnimals = false;
+  bool cooking = false;
+  bool painting = false;
+  bool movies = false;
+  bool sports = false;
+  bool writing = false;
+  bool drinking = false;
+
   //for loading spinner
   bool loading = false;
 
-
   @override
-
   Widget build(BuildContext context) {
     //this is providing the user object
     final user = Provider.of<User>(context);
@@ -49,7 +58,8 @@ class _CreateProfileState extends State<CreateProfile> {
                             setState(() => nickname = val);
                           },
                           decoration: InputDecoration(
-                              labelText: 'Choose a nickname to display to users'),
+                              labelText:
+                                  'Choose a nickname to display to users'),
                           keyboardType: TextInputType.text,
                         ),
                         TextField(
@@ -95,8 +105,11 @@ class _CreateProfileState extends State<CreateProfile> {
                                   gender = newValue;
                                 });
                               },
-                              items: <String>['Female', 'Male', 'Other']
-                                  .map<DropdownMenuItem<String>>((String value) {
+                              items: <String>[
+                                'Female',
+                                'Male',
+                                'Other'
+                              ].map<DropdownMenuItem<String>>((String value) {
                                 return DropdownMenuItem<String>(
                                   value: value,
                                   child: Text(value),
@@ -109,8 +122,8 @@ class _CreateProfileState extends State<CreateProfile> {
                           onChanged: (val) {
                             setState(() => occupation = val);
                           },
-                          decoration:
-                              InputDecoration(labelText: 'Enter your occupation'),
+                          decoration: InputDecoration(
+                              labelText: 'Enter your occupation'),
                           keyboardType: TextInputType.text,
                         ),
                         TextField(
@@ -121,13 +134,9 @@ class _CreateProfileState extends State<CreateProfile> {
                               labelText: 'Share something about yourself'),
                           keyboardType: TextInputType.text,
                         ),
-                        TextField(
-                          onChanged: (val) {
-                            setState(() => interests = val);
-                          },
-                          decoration: InputDecoration(
-                              labelText: 'What are your interests?'),
-                          keyboardType: TextInputType.text,
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10.0),
+                          child: Text('What are your interests?'),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 8),
@@ -137,32 +146,104 @@ class _CreateProfileState extends State<CreateProfile> {
                               spacing: 5,
                               runSpacing: 3,
                               children: <Widget>[
-                                filterChipWidget(
-                                  chipName: 'yodeling',
+                                FilterChip(
+                                  label: Text('yodeling'),
+                                  selected: yodeling,
+                                  onSelected: (isSelected) {
+                                    setState(() {
+                                      yodeling = isSelected;
+                                    });
+                                  },
+                                  selectedColor: Colors.pink[400],
+                                  checkmarkColor: Colors.white,
                                 ),
-                                filterChipWidget(
-                                  chipName: 'shopping',
+                                FilterChip(
+                                  label: Text('shopping'),
+                                  selected: shopping,
+                                  onSelected: (isSelected) {
+                                    setState(() {
+                                      shopping = isSelected;
+                                    });
+                                  },
+                                  selectedColor: Colors.pink[400],
+                                  checkmarkColor: Colors.white,
                                 ),
-                                filterChipWidget(
-                                  chipName: 'making balloon animals',
+                                FilterChip(
+                                  label: Text('making balloon animals'),
+                                  selected: makingBalloonAnimals,
+                                  onSelected: (isSelected) {
+                                    setState(() {
+                                      makingBalloonAnimals = isSelected;
+                                    });
+                                  },
+                                  selectedColor: Colors.pink[400],
+                                  checkmarkColor: Colors.white,
                                 ),
-                                filterChipWidget(
-                                  chipName: 'cooking',
+                                FilterChip(
+                                  label: Text('cooking'),
+                                  selected: cooking,
+                                  onSelected: (isSelected) {
+                                    setState(() {
+                                      cooking = isSelected;
+                                    });
+                                  },
+                                  selectedColor: Colors.pink[400],
+                                  checkmarkColor: Colors.white,
                                 ),
-                                filterChipWidget(
-                                  chipName: 'painting',
+                                FilterChip(
+                                  label: Text('painting'),
+                                  selected: painting,
+                                  onSelected: (isSelected) {
+                                    setState(() {
+                                      painting = isSelected;
+                                    });
+                                  },
+                                  selectedColor: Colors.pink[400],
+                                  checkmarkColor: Colors.white,
                                 ),
-                                filterChipWidget(
-                                  chipName: 'writing',
+                                FilterChip(
+                                  label: Text('writing'),
+                                  selected: writing,
+                                  onSelected: (isSelected) {
+                                    setState(() {
+                                      writing = isSelected;
+                                    });
+                                  },
+                                  selectedColor: Colors.pink[400],
+                                  checkmarkColor: Colors.white,
                                 ),
-                                filterChipWidget(
-                                  chipName: 'sports',
+                                FilterChip(
+                                  label: Text('sports'),
+                                  selected: sports,
+                                  onSelected: (isSelected) {
+                                    setState(() {
+                                      sports = isSelected;
+                                    });
+                                  },
+                                  selectedColor: Colors.pink[400],
+                                  checkmarkColor: Colors.white,
                                 ),
-                                filterChipWidget(
-                                  chipName: 'movies',
+                                FilterChip(
+                                  label: Text('movies'),
+                                  selected: movies,
+                                  onSelected: (isSelected) {
+                                    setState(() {
+                                      movies = isSelected;
+                                    });
+                                  },
+                                  selectedColor: Colors.pink[400],
+                                  checkmarkColor: Colors.white,
                                 ),
-                                filterChipWidget(
-                                  chipName: 'traveling',
+                                FilterChip(
+                                  label: Text('drinking'),
+                                  selected: drinking,
+                                  onSelected: (isSelected) {
+                                    setState(() {
+                                      drinking = isSelected;
+                                    });
+                                  },
+                                  selectedColor: Colors.pink[400],
+                                  checkmarkColor: Colors.white,
                                 ),
                               ],
                             ),
@@ -173,14 +254,25 @@ class _CreateProfileState extends State<CreateProfile> {
                           child: RaisedButton(
                             onPressed: () async {
                               //write profile info into the db
-                              await DatabaseService(uid: user.uid).updateUserData(
-                                  nickname,
-                                  location,
-                                  age,
-                                  gender,
-                                  occupation,
-                                  about,
-                                  interests);
+                              await DatabaseService(uid: user.uid)
+                                  .updateUserData(
+                                nickname,
+                                location,
+                                age,
+                                gender,
+                                occupation,
+                                about,
+                                interests,
+                                yodeling,
+                                shopping,
+                                makingBalloonAnimals,
+                                cooking,
+                                painting,
+                                movies,
+                                sports,
+                                writing,
+                                drinking,
+                              );
                               Navigator.of(context).pushNamed('/uploadphoto');
                             },
                             textColor: Colors.white,
@@ -207,32 +299,36 @@ class _CreateProfileState extends State<CreateProfile> {
   }
 }
 
+// the code below was used for the chip thing. It worked fine but I wasn't able to get the boolean for each chip, so I commented out for now.
+// I just hard code every chip for now
+// probably we can use it later
+// Yuya 6/8/2020
 
-class filterChipWidget extends StatefulWidget {
-  final String chipName;
-
-  filterChipWidget({Key key, this.chipName}) : super(key: key);
-
-  @override
-  _filterChipWidgetState createState() => _filterChipWidgetState();
-}
-
-class _filterChipWidgetState extends State<filterChipWidget> {
-  var _isSelected = false;
-  @override
-  Widget build(BuildContext context) {
-    return FilterChip(
-      label: Text(widget.chipName),
-      selected: _isSelected,
-      onSelected: (isSelected){
-        setState(() {
-          _isSelected = isSelected;
-        });
-      },
-      selectedColor: Colors.pink[400],
-    checkmarkColor: Colors.white,
-    );
-  }
-}
-
-
+//class filterChipWidget extends StatefulWidget {
+//  final String chipName;
+//  final bool yodeling;
+//  final bool shopping;
+//
+//  filterChipWidget({Key key, this.chipName, this.yodeling, this.shopping}) : super(key: key);
+//
+//  @override
+//  _filterChipWidgetState createState() => _filterChipWidgetState();
+//}
+//
+//class _filterChipWidgetState extends State<filterChipWidget> {
+//  var _isSelected = false;
+//  @override
+//  Widget build(BuildContext context) {
+//    return FilterChip(
+//      label: Text(widget.chipName),
+//      selected: _isSelected,
+//      onSelected: (isSelected){
+//        setState(() {
+//          _isSelected = isSelected;
+//        });
+//      },
+//      selectedColor: Colors.pink[400],
+//    checkmarkColor: Colors.white,
+//    );
+//  }
+//}
