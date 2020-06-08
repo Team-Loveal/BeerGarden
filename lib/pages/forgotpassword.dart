@@ -26,9 +26,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         Navigator.of(context).pushNamed('/login');
       }
     });
-    String trimmedemailaddy = emailAddy.trim();
+    String trimmedEmailAddy = emailAddy.trim();
     FirebaseAuth mAuth = FirebaseAuth.instance;
-    await mAuth.sendPasswordResetEmail(email: trimmedemailaddy);
+    await mAuth.sendPasswordResetEmail(email: trimmedEmailAddy);
   }
 
   void onChanged(String value) {
