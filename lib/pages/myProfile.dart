@@ -1,5 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:lovealapp/models/user.dart';
+import 'package:lovealapp/services/database.dart';
+import 'package:provider/provider.dart';
 
 class MyProfile extends StatefulWidget {
   @override
@@ -9,6 +14,8 @@ class MyProfile extends StatefulWidget {
 class _MyProfileState extends State<MyProfile> {
   @override
   Widget build(BuildContext context) {
+    //get userData from the DB
+    final userData = Provider.of<UserData>(context);
     return Scaffold(
       body: ListView(
         children: <Widget>[
@@ -36,7 +43,9 @@ class _MyProfileState extends State<MyProfile> {
                     size: 35,
                     color: Colors.white,
                   ),
-                  onPressed: (){},
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('/editProfile');
+                  },
                 ),
               )
             ],
@@ -54,14 +63,14 @@ class _MyProfileState extends State<MyProfile> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text('John Smith, 28',
+                        Text('${userData.nickname}, ${userData.age}',
                             style: TextStyle(
                                 fontSize: 28, fontWeight: FontWeight.bold)),
                         Row(
                           children: <Widget>[
                             Icon(MdiIcons.mapMarker,
                                 size: 18, color: Colors.grey),
-                            Text('Tokyo, Japan',
+                            Text('${userData.location}, Japan',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.grey))
@@ -91,7 +100,7 @@ class _MyProfileState extends State<MyProfile> {
                         fontWeight: FontWeight.bold,
                       )),
                   SizedBox(height: 5),
-                  Text('High School Teacher', style: TextStyle(fontSize: 16))
+                  Text(userData.occupation, style: TextStyle(fontSize: 16))
                 ]),
           ),
           Container(
@@ -106,24 +115,99 @@ class _MyProfileState extends State<MyProfile> {
                         fontWeight: FontWeight.bold,
                       )),
                   SizedBox(height: 5),
-                  Row(
+                  Wrap(
                     children: <Widget>[
-                      Container(
-                          margin: EdgeInsets.only(right: 10),
-                          child: OutlineButton(
-                              child: Text("Yodeling",
-                                  style: TextStyle(color: Colors.pink)),
-                              onPressed: null,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0)))),
-                      Container(
-                          margin: EdgeInsets.only(right: 10),
-                          child: OutlineButton(
-                              child: Text("Skiing",
-                                  style: TextStyle(color: Colors.pink)),
-                              onPressed: null,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0)))),
+                      //WHEN REFACTORING CREATE SEPARATE WIDGET AND MAP THROUGH INTERESTS
+                      if (userData.yodeling)
+                        Container(
+                            margin: EdgeInsets.only(right: 10),
+                            child: OutlineButton(
+                                child: Text("Yodeling",
+                                    style: TextStyle(color: Colors.pink)),
+                                onPressed: null,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(10.0)))),
+                      if (userData.shopping)
+                        Container(
+                            margin: EdgeInsets.only(right: 10),
+                            child: OutlineButton(
+                                child: Text("Skiing",
+                                    style: TextStyle(color: Colors.pink)),
+                                onPressed: null,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(10.0)))),
+                      if (userData.makingBalloonAnimals)
+                        Container(
+                            margin: EdgeInsets.only(right: 10),
+                            child: OutlineButton(
+                                child: Text("makingBalloonAnimals",
+                                    style: TextStyle(color: Colors.pink)),
+                                onPressed: null,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(10.0)))),
+                      if (userData.cooking)
+                        Container(
+                            margin: EdgeInsets.only(right: 10),
+                            child: OutlineButton(
+                                child: Text("cooking",
+                                    style: TextStyle(color: Colors.pink)),
+                                onPressed: null,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(10.0)))),
+                      if (userData.painting)
+                        Container(
+                            margin: EdgeInsets.only(right: 10),
+                            child: OutlineButton(
+                                child: Text("painting",
+                                    style: TextStyle(color: Colors.pink)),
+                                onPressed: null,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(10.0)))),
+                      if (userData.movies)
+                        Container(
+                            margin: EdgeInsets.only(right: 10),
+                            child: OutlineButton(
+                                child: Text("movies",
+                                    style: TextStyle(color: Colors.pink)),
+                                onPressed: null,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(10.0)))),
+                      if (userData.sports)
+                        Container(
+                            margin: EdgeInsets.only(right: 10),
+                            child: OutlineButton(
+                                child: Text("sports",
+                                    style: TextStyle(color: Colors.pink)),
+                                onPressed: null,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(10.0)))),
+                      if (userData.writing)
+                        Container(
+                            margin: EdgeInsets.only(right: 10),
+                            child: OutlineButton(
+                                child: Text("writing",
+                                    style: TextStyle(color: Colors.pink)),
+                                onPressed: null,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(10.0)))),
+                      if (userData.drinking)
+                        Container(
+                            margin: EdgeInsets.only(right: 10),
+                            child: OutlineButton(
+                                child: Text("drinking",
+                                    style: TextStyle(color: Colors.pink)),
+                                onPressed: null,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(10.0)))),
                     ],
                   )
                 ]),
@@ -140,9 +224,7 @@ class _MyProfileState extends State<MyProfile> {
                         fontWeight: FontWeight.bold,
                       )),
                   SizedBox(height: 5),
-                  Text(
-                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                      style: TextStyle(fontSize: 16))
+                  Text(userData.about, style: TextStyle(fontSize: 16))
                 ]),
           ),
         ],

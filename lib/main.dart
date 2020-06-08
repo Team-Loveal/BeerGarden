@@ -42,6 +42,7 @@ class MyApp extends StatelessWidget {
             '/forgotpassword': (_) => ForgotPassword(),
             '/createProfile': (_) => CreateProfile(),
             '/uploadphoto': (_) => UploadPhoto(),
+            '/editProfile': (_) => EditProfile(),
           }),
     );
   }

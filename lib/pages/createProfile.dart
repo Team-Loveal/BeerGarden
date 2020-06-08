@@ -24,8 +24,7 @@ class _CreateProfileState extends State<CreateProfile> {
   String gender;
   String occupation;
   String about;
-  String interests;
-
+  List interests;
   //for interests
   bool yodeling = false;
   bool shopping = false;
@@ -262,7 +261,6 @@ class _CreateProfileState extends State<CreateProfile> {
                                 gender,
                                 occupation,
                                 about,
-                                interests,
                                 yodeling,
                                 shopping,
                                 makingBalloonAnimals,
