@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:lovealapp/models/user.dart';
+import 'package:lovealapp/models/user.dart';
 import 'package:lovealapp/pages/match.dart';
 import 'package:lovealapp/pages/message.dart';
 import 'package:lovealapp/pages/messagesList.dart';
 import 'package:lovealapp/pages/myProfile.dart';
+
+import 'package:lovealapp/services/database.dart';
+import 'package:provider/provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class NavigationHome extends StatefulWidget {
   @override
@@ -25,24 +31,27 @@ class _NavigationHomeState extends State<NavigationHome> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _children[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-          // new
-          onTap: onTabTapped,
-          currentIndex: _currentIndex,
-          items: [
-            BottomNavigationBarItem(
-              icon: new Icon(Icons.favorite),
-              title: new Text('Match'),
-            ),
-            BottomNavigationBarItem(
-              icon: new Icon(Icons.message),
-              title: new Text('Messages'),
-            ),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.person), title: Text('Profile'))
-          ]),
+    return StreamProvider<UserData>.value(
+      value: DatabaseService().userData,
+      child: Scaffold(
+        body: _children[_currentIndex],
+        bottomNavigationBar: BottomNavigationBar(
+            // new
+            onTap: onTabTapped,
+            currentIndex: _currentIndex,
+            items: [
+              BottomNavigationBarItem(
+                icon: new Icon(Icons.favorite),
+                title: new Text('Match'),
+              ),
+              BottomNavigationBarItem(
+                icon: new Icon(Icons.message),
+                title: new Text('Messages'),
+              ),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.person), title: Text('Profile'))
+            ]),
+      ),
     );
   }
 }

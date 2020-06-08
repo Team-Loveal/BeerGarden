@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:lovealapp/models/user.dart';
 
 class DatabaseService {
   final String uid;
@@ -35,9 +36,24 @@ class DatabaseService {
     });
   }
 
-  //get users doc stream
-  //prob useful when populating user data in preview profile and edit profile
-  Stream<QuerySnapshot> get userData {
-    return usersCollection.snapshots();
+  //userData from snapshot
+  UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
+    return UserData(
+      uid: uid,
+      email: snapshot.data['email'],
+      nickname: snapshot.data['nickname'],
+      location: snapshot.data['location'],
+      age: snapshot.data['age'],
+      gender: snapshot.data['gender'],
+      occupation: snapshot.data['occupation'],
+      about: snapshot.data['about'],
+      interests: snapshot.data['interests'],
+    );
+  }
+
+  //get user doc stream
+  //used when populating user data in preview profile and edit profile
+  Stream<UserData> get userData {
+    return usersCollection.document(uid).snapshots().map(_userDataFromSnapshot);
   }
 }

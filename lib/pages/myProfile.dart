@@ -1,5 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:lovealapp/models/user.dart';
+import 'package:lovealapp/services/database.dart';
+import 'package:provider/provider.dart';
 
 class MyProfile extends StatefulWidget {
   @override
@@ -9,6 +14,14 @@ class MyProfile extends StatefulWidget {
 class _MyProfileState extends State<MyProfile> {
   @override
   Widget build(BuildContext context) {
+    //get userData from the DB
+    final userData = Provider.of<UserData>(context);
+    //get userID from auth
+    final user = Provider.of<User>(context);
+
+    print(user.uid);
+    print(userData.uid);
+
     return Scaffold(
       body: ListView(
         children: <Widget>[
@@ -36,7 +49,9 @@ class _MyProfileState extends State<MyProfile> {
                     size: 35,
                     color: Colors.white,
                   ),
-                  onPressed: (){},
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('/editProfile');
+                  },
                 ),
               )
             ],
