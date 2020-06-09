@@ -6,6 +6,9 @@ import 'dart:async';
 import 'dart:io';
 import 'package:lovealapp/pages/profilePreview.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:path/path.dart' as Path;
+
+
 
 class UploadPhoto extends StatefulWidget {
   @override
@@ -14,6 +17,7 @@ class UploadPhoto extends StatefulWidget {
 
 class _UploadPhotoState extends State<UploadPhoto> {
   File _image;
+  String _uploadedFileURL;
 
   Future getImage() async {
     final image = await ImagePicker.pickImage(source: ImageSource.gallery);
@@ -63,11 +67,9 @@ class _UploadPhotoState extends State<UploadPhoto> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  onPressed: _image == null
-                      ? () => {getImage()}
-                      : () => {
+                  onPressed: _image == null ? () => {getImage()} : () => {
 //                    Navigator.push(context, MaterialPageRoute(builder: (context) => ProfilePreview(profileImg: _image)))
-                          },
+                  },
                 ),
               ],
             ),
@@ -89,9 +91,7 @@ class _UploadPhotoState extends State<UploadPhoto> {
               borderRadius: BorderRadius.circular(20),
             ),
             onPressed: () {
-              final StorageReference firebaseStorageRef =
-                  FirebaseStorage.instance.ref().child('myimg.jpg');
-              final StorageUploadTask task = firebaseStorageRef.putFile(_image);
+              uploadFile();
               Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -102,5 +102,19 @@ class _UploadPhotoState extends State<UploadPhoto> {
         ],
       ),
     );
+  }
+  Future uploadFile() async {
+    StorageReference storageReference = FirebaseStorage.instance
+        .ref()
+        .child('users/${Path.basename(_image.path)}}');
+    StorageUploadTask uploadTask = storageReference.putFile(_image);
+    await uploadTask.onComplete;
+    print('File Uploaded');
+    storageReference.getDownloadURL().then((fileURL) {
+      setState(() {
+        _uploadedFileURL = fileURL;
+        print(_uploadedFileURL);
+      });
+    });
   }
 }

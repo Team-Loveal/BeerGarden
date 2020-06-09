@@ -1,7 +1,7 @@
 Our awesome TODO list
 
 MVP for next Wednesday
-[ ] Complete the basic UI tasks from github
+[X] Complete the basic UI tasks from github
 [ ] Add functionality to the UI
     [X] Welcome page Login connects to the login screen.
     [ ] Able to input email and password and login, the button leads to the todays match screen
