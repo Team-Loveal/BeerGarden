@@ -14,6 +14,7 @@ class MyProfile extends StatefulWidget {
 class _MyProfileState extends State<MyProfile> {
   @override
   Widget build(BuildContext context) {
+    //TODO create if statement like in editProfile to display loader when data is loading from db
     //get userData from the DB
     final userData = Provider.of<UserData>(context);
     return Scaffold(
@@ -132,7 +133,7 @@ class _MyProfileState extends State<MyProfile> {
                         Container(
                             margin: EdgeInsets.only(right: 10),
                             child: OutlineButton(
-                                child: Text("Skiing",
+                                child: Text("Shopping",
                                     style: TextStyle(color: Colors.pink)),
                                 onPressed: null,
                                 shape: RoundedRectangleBorder(
@@ -142,7 +143,7 @@ class _MyProfileState extends State<MyProfile> {
                         Container(
                             margin: EdgeInsets.only(right: 10),
                             child: OutlineButton(
-                                child: Text("makingBalloonAnimals",
+                                child: Text("MakingBalloonAnimals",
                                     style: TextStyle(color: Colors.pink)),
                                 onPressed: null,
                                 shape: RoundedRectangleBorder(
@@ -152,7 +153,7 @@ class _MyProfileState extends State<MyProfile> {
                         Container(
                             margin: EdgeInsets.only(right: 10),
                             child: OutlineButton(
-                                child: Text("cooking",
+                                child: Text("Cooking",
                                     style: TextStyle(color: Colors.pink)),
                                 onPressed: null,
                                 shape: RoundedRectangleBorder(
@@ -162,7 +163,7 @@ class _MyProfileState extends State<MyProfile> {
                         Container(
                             margin: EdgeInsets.only(right: 10),
                             child: OutlineButton(
-                                child: Text("painting",
+                                child: Text("Painting",
                                     style: TextStyle(color: Colors.pink)),
                                 onPressed: null,
                                 shape: RoundedRectangleBorder(
@@ -172,7 +173,7 @@ class _MyProfileState extends State<MyProfile> {
                         Container(
                             margin: EdgeInsets.only(right: 10),
                             child: OutlineButton(
-                                child: Text("movies",
+                                child: Text("Movies",
                                     style: TextStyle(color: Colors.pink)),
                                 onPressed: null,
                                 shape: RoundedRectangleBorder(
@@ -182,7 +183,7 @@ class _MyProfileState extends State<MyProfile> {
                         Container(
                             margin: EdgeInsets.only(right: 10),
                             child: OutlineButton(
-                                child: Text("sports",
+                                child: Text("Sports",
                                     style: TextStyle(color: Colors.pink)),
                                 onPressed: null,
                                 shape: RoundedRectangleBorder(
@@ -192,7 +193,7 @@ class _MyProfileState extends State<MyProfile> {
                         Container(
                             margin: EdgeInsets.only(right: 10),
                             child: OutlineButton(
-                                child: Text("writing",
+                                child: Text("Writing",
                                     style: TextStyle(color: Colors.pink)),
                                 onPressed: null,
                                 shape: RoundedRectangleBorder(
@@ -202,7 +203,7 @@ class _MyProfileState extends State<MyProfile> {
                         Container(
                             margin: EdgeInsets.only(right: 10),
                             child: OutlineButton(
-                                child: Text("drinking",
+                                child: Text("Drinking",
                                     style: TextStyle(color: Colors.pink)),
                                 onPressed: null,
                                 shape: RoundedRectangleBorder(

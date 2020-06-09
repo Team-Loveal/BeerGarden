@@ -75,25 +75,27 @@ class _UploadPhotoState extends State<UploadPhoto> {
       ),
     );
   }
+
   Widget enableUpload() {
-    return Container (
+    return Container(
       child: Column(
         children: <Widget>[
 //          Image.file(_image, height: 300, width: 300),
           RaisedButton(
             color: Colors.pink,
-            child: Text('Next',
-            style: TextStyle(
-              fontWeight: FontWeight.bold
-            )),
+            child: Text('Next', style: TextStyle(fontWeight: FontWeight.bold)),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
             ),
             onPressed: () {
-//              String path = "userphotos/" + UUID + ".png";
-              final StorageReference firebaseStorageRef = FirebaseStorage.instance.ref().child('myimg.jpg');
+              final StorageReference firebaseStorageRef =
+                  FirebaseStorage.instance.ref().child('myimg.jpg');
               final StorageUploadTask task = firebaseStorageRef.putFile(_image);
-              Navigator.push(context, MaterialPageRoute(builder: (context) => ProfilePreview(profileImg: _image)));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          ProfilePreview(profileImg: _image)));
             },
           )
         ],
