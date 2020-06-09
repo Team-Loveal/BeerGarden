@@ -68,9 +68,9 @@ class AuthService {
     try {
       GoogleSignIn googleSignIn = GoogleSignIn();
       GoogleSignInAccount account = await googleSignIn.signIn();
-      if(account == null)
-        return false;
-      AuthResult result = await _auth.signInWithCredential(GoogleAuthProvider.getCredential(
+      if (account == null) return false;
+      AuthResult result =
+          await _auth.signInWithCredential(GoogleAuthProvider.getCredential(
         idToken: (await account.authentication).idToken,
         accessToken: (await account.authentication).accessToken,
       ));
@@ -88,12 +88,11 @@ class AuthService {
     try {
       GoogleSignIn googleSignIn = GoogleSignIn();
       GoogleSignInAccount account = await googleSignIn.signIn();
-      if(account == null)
-        return false;
-      AuthResult result = await _auth.signInWithCredential(GoogleAuthProvider.getCredential(
-          idToken: (await account.authentication).idToken,
-          accessToken: (await account.authentication).accessToken,
-
+      if (account == null) return false;
+      AuthResult result =
+          await _auth.signInWithCredential(GoogleAuthProvider.getCredential(
+        idToken: (await account.authentication).idToken,
+        accessToken: (await account.authentication).accessToken,
       ));
       FirebaseUser user = result.user;
       return _userFromFirebaseUser(user);

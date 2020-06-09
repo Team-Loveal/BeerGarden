@@ -44,6 +44,7 @@ class MyApp extends StatelessWidget {
             '/createProfile': (_) => CreateProfile(),
             '/uploadphoto': (_) => UploadPhoto(),
             '/editProfile': (_) => EditProfile(),
+            '/message': (_) => Message(),
           }),
     );
   }
