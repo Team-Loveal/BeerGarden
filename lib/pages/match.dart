@@ -80,8 +80,8 @@ class _MatchState extends State<Match> {
               )),
           Container(
             margin: EdgeInsets.symmetric(horizontal: 30.0),
-            // width: 380,
-            // height: 380,
+//             width: 380,
+//             height: 380,
             child: Stack(
               children: <Widget>[
                 Stack(

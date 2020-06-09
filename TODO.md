@@ -2,13 +2,13 @@ Our awesome TODO list
 
 MVP for next Wednesday
 [X] Complete the basic UI tasks from github
-[ ] Add functionality to the UI
+[X] Add functionality to the UI
     [X] Welcome page Login connects to the login screen.
-    [ ] Able to input email and password and login, the button leads to the todays match screen
-    [ ] Welcome page signup button links to the signup page. Allow signup by email//facebook
-    [ ] Signup button leads to create a choose a nickname/ upload a photo/ create a profile page
+    [X] Able to input email and password and login, the button leads to the todays match screen
+    [X] Welcome page signup button links to the signup page. Allow signup by email//facebook
+    [X] Signup button leads to create a choose a nickname/ upload a photo/ create a profile page
     [X] The 3 buttons on the bottom bar can toggle between matches, messages, and own profile
-    [ ] In the create profile screen, have all fields and drop down menus working and saving into the database
+    [X] In the create profile screen, have all fields and drop down menus working and saving into the database
 [ ] Have a database
     [ ] Have all the proper connections and magic in the database
 [ ] Have real time chat functionality
@@ -16,7 +16,7 @@ MVP for next Wednesday
     [ ] Notifications for messages
 [ ] Sign up/user auth
     -Using firebase // sign in with Google
-[ ] User can upload multiple photos
+[X] User can upload multiple photos
     -Using firebase storage?
 [ ] Talk with one new person per day
     [ ] create the function that will match the user with 1 peson based on their filtered choices
