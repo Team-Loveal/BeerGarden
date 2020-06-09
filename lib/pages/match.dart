@@ -127,14 +127,7 @@ class _MatchState extends State<Match> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  onPressed: () => {
-                        // create chatRoom
-                        // find chatRoomId in messages collection
-                        // if it exists:
-                        // route user to message screen
-                        // else create chatRoomId
-                        // route user...
-                      }),
+                  onPressed: () => {}),
             ),
           ),
         ],
@@ -142,31 +135,3 @@ class _MatchState extends State<Match> {
     );
   }
 }
-//chatroomMap = object of users/messages?
-// {'sentBy': 'uid',
-//    'text': 'hello' }
-//
-//void createChatRoom(String chatroomId, chatroomMap) {
-//  Firestore.instance.collection('messages')
-//    .document(chatroomId)
-//    .setData(chatroomMap)
-//    .catchError((e){
-//      print(e.toString());
-//    });
-//}
-//
-//getChatroomID(String user1, String user2) {
-//  if (user1.substring(0, 1).codeUnitAt(0) > user2.substring(0, 1).codeUnitAt(0)) {
-//    return "$user2\_$user1";
-//  } else {
-//    return "$user1\_$user2";
-//  }
-//}
-//
-//
-//// returns bool
-//void findChatRoom(String userId, peerId) {
-//  Firestore.instance
-//  .collection('messages')
-//  .where(firebase.firestore.FieldPath.documentId(), '==', '${userId}_${peerId}')
-//}

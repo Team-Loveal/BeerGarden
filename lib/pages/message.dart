@@ -66,15 +66,15 @@ class _MessageState extends State<Message> {
       var documentReference = Firestore.instance
           .collection('messages')
           .document(chatRoomID)
-          .collection(chatRoomID)
+          .collection('chatroom')
           .document(DateTime.now().millisecondsSinceEpoch.toString());
 
       Firestore.instance.runTransaction((transaction) async {
         await transaction.set(
           documentReference,
           {
-            'fromID': "testpig", // replace with var id
-            'toID': "testmonkey", // replace with var peerID
+            'fromID': "testpig", // TODO replace with var id
+            'toID': "testmonkey", // TODO replace with var peerID
             'timestamp': DateTime.now().millisecondsSinceEpoch.toString(),
             'text': text,
           },
@@ -114,7 +114,7 @@ class _MessageState extends State<Message> {
                     stream: Firestore.instance
                         .collection('messages')
                         .document(chatRoomID)
-                        .collection(chatRoomID)
+                        .collection('chatroom')
                         .orderBy('timestamp', descending: true)
                         .limit(20)
                         .snapshots(),
@@ -124,13 +124,12 @@ class _MessageState extends State<Message> {
                           child: CircularProgressIndicator(),
                         );
                       } else {
-                        listMessages = snapshot.data.documents;
                         return ListView.builder(
                           padding: EdgeInsets.all(8.0),
                           reverse: true,
                           // builds widget for each message in the database
                           itemBuilder: (context, index) => buildMessage(
-                              index, snapshot.data.documents[index], context),
+                              snapshot.data.documents[index], context),
                           itemCount: snapshot.data.documents.length,
                         );
                       }
@@ -146,14 +145,13 @@ class _MessageState extends State<Message> {
   }
 
   // For each message bubble
-  Widget buildMessage(
-      int index, DocumentSnapshot document, BuildContext context) {
+  Widget buildMessage(DocumentSnapshot document, BuildContext context) {
     // TODO replace with user id
     return Padding(
       padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
       child: Flex(
         direction: Axis.horizontal,
-        mainAxisAlignment: document['fromID'] == 'testpig'
+        mainAxisAlignment: document['fromID'] == 'testpig' // TODO user.uid
             ? MainAxisAlignment.end
             : MainAxisAlignment.start,
         children: <Widget>[

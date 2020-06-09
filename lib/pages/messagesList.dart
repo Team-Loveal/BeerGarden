@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:lovealapp/models/user.dart';
+import 'package:provider/provider.dart';
 
 class Messages extends StatefulWidget {
   @override
@@ -6,389 +9,111 @@ class Messages extends StatefulWidget {
 }
 
 class _MessagesState extends State<Messages> {
+  String chatroomID =
+      "5WADFQiHEses3riWV9JxaYJNrGM2-b7fXewrdeaPJ814w5A0qvKo4cuH3";
+
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<User>(context);
+    debugPrint('User: ${user.uid}');
+
     return Scaffold(
-      body: Container(
-        //use map to get messages from array
-        child: ListView(children: <Widget>[
-          //Messages heading
-          Container(
-              margin:
-                  const EdgeInsets.symmetric(vertical: 40.0, horizontal: 20.0),
-              child: Text('Messages',
-                  style: TextStyle(
-                    fontSize: 40.0,
-                    fontWeight: FontWeight.bold,
-                  ))),
-          //Messages
-          Container(
-            margin: const EdgeInsets.only(bottom: 20.0),
-            height: 50,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Expanded(
-                  child: CircleAvatar(
-                    backgroundColor: Colors.pinkAccent,
-                    radius: 50,
-                    child: CircleAvatar(
-                        radius: 23,
-                        backgroundImage: NetworkImage(
-                            'https://mymodernmet.com/wp/wp-content/uploads/2017/01/animal-selfies-5.jpg')),
-                  ),
-                ),
-                Expanded(
-                  flex: 3,
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text('Nickname',
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                        Text('Message Message')
-                      ]),
-                ),
-                Expanded(child: Text('May 2nd')),
-              ],
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          title: Text('Messages',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32)),
+        ),
+        body: Column(
+          children: <Widget>[
+            Flexible(
+              child: StreamBuilder(
+                  stream: Firestore.instance
+                      .collection('messages')
+                      .where('fromID',
+                          isEqualTo: 'i7CWlm6grKQGMkZkIrIBubcZjOF2')
+                      .where('chatted', isEqualTo: true)
+                      .snapshots(), // TODO replace with chatRoomId
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else {
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        // scrollDirection: Axis.vertical,
+                        itemBuilder: (context, index) => buildChatroom(
+                            snapshot.data.documents[index], context),
+                        itemCount: snapshot.data.documents.length,
+                      );
+                    }
+                  }),
+            ),
+          ],
+        ));
+  }
+
+  Widget buildChatroom(DocumentSnapshot document, BuildContext context) {
+    var doc = document.reference
+        .collection('chatroom')
+        .orderBy('timestamp', descending: true)
+        .limit(1)
+        .getDocuments()
+        .then((data) => {
+              if (data.documents.length > 0) {print(data.documents[0].data)}
+            });
+
+    print(doc);
+    // .getDocuments()
+    // .then((doc) => {
+    //       if (doc.documents.isNotEmpty)
+    //         {
+    //           // print('${}')
+    //           debugPrint("Active Chatroom! ${doc.getData}")
+    //         }
+    //     })
+    // .catchError((err) => print("No Active Chatrooms..."));
+
+    // .orderBy('timestamp', descending: true).limit(1);
+    // .then((val) =>
+    //   val.orderBy('timestamp', descending: true).limit(1);
+    // );
+    // .then((val) {
+    //   val.documents.forEach((e) {
+    //     print("another k = ${e['text']}");
+    //   });
+    // });
+    // TODO find toID and fetch nickname from users document
+    return Container(
+      margin: const EdgeInsets.only(bottom: 20.0),
+      height: 50,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Expanded(
+            child: CircleAvatar(
+              backgroundColor: Colors.pinkAccent,
+              radius: 50,
+              child: CircleAvatar(
+                  radius: 23,
+                  backgroundImage: NetworkImage(
+                      'https://mymodernmet.com/wp/wp-content/uploads/2017/01/animal-selfies-5.jpg')),
             ),
           ),
-          Container(
-            margin: const EdgeInsets.only(bottom: 20.0),
-            height: 50,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Expanded(
-                  child: CircleAvatar(
-                    backgroundColor: Colors.pinkAccent,
-                    radius: 50,
-                    child: CircleAvatar(
-                        radius: 23,
-                        backgroundImage: NetworkImage(
-                            'https://mymodernmet.com/wp/wp-content/uploads/2017/01/animal-selfies-5.jpg')),
-                  ),
-                ),
-                Expanded(
-                  flex: 3,
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text('Nickname',
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                        Text('Message Message')
-                      ]),
-                ),
-                Expanded(child: Text('May 2nd')),
-              ],
-            ),
+          Expanded(
+            flex: 3,
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text('Nickname',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  Text('Message Message')
+                ]),
           ),
-          Container(
-            margin: const EdgeInsets.only(bottom: 20.0),
-            height: 50,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Expanded(
-                  child: CircleAvatar(
-                    backgroundColor: Colors.pinkAccent,
-                    radius: 50,
-                    child: CircleAvatar(
-                        radius: 23,
-                        backgroundImage: NetworkImage(
-                            'https://mymodernmet.com/wp/wp-content/uploads/2017/01/animal-selfies-5.jpg')),
-                  ),
-                ),
-                Expanded(
-                  flex: 3,
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text('Nickname',
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                        Text('Message Message')
-                      ]),
-                ),
-                Expanded(child: Text('May 2nd')),
-              ],
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(bottom: 20.0),
-            height: 50,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                CircleAvatar(
-                  radius: 40,
-                  backgroundColor: Color(0xffFDCF09),
-                  child: CircleAvatar(
-                      radius: 25,
-                      backgroundImage: NetworkImage(
-                          'https://mymodernmet.com/wp/wp-content/uploads/2017/01/animal-selfies-5.jpg')),
-                ),
-                Expanded(
-                  flex: 3,
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text('Nickname',
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                        Text('Message Message')
-                      ]),
-                ),
-                Expanded(child: Text('May 2nd')),
-              ],
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(bottom: 20.0),
-            height: 50,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                CircleAvatar(
-                  radius: 40,
-                  backgroundColor: Color(0xffFDCF09),
-                  child: CircleAvatar(
-                      radius: 25,
-                      backgroundImage: NetworkImage(
-                          'https://mymodernmet.com/wp/wp-content/uploads/2017/01/animal-selfies-5.jpg')),
-                ),
-                Expanded(
-                  flex: 3,
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text('Nickname',
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                        Text('Message Message')
-                      ]),
-                ),
-                Expanded(child: Text('May 2nd')),
-              ],
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(bottom: 20.0),
-            height: 50,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                CircleAvatar(
-                  radius: 40,
-                  backgroundColor: Color(0xffFDCF09),
-                  child: CircleAvatar(
-                      radius: 25,
-                      backgroundImage: NetworkImage(
-                          'https://mymodernmet.com/wp/wp-content/uploads/2017/01/animal-selfies-5.jpg')),
-                ),
-                Expanded(
-                  flex: 3,
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text('Nickname',
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                        Text('Message Message')
-                      ]),
-                ),
-                Expanded(child: Text('May 2nd')),
-              ],
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(bottom: 20.0),
-            height: 50,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                CircleAvatar(
-                  radius: 40,
-                  backgroundColor: Color(0xffFDCF09),
-                  child: CircleAvatar(
-                      radius: 25,
-                      backgroundImage: NetworkImage(
-                          'https://mymodernmet.com/wp/wp-content/uploads/2017/01/animal-selfies-5.jpg')),
-                ),
-                Expanded(
-                  flex: 3,
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text('Nickname',
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                        Text('Message Message')
-                      ]),
-                ),
-                Expanded(child: Text('May 2nd')),
-              ],
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(bottom: 20.0),
-            height: 50,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                CircleAvatar(
-                  radius: 40,
-                  backgroundColor: Color(0xffFDCF09),
-                  child: CircleAvatar(
-                      radius: 25,
-                      backgroundImage: NetworkImage(
-                          'https://mymodernmet.com/wp/wp-content/uploads/2017/01/animal-selfies-5.jpg')),
-                ),
-                Expanded(
-                  flex: 3,
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text('Nickname',
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                        Text('Message Message')
-                      ]),
-                ),
-                Expanded(child: Text('May 2nd')),
-              ],
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(bottom: 20.0),
-            height: 50,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                CircleAvatar(
-                  radius: 40,
-                  backgroundColor: Color(0xffFDCF09),
-                  child: CircleAvatar(
-                      radius: 25,
-                      backgroundImage: NetworkImage(
-                          'https://mymodernmet.com/wp/wp-content/uploads/2017/01/animal-selfies-5.jpg')),
-                ),
-                Expanded(
-                  flex: 3,
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text('Nickname',
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                        Text('Message Message')
-                      ]),
-                ),
-                Expanded(child: Text('May 2nd')),
-              ],
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(bottom: 20.0),
-            height: 50,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                CircleAvatar(
-                  radius: 40,
-                  backgroundColor: Color(0xffFDCF09),
-                  child: CircleAvatar(
-                      radius: 25,
-                      backgroundImage: NetworkImage(
-                          'https://mymodernmet.com/wp/wp-content/uploads/2017/01/animal-selfies-5.jpg')),
-                ),
-                Expanded(
-                  flex: 3,
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text('Nickname',
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                        Text('Message Message')
-                      ]),
-                ),
-                Expanded(child: Text('May 2nd')),
-              ],
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(bottom: 20.0),
-            height: 50,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                CircleAvatar(
-                  radius: 40,
-                  backgroundColor: Color(0xffFDCF09),
-                  child: CircleAvatar(
-                      radius: 25,
-                      backgroundImage: NetworkImage(
-                          'https://mymodernmet.com/wp/wp-content/uploads/2017/01/animal-selfies-5.jpg')),
-                ),
-                Expanded(
-                  flex: 3,
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text('Nickname',
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                        Text('Message Message')
-                      ]),
-                ),
-                Expanded(child: Text('May 2nd')),
-              ],
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(bottom: 20.0),
-            height: 50,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                CircleAvatar(
-                  radius: 40,
-                  backgroundColor: Color(0xffFDCF09),
-                  child: CircleAvatar(
-                      radius: 25,
-                      backgroundImage: NetworkImage(
-                          'https://mymodernmet.com/wp/wp-content/uploads/2017/01/animal-selfies-5.jpg')),
-                ),
-                Expanded(
-                  flex: 3,
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text('Nickname',
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                        Text('Message Message')
-                      ]),
-                ),
-                Expanded(child: Text('May 2nd')),
-              ],
-            ),
-          ),
-        ]),
+          Expanded(child: Text('May 2nd')),
+        ],
       ),
     );
   }
