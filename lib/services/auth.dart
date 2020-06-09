@@ -63,6 +63,30 @@ class AuthService {
     }
   }
 
+  //Register with The Google
+  Future registerWithGoogle() async {
+    try {
+      GoogleSignIn googleSignIn = GoogleSignIn();
+      GoogleSignInAccount account = await googleSignIn.signIn();
+      if(account == null)
+        return false;
+      AuthResult result = await _auth.signInWithCredential(GoogleAuthProvider.getCredential(
+        idToken: (await account.authentication).idToken,
+        accessToken: (await account.authentication).accessToken,
+
+      ));
+      FirebaseUser user = result.user;
+      await DatabaseService(uid: user.uid).setUserData(email);
+
+      return _userFromFirebaseUser(user);
+
+    } catch (e) {
+      print("Error logging with Google");
+      return false;
+    }
+  }
+
+
   //Login with The Google
   Future loginWithGoogle() async {
     try {
@@ -70,13 +94,17 @@ class AuthService {
       GoogleSignInAccount account = await googleSignIn.signIn();
       if(account == null)
         return false;
-      AuthResult res = await _auth.signInWithCredential(GoogleAuthProvider.getCredential(
+      AuthResult result = await _auth.signInWithCredential(GoogleAuthProvider.getCredential(
           idToken: (await account.authentication).idToken,
           accessToken: (await account.authentication).accessToken,
+
       ));
-      if(res.user == null)
+
+      FirebaseUser user = result.user;
+      return _userFromFirebaseUser(user);
+     /* if(result.user == null)
         return false;
-      return true;
+      return true;*/
     } catch (e) {
       print("Error logging with Google");
       return false;
