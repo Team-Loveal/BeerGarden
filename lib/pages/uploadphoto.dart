@@ -6,6 +6,9 @@ import 'dart:async';
 import 'dart:io';
 import 'package:lovealapp/pages/profilePreview.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:lovealapp/models/user.dart';
+import 'package:provider/provider.dart';
+import 'package:lovealapp/services/database.dart';
 import 'package:path/path.dart' as Path;
 
 
@@ -26,6 +29,7 @@ class _UploadPhotoState extends State<UploadPhoto> {
       _image = image;
     });
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -80,6 +84,7 @@ class _UploadPhotoState extends State<UploadPhoto> {
   }
 
   Widget enableUpload() {
+    final user = Provider.of<User>(context);
     return Container(
       child: Column(
         children: <Widget>[
@@ -90,8 +95,11 @@ class _UploadPhotoState extends State<UploadPhoto> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
             ),
-            onPressed: () {
+            onPressed: () /*async*/ {
               uploadFile();
+//              await DatabaseService(uid: user.uid)
+//                  .updateUserData()
+
               Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -113,7 +121,7 @@ class _UploadPhotoState extends State<UploadPhoto> {
     storageReference.getDownloadURL().then((fileURL) {
       setState(() {
         _uploadedFileURL = fileURL;
-        print(_uploadedFileURL);
+
       });
     });
   }

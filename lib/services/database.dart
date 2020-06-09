@@ -85,4 +85,23 @@ class DatabaseService {
   Stream<UserData> get userData {
     return usersCollection.document(uid).snapshots().map(_userDataFromSnapshot);
   }
+
+  //update user img when uploaded
+  Future updateUserImg (
+      String imgUrl,
+      ) async {
+    return await usersCollection.document(uid).updateData({
+      'imgUrl' : imgUrl,
+    });
+  }
+
+  //userData from snapshot
+  UserImg _userImgFromSnapshot(DocumentSnapshot snapshot) {
+    return UserImg(
+      uid: uid,
+      imgUrl: snapshot.data['imgUrl'],
+
+    );
+  }
+
 }
