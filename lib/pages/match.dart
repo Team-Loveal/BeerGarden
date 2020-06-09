@@ -1,19 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/basic.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:lovealapp/models/user.dart';
 import 'package:lovealapp/services/auth.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'dart:ui';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:provider/provider.dart';
+import 'dart:math';
 
+import 'message.dart';
+
+//TODO loop through messages collection and if chatted is false, get toID and use it to get profile info
+//
 class Match extends StatefulWidget {
   @override
   _MatchState createState() => _MatchState();
 }
 
 class _MatchState extends State<Match> {
+  String matchID;
+  String chatID;
+
   @override
   Widget build(BuildContext context) {
     final AuthService _auth = AuthService();
+    final user = Provider.of<User>(context);
+
+    Firestore.instance
+        .collection("messages")
+        .where('fromID', isEqualTo: user.uid)
+        .snapshots()
+        .listen((data) => data.documents.forEach((doc) => {
+              if (!doc['chatted'])
+                {matchID = doc['toID'], chatID = doc.documentID}
+            }));
+
     return Scaffold(
       body: ListView(
         children: <Widget>[
@@ -123,7 +145,19 @@ class _MatchState extends State<Match> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  onPressed: () => {}),
+                  onPressed: () => {
+                        //set chatted to true in db
+                        Firestore.instance
+                            .collection("messages")
+                            .document(chatID)
+                            .updateData({'chatted': true}),
+
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    Message(chatRoomID: chatID)))
+                      }),
             ),
           ),
         ],
