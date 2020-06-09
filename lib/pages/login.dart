@@ -95,10 +95,11 @@ class _LoginState extends State<Login> {
                         child: RaisedButton(
                             onPressed: () async {
                               setState(() => loading = true);
-                              String trimmedemail = email.trim();
+                              String trimmedEmail = email.trim();
+                              String trimmedPassword = password.trim();
                               dynamic result =
                                   await _auth.signIWithEmailAndPassword(
-                                      trimmedemail, password);
+                                      trimmedEmail, trimmedPassword);
                               if (result == null) {
                                 setState(() {
                                   error =
@@ -152,7 +153,26 @@ class _LoginState extends State<Login> {
                           shape: CircleBorder(),
                         ),
                         RawMaterialButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            dynamic result =
+                            await AuthService().loginWithGoogle();
+                            if (result == null) {
+                              setState(() {
+                                error =
+                                'Could not sign in with those credentials';
+                                loading = false;
+                              });
+                            } else {
+                              //result.uid is the uid we will need for the db
+                              print(result);
+                              Navigator.of(context)
+                                  .popUntil((route) => route.isFirst);
+                            }
+
+                           /* bool res = await AuthService().loginWithGoogle();
+                            if(!res)
+                              print("error logging in with Google");*/
+                          },
                           fillColor: Colors.white,
                           child: Icon(
                             MdiIcons.google,

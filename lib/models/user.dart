@@ -12,7 +12,15 @@ class UserData {
   final String gender;
   final String occupation;
   final String about;
-  final String interests;
+  final bool yodeling;
+  final bool shopping;
+  final bool makingBalloonAnimals;
+  final bool cooking;
+  final bool painting;
+  final bool movies;
+  final bool sports;
+  final bool writing;
+  final bool drinking;
 
   UserData(
       {this.uid,
@@ -23,5 +31,13 @@ class UserData {
       this.gender,
       this.occupation,
       this.about,
-      this.interests});
+      this.yodeling,
+      this.shopping,
+      this.makingBalloonAnimals,
+      this.cooking,
+      this.painting,
+      this.movies,
+      this.sports,
+      this.writing,
+      this.drinking});
 }
