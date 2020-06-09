@@ -6,6 +6,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:lovealapp/pages/login.dart';
 import "package:lovealapp/services/auth.dart";
 import 'package:lovealapp/shared/loading.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 //If you're going to add validator functionality, you must change the TextFields to TextFormField and Container to Form
 
@@ -142,7 +143,22 @@ class _SignUpState extends State<SignUp> {
                           shape: CircleBorder(),
                         ),
                         RawMaterialButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            dynamic result =
+                            await AuthService().loginWithGoogle();
+                            if (result == null) {
+                              setState(() {
+                                error =
+                                'Could not sign in with those credentials';
+                                loading = false;
+                              });
+                            } else {
+                              //result.uid is the uid we will need for the db
+                              print(result);
+                              Navigator.of(context)
+                                  .pushNamed('/createProfile');
+                            }
+                          },
                           fillColor: Colors.white,
                           child: Icon(
                             MdiIcons.google,
