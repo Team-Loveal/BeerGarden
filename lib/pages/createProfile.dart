@@ -29,30 +29,30 @@ class _CreateProfileState extends State<CreateProfile> {
   bool yodeling = false;
   bool shopping = false;
   bool makingBalloonAnimals = false;
-  bool cooking = false;
-  bool painting = false;
-  bool movies = false;
-  bool sports = false;
-  bool writing = false;
-  bool drinking = false;
+                    bool cooking = false;
+                bool painting = false;
+                bool movies = false;
+                bool sports = false;
+                bool writing = false;
+                bool drinking = false;
 
-  //for loading spinner
-  bool loading = false;
+                //for loading spinner
+                bool loading = false;
 
-  //for chat
-  String chatID;
+                //for chat
+                String chatID;
 
-  @override
-  Widget build(BuildContext context) {
-    //this is providing the user object
-    final user = Provider.of<User>(context);
+                @override
+                Widget build(BuildContext context) {
+                  //this is providing the user object
+                  final user = Provider.of<User>(context);
 
-    return loading
-        ? Loading()
-        : Scaffold(
-            body: SafeArea(
-              child: SingleChildScrollView(
-                child: Padding(
+                return loading
+                ? Loading()
+            : Scaffold(
+    body: SafeArea(
+    child: SingleChildScrollView(
+        child: Padding(
                     padding: const EdgeInsets.all(30),
                     child: Column(
                       children: <Widget>[

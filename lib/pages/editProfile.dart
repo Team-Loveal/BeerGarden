@@ -17,11 +17,10 @@ class _EditProfileState extends State<EditProfile> {
 
   }
 
-
   @override
   Widget build(BuildContext context) {
 
-    //final userData = Provider.of<UserData>(context);
+    final user = Provider.of<User>(context);
     return Scaffold(
 
       appBar: AppBar(
@@ -76,6 +75,7 @@ class _EditProfileState extends State<EditProfile> {
                                 color: Colors.red, fontWeight: FontWeight.w300),
                             decoration: InputDecoration(
                               labelText: 'Nickname',
+                              hintText: user.nickname
                             ),
                             autofocus: true,
                             keyboardType: TextInputType.text,
@@ -139,6 +139,7 @@ class _EditProfileState extends State<EditProfile> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
+
                                     Text(
                                       'Gender',
                                       style: TextStyle(
@@ -185,7 +186,7 @@ class _EditProfileState extends State<EditProfile> {
                               borderRadius: BorderRadius.circular(20)),
                             //final userData = Provider.of<UserData>(context);
                           onPressed: () => {
-                          //  print(userData),
+                            print(user.uid),
                             print("Datttttttaaatatatatataatatatatatatat"),
                             updateProfileData(),
                           },
