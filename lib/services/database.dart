@@ -98,10 +98,13 @@ class DatabaseService {
   //userData from snapshot
   UserImg _userImgFromSnapshot(DocumentSnapshot snapshot) {
     return UserImg(
-      uid: uid,
       imgUrl: snapshot.data['imgUrl'],
 
     );
+  }
+
+  Stream<UserImg> get userImg {
+    return usersCollection.document(uid).snapshots().map(_userImgFromSnapshot);
   }
 
 }

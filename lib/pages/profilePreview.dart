@@ -13,17 +13,21 @@ import 'package:provider/provider.dart';
 
 class ProfilePreview extends StatefulWidget {
   final File profileImg;
+  final String imgUrl;
 
-  ProfilePreview({Key key, @required this.profileImg}) : super(key: key);
+  ProfilePreview({Key key, @required this.profileImg, this.imgUrl})
+      : super(key: key);
 
   @override
-  _ProfilePreviewState createState() => _ProfilePreviewState(profileImg);
+  _ProfilePreviewState createState() =>
+      _ProfilePreviewState(profileImg, imgUrl);
 }
 
 class _ProfilePreviewState extends State<ProfilePreview> {
   final File profileImg;
+  final String imgUrl;
 
-  _ProfilePreviewState(this.profileImg);
+  _ProfilePreviewState(this.profileImg, this.imgUrl);
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +43,10 @@ class _ProfilePreviewState extends State<ProfilePreview> {
 
             return Scaffold(
               floatingActionButton: FloatingActionButton.extended(
-                onPressed: () {
+                onPressed: () async {
+                  print(imgUrl);
+                  //upload photo url to the DB
+                  await DatabaseService(uid: user.uid).updateUserImg(imgUrl);
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => NavigationHome()),

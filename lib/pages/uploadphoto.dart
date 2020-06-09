@@ -95,16 +95,13 @@ class _UploadPhotoState extends State<UploadPhoto> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
             ),
-            onPressed: () /*async*/ {
-              uploadFile();
-//              await DatabaseService(uid: user.uid)
-//                  .updateUserData()
-
+            onPressed: () async {
+              uploadFile()
               Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) =>
-                          ProfilePreview(profileImg: _image)));
+                          ProfilePreview(profileImg: _image, imgUrl: _uploadedFileURL)));
             },
           )
         ],
@@ -121,8 +118,12 @@ class _UploadPhotoState extends State<UploadPhoto> {
     storageReference.getDownloadURL().then((fileURL) {
       setState(() {
         _uploadedFileURL = fileURL;
-
       });
+
     });
   }
 }
+//await DatabaseService(uid: user.uid)
+//.updateUserImg(
+//_uploadedFileURL
+//)
