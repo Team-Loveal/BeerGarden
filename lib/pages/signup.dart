@@ -145,7 +145,7 @@ class _SignUpState extends State<SignUp> {
                         RawMaterialButton(
                           onPressed: () async {
                             dynamic result =
-                            await AuthService().loginWithGoogle();
+                            await AuthService().registerWithGoogle();
                             if (result == null) {
                               setState(() {
                                 error =
