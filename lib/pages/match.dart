@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/basic.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:lovealapp/services/auth.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'dart:ui';
+import 'package:provider/provider.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:lovealapp/models/user.dart';
 
 class Match extends StatefulWidget {
   @override
@@ -14,6 +15,9 @@ class _MatchState extends State<Match> {
   @override
   Widget build(BuildContext context) {
     final AuthService _auth = AuthService();
+    final user = Provider.of<User>(context);
+    // TODO get peer data (Id, nickname, etc.)
+
     return Scaffold(
       body: ListView(
         children: <Widget>[
@@ -123,7 +127,14 @@ class _MatchState extends State<Match> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  onPressed: () => {}),
+                  onPressed: () => {
+                        // create chatRoom
+                        // find chatRoomId in messages collection
+                        // if it exists:
+                        // route user to message screen
+                        // else create chatRoomId
+                        // route user...
+                      }),
             ),
           ),
         ],
@@ -131,3 +142,31 @@ class _MatchState extends State<Match> {
     );
   }
 }
+//chatroomMap = object of users/messages?
+// {'sentBy': 'uid',
+//    'text': 'hello' }
+//
+//void createChatRoom(String chatroomId, chatroomMap) {
+//  Firestore.instance.collection('messages')
+//    .document(chatroomId)
+//    .setData(chatroomMap)
+//    .catchError((e){
+//      print(e.toString());
+//    });
+//}
+//
+//getChatroomID(String user1, String user2) {
+//  if (user1.substring(0, 1).codeUnitAt(0) > user2.substring(0, 1).codeUnitAt(0)) {
+//    return "$user2\_$user1";
+//  } else {
+//    return "$user1\_$user2";
+//  }
+//}
+//
+//
+//// returns bool
+//void findChatRoom(String userId, peerId) {
+//  Firestore.instance
+//  .collection('messages')
+//  .where(firebase.firestore.FieldPath.documentId(), '==', '${userId}_${peerId}')
+//}
