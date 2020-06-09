@@ -27,7 +27,7 @@ class _MessageState extends State<Message> {
   void initState() {
     super.initState();
     //THIS IS THE CHAT ROOM ID
-    print(chatRoomID);
+    print('CHATROOMID: $chatRoomID');
 
     // TODO replace hardcoded chatRoomID (userID-userID)
     //chatRoomID = "5WADFQiHEses3riWV9JxaYJNrGM2-b7fXewrdeaPJ814w5A0qvKo4cuH3";
