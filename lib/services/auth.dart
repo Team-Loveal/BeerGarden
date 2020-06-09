@@ -64,18 +64,18 @@ class AuthService {
   }
 
   //Login with The Google
+  //TODO add user to db
   Future loginWithGoogle() async {
     try {
       GoogleSignIn googleSignIn = GoogleSignIn();
       GoogleSignInAccount account = await googleSignIn.signIn();
-      if(account == null)
-        return false;
-      AuthResult res = await _auth.signInWithCredential(GoogleAuthProvider.getCredential(
-          idToken: (await account.authentication).idToken,
-          accessToken: (await account.authentication).accessToken,
+      if (account == null) return false;
+      AuthResult res =
+          await _auth.signInWithCredential(GoogleAuthProvider.getCredential(
+        idToken: (await account.authentication).idToken,
+        accessToken: (await account.authentication).accessToken,
       ));
-      if(res.user == null)
-        return false;
+      if (res.user == null) return false;
       return true;
     } catch (e) {
       print("Error logging with Google");

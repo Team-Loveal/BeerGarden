@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/basic.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:lovealapp/models/user.dart';
 import 'package:lovealapp/services/auth.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'dart:ui';
+import 'package:provider/provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Match extends StatefulWidget {
   @override
@@ -13,6 +16,7 @@ class Match extends StatefulWidget {
 class _MatchState extends State<Match> {
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<User>(context);
     final AuthService _auth = AuthService();
     return Scaffold(
       body: ListView(
@@ -123,7 +127,23 @@ class _MatchState extends State<Match> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  onPressed: () => {}),
+                  onPressed: () => {
+                        //TODO GET TOUSERID and concat with YOURUSERID and write it into messages db
+                        //userid = user.uid
+                        //loop through all userids
+                        Firestore.instance
+                            .collection("users")
+                            .getDocuments()
+                            .then((querySnapshot) {
+                          querySnapshot.documents.forEach((document) {
+                            if (document.documentID != user.uid) {
+                              //concat and make into a string and push into chatIds array
+                              print('${user.uid} - ${document.documentID}');
+                              print('${document.documentID} - ${user.uid}');
+                            }
+                          });
+                        })
+                      }),
             ),
           ),
         ],
