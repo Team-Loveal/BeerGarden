@@ -46,6 +46,7 @@ class _CreateProfileState extends State<CreateProfile> {
   Widget build(BuildContext context) {
     //this is providing the user object
     final user = Provider.of<User>(context);
+
     return loading
         ? Loading()
         : Scaffold(

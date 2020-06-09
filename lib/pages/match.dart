@@ -5,9 +5,10 @@ import 'package:lovealapp/models/user.dart';
 import 'package:lovealapp/services/auth.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'dart:ui';
-import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+//TODO loop through messages collection and if chatted is false, get toID and use it to get profile info
+//
 class Match extends StatefulWidget {
   @override
   _MatchState createState() => _MatchState();
@@ -16,7 +17,6 @@ class Match extends StatefulWidget {
 class _MatchState extends State<Match> {
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<User>(context);
     final AuthService _auth = AuthService();
     return Scaffold(
       body: ListView(
@@ -127,23 +127,7 @@ class _MatchState extends State<Match> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  onPressed: () => {
-                        //TODO GET TOUSERID and concat with YOURUSERID and write it into messages db
-                        //userid = user.uid
-                        //loop through all userids
-                        Firestore.instance
-                            .collection("users")
-                            .getDocuments()
-                            .then((querySnapshot) {
-                          querySnapshot.documents.forEach((document) {
-                            if (document.documentID != user.uid) {
-                              //concat and make into a string and push into chatIds array
-                              print('${user.uid} - ${document.documentID}');
-                              print('${document.documentID} - ${user.uid}');
-                            }
-                          });
-                        })
-                      }),
+                  onPressed: () => {}),
             ),
           ),
         ],
