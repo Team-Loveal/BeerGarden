@@ -39,10 +39,14 @@ class _CreateProfileState extends State<CreateProfile> {
   //for loading spinner
   bool loading = false;
 
+  //for chat
+  String chatID;
+
   @override
   Widget build(BuildContext context) {
     //this is providing the user object
     final user = Provider.of<User>(context);
+
     return loading
         ? Loading()
         : Scaffold(

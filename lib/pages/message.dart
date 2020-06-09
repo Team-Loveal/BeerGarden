@@ -2,25 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-
-String _name = 'Ugly Jeff'; // TODO replace with peer userName
+import 'package:provider/provider.dart';
+import 'package:lovealapp/models/user.dart';
 
 class Message extends StatefulWidget {
+  final String chatRoomID;
+
+  Message({Key key, @required this.chatRoomID}) : super(key: key);
+
   @override
-  _MessageState createState() => _MessageState();
+  _MessageState createState() => _MessageState(chatRoomID);
 }
 
 class _MessageState extends State<Message> {
-  String chatRoomID;
-  var listMessages;
+  final String chatRoomID;
+  _MessageState(this.chatRoomID);
 
-  @override
-  void initState() {
-    super.initState();
-
-    // TODO replace hardcoded chatRoomID (userID-userID)
-    chatRoomID = "5WADFQiHEses3riWV9JxaYJNrGM2-b7fXewrdeaPJ814w5A0qvKo4cuH3";
-  }
+  // user context from provider
+  var user;
+  var toID;
 
   //MESSAGE INPUT AND SEND
   Widget _buildTextInput() {
@@ -69,12 +69,15 @@ class _MessageState extends State<Message> {
           .collection('chatroom')
           .document(DateTime.now().millisecondsSinceEpoch.toString());
 
+      var toID =
+          Firestore.instance.collection('messages').document(chatRoomID).get();
+
       Firestore.instance.runTransaction((transaction) async {
         await transaction.set(
           documentReference,
           {
-            'fromID': "testpig", // TODO replace with var id
-            'toID': "testmonkey", // TODO replace with var peerID
+            'fromID': user.uid,
+            'toID': toID,
             'timestamp': DateTime.now().millisecondsSinceEpoch.toString(),
             'text': text,
           },
@@ -89,18 +92,31 @@ class _MessageState extends State<Message> {
   //BASICALLY THE BODY
   @override
   Widget build(BuildContext context) {
+    user = Provider.of<User>(context);
+
+    toID = Firestore.instance
+        .collection('messages')
+        .document(chatRoomID)
+        .get()
+        .then((value) => value.data['fromID']);
+
+    var nickname = Firestore.instance
+        .collection('users')
+        .document(toID)
+        .get()
+        .then((value) => value.data['nickname']);
+
     return Scaffold(
-        // TODO add a return button to navigate back to messagesList
         appBar: AppBar(
           leading: IconButton(
               onPressed: () {
-                // Navigator.pop(context);
+                // TODO add a return button to navigate back to messagesList
               },
               icon: Icon(MdiIcons.arrowLeft)),
-//          title: Text("Ugly Jeff", style: TextStyle(color: Colors.pinkAccent),
-//              onPressed: () {
-//            // TODO navigate to user profile
-//          }),
+          title: Text(
+            "jeff", // TODO replace with nickname
+            style: TextStyle(color: Colors.pinkAccent),
+          ),
           elevation: 0.0,
           centerTitle: true,
         ),
@@ -146,12 +162,11 @@ class _MessageState extends State<Message> {
 
   // For each message bubble
   Widget buildMessage(DocumentSnapshot document, BuildContext context) {
-    // TODO replace with user id
     return Padding(
       padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
       child: Flex(
         direction: Axis.horizontal,
-        mainAxisAlignment: document['fromID'] == 'testpig' // TODO user.uid
+        mainAxisAlignment: document['fromID'] == user.uid
             ? MainAxisAlignment.end
             : MainAxisAlignment.start,
         children: <Widget>[
@@ -162,7 +177,7 @@ class _MessageState extends State<Message> {
             ),
             decoration: BoxDecoration(
               color:
-                  document['fromID'] == 'testpig' ? Colors.white : Colors.pink,
+                  document['fromID'] == user.uid ? Colors.white : Colors.pink,
               borderRadius: BorderRadius.all(
                 Radius.circular(10.0),
               ),

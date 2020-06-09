@@ -63,26 +63,13 @@ class _MessagesState extends State<Messages> {
               if (data.documents.length > 0) {print(data.documents[0].data)}
             });
 
-    print(doc);
-    // .getDocuments()
-    // .then((doc) => {
-    //       if (doc.documents.isNotEmpty)
-    //         {
-    //           // print('${}')
-    //           debugPrint("Active Chatroom! ${doc.getData}")
-    //         }
-    //     })
-    // .catchError((err) => print("No Active Chatrooms..."));
+    var nickname = Firestore.instance
+        .collection('users')
+        .document('WI4AaMen5ZP0ih4TRzE5TDP5qj22')
+        .get()
+        .then((value) => value.data['nickname']);
 
-    // .orderBy('timestamp', descending: true).limit(1);
-    // .then((val) =>
-    //   val.orderBy('timestamp', descending: true).limit(1);
-    // );
-    // .then((val) {
-    //   val.documents.forEach((e) {
-    //     print("another k = ${e['text']}");
-    //   });
-    // });
+    print(nickname);
     // TODO find toID and fetch nickname from users document
     return Container(
       margin: const EdgeInsets.only(bottom: 20.0),

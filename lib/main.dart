@@ -6,8 +6,8 @@ import 'package:lovealapp/pages/wrapper.dart';
 import 'package:lovealapp/pages/forgotpassword.dart';
 import 'package:lovealapp/services/auth.dart';
 import 'package:lovealapp/pages/createProfile.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:lovealapp/pages/editProfile.dart';
+import 'package:lovealapp/pages/message.dart';
 
 //provide user data to Wrapper file
 import 'package:provider/provider.dart';
@@ -38,6 +38,7 @@ class MyApp extends StatelessWidget {
             '/createProfile': (_) => CreateProfile(),
             '/uploadphoto': (_) => UploadPhoto(),
             '/editProfile': (_) => EditProfile(),
+            '/message': (_) => Message(), // parameter chatRoomID required!!
           }),
     );
   }
