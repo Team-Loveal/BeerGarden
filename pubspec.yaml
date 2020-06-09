@@ -22,10 +22,10 @@ environment:
 
 dependencies:
   chips_choice: ^1.2.0
-
   flutter:
     sdk: flutter
   material_design_icons_flutter: 4.0.5345
+  google_sign_in: ^4.5.1
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.3

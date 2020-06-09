@@ -13,6 +13,7 @@ import 'package:lovealapp/pages/match.dart';
 import 'package:lovealapp/pages/forgotpassword.dart';
 import 'package:lovealapp/services/auth.dart';
 import 'package:lovealapp/pages/createProfile.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 //provide user data to Wrapper file
 import 'package:provider/provider.dart';
