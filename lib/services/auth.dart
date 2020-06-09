@@ -73,19 +73,15 @@ class AuthService {
       AuthResult result = await _auth.signInWithCredential(GoogleAuthProvider.getCredential(
         idToken: (await account.authentication).idToken,
         accessToken: (await account.authentication).accessToken,
-
       ));
       FirebaseUser user = result.user;
-      await DatabaseService(uid: user.uid).setUserData(email);
-
+      await DatabaseService(uid: user.uid).setUserData(account.email);
       return _userFromFirebaseUser(user);
-
     } catch (e) {
       print("Error logging with Google");
       return false;
     }
   }
-
 
   //Login with The Google
   Future loginWithGoogle() async {
@@ -99,12 +95,8 @@ class AuthService {
           accessToken: (await account.authentication).accessToken,
 
       ));
-
       FirebaseUser user = result.user;
       return _userFromFirebaseUser(user);
-     /* if(result.user == null)
-        return false;
-      return true;*/
     } catch (e) {
       print("Error logging with Google");
       return false;
