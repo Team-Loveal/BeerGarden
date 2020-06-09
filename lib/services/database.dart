@@ -61,24 +61,26 @@ class DatabaseService {
   //userData from snapshot
   UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
     return UserData(
-        uid: uid,
-        email: snapshot.data['email'],
-        nickname: snapshot.data['nickname'],
-        location: snapshot.data['location'],
-        age: snapshot.data['age'],
-        gender: snapshot.data['gender'],
-        occupation: snapshot.data['occupation'],
-        about: snapshot.data['about'],
-        yodeling: snapshot.data['yodeling'],
-        shopping: snapshot.data['shopping'],
-        makingBalloonAnimals: snapshot.data['makingBalloonAnimals'],
-        cooking: snapshot.data['cooking'],
-        painting: snapshot.data['painting'],
-        movies: snapshot.data['movies'],
-        sports: snapshot.data['sports'],
-        writing: snapshot.data['writing'],
-        drinking: snapshot.data['drinking'],
-        matchedToday: snapshot.data['matchedToday']);
+      uid: uid,
+      email: snapshot.data['email'],
+      nickname: snapshot.data['nickname'],
+      location: snapshot.data['location'],
+      age: snapshot.data['age'],
+      gender: snapshot.data['gender'],
+      occupation: snapshot.data['occupation'],
+      about: snapshot.data['about'],
+      yodeling: snapshot.data['yodeling'],
+      shopping: snapshot.data['shopping'],
+      makingBalloonAnimals: snapshot.data['makingBalloonAnimals'],
+      cooking: snapshot.data['cooking'],
+      painting: snapshot.data['painting'],
+      movies: snapshot.data['movies'],
+      sports: snapshot.data['sports'],
+      writing: snapshot.data['writing'],
+      drinking: snapshot.data['drinking'],
+      matchedToday: snapshot.data['matchedToday'],
+      imgUrl: snapshot.data['imgUrl'],
+    );
   }
 
   //get user doc stream
@@ -88,11 +90,11 @@ class DatabaseService {
   }
 
   //update user img when uploaded
-  Future updateUserImg (
-      String imgUrl,
-      ) async {
+  Future updateUserImg(
+    String imgUrl,
+  ) async {
     return await usersCollection.document(uid).updateData({
-      'imgUrl' : imgUrl,
+      'imgUrl': imgUrl,
     });
   }
 
@@ -100,12 +102,10 @@ class DatabaseService {
   UserImg _userImgFromSnapshot(DocumentSnapshot snapshot) {
     return UserImg(
       imgUrl: snapshot.data['imgUrl'],
-
     );
   }
 
   Stream<UserImg> get userImg {
     return usersCollection.document(uid).snapshots().map(_userImgFromSnapshot);
   }
-
 }
