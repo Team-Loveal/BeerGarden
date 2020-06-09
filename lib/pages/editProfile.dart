@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:lovealapp/models/user.dart';
+import 'package:provider/provider.dart';
+import 'package:lovealapp/services/database.dart';
+
 
 class EditProfile extends StatefulWidget {
   @override
@@ -9,9 +13,17 @@ class _EditProfileState extends State<EditProfile> {
   String age = '20 - 29';
   String gender = 'Female';
 
+  updateProfileData(){
+
+  }
+
+
   @override
   Widget build(BuildContext context) {
+
+    //final userData = Provider.of<UserData>(context);
     return Scaffold(
+
       appBar: AppBar(
         title: Text(
           'Edit Profile',
@@ -171,7 +183,12 @@ class _EditProfileState extends State<EditProfile> {
                           color: Colors.pinkAccent,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20)),
-                          onPressed: () => {},
+                            //final userData = Provider.of<UserData>(context);
+                          onPressed: () => {
+                          //  print(userData),
+                            print("Datttttttaaatatatatataatatatatatatat"),
+                            updateProfileData(),
+                          },
                         ),
                       )
                     ],
