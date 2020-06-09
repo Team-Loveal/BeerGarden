@@ -54,30 +54,31 @@ class DatabaseService {
       'sports': sports,
       'writing': writing,
       'drinking': drinking,
+      'matchedToday': false,
     });
   }
 
   //userData from snapshot
   UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
     return UserData(
-      uid: uid,
-      email: snapshot.data['email'],
-      nickname: snapshot.data['nickname'],
-      location: snapshot.data['location'],
-      age: snapshot.data['age'],
-      gender: snapshot.data['gender'],
-      occupation: snapshot.data['occupation'],
-      about: snapshot.data['about'],
-      yodeling: snapshot.data['yodeling'],
-      shopping: snapshot.data['shopping'],
-      makingBalloonAnimals: snapshot.data['makingBalloonAnimals'],
-      cooking: snapshot.data['cooking'],
-      painting: snapshot.data['painting'],
-      movies: snapshot.data['movies'],
-      sports: snapshot.data['sports'],
-      writing: snapshot.data['writing'],
-      drinking: snapshot.data['drinking'],
-    );
+        uid: uid,
+        email: snapshot.data['email'],
+        nickname: snapshot.data['nickname'],
+        location: snapshot.data['location'],
+        age: snapshot.data['age'],
+        gender: snapshot.data['gender'],
+        occupation: snapshot.data['occupation'],
+        about: snapshot.data['about'],
+        yodeling: snapshot.data['yodeling'],
+        shopping: snapshot.data['shopping'],
+        makingBalloonAnimals: snapshot.data['makingBalloonAnimals'],
+        cooking: snapshot.data['cooking'],
+        painting: snapshot.data['painting'],
+        movies: snapshot.data['movies'],
+        sports: snapshot.data['sports'],
+        writing: snapshot.data['writing'],
+        drinking: snapshot.data['drinking'],
+        matchedToday: snapshot.data['matchedToday']);
   }
 
   //get user doc stream

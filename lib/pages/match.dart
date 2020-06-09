@@ -7,12 +7,8 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
-import 'dart:math';
-
 import 'message.dart';
 
-//TODO loop through messages collection and if chatted is false, get toID and use it to get profile info
-//
 class Match extends StatefulWidget {
   @override
   _MatchState createState() => _MatchState();
@@ -26,15 +22,38 @@ class _MatchState extends State<Match> {
   Widget build(BuildContext context) {
     final AuthService _auth = AuthService();
     final user = Provider.of<User>(context);
+    final userData = Provider.of<UserData>(context);
 
+    //check if matchedToday is true or false
+    //if true then don't get new match
+    //if false get new match
+
+    print('MATCHED TODAY FROM DB ${userData.matchedToday}');
+    print('I AM MATCHID $matchID');
+    print('I AM USERID ${userData.nickname}');
+
+    //find a user where chatted is false
     Firestore.instance
         .collection("messages")
         .where('fromID', isEqualTo: user.uid)
         .snapshots()
         .listen((data) => data.documents.forEach((doc) => {
+              //change this to !doc['matched']
               if (!doc['chatted'])
                 {matchID = doc['toID'], chatID = doc.documentID}
             }));
+
+    //set matched to true in messages collection
+    Firestore.instance
+        .collection("messages")
+        .document(chatID)
+        .updateData({'matched': true});
+
+    //set matchedToday to true
+    Firestore.instance
+        .collection('users')
+        .document(user.uid)
+        .updateData({'matchedToday': true});
 
     return Scaffold(
       body: ListView(
@@ -67,6 +86,26 @@ class _MatchState extends State<Match> {
               children: <Widget>[
                 Stack(
                   children: <Widget>[
+//                    Container(
+//                      child: Column(
+//                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                          crossAxisAlignment: CrossAxisAlignment.start,
+//                          children: <Widget>[
+//                            Text('${userData.nickname}, ${userData.age}',
+//                                style: TextStyle(
+//                                    fontSize: 28, fontWeight: FontWeight.bold)),
+//                            Row(
+//                              children: <Widget>[
+//                                Icon(MdiIcons.mapMarker,
+//                                    size: 18, color: Colors.grey),
+//                                Text('${userData.location}, Japan',
+//                                    style: TextStyle(
+//                                        fontWeight: FontWeight.bold,
+//                                        color: Colors.grey))
+//                              ],
+//                            ),
+//                          ]),
+//                    ),
                     Container(
                         width: MediaQuery.of(context).size.width,
                         height: 380,
@@ -146,6 +185,8 @@ class _MatchState extends State<Match> {
                     borderRadius: BorderRadius.circular(20),
                   ),
                   onPressed: () => {
+                        print('THIS IS CHATID FROM MATCH.DART $chatID'),
+                        print('THIS IS MATCHID FROM MATCH.DART $matchID'),
                         //set chatted to true in db
                         Firestore.instance
                             .collection("messages")
