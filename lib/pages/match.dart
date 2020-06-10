@@ -24,11 +24,8 @@ class _MatchState extends State<Match> {
 
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<User>(context);
     //final userData = Provider.of<UserData>(context);
-
-    //TODO matchForToday should be set to false every 24 hours
-    //TODO add loading widget so ugly screen doesn't show up for a second
+    final user = Provider.of<User>(context);
     //get matchID and chatID from db
     Firestore.instance.collection('users').document(user.uid).get().then((doc) {
       print('CHECK ME ${doc['chatID']}');
@@ -37,6 +34,8 @@ class _MatchState extends State<Match> {
         chatID = doc['chatID'];
       });
     });
+    //TODO matchForToday should be set to false every 24 hours
+    //TODO add loading widget so ugly screen doesn't show up for a second
 
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: matchID).userData,

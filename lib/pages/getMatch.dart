@@ -41,6 +41,7 @@ class _GetMatchState extends State<GetMatch> {
                     .collection('users')
                     .document(user.uid)
                     .updateData({'matchID': matchID, 'chatID': chatID}),
+                //go to matched Profile page
                 Navigator.of(context).pushNamed('/navigationHome')
               },
           textColor: Colors.pink,

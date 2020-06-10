@@ -31,7 +31,6 @@ class _ProfilePreviewState extends State<ProfilePreview> {
     //get userData from the DB
     final user = Provider.of<User>(context);
 
-
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: user.uid).userData,
         builder: (context, snapshot) {
@@ -78,11 +77,11 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                       }
                     });
                   });
-
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => NavigationHome()),
-                  );
+                  Navigator.of(context).popUntil((route) => route.isFirst);
+//                  Navigator.push(
+//                    context,
+//                    MaterialPageRoute(builder: (context) => NavigationHome()),
+//                  );
                 },
                 isExtended: true,
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
