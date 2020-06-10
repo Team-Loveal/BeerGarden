@@ -105,6 +105,8 @@ class DatabaseService {
     );
   }
 
+  //
+
   Stream<UserImg> get userImg {
     return usersCollection.document(uid).snapshots().map(_userImgFromSnapshot);
   }

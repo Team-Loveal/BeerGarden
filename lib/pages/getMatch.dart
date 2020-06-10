@@ -15,27 +15,45 @@ class _GetMatchState extends State<GetMatch> {
   String matchID;
   String chatID;
 
+  //find a user where matched is false
+//  void getData() {
+//    final user = Provider.of<User>(context);
+//    Firestore.instance
+//        .collection("messages")
+//        .where('fromID', isEqualTo: user.uid)
+//        .snapshots()
+//        .listen((data) => data.documents.forEach((doc) => {
+//      //if matched is false
+//      if (!doc['matched'])
+//        {
+//        print(doc['toID']),
+//          matchID = doc['toID'],
+//          chatID = doc.documentID,
+//        }
+//    }));
+//  }
+
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
-//    final userData = Provider.of<UserData>(context);
+    Firestore.instance
+        .collection("messages")
+        .where('fromID', isEqualTo: user.uid)
+        .snapshots()
+        .listen((data) => data.documents.forEach((doc) => {
+              //if matched is false
+              if (!doc['matched'])
+                {
+//                  print(doc['toID']),
+                  matchID = doc['toID'],
+                  chatID = doc.documentID,
+                }
+            }));
+    print(matchID);
     return Container(
       child: FlatButton(
           onPressed: () => {
                 print('clicked'),
-                //find a user where matched is false
-                Firestore.instance
-                    .collection("messages")
-                    .where('fromID', isEqualTo: user.uid)
-                    .snapshots()
-                    .listen((data) => data.documents.forEach((doc) => {
-                          //if matched is false
-                          if (!doc['matched'])
-                            {
-                              matchID = doc['toID'],
-                              chatID = doc.documentID,
-                            }
-                        })),
                 //store matched users id in the db
                 Firestore.instance
                     .collection('users')
