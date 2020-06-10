@@ -1,37 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:chat_list/chat_list.dart';
-import 'package:bubble/bubble.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-
-String _name = 'Ugly Jeff'; // TODO replace with peer userName
+import 'package:provider/provider.dart';
+import 'package:lovealapp/models/user.dart';
 
 class Message extends StatefulWidget {
   final String chatRoomID;
-
-  Message({Key key, @required this.chatRoomID}) : super(key: key);
+  final String matchID;
+  Message({Key key, @required this.chatRoomID, this.matchID}) : super(key: key);
 
   @override
-  _MessageState createState() => _MessageState(chatRoomID);
+  _MessageState createState() => _MessageState(chatRoomID, matchID);
 }
 
 class _MessageState extends State<Message> {
   final String chatRoomID;
-  _MessageState(this.chatRoomID);
+  final String matchID;
+  _MessageState(this.chatRoomID, this.matchID);
 
-  //String chatRoomID;
-  var listMessages;
-
-  @override
-  void initState() {
-    super.initState();
-    //THIS IS THE CHAT ROOM ID
-    print('CHATROOMID: $chatRoomID');
-
-    // TODO replace hardcoded chatRoomID (userID-userID)
-    //chatRoomID = "5WADFQiHEses3riWV9JxaYJNrGM2-b7fXewrdeaPJ814w5A0qvKo4cuH3";
-  }
+  // user context from provider
+  var user;
+  var toID;
 
   //MESSAGE INPUT AND SEND
   Widget _buildTextInput() {
@@ -77,15 +67,15 @@ class _MessageState extends State<Message> {
       var documentReference = Firestore.instance
           .collection('messages')
           .document(chatRoomID)
-          .collection(chatRoomID)
+          .collection('chatroom')
           .document(DateTime.now().millisecondsSinceEpoch.toString());
 
       Firestore.instance.runTransaction((transaction) async {
         await transaction.set(
           documentReference,
           {
-            'fromID': "testpig", // replace with var id
-            'toID': "testmonkey", // replace with var peerID
+            'fromID': user.uid,
+            'toID': matchID,
             'timestamp': DateTime.now().millisecondsSinceEpoch.toString(),
             'text': text,
           },
@@ -100,18 +90,30 @@ class _MessageState extends State<Message> {
   //BASICALLY THE BODY
   @override
   Widget build(BuildContext context) {
+    user = Provider.of<User>(context);
+
     return Scaffold(
-        // TODO add a return button to navigate back to messagesList
         appBar: AppBar(
           leading: IconButton(
               onPressed: () {
-                // Navigator.pop(context);
+                Navigator.pop(context);
               },
               icon: Icon(MdiIcons.arrowLeft)),
-//          title: Text("Ugly Jeff", style: TextStyle(color: Colors.pinkAccent),
-//              onPressed: () {
-//            // TODO navigate to user profile
-//          }),
+          title: FutureBuilder<DocumentSnapshot>(
+              future: Firestore.instance
+                  .collection('users')
+                  .document(matchID)
+                  .get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return Center(child: CircularProgressIndicator());
+                } else {
+                  return Text(
+                    snapshot.data['nickname'],
+                    style: TextStyle(color: Colors.pinkAccent),
+                  );
+                }
+              }),
           elevation: 0.0,
           centerTitle: true,
         ),
@@ -125,7 +127,7 @@ class _MessageState extends State<Message> {
                     stream: Firestore.instance
                         .collection('messages')
                         .document(chatRoomID)
-                        .collection(chatRoomID)
+                        .collection('chatroom')
                         .orderBy('timestamp', descending: true)
                         .limit(20)
                         .snapshots(),
@@ -135,13 +137,12 @@ class _MessageState extends State<Message> {
                           child: CircularProgressIndicator(),
                         );
                       } else {
-                        listMessages = snapshot.data.documents;
                         return ListView.builder(
                           padding: EdgeInsets.all(8.0),
                           reverse: true,
                           // builds widget for each message in the database
                           itemBuilder: (context, index) => buildMessage(
-                              index, snapshot.data.documents[index], context),
+                              snapshot.data.documents[index], context),
                           itemCount: snapshot.data.documents.length,
                         );
                       }
@@ -157,14 +158,12 @@ class _MessageState extends State<Message> {
   }
 
   // For each message bubble
-  Widget buildMessage(
-      int index, DocumentSnapshot document, BuildContext context) {
-    // TODO replace with user id
+  Widget buildMessage(DocumentSnapshot document, BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
       child: Flex(
         direction: Axis.horizontal,
-        mainAxisAlignment: document['fromID'] == 'testpig'
+        mainAxisAlignment: document['fromID'] == user.uid
             ? MainAxisAlignment.end
             : MainAxisAlignment.start,
         children: <Widget>[
@@ -175,7 +174,7 @@ class _MessageState extends State<Message> {
             ),
             decoration: BoxDecoration(
               color:
-                  document['fromID'] == 'testpig' ? Colors.white : Colors.pink,
+                  document['fromID'] == user.uid ? Colors.white : Colors.pink,
               borderRadius: BorderRadius.all(
                 Radius.circular(10.0),
               ),
