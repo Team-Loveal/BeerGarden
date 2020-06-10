@@ -20,19 +20,22 @@ class _MatchState extends State<Match> {
   String matchID;
   String chatID;
 
+  final AuthService _auth = AuthService();
+
   @override
   Widget build(BuildContext context) {
-    final AuthService _auth = AuthService();
     final user = Provider.of<User>(context);
     //final userData = Provider.of<UserData>(context);
 
     //TODO matchForToday should be set to false every 24 hours
     //TODO add loading widget so ugly screen doesn't show up for a second
-
     //get matchID and chatID from db
     Firestore.instance.collection('users').document(user.uid).get().then((doc) {
-      matchID = doc['matchID'];
-      chatID = doc['chatID'];
+      print('CHECK ME ${doc['chatID']}');
+      setState(() {
+        matchID = doc['matchID'];
+        chatID = doc['chatID'];
+      });
     });
 
     return StreamBuilder<UserData>(
