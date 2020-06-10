@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:lovealapp/pages/navigationHome.dart';
 import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:lovealapp/pages/getMatch.dart';
 
 //listen for auth changes provided by stream declared in auth.dart
 class Wrapper extends StatelessWidget {
@@ -17,7 +18,8 @@ class Wrapper extends StatelessWidget {
     if (user == null) {
       return Welcome();
     } else {
-      return NavigationHome();
+      return GetMatch();
+      //return NavigationHome();
     }
   }
 }
