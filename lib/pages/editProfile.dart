@@ -95,8 +95,7 @@ class _EditProfileState extends State<EditProfile> {
                             padding: EdgeInsets.all(10),
                             child: CircleAvatar(
                               radius: 60,
-                              backgroundImage: AssetImage('images/blank.jpg'),
-                              backgroundColor: Colors.white,
+                              backgroundImage: NetworkImage(userData.imgUrl),
                             ),
                           ),
                           Padding(
