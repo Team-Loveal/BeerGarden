@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/animation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -10,7 +9,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:lovealapp/models/user.dart';
 import 'package:provider/provider.dart';
 import 'package:path/path.dart' as Path;
-
 
 class UploadPhoto extends StatefulWidget {
   @override
@@ -51,19 +49,18 @@ class _UploadPhotoState extends State<UploadPhoto> {
                 RaisedButton(
                   child: _image == null
                       ? Text(
-                    'Upload',
-                    style: TextStyle(
-                      color: Colors.grey[900],
-                      fontWeight: FontWeight.bold,
-                    ),
-                  )
+                          'Upload',
+                          style: TextStyle(
+                            color: Colors.grey[900],
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )
                       : enableUpload(),
                   color: Colors.pink,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  onPressed: _image == null ? () => {getImage()} : () =>
-                  {},
+                  onPressed: _image == null ? () => {getImage()} : () => {},
                 ),
               ],
             ),
@@ -108,8 +105,10 @@ class _UploadPhotoState extends State<UploadPhoto> {
     await uploadTask.onComplete;
     print('File Uploaded');
     storageReference.getDownloadURL().then((fileURL) {
-      Firestore.instance.collection("users").document(user.uid).updateData(
-          {"imgUrl": fileURL});
+      Firestore.instance
+          .collection("users")
+          .document(user.uid)
+          .updateData({"imgUrl": fileURL});
     });
   }
 }

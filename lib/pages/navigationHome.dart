@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:lovealapp/models/user.dart';
-import 'package:lovealapp/models/user.dart';
 import 'package:lovealapp/pages/match.dart';
-import 'package:lovealapp/pages/message.dart';
 import 'package:lovealapp/pages/messagesList.dart';
 import 'package:lovealapp/pages/myProfile.dart';
 
 import 'package:lovealapp/services/database.dart';
 import 'package:provider/provider.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class NavigationHome extends StatefulWidget {
   @override

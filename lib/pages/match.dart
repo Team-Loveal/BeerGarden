@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/basic.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:lovealapp/models/user.dart';
 import 'package:lovealapp/services/auth.dart';
 import 'package:lovealapp/services/database.dart';
@@ -96,7 +94,8 @@ class _MatchState extends State<Match> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text('${userData.nickname}, ${userData.age}',
+                        // ${userData.nickname}, ${userData.age}
+                        Text('Nickname',
                             style: TextStyle(
                                 fontSize: 28, fontWeight: FontWeight.bold)),
                         Row(
@@ -355,8 +354,9 @@ class _MatchState extends State<Match> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          Message(chatRoomID: chatID)))
+                                      builder: (context) => Message(
+                                          chatRoomID: chatID,
+                                          matchID: matchID)))
                             }),
                   ),
                 ),
