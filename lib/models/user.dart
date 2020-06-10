@@ -25,6 +25,8 @@ class UserData {
   final bool drinking;
   final bool matchedToday;
   final String imgUrl;
+  final String matchID;
+  final String chatID;
 
   UserData(
       {this.uid,
@@ -45,7 +47,9 @@ class UserData {
       this.writing,
       this.drinking,
       this.matchedToday,
-      this.imgUrl});
+      this.imgUrl,
+      this.matchID,
+      this.chatID});
 }
 
 class UserImg {

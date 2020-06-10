@@ -31,7 +31,6 @@ class _ProfilePreviewState extends State<ProfilePreview> {
     //get userData from the DB
     final user = Provider.of<User>(context);
 
-
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: user.uid).userData,
         builder: (context, snapshot) {
@@ -54,7 +53,7 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                         String chatId1 = '${user.uid} - ${document.documentID}';
                         String chatId2 = '${document.documentID} - ${user.uid}';
 
-                        //check messages documents , if it doesn't exist write to the db
+                        //check messages documents, if it doesn't exist write to the db
                         Firestore.instance
                             .collection("messages")
                             .getDocuments()
@@ -62,15 +61,15 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                           querySnapshot.documents.forEach((document) {
                             if (chatId1 != document.documentID &&
                                 chatId2 != document.documentID) {
-                              //can you create a document without creating a field?
                               Firestore.instance
                                   .collection("messages")
                                   .document(chatId1)
                                   .setData({
                                 'fromID': user.uid,
                                 'toID': toID,
-                                'chatted': false,
+                                //'chatted': false,
                                 'matched': false,
+                                'matchedUsers': [user.uid, toID],
                               });
                             }
                           });
@@ -78,11 +77,11 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                       }
                     });
                   });
-
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => NavigationHome()),
-                  );
+                  Navigator.of(context).popUntil((route) => route.isFirst);
+//                  Navigator.push(
+//                    context,
+//                    MaterialPageRoute(builder: (context) => NavigationHome()),
+//                  );
                 },
                 isExtended: true,
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
