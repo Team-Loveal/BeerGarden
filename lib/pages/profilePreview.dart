@@ -31,6 +31,7 @@ class _ProfilePreviewState extends State<ProfilePreview> {
     //get userData from the DB
     final user = Provider.of<User>(context);
 
+
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: user.uid).userData,
         builder: (context, snapshot) {
@@ -131,7 +132,7 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                         ),
                         Expanded(
                           child: CircleAvatar(
-                            radius: 70,
+                            radius: 50,
                             backgroundImage: FileImage(profileImg),
                           ),
                         ),
