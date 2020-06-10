@@ -69,6 +69,7 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                                 'fromID': user.uid,
                                 'toID': toID,
                                 'chatted': false,
+                                'matched': false,
                               });
                             }
                           });

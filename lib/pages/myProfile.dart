@@ -51,7 +51,7 @@ class _MyProfileState extends State<MyProfile> {
               )
             ],
           ),
-          Container(
+        /*  Container(
             margin: const EdgeInsets.fromLTRB(20, 0, 20, 10),
             height: 80,
             child: Row(
@@ -227,7 +227,7 @@ class _MyProfileState extends State<MyProfile> {
                   SizedBox(height: 5),
                   Text(userData.about, style: TextStyle(fontSize: 16))
                 ]),
-          ),
+          ),*/
         ],
       ),
     );
