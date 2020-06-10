@@ -1,5 +1,6 @@
 //import 'dart:html';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lovealapp/models/user.dart';
@@ -40,6 +41,43 @@ class _ProfilePreviewState extends State<ProfilePreview> {
             return Scaffold(
               floatingActionButton: FloatingActionButton.extended(
                 onPressed: () {
+                  //get potential matches for the user
+                  Firestore.instance
+                      .collection("users")
+                      .getDocuments()
+                      .then((querySnapshot) {
+                    querySnapshot.documents.forEach((document) {
+                      if (document.documentID != user.uid) {
+                        //concat and make into a string and push into chatIds array
+                        String toID = document.documentID;
+                        String chatId1 = '${user.uid} - ${document.documentID}';
+                        String chatId2 = '${document.documentID} - ${user.uid}';
+
+                        //check messages documents , if it doesn't exist write to the db
+                        Firestore.instance
+                            .collection("messages")
+                            .getDocuments()
+                            .then((querySnapshot) {
+                          querySnapshot.documents.forEach((document) {
+                            if (chatId1 != document.documentID &&
+                                chatId2 != document.documentID) {
+                              //can you create a document without creating a field?
+                              Firestore.instance
+                                  .collection("messages")
+                                  .document(chatId1)
+                                  .setData({
+                                'fromID': user.uid,
+                                'toID': toID,
+                                'chatted': false,
+                                'matched': false,
+                              });
+                            }
+                          });
+                        });
+                      }
+                    });
+                  });
+
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => NavigationHome()),

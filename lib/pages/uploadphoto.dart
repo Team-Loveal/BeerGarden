@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/animation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,8 +7,9 @@ import 'dart:async';
 import 'dart:io';
 import 'package:lovealapp/pages/profilePreview.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:lovealapp/models/user.dart';
+import 'package:provider/provider.dart';
 import 'package:path/path.dart' as Path;
-
 
 
 class UploadPhoto extends StatefulWidget {
@@ -49,27 +51,19 @@ class _UploadPhotoState extends State<UploadPhoto> {
                 RaisedButton(
                   child: _image == null
                       ? Text(
-                          'Upload',
-                          style: TextStyle(
-                            color: Colors.grey[900],
-                            fontWeight: FontWeight.bold,
-                          ),
-                        )
+                    'Upload',
+                    style: TextStyle(
+                      color: Colors.grey[900],
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )
                       : enableUpload(),
-//                Text(
-//                        'Next',
-//                        style: TextStyle(
-//                          color: Colors.grey[900],
-//                          fontWeight: FontWeight.bold,
-//                        ),
-//                      ),
                   color: Colors.pink,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  onPressed: _image == null ? () => {getImage()} : () => {
-//                    Navigator.push(context, MaterialPageRoute(builder: (context) => ProfilePreview(profileImg: _image)))
-                  },
+                  onPressed: _image == null ? () => {getImage()} : () =>
+                  {},
                 ),
               ],
             ),
@@ -80,18 +74,19 @@ class _UploadPhotoState extends State<UploadPhoto> {
   }
 
   Widget enableUpload() {
+    final user = Provider.of<User>(context);
     return Container(
       child: Column(
         children: <Widget>[
-//          Image.file(_image, height: 300, width: 300),
           RaisedButton(
             color: Colors.pink,
             child: Text('Next', style: TextStyle(fontWeight: FontWeight.bold)),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
             ),
-            onPressed: () {
+            onPressed: () async {
               uploadFile();
+//              Navigator.of(context).pushNamed('/profilePreview');
               Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -103,7 +98,9 @@ class _UploadPhotoState extends State<UploadPhoto> {
       ),
     );
   }
+
   Future uploadFile() async {
+    final user = Provider.of<User>(context, listen: false);
     StorageReference storageReference = FirebaseStorage.instance
         .ref()
         .child('users/${Path.basename(_image.path)}}');
@@ -111,10 +108,8 @@ class _UploadPhotoState extends State<UploadPhoto> {
     await uploadTask.onComplete;
     print('File Uploaded');
     storageReference.getDownloadURL().then((fileURL) {
-      setState(() {
-        _uploadedFileURL = fileURL;
-        print(_uploadedFileURL);
-      });
+      Firestore.instance.collection("users").document(user.uid).updateData(
+          {"imgUrl": fileURL});
     });
   }
 }

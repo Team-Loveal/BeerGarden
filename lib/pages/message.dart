@@ -8,20 +8,29 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 String _name = 'Ugly Jeff'; // TODO replace with peer userName
 
 class Message extends StatefulWidget {
+  final String chatRoomID;
+
+  Message({Key key, @required this.chatRoomID}) : super(key: key);
+
   @override
-  _MessageState createState() => _MessageState();
+  _MessageState createState() => _MessageState(chatRoomID);
 }
 
 class _MessageState extends State<Message> {
-  String chatRoomID;
+  final String chatRoomID;
+  _MessageState(this.chatRoomID);
+
+  //String chatRoomID;
   var listMessages;
 
   @override
   void initState() {
     super.initState();
+    //THIS IS THE CHAT ROOM ID
+    print('CHATROOMID: $chatRoomID');
 
     // TODO replace hardcoded chatRoomID (userID-userID)
-    chatRoomID = "5WADFQiHEses3riWV9JxaYJNrGM2-b7fXewrdeaPJ814w5A0qvKo4cuH3";
+    //chatRoomID = "5WADFQiHEses3riWV9JxaYJNrGM2-b7fXewrdeaPJ814w5A0qvKo4cuH3";
   }
 
   //MESSAGE INPUT AND SEND
