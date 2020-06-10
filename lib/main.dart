@@ -7,7 +7,6 @@ import 'package:lovealapp/pages/forgotpassword.dart';
 import 'package:lovealapp/services/auth.dart';
 import 'package:lovealapp/pages/createProfile.dart';
 import 'package:lovealapp/pages/editProfile.dart';
-import 'package:lovealapp/pages/message.dart';
 
 //provide user data to Wrapper file
 import 'package:provider/provider.dart';
@@ -28,7 +27,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
           title: 'Loveal',
           debugShowCheckedModeBanner: false,
-          theme: ThemeData.dark(),
+          theme: ThemeData.light(),
           initialRoute: '/',
           routes: {
             '/': (BuildContext context) => Wrapper(),
@@ -38,7 +37,6 @@ class MyApp extends StatelessWidget {
             '/createProfile': (_) => CreateProfile(),
             '/uploadphoto': (_) => UploadPhoto(),
             '/editProfile': (_) => EditProfile(),
-            '/message': (_) => Message(), // parameter chatRoomID required!!
           }),
     );
   }

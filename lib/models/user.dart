@@ -1,3 +1,5 @@
+//import 'dart:html';
+
 class User {
   final String uid;
   User({this.uid});
@@ -21,6 +23,8 @@ class UserData {
   final bool sports;
   final bool writing;
   final bool drinking;
+  final bool matchedToday;
+  final String imgUrl;
 
   UserData(
       {this.uid,
@@ -39,5 +43,15 @@ class UserData {
       this.movies,
       this.sports,
       this.writing,
-      this.drinking});
+      this.drinking,
+      this.matchedToday,
+      this.imgUrl});
+}
+
+class UserImg {
+  final String imgUrl;
+
+  UserImg({
+    this.imgUrl,
+  });
 }

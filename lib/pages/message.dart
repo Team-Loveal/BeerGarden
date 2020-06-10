@@ -7,16 +7,17 @@ import 'package:lovealapp/models/user.dart';
 
 class Message extends StatefulWidget {
   final String chatRoomID;
-
-  Message({Key key, @required this.chatRoomID}) : super(key: key);
+  final String matchID;
+  Message({Key key, @required this.chatRoomID, this.matchID}) : super(key: key);
 
   @override
-  _MessageState createState() => _MessageState(chatRoomID);
+  _MessageState createState() => _MessageState(chatRoomID, matchID);
 }
 
 class _MessageState extends State<Message> {
   final String chatRoomID;
-  _MessageState(this.chatRoomID);
+  final String matchID;
+  _MessageState(this.chatRoomID, this.matchID);
 
   // user context from provider
   var user;
@@ -69,15 +70,12 @@ class _MessageState extends State<Message> {
           .collection('chatroom')
           .document(DateTime.now().millisecondsSinceEpoch.toString());
 
-      var toID =
-          Firestore.instance.collection('messages').document(chatRoomID).get();
-
       Firestore.instance.runTransaction((transaction) async {
         await transaction.set(
           documentReference,
           {
             'fromID': user.uid,
-            'toID': toID,
+            'toID': matchID,
             'timestamp': DateTime.now().millisecondsSinceEpoch.toString(),
             'text': text,
           },
@@ -93,18 +91,13 @@ class _MessageState extends State<Message> {
   @override
   Widget build(BuildContext context) {
     user = Provider.of<User>(context);
-
-    toID = Firestore.instance
-        .collection('messages')
-        .document(chatRoomID)
-        .get()
-        .then((value) => value.data['fromID']);
-
     var nickname = Firestore.instance
         .collection('users')
-        .document(toID)
+        .document(matchID)
         .get()
         .then((value) => value.data['nickname']);
+
+    print(nickname);
 
     return Scaffold(
         appBar: AppBar(
@@ -114,7 +107,7 @@ class _MessageState extends State<Message> {
               },
               icon: Icon(MdiIcons.arrowLeft)),
           title: Text(
-            "jeff", // TODO replace with nickname
+            "Jeff",
             style: TextStyle(color: Colors.pinkAccent),
           ),
           elevation: 0.0,

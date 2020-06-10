@@ -1,10 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:lovealapp/models/user.dart';
-import 'package:lovealapp/services/database.dart';
-import 'package:provider/provider.dart';
 
 class MyProfile extends StatefulWidget {
   @override

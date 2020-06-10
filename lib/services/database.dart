@@ -54,6 +54,7 @@ class DatabaseService {
       'sports': sports,
       'writing': writing,
       'drinking': drinking,
+      'matchedToday': false,
     });
   }
 
@@ -77,6 +78,8 @@ class DatabaseService {
       sports: snapshot.data['sports'],
       writing: snapshot.data['writing'],
       drinking: snapshot.data['drinking'],
+      matchedToday: snapshot.data['matchedToday'],
+      imgUrl: snapshot.data['imgUrl'],
     );
   }
 
@@ -84,5 +87,25 @@ class DatabaseService {
   //used when populating user data in preview profile and edit profile
   Stream<UserData> get userData {
     return usersCollection.document(uid).snapshots().map(_userDataFromSnapshot);
+  }
+
+  //update user img when uploaded
+  Future updateUserImg(
+    String imgUrl,
+  ) async {
+    return await usersCollection.document(uid).updateData({
+      'imgUrl': imgUrl,
+    });
+  }
+
+  //userData from snapshot
+  UserImg _userImgFromSnapshot(DocumentSnapshot snapshot) {
+    return UserImg(
+      imgUrl: snapshot.data['imgUrl'],
+    );
+  }
+
+  Stream<UserImg> get userImg {
+    return usersCollection.document(uid).snapshots().map(_userImgFromSnapshot);
   }
 }
