@@ -91,25 +91,29 @@ class _MessageState extends State<Message> {
   @override
   Widget build(BuildContext context) {
     user = Provider.of<User>(context);
-    var nickname = Firestore.instance
-        .collection('users')
-        .document(matchID)
-        .get()
-        .then((value) => value.data['nickname']);
-
-    print(nickname);
 
     return Scaffold(
         appBar: AppBar(
           leading: IconButton(
               onPressed: () {
-                // TODO add a return button to navigate back to messagesList
+                Navigator.pop(context);
               },
               icon: Icon(MdiIcons.arrowLeft)),
-          title: Text(
-            "Jeff",
-            style: TextStyle(color: Colors.pinkAccent),
-          ),
+          title: FutureBuilder<DocumentSnapshot>(
+              future: Firestore.instance
+                  .collection('users')
+                  .document(matchID)
+                  .get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return Center(child: CircularProgressIndicator());
+                } else {
+                  return Text(
+                    snapshot.data['nickname'],
+                    style: TextStyle(color: Colors.pinkAccent),
+                  );
+                }
+              }),
           elevation: 0.0,
           centerTitle: true,
         ),

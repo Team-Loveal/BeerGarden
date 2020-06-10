@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:lovealapp/models/user.dart';
 import 'package:provider/provider.dart';
+import 'message.dart';
 
 class Messages extends StatefulWidget {
   @override
@@ -63,68 +64,83 @@ class _MessagesState extends State<Messages> {
     final user = Provider.of<User>(context);
     var matchID = document['matchedUsers'].firstWhere((id) => id != user.uid);
 
-    return Container(
-      margin: const EdgeInsets.only(bottom: 15.0),
-      height: 70,
-      padding: EdgeInsets.symmetric(horizontal: 10.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Expanded(
-            child: FutureBuilder<DocumentSnapshot>(
-                future: Firestore.instance
-                    .collection('users')
-                    .document(matchID)
-                    .get(),
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData) {
-                    return Center(child: CircularProgressIndicator());
-                  } else {
-                    return CircleAvatar(
-                      backgroundColor: Colors.pinkAccent,
-                      radius: 50,
-                      child: CircleAvatar(
-                          radius: 35,
-                          backgroundImage:
-                              NetworkImage(snapshot.data['imgUrl'])),
-                    );
-                  }
-                }),
-          ),
-          Expanded(
-            flex: 3,
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 5.0),
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    FutureBuilder<DocumentSnapshot>(
-                        future: Firestore.instance
-                            .collection('users')
-                            .document(matchID)
-                            .get(),
-                        builder: (context, snapshot) {
-                          if (!snapshot.hasData) {
-                            return Center(child: CircularProgressIndicator());
-                          }
-                          return Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Text(snapshot.data['nickname'],
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 26)),
-                              Text('May 2nd'),
-                            ],
-                          );
-                        }),
-                    Text('Message Message')
-                  ]),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => Message(
+                    chatRoomID: document.documentID, matchID: matchID)));
+      },
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 15.0),
+        height: 70,
+        padding: EdgeInsets.symmetric(horizontal: 10.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Expanded(
+              child: FutureBuilder<DocumentSnapshot>(
+                  future: Firestore.instance
+                      .collection('users')
+                      .document(matchID)
+                      .get(),
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData) {
+                      return Center(child: CircularProgressIndicator());
+                    } else {
+                      return CircleAvatar(
+                        backgroundColor: Colors.pinkAccent,
+                        radius: 50,
+                        child: CircleAvatar(
+                            radius: 35,
+                            backgroundImage:
+                                NetworkImage(snapshot.data['imgUrl'])),
+                      );
+                    }
+                  }),
             ),
-          ),
-        ],
+            Expanded(
+              flex: 3,
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 5.0),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      FutureBuilder<DocumentSnapshot>(
+                          future: Firestore.instance
+                              .collection('users')
+                              .document(matchID)
+                              .get(),
+                          builder: (context, snapshot) {
+                            if (!snapshot.hasData) {
+                              return Center(child: CircularProgressIndicator());
+                            }
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Text(snapshot.data['nickname'],
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 26)),
+                                Text('May 2nd'),
+                              ],
+                            );
+                          }),
+                      // FutureBuilder<DocumentSnapshot>(
+                      //     future: Firestore.instance
+                      //         .collection('messages')
+                      //         .document(chatRoomId),
+                      //     builder: (context, snapshot) {
+                      //       return Text('Message Message');
+                      //     })
+                    ]),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
