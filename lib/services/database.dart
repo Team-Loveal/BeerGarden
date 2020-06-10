@@ -54,6 +54,7 @@ class DatabaseService {
       'sports': sports,
       'writing': writing,
       'drinking': drinking,
+      'matchedToday': false,
     });
   }
 
@@ -77,6 +78,8 @@ class DatabaseService {
       sports: snapshot.data['sports'],
       writing: snapshot.data['writing'],
       drinking: snapshot.data['drinking'],
+      matchedToday: snapshot.data['matchedToday'],
+      imgUrl: snapshot.data['imgUrl'],
     );
   }
 
@@ -87,11 +90,11 @@ class DatabaseService {
   }
 
   //update user img when uploaded
-  Future updateUserImg (
-      String imgUrl,
-      ) async {
+  Future updateUserImg(
+    String imgUrl,
+  ) async {
     return await usersCollection.document(uid).updateData({
-      'imgUrl' : imgUrl,
+      'imgUrl': imgUrl,
     });
   }
 
@@ -99,12 +102,10 @@ class DatabaseService {
   UserImg _userImgFromSnapshot(DocumentSnapshot snapshot) {
     return UserImg(
       imgUrl: snapshot.data['imgUrl'],
-
     );
   }
 
   Stream<UserImg> get userImg {
     return usersCollection.document(uid).snapshots().map(_userImgFromSnapshot);
   }
-
 }
