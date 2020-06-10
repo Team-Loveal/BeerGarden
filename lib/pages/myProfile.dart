@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:lovealapp/models/user.dart';
+import 'package:lovealapp/services/database.dart';
 
 class MyProfile extends StatefulWidget {
   @override
@@ -78,9 +79,8 @@ class _MyProfileState extends State<MyProfile> {
                 ),
                 Expanded(
                   child: CircleAvatar(
-                      radius: 60,
-                      backgroundImage: NetworkImage(
-                          'https://mymodernmet.com/wp/wp-content/uploads/2017/01/animal-selfies-5.jpg')),
+                      radius: 65,
+                      backgroundImage: NetworkImage(userData.imgUrl)),
                 ),
               ],
             ),
