@@ -37,6 +37,7 @@
 **/android/gradlew
 **/android/gradlew.bat
 **/android/local.properties
+# key.properties is used for google console
 **/android/key.properties
 **/android/**/GeneratedPluginRegistrant.java
 
