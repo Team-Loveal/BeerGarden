@@ -1,10 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:chips_choice/chips_choice.dart';
-import 'package:flutter/foundation.dart';
 import 'package:lovealapp/models/user.dart';
-import "package:lovealapp/services/auth.dart";
 import 'package:lovealapp/services/database.dart';
 import 'package:lovealapp/shared/loading.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
