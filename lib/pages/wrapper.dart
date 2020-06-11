@@ -24,19 +24,7 @@ class _WrapperState extends State<Wrapper> {
     if (user == null) {
       return Welcome();
     } else {
-      //get matchID and chatID from db
-      Firestore.instance
-          .collection('users')
-          .document(user.uid)
-          .get()
-          .then((doc) {
-        setState(() => {matches = doc['matches']});
-      });
-      if (matches > 0) {
-        return NavigationHome();
-      } else {
-        return GetMatch();
-      }
+      return NavigationHome();
     }
   }
 }
