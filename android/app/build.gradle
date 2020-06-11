@@ -26,7 +26,7 @@ apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
     //upgraded below to 29 from 28 also
-    compileSdkVersion 29
+    compileSdkVersion 28
 
     lintOptions {
         disable 'InvalidPackage'
@@ -37,7 +37,7 @@ android {
         applicationId "yurikanamba.lovealapp"
         minSdkVersion 21
         //Upgraded below to 29 from 28
-        targetSdkVersion 29
+        targetSdkVersion 28
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true

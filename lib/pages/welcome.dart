@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lovealapp/pages/signup.dart';
 
 class Welcome extends StatefulWidget {
   @override

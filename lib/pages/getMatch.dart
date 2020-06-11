@@ -1,10 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:lovealapp/models/user.dart';
-import 'package:lovealapp/shared/loading.dart';
 import 'package:provider/provider.dart';
-import 'package:lovealapp/services/database.dart';
-import 'package:lovealapp/pages/navigationHome.dart';
 
 class GetMatch extends StatefulWidget {
   @override

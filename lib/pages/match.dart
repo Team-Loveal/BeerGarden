@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/basic.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:lovealapp/models/user.dart';
 import 'package:lovealapp/services/auth.dart';
 import 'package:lovealapp/services/database.dart';
@@ -28,14 +26,13 @@ class _MatchState extends State<Match> {
     final user = Provider.of<User>(context);
     //get matchID and chatID from db
     Firestore.instance.collection('users').document(user.uid).get().then((doc) {
-      print('CHECK ME ${doc['chatID']}');
       setState(() {
         matchID = doc['matchID'];
         chatID = doc['chatID'];
       });
     });
-    //TODO matchForToday should be set to false every 24 hours
-    //TODO add loading widget so ugly screen doesn't show up for a second
+    // Todo matchForToday should be set to false every 24 hours
+    // Todo add loading widget so ugly screen doesn't show up for a second
 
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: matchID).userData,
