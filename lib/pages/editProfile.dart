@@ -118,30 +118,30 @@ class _EditProfileState extends State<EditProfile> {
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               textDirection: TextDirection.ltr,
                               children: <Widget>[
-                                TextField(
-                                   onChanged: (val) {
+                                TextFormField(
+                                  onChanged: (val) {
                                   setState(() => nickname = val);
                                 },
                                   style: TextStyle(
-                                      color: Colors.red,
+                                      color: Colors.black,
                                       fontWeight: FontWeight.w300),
+                                  initialValue: userData.nickname,
                                   decoration: InputDecoration(
                                     labelText: 'Nickname',
-                                    hintText: userData.nickname
                                   ),
                                   autofocus: true,
                                   keyboardType: TextInputType.text,
                                 ),
-                                TextField(
+                                TextFormField(
                                   onChanged: (val) {
                                     setState(() => location = val);
                                   },
                                   style: TextStyle(
-                                      color: Colors.red,
+                                      color: Colors.black,
                                       fontWeight: FontWeight.w300),
+                                  initialValue: userData.location,
                                   decoration: InputDecoration(
                                     labelText: 'Location',
-                                    hintText: userData.location,
                                   ),
                                   autofocus: true,
                                   keyboardType: TextInputType.text,
@@ -238,18 +238,20 @@ class _EditProfileState extends State<EditProfile> {
 
                               ),
                             ),
-                            TextField(
+                            TextFormField(
                               onChanged: (val) {
                                 setState(() => occupation = val);
                               },
+                              initialValue: userData.occupation,
                               decoration: InputDecoration(
                                   labelText: 'Enter your occupation'),
                               keyboardType: TextInputType.text,
                             ),
-                            TextField(
+                            TextFormField(
                               onChanged: (val) {
                                 setState(() => about = val);
                               },
+                              initialValue: userData.about,
                               decoration: InputDecoration(
                                   labelText: 'Share something about yourself'),
                               keyboardType: TextInputType.text,
@@ -384,7 +386,7 @@ class _EditProfileState extends State<EditProfile> {
                                     borderRadius: BorderRadius.circular(20)),
                                 //final userData = Provider.of<UserData>(context);
                                 onPressed: () => {
-                                  print(userData.nickname),
+                                 // print(userData.nickname),
                                   print('AAAAAAAAAAAAVBBBCCCCCCCC'),
                                   // print(user.nickname),
 

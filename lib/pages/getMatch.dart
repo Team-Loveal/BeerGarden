@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:lovealapp/models/user.dart';
 import 'package:provider/provider.dart';
+import 'package:lovealapp/services/auth.dart';
 
 class GetMatch extends StatefulWidget {
   @override
@@ -14,12 +15,13 @@ class _GetMatchState extends State<GetMatch> {
 
   @override
   Widget build(BuildContext context) {
+    final AuthService _auth = AuthService();
     final user = Provider.of<User>(context);
 //    final userData = Provider.of<UserData>(context);
     return Container(
       child: FlatButton(
-          onPressed: () => {
-                print('clicked'),
+          onPressed: () async {
+          //await _auth.signOut();
                 //find a user where matched is false
                 Firestore.instance
                     .collection("messages")
@@ -37,11 +39,11 @@ class _GetMatchState extends State<GetMatch> {
                                 'chatID': doc.documentID
                               }),
                             }
-                        })),
+                        }));
                 //store matched users id in the db
 
                 //go to matched Profile page
-                Navigator.of(context).pushNamed('/navigationHome')
+                Navigator.of(context).pushNamed('/navigationHome');
               },
           textColor: Colors.pink,
           child: Text(

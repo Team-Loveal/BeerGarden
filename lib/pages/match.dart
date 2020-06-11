@@ -26,6 +26,7 @@ class _MatchState extends State<Match> {
     final user = Provider.of<User>(context);
     //get matchID and chatID from db
     Firestore.instance.collection('users').document(user.uid).get().then((doc) {
+      print(doc['chatID']);
       setState(() {
         matchID = doc['matchID'];
         chatID = doc['chatID'];
