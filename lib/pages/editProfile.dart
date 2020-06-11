@@ -137,6 +137,8 @@ class _EditProfileState extends State<EditProfile> {
                                   onChanged: (val) {
                                     if (val != userData.nickname) {
                                       setState(() => nickname = val);
+                                    } else {
+                                      nickname = userData.nickname;
                                     }
                                 },
                                   style: TextStyle(
@@ -153,6 +155,8 @@ class _EditProfileState extends State<EditProfile> {
                                   onChanged: (val) {
                                     if (val != userData.location) {
                                       setState(() => location = val);
+                                    } else {
+                                      location = userData.location;
                                     }
                                   },
                                   style: TextStyle(
@@ -261,6 +265,8 @@ class _EditProfileState extends State<EditProfile> {
                               onChanged: (val) {
                                 if (val != userData.occupation) {
                                   setState(() => occupation = val);
+                                }  else {
+                                  occupation = userData.occupation;
                                 }
                               },
                               initialValue: (userData.occupation == null? ' '  : userData.occupation),
@@ -272,6 +278,8 @@ class _EditProfileState extends State<EditProfile> {
                               onChanged: (val) {
                                 if (val != userData.about) {
                                   setState(() => about = val);
+                                }  else {
+                                  about = userData.about;
                                 }
                               },
                               initialValue: (userData.about == null? ' '  : userData.about),
@@ -410,7 +418,7 @@ class _EditProfileState extends State<EditProfile> {
                                 onPressed: () async {
 
                                   print('saved is workgin');
-                                // Navigator.of(context).pushNamed('/myprofile');
+                               // Navigator.of(context).pushNamed('/myprofile');
                                 await DatabaseService(uid: user.uid)
                                 .updateUserDataSmall(
                               nickname,
