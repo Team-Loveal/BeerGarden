@@ -44,3 +44,6 @@ app.*.map.json
 
 # google services
 android/app/google-services.json
+
+# new key
+**/android/key.properties
