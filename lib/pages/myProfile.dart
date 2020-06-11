@@ -12,10 +12,9 @@ class MyProfile extends StatefulWidget {
 class _MyProfileState extends State<MyProfile> {
   @override
   Widget build(BuildContext context) {
-    //TODO create if statement like in editProfile to display loader when data is loading from db
+    // Todo create if statement like in editProfile to display loader when data is loading from db
     //get userData from the DB
     final AuthService _auth = AuthService();
-    final user = Provider.of<User>(context);
     final userData = Provider.of<UserData>(context);
     return Scaffold(
       body: ListView(

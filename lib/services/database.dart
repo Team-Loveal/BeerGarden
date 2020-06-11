@@ -54,7 +54,7 @@ class DatabaseService {
       'sports': sports,
       'writing': writing,
       'drinking': drinking,
-      'matchedToday': false,
+      'matches': 0,
     });
   }
 
@@ -78,7 +78,7 @@ class DatabaseService {
       sports: snapshot.data['sports'],
       writing: snapshot.data['writing'],
       drinking: snapshot.data['drinking'],
-      matchedToday: snapshot.data['matchedToday'],
+      matches: snapshot.data['matches'],
       imgUrl: snapshot.data['imgUrl'],
     );
   }

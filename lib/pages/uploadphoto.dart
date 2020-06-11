@@ -17,13 +17,13 @@ class UploadPhoto extends StatefulWidget {
 
 class _UploadPhotoState extends State<UploadPhoto> {
   File _image;
-  String _uploadedFileURL;
 
   Future getImage() async {
-    final image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    PickedFile image =
+        await ImagePicker().getImage(source: ImageSource.gallery);
 
     setState(() {
-      _image = image;
+      _image = File(image.path);
     });
   }
 
@@ -71,7 +71,6 @@ class _UploadPhotoState extends State<UploadPhoto> {
   }
 
   Widget enableUpload() {
-    final user = Provider.of<User>(context);
     return Container(
       child: Column(
         children: <Widget>[

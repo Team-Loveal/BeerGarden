@@ -23,7 +23,7 @@ class UserData {
   final bool sports;
   final bool writing;
   final bool drinking;
-  final bool matchedToday;
+  final int matches;
   final String imgUrl;
   final String matchID;
   final String chatID;
@@ -46,7 +46,7 @@ class UserData {
       this.sports,
       this.writing,
       this.drinking,
-      this.matchedToday,
+      this.matches,
       this.imgUrl,
       this.matchID,
       this.chatID});
