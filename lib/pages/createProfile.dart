@@ -6,6 +6,7 @@ import 'package:lovealapp/services/database.dart';
 import 'package:lovealapp/shared/loading.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 //CHANGE LOCATION TO DROPDOWN OF PREFECTURES IN JAPAN
 
@@ -45,6 +46,13 @@ class _CreateProfileState extends State<CreateProfile> {
     return loading
         ? Loading()
         : Scaffold(
+            backgroundColor: Hexcolor('#fcfcfa'),
+            appBar: AppBar(
+              backgroundColor: Hexcolor('#1a405f'),
+              title: Text('test', style: TextStyle(
+                color: Colors.white,
+              ),),
+            ),
             body: SafeArea(
               child: SingleChildScrollView(
                 child: Padding(
@@ -162,7 +170,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                       yodeling = isSelected;
                                     });
                                   },
-                                  selectedColor: Colors.pink[400],
+                                  selectedColor: Hexcolor('#efc7c2'),
                                   checkmarkColor: Colors.white,
                                 ),
                                 FilterChip(
@@ -173,7 +181,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                       shopping = isSelected;
                                     });
                                   },
-                                  selectedColor: Colors.pink[400],
+                                  selectedColor: Hexcolor('#e27396'),
                                   checkmarkColor: Colors.white,
                                 ),
                                 FilterChip(
@@ -184,7 +192,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                       makingBalloonAnimals = isSelected;
                                     });
                                   },
-                                  selectedColor: Colors.pink[400],
+                                  selectedColor: Hexcolor('#efcfe3'),
                                   checkmarkColor: Colors.white,
                                 ),
                                 FilterChip(
@@ -195,7 +203,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                       cooking = isSelected;
                                     });
                                   },
-                                  selectedColor: Colors.pink[400],
+                                  selectedColor: Hexcolor('#b3dee2'),
                                   checkmarkColor: Colors.white,
                                 ),
                                 FilterChip(
@@ -206,7 +214,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                       painting = isSelected;
                                     });
                                   },
-                                  selectedColor: Colors.pink[400],
+                                  selectedColor: Hexcolor('#c2bbf0'),
                                   checkmarkColor: Colors.white,
                                 ),
                                 FilterChip(
@@ -217,7 +225,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                       writing = isSelected;
                                     });
                                   },
-                                  selectedColor: Colors.pink[400],
+                                  selectedColor: Hexcolor('#b0f2b4'),
                                   checkmarkColor: Colors.white,
                                 ),
                                 FilterChip(
@@ -228,7 +236,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                       sports = isSelected;
                                     });
                                   },
-                                  selectedColor: Colors.pink[400],
+                                  selectedColor: Hexcolor('#ef7674'),
                                   checkmarkColor: Colors.white,
                                 ),
                                 FilterChip(
@@ -239,7 +247,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                       movies = isSelected;
                                     });
                                   },
-                                  selectedColor: Colors.pink[400],
+                                  selectedColor: Hexcolor('#3a7ca5'),
                                   checkmarkColor: Colors.white,
                                 ),
                                 FilterChip(
@@ -250,7 +258,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                       drinking = isSelected;
                                     });
                                   },
-                                  selectedColor: Colors.pink[400],
+                                  selectedColor: Hexcolor('#ffbf69'),
                                   checkmarkColor: Colors.white,
                                 ),
                               ],
@@ -283,7 +291,7 @@ class _CreateProfileState extends State<CreateProfile> {
                               Navigator.of(context).pushNamed('/uploadphoto');
                             },
                             textColor: Colors.white,
-                            color: Colors.pink,
+                            color: Hexcolor('#ffbebd'),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50)),
                             child: Row(
