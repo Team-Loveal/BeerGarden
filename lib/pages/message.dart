@@ -78,6 +78,7 @@ class _MessageState extends State<Message> {
             'toID': matchID,
             'timestamp': DateTime.now().millisecondsSinceEpoch.toString(),
             'text': text,
+            'unread': true,
           },
         );
       });
