@@ -31,10 +31,11 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: ThemeData.light(),
           home: CreateProfile(),
-// for testing purpouse, connected to create profile page
+
+// this goes under theme
 //          initialRoute: '/',
 //          routes: {
-//            '/': (BuildContext context) => Wrapper(),
+//            '/': (_) => Wrapper(),
 //            '/signup': (_) => SignUp(),
 //            '/login': (_) => Login(),
 //            '/forgotpassword': (_) => ForgotPassword(),

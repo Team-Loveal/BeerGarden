@@ -19,7 +19,6 @@ class _MatchState extends State<Match> {
   String chatID;
 
   final AuthService _auth = AuthService();
-
   @override
   Widget build(BuildContext context) {
     //final userData = Provider.of<UserData>(context);
@@ -340,8 +339,9 @@ class _MatchState extends State<Match> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            Message(chatRoomID: chatID)))
+                                        builder: (context) => Message(
+                                            chatRoomID: chatID,
+                                            matchID: matchID)))
                               }),
                     ),
                   ),

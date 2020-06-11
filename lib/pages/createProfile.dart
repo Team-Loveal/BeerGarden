@@ -57,6 +57,9 @@ class _CreateProfileState extends State<CreateProfile> {
                           onChanged: (val) {
                             setState(() => nickname = val);
                           },
+                          onSaved: (String value){
+                            //this block is used to run code when a user save the form
+                          },
                           decoration: InputDecoration(
                               hintText: 'Choose a nickname to display to users',
                               labelText:
