@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:lovealapp/models/user.dart';
-import 'package:lovealapp/services/database.dart';
 
 class MyProfile extends StatefulWidget {
   @override
@@ -12,7 +11,7 @@ class MyProfile extends StatefulWidget {
 class _MyProfileState extends State<MyProfile> {
   @override
   Widget build(BuildContext context) {
-    //TODO create if statement like in editProfile to display loader when data is loading from db
+    // Todo create if statement like in editProfile to display loader when data is loading from db
     //get userData from the DB
     final userData = Provider.of<UserData>(context);
     return Scaffold(

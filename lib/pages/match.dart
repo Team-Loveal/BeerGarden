@@ -21,10 +21,9 @@ class _MatchState extends State<Match> {
   Widget build(BuildContext context) {
     final AuthService _auth = AuthService();
     final user = Provider.of<User>(context);
-    final userData = Provider.of<UserData>(context);
 
-    //TODO matchForToday should be set to false every 24 hours
-    //TODO add loading widget so ugly screen doesn't show up for a second
+    //Todo matchForToday should be set to false every 24 hours
+    //Todo add loading widget so ugly screen doesn't show up for a second
 
     //find a user where matched is false
     Firestore.instance
