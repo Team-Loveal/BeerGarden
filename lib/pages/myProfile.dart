@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:lovealapp/models/user.dart';
+import 'package:lovealapp/services/auth.dart';
 
 class MyProfile extends StatefulWidget {
   @override
@@ -13,6 +14,7 @@ class _MyProfileState extends State<MyProfile> {
   Widget build(BuildContext context) {
     // Todo create if statement like in editProfile to display loader when data is loading from db
     //get userData from the DB
+    final AuthService _auth = AuthService();
     final userData = Provider.of<UserData>(context);
     return Scaffold(
       body: ListView(
@@ -35,13 +37,23 @@ class _MyProfileState extends State<MyProfile> {
               ),
               Expanded(
                 flex: 1,
+                child: FlatButton.icon(
+                  icon: Icon(Icons.person),
+                  label: Text("logout"),
+                  onPressed: () async {
+                    await _auth.signOut();
+                  },
+                ),
+              ),
+              Expanded(
+                flex: 1,
                 child: IconButton(
                   icon: Icon(
                     Icons.settings,
                     size: 35,
                     color: Colors.white,
                   ),
-                  onPressed: () {
+                  onPressed: () async {
                     Navigator.of(context).pushNamed('/editProfile');
                   },
                 ),

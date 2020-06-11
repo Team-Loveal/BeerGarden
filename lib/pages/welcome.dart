@@ -28,8 +28,7 @@ class _WelcomeState extends State<Welcome> {
                   'Welcome to Loveal',
                   style: TextStyle(fontSize: 45),
                 ),
-                Text('A dating app for ugly people',
-                    style: TextStyle(fontSize: 20)),
+                Text('Reveal your true love', style: TextStyle(fontSize: 20)),
                 Spacer(flex: 4),
                 MaterialButton(
                     child: Text('Login',
