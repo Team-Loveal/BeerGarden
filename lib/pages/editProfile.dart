@@ -119,9 +119,9 @@ class _EditProfileState extends State<EditProfile> {
                               textDirection: TextDirection.ltr,
                               children: <Widget>[
                                 TextField(
-                                  /* onChanged: (val) {
+                                   onChanged: (val) {
                                   setState(() => nickname = val);
-                                },*/
+                                },
                                   style: TextStyle(
                                       color: Colors.red,
                                       fontWeight: FontWeight.w300),
@@ -141,6 +141,7 @@ class _EditProfileState extends State<EditProfile> {
                                       fontWeight: FontWeight.w300),
                                   decoration: InputDecoration(
                                     labelText: 'Location',
+                                    hintText: userData.location,
                                   ),
                                   autofocus: true,
                                   keyboardType: TextInputType.text,
