@@ -22,6 +22,7 @@ class _CreateProfileState extends State<CreateProfile> {
   String occupation;
   String about;
   List interests;
+
   //for interests
   bool yodeling = false;
   bool shopping = false;
@@ -50,16 +51,23 @@ class _CreateProfileState extends State<CreateProfile> {
                     padding: const EdgeInsets.all(30),
                     child: Column(
                       children: <Widget>[
-                        TextField(
+                        TextFormField(
+                          cursorWidth: 3,
+                          maxLength: 35,
                           onChanged: (val) {
                             setState(() => nickname = val);
                           },
                           decoration: InputDecoration(
+                              hintText: 'Choose a nickname to display to users',
                               labelText:
-                                  'Choose a nickname to display to users'),
+                                  'Nickname *'),
+                          validator: (String value) {
+                            return value.length < 3 ? 'Nickname is required' : null;
+                          },
                           keyboardType: TextInputType.text,
                         ),
                         TextField(
+                          cursorWidth: 3,
                           onChanged: (val) {
                             setState(() => location = val);
                           },
