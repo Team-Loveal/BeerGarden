@@ -4,6 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:lovealapp/models/user.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class Message extends StatefulWidget {
   final String chatRoomID;
@@ -47,7 +48,7 @@ class _MessageState extends State<Message> {
           Container(
             margin: EdgeInsets.symmetric(horizontal: 4.0),
             child: IconButton(
-                color: Colors.pinkAccent,
+                color: Hexcolor("#C3C3E6"),
                 icon: const Icon(Icons.send),
                 onPressed: () => _onSendMessage(_textController.text)),
           ),
@@ -94,7 +95,9 @@ class _MessageState extends State<Message> {
     user = Provider.of<User>(context);
 
     return Scaffold(
+      backgroundColor: Hexcolor("#FFF4EB"),
         appBar: AppBar(
+          backgroundColor: Hexcolor("#F08080"),
           leading: IconButton(
               onPressed: () {
                 Navigator.pop(context);
@@ -111,7 +114,7 @@ class _MessageState extends State<Message> {
                 } else {
                   return Text(
                     snapshot.data['nickname'],
-                    style: TextStyle(color: Colors.pinkAccent),
+                    style: TextStyle(color: Hexcolor("#3c3c3c")),
                   );
                 }
               }),
@@ -188,13 +191,13 @@ class _MessageState extends State<Message> {
             ),
             decoration: BoxDecoration(
               color:
-                  document['fromID'] == user.uid ? Colors.white : Colors.pink,
+                  document['fromID'] == user.uid ? Hexcolor("#F5F5F5") : Hexcolor("#D1C8E1"),
               borderRadius: BorderRadius.all(
                 Radius.circular(10.0),
               ),
             ),
             child: Text(document['text'],
-                style: TextStyle(color: Colors.black, fontSize: 14)),
+                style: TextStyle(color: Hexcolor("#3c3c3c"), fontSize: 14)),
           ),
         ],
       ),

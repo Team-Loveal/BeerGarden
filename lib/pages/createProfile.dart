@@ -6,6 +6,8 @@ import 'package:lovealapp/services/database.dart';
 import 'package:lovealapp/shared/loading.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:hexcolor/hexcolor.dart';
+
 
 //CHANGE LOCATION TO DROPDOWN OF PREFECTURES IN JAPAN
 
@@ -44,6 +46,7 @@ class _CreateProfileState extends State<CreateProfile> {
     return loading
         ? Loading()
         : Scaffold(
+      backgroundColor: Hexcolor("#fff6c2"),
             body: SafeArea(
               child: SingleChildScrollView(
                 child: Padding(
