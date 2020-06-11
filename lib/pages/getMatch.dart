@@ -32,15 +32,17 @@ class _GetMatchState extends State<GetMatch> {
                           //if matched is false
                           if (!doc['matched'])
                             {
-                              matchID = doc['toID'],
-                              chatID = doc.documentID,
+                              Firestore.instance
+                                  .collection('users')
+                                  .document(user.uid)
+                                  .updateData({
+                                'matchID': doc['toID'],
+                                'chatID': doc.documentID
+                              }),
                             }
                         })),
                 //store matched users id in the db
-                Firestore.instance
-                    .collection('users')
-                    .document(user.uid)
-                    .updateData({'matchID': matchID, 'chatID': chatID}),
+
                 //go to matched Profile page
                 Navigator.of(context).pushNamed('/navigationHome')
               },
