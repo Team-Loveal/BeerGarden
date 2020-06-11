@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData.light(),
           initialRoute: '/',
           routes: {
-            '/': (BuildContext context) => Wrapper(),
+            '/': (_) => Wrapper(),
             '/signup': (_) => SignUp(),
             '/login': (_) => Login(),
             '/forgotpassword': (_) => ForgotPassword(),
