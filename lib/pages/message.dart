@@ -158,8 +158,21 @@ class _MessageState extends State<Message> {
         ));
   }
 
+  void toggleUnread(DocumentSnapshot document) {
+    Firestore.instance
+        .collection('messages')
+        .document(chatRoomID)
+        .collection('chatroom')
+        .document(document.documentID)
+        .updateData({'unread': false});
+  }
+
   // For each message bubble
   Widget buildMessage(DocumentSnapshot document, BuildContext context) {
+    if (document['fromID'] != user.uid) {
+      toggleUnread(document);
+    }
+
     return Padding(
       padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
       child: Flex(
