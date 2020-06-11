@@ -3,6 +3,10 @@ import 'package:lovealapp/models/user.dart';
 import 'package:provider/provider.dart';
 import 'package:lovealapp/services/database.dart';
 import 'package:lovealapp/shared/loading.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:lovealapp/pages/uploadphoto.dart';
+
 
 
 class EditProfile extends StatefulWidget {
@@ -11,6 +15,7 @@ class EditProfile extends StatefulWidget {
 }
 
 class _EditProfileState extends State<EditProfile> {
+
   String nickname;
   String location;
  /* String age = '20 - 29';
@@ -36,11 +41,16 @@ class _EditProfileState extends State<EditProfile> {
     final user = Provider.of<User>(context);
 
 
+
+    print("this is $nickname");
    /* void changeRoute() => {
       Navigator.of(context).pushNamed('/myprofile')
     };*/
 
-    updateProfileData() async {
+    /*updateProfileData() async {
+      if(nickname == '') {
+        nickname = userData.nickname
+      }
      // Navigator.of(context).pushNamed('/myprofile');
       await DatabaseService(uid: user.uid)
           .updateUserDataSmall(
@@ -50,7 +60,7 @@ class _EditProfileState extends State<EditProfile> {
          // gender,
           occupation,
           about,
-        /*  yodeling,
+        *//*  yodeling,
           shopping,
           makingBalloonAnimals,
           cooking,
@@ -58,9 +68,9 @@ class _EditProfileState extends State<EditProfile> {
           movies,
           sports,
           writing,
-          drinking*/
+          drinking*//*
       );
-    }
+    }*/
 
     return StreamBuilder<UserData>(
       stream: DatabaseService(uid: user.uid).userData,
@@ -71,6 +81,10 @@ class _EditProfileState extends State<EditProfile> {
         /*  void changeRoute() => {
             Navigator.of(context).pushNamed('/myprofile')
           };*/
+         /* nickname = userData.nickname;
+          location = userData.location;
+          occupation = userData.occupation;
+          about = userData.about;*/
 
           return Scaffold(
             appBar: AppBar(
@@ -138,7 +152,7 @@ class _EditProfileState extends State<EditProfile> {
                                 TextFormField(
                                   onChanged: (val) {
                                     if (val != userData.location) {
-                                       setState(() => location = val);
+                                      setState(() => location = val);
                                     }
                                   },
                                   style: TextStyle(
@@ -246,7 +260,7 @@ class _EditProfileState extends State<EditProfile> {
                             TextFormField(
                               onChanged: (val) {
                                 if (val != userData.occupation) {
-                                  setState(() => location = val);
+                                  setState(() => occupation = val);
                                 }
                               },
                               initialValue: (userData.occupation == null? ' '  : userData.occupation),
@@ -393,8 +407,29 @@ class _EditProfileState extends State<EditProfile> {
                                 color: Colors.pinkAccent,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20)),
-                                onPressed: () => {
-                                  updateProfileData(),
+                                onPressed: () async {
+
+                                  print('saved is workgin');
+                                // Navigator.of(context).pushNamed('/myprofile');
+                                await DatabaseService(uid: user.uid)
+                                .updateUserDataSmall(
+                              nickname,
+                              location,
+                              // age,
+                              // gender,
+                              occupation,
+                              about,
+                              /*  yodeling,
+          shopping,
+          makingBalloonAnimals,
+          cooking,
+          painting,
+          movies,
+          sports,
+          writing,
+          drinking*/
+                            );
+
                                 //  Navigator.of(context).pushNamed('/myprofile'),
                                   //changeRoute(),
                                 },
