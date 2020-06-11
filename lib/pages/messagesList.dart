@@ -95,7 +95,6 @@ class _MessagesState extends State<Messages> {
   Widget buildChatroom(DocumentSnapshot document, BuildContext context) {
     final user = Provider.of<User>(context);
     var matchID = document['matchedUsers'].firstWhere((id) => id != user.uid);
-    print('IA M MATCHID $matchID');
     var formatter = new DateFormat('MMMMd');
 
     return GestureDetector(
