@@ -17,6 +17,7 @@ class Match extends StatefulWidget {
 class _MatchState extends State<Match> {
   String matchID;
   String chatID;
+  int matches;
 
   final AuthService _auth = AuthService();
   @override
@@ -28,15 +29,14 @@ class _MatchState extends State<Match> {
       setState(() {
         matchID = doc['matchID'];
         chatID = doc['chatID'];
+        matches = doc['matches'];
       });
     });
-    // Todo matchForToday should be set to false every 24 hours
-    // Todo add loading widget so ugly screen doesn't show up for a second
 
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: matchID).userData,
         builder: (context, snapshot) {
-          if (snapshot.hasData) {
+          if (snapshot.hasData && matches == 0) {
             UserData userData = snapshot.data;
             return Scaffold(
               body: ListView(
@@ -327,9 +327,6 @@ class _MatchState extends State<Match> {
                             borderRadius: BorderRadius.circular(20),
                           ),
                           onPressed: () => {
-                                print('THIS IS CHATID FROM MATCH.DART $chatID'),
-                                print(
-                                    'THIS IS MATCHID FROM MATCH.DART $matchID'),
                                 //set chatted to true in db
                                 Firestore.instance
                                     .collection("messages")
@@ -348,6 +345,8 @@ class _MatchState extends State<Match> {
                 ],
               ),
             );
+          } else if (snapshot.hasData && matches > 0) {
+            return Scaffold();
           } else {
             return Loading();
           }
