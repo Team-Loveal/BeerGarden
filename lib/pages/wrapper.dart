@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lovealapp/models/user.dart';
 import 'package:lovealapp/pages/welcome.dart';
-import 'package:lovealapp/pages/match.dart';
 import 'package:provider/provider.dart';
-import 'package:lovealapp/pages/navigationHome.dart';
-import 'package:provider/provider.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:lovealapp/pages/getMatch.dart';
 
 //listen for auth changes provided by stream declared in auth.dart

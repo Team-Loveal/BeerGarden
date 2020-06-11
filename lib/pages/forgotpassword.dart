@@ -1,9 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:lovealapp/pages/login.dart';
-import 'package:lovealapp/services/auth.dart';
 import 'dart:async';
 
 class ForgotPassword extends StatefulWidget {
@@ -19,7 +16,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     setState(() {
       _warning = 'A password has been sent to $emailAddy';
     });
-    showAlert();
+    ShowAlert();
     clearTextInput();
     Timer(Duration(seconds: 5), () {
       {
@@ -43,13 +40,12 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
   @override
   Widget build(BuildContext context) {
-    var _controller = TextEditingController();
     return Scaffold(
         body: Padding(
             padding: EdgeInsets.all(20),
             child: ListView(
               children: <Widget>[
-                showAlert(),
+                ShowAlert(),
                 Container(
                     alignment: Alignment.bottomLeft,
                     padding: EdgeInsets.fromLTRB(20, 60, 20, 5),
@@ -129,12 +125,12 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
 String _warning;
 
-class showAlert extends StatefulWidget {
+class ShowAlert extends StatefulWidget {
   @override
-  _showAlertState createState() => _showAlertState();
+  _ShowAlertState createState() => _ShowAlertState();
 }
 
-class _showAlertState extends State<showAlert> {
+class _ShowAlertState extends State<ShowAlert> {
   @override
   Widget build(BuildContext context) {
     if (_warning != null) {
