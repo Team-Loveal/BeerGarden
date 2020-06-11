@@ -1,5 +1,3 @@
-//import 'dart:html';
-
 class User {
   final String uid;
   User({this.uid});
