@@ -18,8 +18,8 @@ class _MatchState extends State<Match> {
   String matchID;
   String chatID;
   int matches;
-
   final AuthService _auth = AuthService();
+
   @override
   Widget build(BuildContext context) {
     //final userData = Provider.of<UserData>(context);
@@ -345,8 +345,6 @@ class _MatchState extends State<Match> {
                 ],
               ),
             );
-          } else if (snapshot.hasData && matches > 0) {
-            return Scaffold();
           } else {
             return Loading();
           }
