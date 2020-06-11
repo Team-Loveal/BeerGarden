@@ -35,6 +35,11 @@ class _EditProfileState extends State<EditProfile> {
 
     final user = Provider.of<User>(context);
 
+
+   /* void changeRoute() => {
+      Navigator.of(context).pushNamed('/myprofile')
+    };*/
+
     updateProfileData() async {
      // Navigator.of(context).pushNamed('/myprofile');
       await DatabaseService(uid: user.uid)
@@ -63,9 +68,9 @@ class _EditProfileState extends State<EditProfile> {
         if (snapshot.hasData) {
           UserData userData = snapshot.data;
 
-          void changeRoute() => {
+        /*  void changeRoute() => {
             Navigator.of(context).pushNamed('/myprofile')
-          };
+          };*/
 
           return Scaffold(
             appBar: AppBar(
@@ -116,7 +121,9 @@ class _EditProfileState extends State<EditProfile> {
                               children: <Widget>[
                                 TextFormField(
                                   onChanged: (val) {
-                                  setState(() => nickname = val);
+                                    if (val != userData.nickname) {
+                                      setState(() => nickname = val);
+                                    }
                                 },
                                   style: TextStyle(
                                       color: Colors.black,
@@ -130,7 +137,9 @@ class _EditProfileState extends State<EditProfile> {
                                 ),
                                 TextFormField(
                                   onChanged: (val) {
-                                    setState(() => location = val);
+                                    if (val != userData.location) {
+                                       setState(() => location = val);
+                                    }
                                   },
                                   style: TextStyle(
                                       color: Colors.black,
@@ -236,7 +245,9 @@ class _EditProfileState extends State<EditProfile> {
                             ),*/
                             TextFormField(
                               onChanged: (val) {
-                                setState(() => occupation = val);
+                                if (val != userData.occupation) {
+                                  setState(() => location = val);
+                                }
                               },
                               initialValue: (userData.occupation == null? ' '  : userData.occupation),
                               decoration: InputDecoration(
@@ -245,7 +256,9 @@ class _EditProfileState extends State<EditProfile> {
                             ),
                             TextFormField(
                               onChanged: (val) {
-                                setState(() => about = val);
+                                if (val != userData.about) {
+                                  setState(() => about = val);
+                                }
                               },
                               initialValue: (userData.about == null? ' '  : userData.about),
                               decoration: InputDecoration(
@@ -382,7 +395,8 @@ class _EditProfileState extends State<EditProfile> {
                                     borderRadius: BorderRadius.circular(20)),
                                 onPressed: () => {
                                   updateProfileData(),
-                                  changeRoute(),
+                                //  Navigator.of(context).pushNamed('/myprofile'),
+                                  //changeRoute(),
                                 },
                               ),
                             )
