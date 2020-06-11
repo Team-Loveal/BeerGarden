@@ -30,18 +30,22 @@ class MyApp extends StatelessWidget {
           title: 'Loveal',
           debugShowCheckedModeBanner: false,
           theme: ThemeData.light(),
-          initialRoute: '/',
-          routes: {
-            '/': (_) => Wrapper(),
-            '/signup': (_) => SignUp(),
-            '/login': (_) => Login(),
-            '/forgotpassword': (_) => ForgotPassword(),
-            '/createProfile': (_) => CreateProfile(),
-            '/uploadphoto': (_) => UploadPhoto(),
-            '/editProfile': (_) => EditProfile(),
-            '/getMatch': (_) => GetMatch(),
-            '/navigationHome': (_) => NavigationHome(),
-          }),
+          home: CreateProfile(),
+
+// this goes under theme
+//          initialRoute: '/',
+//          routes: {
+//            '/': (_) => Wrapper(),
+//            '/signup': (_) => SignUp(),
+//            '/login': (_) => Login(),
+//            '/forgotpassword': (_) => ForgotPassword(),
+//            '/createProfile': (_) => CreateProfile(),
+//            '/uploadphoto': (_) => UploadPhoto(),
+//            '/editProfile': (_) => EditProfile(),
+//            '/getMatch': (_) => GetMatch(),
+//            '/navigationHome': (_) => NavigationHome(),
+//          }
+          ),
     );
   }
 }
