@@ -342,8 +342,9 @@ class _MatchState extends State<Match> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            Message(chatRoomID: chatID)))
+                                        builder: (context) => Message(
+                                            chatRoomID: chatID,
+                                            matchID: matchID)))
                               }),
                     ),
                   ),

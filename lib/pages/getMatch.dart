@@ -6,6 +6,8 @@ import 'package:provider/provider.dart';
 import 'package:lovealapp/services/database.dart';
 import 'package:lovealapp/pages/navigationHome.dart';
 
+//wsHa5qaUihfOvz4KIPHxNBseiAI2 - Sk7c6t02YcRDDj5Z0MhleSJaVkr2
+
 class GetMatch extends StatefulWidget {
   @override
   _GetMatchState createState() => _GetMatchState();
@@ -15,50 +17,44 @@ class _GetMatchState extends State<GetMatch> {
   String matchID;
   String chatID;
 
-  //find a user where matched is false
-//  void getData() {
-//    final user = Provider.of<User>(context);
+  @override
+  Widget build(BuildContext context) {
+    final user = Provider.of<User>(context);
 //    Firestore.instance
 //        .collection("messages")
 //        .where('fromID', isEqualTo: user.uid)
 //        .snapshots()
 //        .listen((data) => data.documents.forEach((doc) => {
-//      //if matched is false
-//      if (!doc['matched'])
-//        {
-//        print(doc['toID']),
-//          matchID = doc['toID'],
-//          chatID = doc.documentID,
-//        }
-//    }));
-//  }
-
-  @override
-  Widget build(BuildContext context) {
-    final user = Provider.of<User>(context);
-    Firestore.instance
-        .collection("messages")
-        .where('fromID', isEqualTo: user.uid)
-        .snapshots()
-        .listen((data) => data.documents.forEach((doc) => {
-              //if matched is false
-              if (!doc['matched'])
-                {
-//                  print(doc['toID']),
-                  matchID = doc['toID'],
-                  chatID = doc.documentID,
-                }
-            }));
-    print(matchID);
+//              //if matched is false
+//              if (!doc['matched'])
+//                {
+////                  print(doc['toID']),
+//                  matchID = doc['toID'],
+//                  chatID = doc.documentID,
+//                }
+//            }));
+//    print(matchID);
     return Container(
       child: FlatButton(
           onPressed: () => {
-                print('clicked'),
-                //store matched users id in the db
+                //find a user where matched is false
                 Firestore.instance
-                    .collection('users')
-                    .document(user.uid)
-                    .updateData({'matchID': matchID, 'chatID': chatID}),
+                    .collection("messages")
+                    .where('fromID', isEqualTo: user.uid)
+                    .snapshots()
+                    .listen((data) => data.documents.forEach((doc) => {
+                          //if matched is false
+                          if (!doc['matched'])
+                            {
+                              Firestore.instance
+                                  .collection('users')
+                                  .document(user.uid)
+                                  .updateData({
+                                'matchID': doc['toID'],
+                                'chatID': doc.documentID
+                              }),
+                            }
+                        })),
                 //go to matched Profile page
                 Navigator.of(context).pushNamed('/navigationHome')
               },
