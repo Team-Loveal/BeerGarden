@@ -13,11 +13,11 @@ class EditProfile extends StatefulWidget {
 class _EditProfileState extends State<EditProfile> {
   String nickname;
   String location;
-  String age = '20 - 29';
-  String gender = 'Female';
+ /* String age = '20 - 29';
+  String gender = 'Female';*/
   String occupation;
   String about;
-  List interests;
+ /* List interests;
   //for interests
   bool yodeling = false;
   bool shopping = false;
@@ -27,33 +27,25 @@ class _EditProfileState extends State<EditProfile> {
   bool movies = false;
   bool sports = false;
   bool writing = false;
-  bool drinking = false;
+  bool drinking = false;*/
 
-  /*updateProfileData() async {
-    await DatabaseService(uid: user.uid)
-        .updateUserData(
-      nickname,
-      location,
-      age,
-      gender,
 
-  }
-*/
   @override
   Widget build(BuildContext context) {
 
     final user = Provider.of<User>(context);
 
     updateProfileData() async {
+      Navigator.of(context).pushNamed('/myprofile');
       await DatabaseService(uid: user.uid)
-          .updateUserData(
+          .updateUserDataSmall(
           nickname,
           location,
-          age,
-          gender,
+         // age,
+         // gender,
           occupation,
           about,
-          yodeling,
+        /*  yodeling,
           shopping,
           makingBalloonAnimals,
           cooking,
@@ -61,7 +53,7 @@ class _EditProfileState extends State<EditProfile> {
           movies,
           sports,
           writing,
-          drinking
+          drinking*/
       );
     }
 
@@ -125,7 +117,7 @@ class _EditProfileState extends State<EditProfile> {
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w300),
-                                  initialValue: userData.nickname,
+                                  initialValue: (userData.nickname == null? ' '  : userData.nickname),
                                   decoration: InputDecoration(
                                     labelText: 'Nickname',
                                   ),
@@ -139,7 +131,7 @@ class _EditProfileState extends State<EditProfile> {
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w300),
-                                  initialValue: userData.location,
+                                  initialValue: (userData.location == null? ' '  : userData.location),
                                   decoration: InputDecoration(
                                     labelText: 'Location',
                                   ),
@@ -150,7 +142,7 @@ class _EditProfileState extends State<EditProfile> {
                               ],
 
                             ),
-                            Padding(
+                            /*Padding(
                               padding: EdgeInsets.only(top: 20),
                               child: Container(
                                 child: Row(
@@ -237,12 +229,12 @@ class _EditProfileState extends State<EditProfile> {
                                 ),
 
                               ),
-                            ),
+                            ),*/
                             TextFormField(
                               onChanged: (val) {
                                 setState(() => occupation = val);
                               },
-                              initialValue: userData.occupation,
+                              initialValue: (userData.occupation == null? ' '  : userData.occupation),
                               decoration: InputDecoration(
                                   labelText: 'Enter your occupation'),
                               keyboardType: TextInputType.text,
@@ -251,12 +243,12 @@ class _EditProfileState extends State<EditProfile> {
                               onChanged: (val) {
                                 setState(() => about = val);
                               },
-                              initialValue: userData.about,
+                              initialValue: (userData.about == null? ' '  : userData.about),
                               decoration: InputDecoration(
                                   labelText: 'Share something about yourself'),
                               keyboardType: TextInputType.text,
                             ),
-                            Padding(
+                            /*Padding(
                               padding: const EdgeInsets.only(top: 10.0),
                               child: Text('What are your interests?'),
                             ),
@@ -370,7 +362,7 @@ class _EditProfileState extends State<EditProfile> {
                                   ],
                                 ),
                               ),
-                            ),
+                            ),*/
                             Padding(
                               padding: EdgeInsets.only(top: 20),
                               child: RaisedButton(
@@ -384,12 +376,7 @@ class _EditProfileState extends State<EditProfile> {
                                 color: Colors.pinkAccent,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20)),
-                                //final userData = Provider.of<UserData>(context);
                                 onPressed: () => {
-                                 // print(userData.nickname),
-                                  print('AAAAAAAAAAAAVBBBCCCCCCCC'),
-                                  // print(user.nickname),
-
                                   updateProfileData(),
                                 },
                               ),
