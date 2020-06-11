@@ -36,7 +36,7 @@ class _EditProfileState extends State<EditProfile> {
     final user = Provider.of<User>(context);
 
     updateProfileData() async {
-      Navigator.of(context).pushNamed('/myprofile');
+     // Navigator.of(context).pushNamed('/myprofile');
       await DatabaseService(uid: user.uid)
           .updateUserDataSmall(
           nickname,
@@ -62,6 +62,10 @@ class _EditProfileState extends State<EditProfile> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           UserData userData = snapshot.data;
+
+          void changeRoute() => {
+            Navigator.of(context).pushNamed('/myprofile')
+          };
 
           return Scaffold(
             appBar: AppBar(
@@ -378,6 +382,7 @@ class _EditProfileState extends State<EditProfile> {
                                     borderRadius: BorderRadius.circular(20)),
                                 onPressed: () => {
                                   updateProfileData(),
+                                  changeRoute(),
                                 },
                               ),
                             )

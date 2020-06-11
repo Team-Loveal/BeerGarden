@@ -54,7 +54,7 @@ class DatabaseService {
       'sports': sports,
       'writing': writing,
       'drinking': drinking,
-      'matchedToday': false,
+      'matches': 0,
     });
   }
 
@@ -94,7 +94,7 @@ class DatabaseService {
       sports: snapshot.data['sports'],
       writing: snapshot.data['writing'],
       drinking: snapshot.data['drinking'],
-      matchedToday: snapshot.data['matchedToday'],
+      matches: snapshot.data['matches'],
       imgUrl: snapshot.data['imgUrl'],
     );
   }
@@ -120,6 +120,8 @@ class DatabaseService {
       imgUrl: snapshot.data['imgUrl'],
     );
   }
+
+  //
 
   Stream<UserImg> get userImg {
     return usersCollection.document(uid).snapshots().map(_userImgFromSnapshot);
