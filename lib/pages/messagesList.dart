@@ -17,11 +17,11 @@ class _MessagesState extends State<Messages> {
     final user = Provider.of<User>(context);
 
     return Scaffold(
-        backgroundColor: Colors.pink,
+        backgroundColor: Hexcolor("#FFF4EB"),
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(80.0),
           child: AppBar(
-            backgroundColor: Colors.pink,
+            backgroundColor: Hexcolor("#FFF4EB"),
             title: Text('Messages',
                 style: TextStyle(
                     color: Colors.white,

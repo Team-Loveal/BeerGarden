@@ -9,6 +9,7 @@ import 'package:lovealapp/pages/forgotpassword.dart';
 import 'package:lovealapp/services/auth.dart';
 import 'package:lovealapp/pages/createProfile.dart';
 import 'package:lovealapp/pages/editProfile.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 //provide user data to Wrapper file
 import 'package:provider/provider.dart';
@@ -24,24 +25,29 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //Material App is a widget that has properties like title, theme etc.
-    // return StreamProvider<User>.value(
-    //   value: AuthService().user,
-    return MaterialApp(
-        title: 'Loveal',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData.light(),
-        initialRoute: '/',
-        routes: {
-          '/..': (BuildContext context) => Wrapper(),
-          '/': (_) => Login(),
-          '/login': (_) => Login(),
-          '/forgotpassword': (_) => ForgotPassword(),
-          '/createProfile': (_) => CreateProfile(),
-          '/uploadphoto': (_) => UploadPhoto(),
-          '/editProfile': (_) => EditProfile(),
-          '/getMatch': (_) => GetMatch(),
-          '/navigationHome': (_) => NavigationHome(),
-        });
-    // );
+    return StreamProvider<User>.value(
+      value: AuthService().user,
+      child: MaterialApp(
+          title: 'Loveal',
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            fontFamily: 'Alata',
+            primaryColor: Hexcolor("#fdeac6"),
+            accentColor: Hexcolor("#fdeac6"),
+          ),
+// this goes under theme
+          initialRoute: '/',
+          routes: {
+            '/': (_) => Login(),
+            '/signup': (_) => SignUp(),
+            '/login': (_) => Login(),
+            '/forgotpassword': (_) => ForgotPassword(),
+            '/createProfile': (_) => CreateProfile(),
+            '/uploadphoto': (_) => UploadPhoto(),
+            '/editProfile': (_) => EditProfile(),
+            '/getMatch': (_) => GetMatch(),
+            '/navigationHome': (_) => NavigationHome(),
+          }),
+    );
   }
 }

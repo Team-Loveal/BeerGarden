@@ -17,27 +17,27 @@ class Match extends StatefulWidget {
 class _MatchState extends State<Match> {
   String matchID;
   String chatID;
-
+  int matches;
   final AuthService _auth = AuthService();
 
   @override
   Widget build(BuildContext context) {
-    //final userData = Provider.of<UserData>(context);
+    final myUserData = Provider.of<UserData>(context);
     final user = Provider.of<User>(context);
+
     //get matchID and chatID from db
     Firestore.instance.collection('users').document(user.uid).get().then((doc) {
       setState(() {
         matchID = doc['matchID'];
         chatID = doc['chatID'];
+        matches = doc['matches'];
       });
     });
-    // Todo matchForToday should be set to false every 24 hours
-    // Todo add loading widget so ugly screen doesn't show up for a second
 
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: matchID).userData,
         builder: (context, snapshot) {
-          if (snapshot.hasData) {
+          if (snapshot.hasData && matches > 0) {
             UserData userData = snapshot.data;
             return Scaffold(
               body: ListView(
@@ -328,9 +328,6 @@ class _MatchState extends State<Match> {
                             borderRadius: BorderRadius.circular(20),
                           ),
                           onPressed: () => {
-                                print('THIS IS CHATID FROM MATCH.DART $chatID'),
-                                print(
-                                    'THIS IS MATCHID FROM MATCH.DART $matchID'),
                                 //set chatted to true in db
                                 Firestore.instance
                                     .collection("messages")
@@ -340,10 +337,58 @@ class _MatchState extends State<Match> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            Message(chatRoomID: chatID)))
+                                        builder: (context) => Message(
+                                            chatRoomID: chatID,
+                                            matchID: matchID)))
                               }),
                     ),
+                  ),
+                ],
+              ),
+            );
+          } else if (snapshot.hasData && matches == 0 || matchID == null) {
+            print(myUserData.nickname);
+            return Scaffold(
+              body: ListView(
+                children: <Widget>[
+                  //TODAY'S MATCH
+                  FlatButton(
+                    color: Colors.pinkAccent,
+                    child: Text('Get your new match for the day <3',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        )),
+                    onPressed: () {
+                      //add matches by one
+                      int matches = myUserData.matches + 1;
+
+                      //find a user where matched is false
+                      Firestore.instance
+                          .collection("messages")
+                          .where('fromID', isEqualTo: user.uid)
+                          .getDocuments()
+                          .then((data) => data.documents.forEach((doc) => {
+                                if (!doc['matched'])
+                                  {
+                                    print(
+                                        'found unmatched user $doc.toID and $doc.documentID'),
+                                    Firestore.instance
+                                        .collection('users')
+                                        .document(user.uid)
+                                        .updateData({
+                                      'matchID': doc['toID'],
+                                      'chatID': doc.documentID,
+                                      'matches': matches,
+                                    }),
+                                    print(
+                                        'updated user collection with matchID: $doc.toID')
+                                  }
+                              }));
+
+                      //go to matched Profile page
+                      Navigator.of(context).pushNamed('/navigationHome');
+                    },
                   ),
                 ],
               ),

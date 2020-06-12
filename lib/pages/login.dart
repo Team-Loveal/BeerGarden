@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lovealapp/services/auth.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:lovealapp/shared/loading.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -63,17 +63,21 @@ class _LoginState extends State<Login> {
         keyboardType: TextInputType.emailAddress,
         style: TextStyle(
           color: Colors.white,
-          fontFamily: 'OpenSans',
         ),
         decoration: InputDecoration(
+            fillColor: Colors.white,
+            filled: true,
+            enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+                borderRadius: BorderRadius.all(Radius.circular(30.0))),
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(30.0))),
             contentPadding: EdgeInsets.only(top: 14.0),
-            prefixIcon: Icon(MdiIcons.email, color: Colors.white),
+            prefixIcon: Icon(MdiIcons.email, color: Hexcolor('#F4AA33')),
             labelText: 'Email',
             labelStyle: TextStyle(
                 fontSize: 18.0,
-                color: Colors.white,
+                color: Hexcolor('#F4AA33'),
                 fontWeight: FontWeight.bold)),
       ),
     );
@@ -90,17 +94,21 @@ class _LoginState extends State<Login> {
         obscureText: true,
         style: TextStyle(
           color: Colors.white,
-          fontFamily: 'OpenSans',
         ),
         decoration: InputDecoration(
+            fillColor: Colors.white,
+            filled: true,
+            enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+                borderRadius: BorderRadius.all(Radius.circular(30.0))),
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(30.0))),
             contentPadding: EdgeInsets.only(top: 14.0),
-            prefixIcon: Icon(MdiIcons.key, color: Colors.white),
+            prefixIcon: Icon(MdiIcons.key, color: Hexcolor('#F4AA33')),
             labelText: 'Password',
             labelStyle: TextStyle(
                 fontSize: 18.0,
-                color: Colors.white,
+                color: Hexcolor('#F4AA33'),
                 fontWeight: FontWeight.bold)),
       ),
     );
@@ -125,7 +133,7 @@ class _LoginState extends State<Login> {
       child: RaisedButton(
         elevation: 5.0,
         onPressed: () => handleLogin(),
-        padding: EdgeInsets.all(15.0),
+        padding: EdgeInsets.all(12.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
         ),
@@ -133,11 +141,10 @@ class _LoginState extends State<Login> {
         child: Text(
           'LOGIN',
           style: TextStyle(
-            color: Color(0xFF527DAA),
+            color: Colors.black,
             letterSpacing: 1.5,
-            fontSize: 18.0,
+            fontSize: 20.0,
             fontWeight: FontWeight.bold,
-            fontFamily: 'OpenSans',
           ),
         ),
       ),
@@ -147,7 +154,7 @@ class _LoginState extends State<Login> {
   Widget _buildSignInWithText() {
     return Column(
       children: <Widget>[
-        SizedBox(height: 20.0),
+        SizedBox(height: 40.0),
         Text(
           '- Login with -',
           style: TextStyle(
@@ -155,7 +162,6 @@ class _LoginState extends State<Login> {
             fontWeight: FontWeight.w400,
           ),
         ),
-        SizedBox(height: 20.0),
       ],
     );
   }
@@ -164,8 +170,8 @@ class _LoginState extends State<Login> {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 60.0,
-        width: 60.0,
+        height: 52.0,
+        width: 52.0,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: Colors.white,
@@ -205,7 +211,7 @@ class _LoginState extends State<Login> {
 
   Widget _buildSignupBtn() {
     return GestureDetector(
-      onTap: () => {Navigator.of(context).pushNamed('/signup')},
+      onTap: () => {Navigator.of(context).pushNamed('/signup'), print('hello')},
       child: RichText(
         text: TextSpan(
           children: [
@@ -213,7 +219,7 @@ class _LoginState extends State<Login> {
               text: 'Don\'t have an account? ',
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 18.0,
+                fontSize: 16.0,
                 fontWeight: FontWeight.w400,
               ),
             ),
@@ -221,7 +227,7 @@ class _LoginState extends State<Login> {
               text: 'Sign Up',
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 18.0,
+                fontSize: 16.0,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -248,12 +254,10 @@ class _LoginState extends State<Login> {
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         colors: [
-                          Color(0xFF73AEF5),
-                          Color(0xFF61A4F1),
-                          Color(0xFF478DE0),
-                          Color(0xFF398AE5),
+                          Hexcolor('#FFF1BA'),
+                          Hexcolor('#F4AA33'),
                         ],
-                        stops: [0.1, 0.4, 0.7, 0.9],
+                        stops: [0.2, 0.7],
                       ),
                     ),
                   ),
@@ -271,8 +275,7 @@ class _LoginState extends State<Login> {
                           Text(
                             'Login',
                             style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'OpenSans',
+                              color: Colors.black,
                               fontSize: 52.0,
                               fontWeight: FontWeight.bold,
                             ),

@@ -26,11 +26,6 @@ class Message extends StatefulWidget {
 }
 
 class _MessageState extends State<Message> {
-  @override
-  void initState() {
-    getChatted();
-  }
-
   final String chatRoomID;
   final String matchID;
   final String nickname;

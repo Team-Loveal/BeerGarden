@@ -6,6 +6,8 @@ import 'package:lovealapp/services/database.dart';
 import 'package:lovealapp/shared/loading.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:hexcolor/hexcolor.dart';
+
 
 //CHANGE LOCATION TO DROPDOWN OF PREFECTURES IN JAPAN
 
@@ -22,6 +24,7 @@ class _CreateProfileState extends State<CreateProfile> {
   String occupation;
   String about;
   List interests;
+
   //for interests
   bool yodeling = false;
   bool shopping = false;
@@ -44,22 +47,33 @@ class _CreateProfileState extends State<CreateProfile> {
     return loading
         ? Loading()
         : Scaffold(
+      backgroundColor: Hexcolor("#FFF6C2"),
             body: SafeArea(
               child: SingleChildScrollView(
                 child: Padding(
                     padding: const EdgeInsets.all(30),
                     child: Column(
                       children: <Widget>[
-                        TextField(
+                        TextFormField(
+                          cursorWidth: 3,
+                          maxLength: 35,
                           onChanged: (val) {
                             setState(() => nickname = val);
                           },
+                          onSaved: (String value){
+                            //this block is used to run code when a user save the form
+                          },
                           decoration: InputDecoration(
+                              hintText: 'Choose a nickname to display to users',
                               labelText:
-                                  'Choose a nickname to display to users'),
+                                  'Nickname *'),
+                          validator: (String value) {
+                            return value.length < 3 ? 'Nickname is required' : null;
+                          },
                           keyboardType: TextInputType.text,
                         ),
                         TextField(
+                          cursorWidth: 3,
                           onChanged: (val) {
                             setState(() => location = val);
                           },
@@ -151,8 +165,8 @@ class _CreateProfileState extends State<CreateProfile> {
                                       yodeling = isSelected;
                                     });
                                   },
-                                  selectedColor: Colors.pink[400],
-                                  checkmarkColor: Colors.white,
+                                  selectedColor: Hexcolor("#80F0F0"),
+//                                  checkmarkColor: Colors.white,
                                 ),
                                 FilterChip(
                                   label: Text('shopping'),
@@ -163,7 +177,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                     });
                                   },
                                   selectedColor: Colors.pink[400],
-                                  checkmarkColor: Colors.white,
+//                                  checkmarkColor: Colors.white,
                                 ),
                                 FilterChip(
                                   label: Text('making balloon animals'),
@@ -272,7 +286,7 @@ class _CreateProfileState extends State<CreateProfile> {
                               Navigator.of(context).pushNamed('/uploadphoto');
                             },
                             textColor: Colors.white,
-                            color: Colors.pink,
+                            color: Hexcolor("#215a00"),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50)),
                             child: Row(

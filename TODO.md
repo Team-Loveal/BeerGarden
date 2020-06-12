@@ -36,6 +36,7 @@ MVP for next Wednesday
     -Pancakes?
 [ ] Beta version deployed on Google Play
     - research how to do this // time it takes
+    - now the app is on the google console and it's pending (they are reviewing now)
 [ ] Blocking people
     -how to do this? (boolean in the db??)
 
