@@ -34,6 +34,12 @@ class _EditProfileState extends State<EditProfile> {
   bool writing = false;
   bool drinking = false;*/
 
+ TextEditingController _nicknameController = TextEditingController();
+
+/* void initState() {
+   super.initState();
+   _nicknameController = userData.nickname;
+ }*/
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +84,11 @@ class _EditProfileState extends State<EditProfile> {
         if (snapshot.hasData) {
           UserData userData = snapshot.data;
 
-        /*  void changeRoute() => {
+          void initState() {
+            super.initState();
+          //  _nicknameController = userData.nickname
+          }
+    /*  void changeRoute() => {
             Navigator.of(context).pushNamed('/myprofile')
           };*/
          /* nickname = userData.nickname;
@@ -134,6 +144,8 @@ class _EditProfileState extends State<EditProfile> {
                               textDirection: TextDirection.ltr,
                               children: <Widget>[
                                 TextFormField(
+                                  controller: _nicknameController,
+
                                   onSaved: (val) {
                                     if (val != userData.nickname) {
                                       setState(() => nickname = val);
