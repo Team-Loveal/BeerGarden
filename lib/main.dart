@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
           title: 'Loveal',
           debugShowCheckedModeBanner: false,
           theme: ThemeData.light(),
+//home: CreateProfile(),
 // this goes under theme
           initialRoute: '/',
           routes: {
@@ -42,7 +43,8 @@ class MyApp extends StatelessWidget {
             '/editProfile': (_) => EditProfile(),
             '/getMatch': (_) => GetMatch(),
             '/navigationHome': (_) => NavigationHome(),
-          }),
+          }
+          ),
     );
   }
 }

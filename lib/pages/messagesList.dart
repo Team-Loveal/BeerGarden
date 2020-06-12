@@ -17,20 +17,20 @@ class _MessagesState extends State<Messages> {
 
     return Scaffold(
         backgroundColor: Colors.pink,
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(80.0),
-          child: AppBar(
-            backgroundColor: Colors.pink,
-            title: Text('Messages',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 38)),
-            elevation: 0.0,
-            centerTitle: true,
-            leading: Container(),
-          ),
-        ),
+//        appBar: PreferredSize(
+//          preferredSize: Size.fromHeight(80.0),
+//          child: AppBar(
+//            backgroundColor: Colors.pink,
+//            title: Text('Messages',
+//                style: TextStyle(
+//                    color: Colors.white,
+//                    fontWeight: FontWeight.bold,
+//                    fontSize: 38)),
+//            elevation: 0.0,
+//            centerTitle: true,
+//            leading: Container(),
+//          ),
+//        ),
         body: Column(
           children: <Widget>[
             Expanded(
