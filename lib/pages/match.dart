@@ -347,7 +347,6 @@ class _MatchState extends State<Match> {
               ),
             );
           } else if (snapshot.hasData && matches == 0 || matchID == null) {
-            UserData userData = snapshot.data;
             print(myUserData.nickname);
             return Scaffold(
               body: ListView(

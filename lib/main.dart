@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
 // this goes under theme
           initialRoute: '/',
           routes: {
-            '/': (_) => Wrapper(),
+            '/': (_) => Login(),
             '/signup': (_) => SignUp(),
             '/login': (_) => Login(),
             '/forgotpassword': (_) => ForgotPassword(),
