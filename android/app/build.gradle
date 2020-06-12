@@ -33,7 +33,7 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     //upgraded below to 29 from 28 also
-    compileSdkVersion 28
+    compileSdkVersion 29
 
     lintOptions {
         disable 'InvalidPackage'
@@ -45,7 +45,7 @@ android {
 //        applicationId "lovealapp"
         minSdkVersion 21
         //Upgraded below to 29 from 28
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true
