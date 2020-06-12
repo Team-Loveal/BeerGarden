@@ -9,6 +9,7 @@ import 'package:lovealapp/pages/forgotpassword.dart';
 import 'package:lovealapp/services/auth.dart';
 import 'package:lovealapp/pages/createProfile.dart';
 import 'package:lovealapp/pages/editProfile.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 //provide user data to Wrapper file
 import 'package:provider/provider.dart';
@@ -29,7 +30,11 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
           title: 'Loveal',
           debugShowCheckedModeBanner: false,
-          theme: ThemeData.light(),
+          theme: ThemeData(
+            fontFamily: 'Alata',
+            primaryColor: Hexcolor("#fdeac6"),
+            accentColor: Hexcolor("#fdeac6"),
+          ),
 // this goes under theme
           initialRoute: '/',
           routes: {
