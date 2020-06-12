@@ -58,6 +58,24 @@ class DatabaseService {
     });
   }
 
+///GC DELETE THSSSSS
+  Future updateUserDataSmall(
+      String nickname,
+      String location,
+      String occupation,
+      String about,
+      ) async {
+    return await usersCollection.document(uid).updateData({
+      'nickname': nickname,
+      'location': location,
+      'occupation': occupation,
+      'about': about,
+      'matchedToday': false,
+    });
+  }
+
+  //matchData from snapshot
+
   //userData from snapshot
   UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
     return UserData(
