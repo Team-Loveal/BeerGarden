@@ -6,7 +6,6 @@ import 'message.dart';
 import 'package:intl/intl.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-
 class Messages extends StatefulWidget {
   @override
   _MessagesState createState() => _MessagesState();
@@ -60,6 +59,7 @@ class _MessagesState extends State<Messages> {
                                 .collection('messages')
                                 .where('matchedUsers', arrayContains: user.uid)
                                 .where('matched', isEqualTo: true)
+                                .where('active', isEqualTo: true)
                                 .snapshots(),
                             builder: (context, snapshot) {
                               if (!snapshot.hasData) {
@@ -74,7 +74,7 @@ class _MessagesState extends State<Messages> {
                                   ),
                                   child: ListView.builder(
                                     shrinkWrap: true,
-                                    // scrollDirection: Axis.vertical,
+                                    scrollDirection: Axis.vertical,
                                     itemBuilder: (context, index) =>
                                         buildChatroom(
                                             snapshot.data.documents[index],
@@ -98,6 +98,10 @@ class _MessagesState extends State<Messages> {
     final user = Provider.of<User>(context);
     var matchID = document['matchedUsers'].firstWhere((id) => id != user.uid);
     var formatter = new DateFormat('MMMMd');
+    bool unread = false;
+    DateTime date;
+    String nickname;
+    String imgUrl;
 
     return GestureDetector(
       onTap: () {
@@ -105,7 +109,10 @@ class _MessagesState extends State<Messages> {
             context,
             MaterialPageRoute(
                 builder: (context) => Message(
-                    chatRoomID: document.documentID, matchID: matchID)));
+                    chatRoomID: document.documentID,
+                    matchID: matchID,
+                    nickname: nickname,
+                    imgUrl: imgUrl)));
       },
       child: FutureBuilder<DocumentSnapshot>(
         future: Firestore.instance.collection('users').document(matchID).get(),
@@ -126,8 +133,13 @@ class _MessagesState extends State<Messages> {
                       .snapshots(),
                   builder: (context, messages) {
                     // Format timestamp to "Month Day"
-                    DateTime date = new DateTime.fromMillisecondsSinceEpoch(
+                    date = new DateTime.fromMillisecondsSinceEpoch(
                         int.parse(messages.data.documents[0]['timestamp']));
+                    unread = messages.data.documents[0]['fromID'] != user.uid &&
+                        messages.data.documents[0]['unread'];
+                    nickname = snapshot.data['nickname'];
+                    imgUrl = snapshot.data['imgUrl'];
+
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
@@ -135,18 +147,18 @@ class _MessagesState extends State<Messages> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
                             CircleAvatar(
-                              backgroundColor: Colors.pinkAccent,
+                              backgroundColor:
+                                  unread ? Colors.pink : Hexcolor('#f1f4f5'),
                               radius: 38,
                               child: CircleAvatar(
                                   radius: 35,
-                                  backgroundImage:
-                                      NetworkImage(snapshot.data['imgUrl'])),
+                                  backgroundImage: NetworkImage(imgUrl)),
                             ),
                             SizedBox(width: 10.0),
                             Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  Text(snapshot.data['nickname'],
+                                  Text(nickname,
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 18.0)),
@@ -172,8 +184,7 @@ class _MessagesState extends State<Messages> {
                             Text(formatter.format(date),
                                 style: TextStyle(fontSize: 12.0)),
                             SizedBox(height: 10.0),
-                            messages.data.documents[0]['fromID'] != user.uid &&
-                                    messages.data.documents[0]['unread']
+                            unread
                                 ? Container(
                                     width: 40.0,
                                     height: 20.0,

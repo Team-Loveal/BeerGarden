@@ -18,28 +18,35 @@ class _MatchState extends State<Match> {
   String matchID;
   String chatID;
   int matches;
+
   final AuthService _auth = AuthService();
 
   @override
-  Widget build(BuildContext context) {
-    final myUserData = Provider.of<UserData>(context);
-    final user = Provider.of<User>(context);
+  void initState() {
+    super.initState();
+    print('I AM RUNNING');
+    final user = Provider.of<User>(context, listen: false);
 
     //get matchID and chatID from db
     Firestore.instance.collection('users').document(user.uid).get().then((doc) {
-      print(doc['chatID']);
       setState(() {
         matchID = doc['matchID'];
         chatID = doc['chatID'];
         matches = doc['matches'];
       });
+      print('I AM matchID $matchID and I am matches $matches');
     });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final myUserData = Provider.of<UserData>(context);
 
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: matchID).userData,
         builder: (context, snapshot) {
+          UserData userData = snapshot.data;
           if (snapshot.hasData && matches > 0) {
-            UserData userData = snapshot.data;
             return Scaffold(
               body: ListView(
                 children: <Widget>[
@@ -97,7 +104,10 @@ class _MatchState extends State<Match> {
                         Stack(
                           children: <Widget>[
                             Container(
-                                width: MediaQuery.of(context).size.width,
+                                width: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .width,
                                 height: 380,
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(10.0),
@@ -105,7 +115,10 @@ class _MatchState extends State<Match> {
                                       fit: BoxFit.cover),
                                 )),
                             Container(
-                                width: MediaQuery.of(context).size.width,
+                                width: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .width,
                                 height: 380,
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(10.0),
@@ -200,99 +213,99 @@ class _MatchState extends State<Match> {
                                     child: OutlineButton(
                                         child: Text("Yodeling",
                                             style:
-                                                TextStyle(color: Colors.pink)),
+                                            TextStyle(color: Colors.pink)),
                                         onPressed: null,
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
-                                                BorderRadius.circular(10.0)))),
+                                            BorderRadius.circular(10.0)))),
                               if (userData.shopping)
                                 Container(
                                     margin: EdgeInsets.only(right: 10),
                                     child: OutlineButton(
                                         child: Text("Shopping",
                                             style:
-                                                TextStyle(color: Colors.pink)),
+                                            TextStyle(color: Colors.pink)),
                                         onPressed: null,
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
-                                                BorderRadius.circular(10.0)))),
+                                            BorderRadius.circular(10.0)))),
                               if (userData.makingBalloonAnimals)
                                 Container(
                                     margin: EdgeInsets.only(right: 10),
                                     child: OutlineButton(
                                         child: Text("MakingBalloonAnimals",
                                             style:
-                                                TextStyle(color: Colors.pink)),
+                                            TextStyle(color: Colors.pink)),
                                         onPressed: null,
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
-                                                BorderRadius.circular(10.0)))),
+                                            BorderRadius.circular(10.0)))),
                               if (userData.cooking)
                                 Container(
                                     margin: EdgeInsets.only(right: 10),
                                     child: OutlineButton(
                                         child: Text("Cooking",
                                             style:
-                                                TextStyle(color: Colors.pink)),
+                                            TextStyle(color: Colors.pink)),
                                         onPressed: null,
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
-                                                BorderRadius.circular(10.0)))),
+                                            BorderRadius.circular(10.0)))),
                               if (userData.painting)
                                 Container(
                                     margin: EdgeInsets.only(right: 10),
                                     child: OutlineButton(
                                         child: Text("Painting",
                                             style:
-                                                TextStyle(color: Colors.pink)),
+                                            TextStyle(color: Colors.pink)),
                                         onPressed: null,
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
-                                                BorderRadius.circular(10.0)))),
+                                            BorderRadius.circular(10.0)))),
                               if (userData.movies)
                                 Container(
                                     margin: EdgeInsets.only(right: 10),
                                     child: OutlineButton(
                                         child: Text("Movies",
                                             style:
-                                                TextStyle(color: Colors.pink)),
+                                            TextStyle(color: Colors.pink)),
                                         onPressed: null,
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
-                                                BorderRadius.circular(10.0)))),
+                                            BorderRadius.circular(10.0)))),
                               if (userData.sports)
                                 Container(
                                     margin: EdgeInsets.only(right: 10),
                                     child: OutlineButton(
                                         child: Text("Sports",
                                             style:
-                                                TextStyle(color: Colors.pink)),
+                                            TextStyle(color: Colors.pink)),
                                         onPressed: null,
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
-                                                BorderRadius.circular(10.0)))),
+                                            BorderRadius.circular(10.0)))),
                               if (userData.writing)
                                 Container(
                                     margin: EdgeInsets.only(right: 10),
                                     child: OutlineButton(
                                         child: Text("Writing",
                                             style:
-                                                TextStyle(color: Colors.pink)),
+                                            TextStyle(color: Colors.pink)),
                                         onPressed: null,
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
-                                                BorderRadius.circular(10.0)))),
+                                            BorderRadius.circular(10.0)))),
                               if (userData.drinking)
                                 Container(
                                     margin: EdgeInsets.only(right: 10),
                                     child: OutlineButton(
                                         child: Text("Drinking",
                                             style:
-                                                TextStyle(color: Colors.pink)),
+                                            TextStyle(color: Colors.pink)),
                                         onPressed: null,
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
-                                                BorderRadius.circular(10.0)))),
+                                            BorderRadius.circular(10.0)))),
                             ],
                           )
                         ]),
@@ -328,32 +341,34 @@ class _MatchState extends State<Match> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
-                          onPressed: () => {
-                                //set chatted to true in db
-                                Firestore.instance
-                                    .collection("messages")
-                                    .document(chatID)
-                                    .updateData({'matched': true}),
+                          onPressed: () =>
+                          {
+                            //set chatted to true in db
+                            Firestore.instance
+                                .collection("messages")
+                                .document(chatID)
+                                .updateData({'matched': true}),
 
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => Message(
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        Message(
                                             chatRoomID: chatID,
                                             matchID: matchID)))
-                              }),
+                          }),
                     ),
                   ),
                 ],
               ),
             );
-          } else if (snapshot.hasData && matches == 0 || matchID == null) {
-            UserData userData = snapshot.data;
-            print(myUserData.nickname);
+          }
+          else if (matches == 0 || matchID == null) {
+            final user = Provider.of<User>(context);
             return Scaffold(
               body: ListView(
                 children: <Widget>[
-                  //TODAY'S MATCH
+                  //GET NEW MATCH BUTTON
                   FlatButton(
                     color: Colors.pinkAccent,
                     child: Text('Get your new match for the day <3',
@@ -371,22 +386,22 @@ class _MatchState extends State<Match> {
                           .where('fromID', isEqualTo: user.uid)
                           .getDocuments()
                           .then((data) => data.documents.forEach((doc) => {
-                                if (!doc['matched'])
-                                  {
-                                    print(
-                                        'found unmatched user $doc.toID and $doc.documentID'),
-                                    Firestore.instance
-                                        .collection('users')
-                                        .document(user.uid)
-                                        .updateData({
-                                      'matchID': doc['toID'],
-                                      'chatID': doc.documentID,
-                                      'matches': matches,
-                                    }),
-                                    print(
-                                        'updated user collection with matchID: $doc.toID')
-                                  }
-                              }));
+                        if (!doc['matched'])
+                          {
+                            print(
+                                'found unmatched user $doc.toID and $doc.documentID'),
+                            Firestore.instance
+                                .collection('users')
+                                .document(user.uid)
+                                .updateData({
+                              'matchID': doc['toID'],
+                              'chatID': doc.documentID,
+                              'matches': matches,
+                            }),
+                            print(
+                                'updated user collection with matchID: $doc.toID')
+                          }
+                      }));
 
                       //go to matched Profile page
                       Navigator.of(context).pushNamed('/navigationHome');
@@ -395,7 +410,8 @@ class _MatchState extends State<Match> {
                 ],
               ),
             );
-          } else {
+          }
+          else {
             return Loading();
           }
         });

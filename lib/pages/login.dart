@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lovealapp/services/auth.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:lovealapp/shared/loading.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -19,205 +20,284 @@ class _LoginState extends State<Login> {
   //for loading spinner
   bool loading = false;
 
+  void handleLogin() async {
+    setState(() => loading = true);
+    String trimmedEmail = email.trim();
+    String trimmedPassword = password.trim();
+    dynamic result =
+        await _auth.signIWithEmailAndPassword(trimmedEmail, trimmedPassword);
+    if (result == null) {
+      setState(() {
+        error = 'Could not sign in with those credentials';
+        loading = false;
+      });
+    } else {
+      //result.uid is the uid we will need for the db
+      print(result);
+      Navigator.of(context).popUntil((route) => route.isFirst);
+    }
+  }
+
+  void googleLogin() async {
+    dynamic result = await AuthService().loginWithGoogle();
+    if (result == null) {
+      setState(() {
+        error = 'Could not sign in with those credentials';
+        loading = false;
+      });
+    } else {
+      //result.uid is the uid we will need for the db
+      print(result);
+      Navigator.of(context).popUntil((route) => route.isFirst);
+    }
+  }
+
+  Widget _buildEmail() {
+    return Container(
+      alignment: Alignment.centerLeft,
+      height: 60.0,
+      child: TextField(
+        onChanged: (val) {
+          setState(() => email = val);
+        },
+        keyboardType: TextInputType.emailAddress,
+        style: TextStyle(
+          color: Colors.white,
+        ),
+        decoration: InputDecoration(
+            fillColor: Colors.white,
+            filled: true,
+            enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+                borderRadius: BorderRadius.all(Radius.circular(30.0))),
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(30.0))),
+            contentPadding: EdgeInsets.only(top: 14.0),
+            prefixIcon: Icon(MdiIcons.email, color: Hexcolor('#F4AA33')),
+            labelText: 'Email',
+            labelStyle: TextStyle(
+                fontSize: 18.0,
+                color: Hexcolor('#F4AA33'),
+                fontWeight: FontWeight.bold)),
+      ),
+    );
+  }
+
+  Widget _buildPassword() {
+    return Container(
+      alignment: Alignment.centerLeft,
+      height: 50.0,
+      child: TextField(
+        onChanged: (val) {
+          setState(() => password = val);
+        },
+        obscureText: true,
+        style: TextStyle(
+          color: Colors.white,
+        ),
+        decoration: InputDecoration(
+            fillColor: Colors.white,
+            filled: true,
+            enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+                borderRadius: BorderRadius.all(Radius.circular(30.0))),
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(30.0))),
+            contentPadding: EdgeInsets.only(top: 14.0),
+            prefixIcon: Icon(MdiIcons.key, color: Hexcolor('#F4AA33')),
+            labelText: 'Password',
+            labelStyle: TextStyle(
+                fontSize: 18.0,
+                color: Hexcolor('#F4AA33'),
+                fontWeight: FontWeight.bold)),
+      ),
+    );
+  }
+
+  Widget _buildForgotPasswordBtn() {
+    return Container(
+      alignment: Alignment.centerRight,
+      child: FlatButton(
+        onPressed: () => {Navigator.of(context).pushNamed('/forgotpassword')},
+        padding: EdgeInsets.only(right: 0.0),
+        child: Text('Forgot Password?',
+            style: TextStyle(fontWeight: FontWeight.bold)),
+      ),
+    );
+  }
+
+  Widget _buildLoginBtn() {
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 25.0),
+      width: double.infinity,
+      child: RaisedButton(
+        elevation: 5.0,
+        onPressed: () => handleLogin(),
+        padding: EdgeInsets.all(12.0),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30.0),
+        ),
+        color: Colors.white,
+        child: Text(
+          'LOGIN',
+          style: TextStyle(
+            color: Colors.black,
+            letterSpacing: 1.5,
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSignInWithText() {
+    return Column(
+      children: <Widget>[
+        SizedBox(height: 40.0),
+        Text(
+          '- Login with -',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSocialBtn(Function onTap, IconData icon, Color color) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        height: 52.0,
+        width: 52.0,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              offset: Offset(0, 2),
+              blurRadius: 6.0,
+            ),
+          ],
+        ),
+        child: Icon(
+          icon,
+          size: 40,
+          color: color,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSocialBtnRow() {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 30.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          _buildSocialBtn(() => print('Login with Facebook'), MdiIcons.facebook,
+              Color.fromARGB(255, 66, 103, 178)),
+          _buildSocialBtn(() => googleLogin(), MdiIcons.google,
+              Color.fromARGB(255, 234, 67, 53)),
+          _buildSocialBtn(() => print('Login with Google'), MdiIcons.twitter,
+              Color.fromARGB(255, 29, 161, 242)),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSignupBtn() {
+    return GestureDetector(
+      onTap: () => {Navigator.of(context).pushNamed('/signup'), print('hello')},
+      child: RichText(
+        text: TextSpan(
+          children: [
+            TextSpan(
+              text: 'Don\'t have an account? ',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 16.0,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            TextSpan(
+              text: 'Sign Up',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 16.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return loading
         ? Loading()
         : Scaffold(
-            body: Padding(
-                padding: EdgeInsets.all(20),
-                child: ListView(
-                  children: <Widget>[
-                    //May need to add button to switch to Sign Up
-                    Container(
-                        alignment: Alignment.bottomLeft,
-                        padding: EdgeInsets.fromLTRB(20, 60, 20, 5),
-                        child: Text(
-                          'Login',
-                          style: TextStyle(
-                              fontSize: 36, fontWeight: FontWeight.bold),
-                        )),
-                    Container(
-                        alignment: Alignment.bottomLeft,
-                        padding: EdgeInsets.fromLTRB(20, 0, 15, 20),
-                        child: Text(
-                          'Please login to find your match',
-                          style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold),
-                        )),
-                    Container(
-                        height: 55,
-                        padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
-                        child: TextField(
-                          onChanged: (val) {
-                            setState(() => email = val);
-                          },
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              prefixIcon: Icon(MdiIcons.email),
-                              labelText: 'Email',
-                              labelStyle:
-                                  TextStyle(fontWeight: FontWeight.bold)),
-                        )),
-                    Container(
-                        height: 55,
-                        padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
-                        child: TextField(
-                          onChanged: (val) {
-                            setState(() => password = val);
-                          },
-                          obscureText: true,
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              prefixIcon: Icon(MdiIcons.key),
-                              labelText: 'Password',
-                              labelStyle:
-                                  TextStyle(fontWeight: FontWeight.bold)),
-                        )),
-                    Container(
-                      alignment: Alignment.bottomLeft,
-                      padding: EdgeInsets.fromLTRB(10, 0, 20, 0),
-                      child: FlatButton(
-                        onPressed: () => {
-                          Navigator.of(context).pushNamed('/forgotpassword')
-                        },
-                        textColor: Colors.pink,
-                        child: Text(
-                          'Forgot password',
-                          style: TextStyle(fontSize: 14),
-                        ),
+            body: GestureDetector(
+              onTap: () => FocusScope.of(context).unfocus(),
+              child: Stack(
+                children: <Widget>[
+                  Container(
+                    height: double.infinity,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Hexcolor('#FFF1BA'),
+                          Hexcolor('#F4AA33'),
+                        ],
+                        stops: [0.2, 0.7],
                       ),
                     ),
-                    Container(
-                        padding: EdgeInsets.fromLTRB(180, 0, 20, 0),
-                        child: RaisedButton(
-                            onPressed: () async {
-                              setState(() => loading = true);
-                              String trimmedEmail = email.trim();
-                              String trimmedPassword = password.trim();
-                              dynamic result =
-                                  await _auth.signIWithEmailAndPassword(
-                                      trimmedEmail, trimmedPassword);
-                              if (result == null) {
-                                setState(() {
-                                  error =
-                                      'Could not sign in with those credentials';
-                                  loading = false;
-                                });
-                              } else {
-                                //result.uid is the uid we will need for the db
-                                print(result);
-                                Navigator.of(context)
-                                    .popUntil((route) => route.isFirst);
-                              }
-                            },
-                            textColor: Colors.white,
-                            color: Colors.pink,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(50.0)),
-                            child: Row(
-                              children: <Widget>[
-                                Text('LOGIN  ',
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold)),
-                                Icon(MdiIcons.arrowRight, size: 18)
-                              ],
-                              mainAxisAlignment: MainAxisAlignment.center,
-                            ))),
-                    Container(
-                      child: Text(error,
-                          style: TextStyle(color: Colors.red, fontSize: 14.0)),
-                    ),
-                    Container(
-                        alignment: Alignment.center,
-                        margin: EdgeInsets.fromLTRB(0, 50, 0, 10),
-                        child: Text('Login with',
+                  ),
+                  Container(
+                    height: double.infinity,
+                    child: SingleChildScrollView(
+                      physics: AlwaysScrollableScrollPhysics(),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 40.0,
+                        vertical: 120.0,
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            'Login',
                             style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 12,
-                            ))),
-                    Container(
-                        child: Row(
-                      children: <Widget>[
-                        RawMaterialButton(
-                          onPressed: () {},
-                          fillColor: Colors.white,
-                          child: Icon(
-                            MdiIcons.facebook,
-                            size: 40,
-                            color: Color.fromARGB(255, 66, 103, 178),
+                              color: Colors.black,
+                              fontSize: 52.0,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                          shape: CircleBorder(),
-                        ),
-                        RawMaterialButton(
-                          onPressed: () async {
-                            dynamic result =
-                            await AuthService().loginWithGoogle();
-                            if (result == null) {
-                              setState(() {
-                                error =
-                                'Could not sign in with those credentials';
-                                loading = false;
-                              });
-                            } else {
-                              //result.uid is the uid we will need for the db
-                              print(result);
-                              Navigator.of(context)
-                                  .popUntil((route) => route.isFirst);
-                            }
-
-                           /* bool res = await AuthService().loginWithGoogle();
-                            if(!res)
-                              print("error logging in with Google");*/
-                          },
-                          fillColor: Colors.white,
-                          child: Icon(
-                            MdiIcons.google,
-                            size: 40,
-                            color: Color.fromARGB(255, 234, 67, 53),
+                          SizedBox(height: 50.0),
+                          _buildEmail(),
+                          SizedBox(
+                            height: 12.0,
                           ),
-                          shape: CircleBorder(),
-                        ),
-                        RawMaterialButton(
-                          onPressed: () {},
-                          fillColor: Colors.white,
-                          child: Icon(
-                            MdiIcons.twitter,
-                            size: 40,
-                            color: Color.fromARGB(255, 29, 161, 242),
-                          ),
-                          shape: CircleBorder(),
-                        ),
-                      ],
-                      mainAxisAlignment: MainAxisAlignment.center,
-                    )),
-                    Container(
-                        padding: EdgeInsets.only(top: 10),
-                        child: Row(
-                          children: <Widget>[
-                            Text("Don't have an account?",
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.grey,
-                                    fontWeight: FontWeight.bold)),
-                            FlatButton(
-                                onPressed: () => {
-                                      Navigator.of(context).pushNamed('/signup')
-                                    },
-                                textColor: Colors.pink,
-                                child: Text(
-                                  'Sign up',
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold),
-                                )),
-                          ],
-                          mainAxisAlignment: MainAxisAlignment.center,
-                        )),
-                  ],
-                )));
+                          _buildPassword(),
+                          _buildForgotPasswordBtn(),
+                          _buildLoginBtn(),
+                          _buildSignInWithText(),
+                          _buildSocialBtnRow(),
+                          _buildSignupBtn(),
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          );
   }
 }
