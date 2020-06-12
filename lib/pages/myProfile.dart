@@ -17,7 +17,7 @@ class _MyProfileState extends State<MyProfile> {
     final AuthService _auth = AuthService();
     final userData = Provider.of<UserData>(context);
     final user = Provider.of<User>(context);
-    print("I AM USER ID ${user.uid}");
+
     return Scaffold(
       body: ListView(
         children: <Widget>[
