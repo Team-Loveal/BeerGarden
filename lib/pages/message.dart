@@ -10,62 +10,82 @@ import 'package:intl/intl.dart';
 class Message extends StatefulWidget {
   final String chatRoomID;
   final String matchID;
-  Message({Key key, @required this.chatRoomID, this.matchID}) : super(key: key);
+  final String nickname;
+  final String imgUrl;
+  Message(
+      {Key key,
+      @required this.chatRoomID,
+      this.matchID,
+      this.nickname,
+      this.imgUrl})
+      : super(key: key);
 
   @override
-  _MessageState createState() => _MessageState(chatRoomID, matchID);
+  _MessageState createState() =>
+      _MessageState(chatRoomID, matchID, nickname, imgUrl);
 }
 
 class _MessageState extends State<Message> {
+  @override
+  void initState() {
+    getChatted();
+  }
+
   final String chatRoomID;
   final String matchID;
-  _MessageState(this.chatRoomID, this.matchID);
+  final String nickname;
+  final String imgUrl;
+  _MessageState(this.chatRoomID, this.matchID, this.nickname, this.imgUrl);
 
   // user context from provider
   var user;
   var toID;
 
-  //MESSAGE INPUT AND SEND
-  Widget _buildTextInput() {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 15.0),
-      color: Colors.white,
-      height: 80.0,
-      child: Row(
-        children: [
-          Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                color: Hexcolor('#f1f4f5'),
-                borderRadius: BorderRadius.circular(35.0),
-              ),
-              child: TextField(
-                controller: _textController,
-                decoration: InputDecoration(
-                    hintText: "Send a message...",
-                    border: InputBorder.none,
-                    contentPadding: EdgeInsets.symmetric(horizontal: 15.0)),
-              ),
-            ),
-          ),
-          SizedBox(width: 12),
-          IconButton(
-              color: Colors.pinkAccent,
-              icon: Icon(Icons.send, size: 38.0),
-              onPressed: () => _onSendMessage(_textController.text)),
-        ],
-      ),
-    );
+  final dbRef = Firestore.instance;
+  bool activeChat;
+
+  // check if chatroom is active
+  void getChatted() {
+    dbRef
+        .collection('messages')
+        .document(chatRoomID)
+        .get()
+        .then((snapshot) => activeChat = snapshot['active']);
+  }
+
+  void activateChat() {
+    try {
+      dbRef
+          .collection('messages')
+          .document(chatRoomID)
+          .updateData({'active': true});
+    } catch (err) {
+      print(err.toString());
+    }
+  }
+
+  void toggleUnread(DocumentSnapshot document) {
+    dbRef
+        .collection('messages')
+        .document(chatRoomID)
+        .collection('chatroom')
+        .document(document.documentID)
+        .updateData({'unread': false});
   }
 
   //for reading the contents of the input field and for clearing the field after the text message is sent
   final _textController = TextEditingController();
 
   void _onSendMessage(String text) {
+    // toggle chatted if first message
+    if (!activeChat) {
+      activateChat();
+    }
+
     if (text.trim() != "") {
       _textController.clear();
 
-      var documentReference = Firestore.instance
+      var documentReference = dbRef
           .collection('messages')
           .document(chatRoomID)
           .collection('chatroom')
@@ -89,7 +109,7 @@ class _MessageState extends State<Message> {
     }
   }
 
-  //BASICALLY THE BODY
+  // BODY
   @override
   Widget build(BuildContext context) {
     user = Provider.of<User>(context);
@@ -105,21 +125,18 @@ class _MessageState extends State<Message> {
                   Navigator.pop(context);
                 },
                 icon: Icon(MdiIcons.arrowLeft)),
-            title: FutureBuilder<DocumentSnapshot>(
-                future: Firestore.instance
-                    .collection('users')
-                    .document(matchID)
-                    .get(),
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData) {
-                    return Center(child: CircularProgressIndicator());
-                  } else {
-                    return Text(
-                      snapshot.data['nickname'],
-                      style: TextStyle(fontSize: 30, color: Colors.white),
-                    );
-                  }
-                }),
+            title: Row(
+              children: <Widget>[
+                CircleAvatar(
+                  radius: 25,
+                  backgroundImage: NetworkImage(imgUrl),
+                ),
+                Text(
+                  nickname,
+                  style: TextStyle(fontSize: 30, color: Colors.white),
+                ),
+              ],
+            ),
             elevation: 0.0,
             centerTitle: true,
           ),
@@ -152,7 +169,7 @@ class _MessageState extends State<Message> {
                             // builds a list of messages from database
                             // updated in realtime with stream
                             child: StreamBuilder(
-                                stream: Firestore.instance
+                                stream: dbRef
                                     .collection('messages')
                                     .document(chatRoomID)
                                     .collection('chatroom')
@@ -200,13 +217,37 @@ class _MessageState extends State<Message> {
         ));
   }
 
-  void toggleUnread(DocumentSnapshot document) {
-    Firestore.instance
-        .collection('messages')
-        .document(chatRoomID)
-        .collection('chatroom')
-        .document(document.documentID)
-        .updateData({'unread': false});
+  // MESSAGE INPUT AND SEND
+  Widget _buildTextInput() {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 15.0),
+      color: Colors.white,
+      height: 80.0,
+      child: Row(
+        children: [
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                color: Hexcolor('#f1f4f5'),
+                borderRadius: BorderRadius.circular(35.0),
+              ),
+              child: TextField(
+                controller: _textController,
+                decoration: InputDecoration(
+                    hintText: "Send a message...",
+                    border: InputBorder.none,
+                    contentPadding: EdgeInsets.symmetric(horizontal: 15.0)),
+              ),
+            ),
+          ),
+          SizedBox(width: 12),
+          IconButton(
+              color: Colors.pinkAccent,
+              icon: Icon(Icons.send, size: 38.0),
+              onPressed: () => _onSendMessage(_textController.text)),
+        ],
+      ),
+    );
   }
 
   // For each message bubble
@@ -216,6 +257,7 @@ class _MessageState extends State<Message> {
     }
     bool isUser = document['fromID'] == user.uid;
 
+    // Format time to readable HH:MM
     var formatter = new DateFormat('Hm');
     DateTime date = new DateTime.fromMillisecondsSinceEpoch(
         int.parse(document['timestamp']));

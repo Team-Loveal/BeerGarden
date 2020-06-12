@@ -24,24 +24,24 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //Material App is a widget that has properties like title, theme etc.
-    return StreamProvider<User>.value(
-      value: AuthService().user,
-      child: MaterialApp(
-          title: 'Loveal',
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData.light(),
-          initialRoute: '/',
-          routes: {
-            '/': (BuildContext context) => Wrapper(),
-            '/signup': (_) => SignUp(),
-            '/login': (_) => Login(),
-            '/forgotpassword': (_) => ForgotPassword(),
-            '/createProfile': (_) => CreateProfile(),
-            '/uploadphoto': (_) => UploadPhoto(),
-            '/editProfile': (_) => EditProfile(),
-            '/getMatch': (_) => GetMatch(),
-            '/navigationHome': (_) => NavigationHome(),
-          }),
-    );
+    // return StreamProvider<User>.value(
+    //   value: AuthService().user,
+    return MaterialApp(
+        title: 'Loveal',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData.light(),
+        initialRoute: '/',
+        routes: {
+          '/..': (BuildContext context) => Wrapper(),
+          '/': (_) => Login(),
+          '/login': (_) => Login(),
+          '/forgotpassword': (_) => ForgotPassword(),
+          '/createProfile': (_) => CreateProfile(),
+          '/uploadphoto': (_) => UploadPhoto(),
+          '/editProfile': (_) => EditProfile(),
+          '/getMatch': (_) => GetMatch(),
+          '/navigationHome': (_) => NavigationHome(),
+        });
+    // );
   }
 }
