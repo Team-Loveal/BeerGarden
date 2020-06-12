@@ -33,7 +33,6 @@ class _LoginState extends State<Login> {
       });
     } else {
       //result.uid is the uid we will need for the db
-      print(result);
       Navigator.of(context).popUntil((route) => route.isFirst);
     }
   }
@@ -47,9 +46,12 @@ class _LoginState extends State<Login> {
       });
     } else {
       //result.uid is the uid we will need for the db
-      print(result);
       Navigator.of(context).popUntil((route) => route.isFirst);
     }
+  }
+
+  void facebookLogin() async {
+    // TODO
   }
 
   Widget _buildEmail() {
@@ -62,7 +64,7 @@ class _LoginState extends State<Login> {
         },
         keyboardType: TextInputType.emailAddress,
         style: TextStyle(
-          color: Colors.white,
+          color: Colors.black,
         ),
         decoration: InputDecoration(
             fillColor: Colors.white,
@@ -93,7 +95,7 @@ class _LoginState extends State<Login> {
         },
         obscureText: true,
         style: TextStyle(
-          color: Colors.white,
+          color: Colors.black,
         ),
         decoration: InputDecoration(
             fillColor: Colors.white,
@@ -198,12 +200,10 @@ class _LoginState extends State<Login> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          _buildSocialBtn(() => print('Login with Facebook'), MdiIcons.facebook,
+          _buildSocialBtn(() => facebookLogin(), MdiIcons.facebook,
               Color.fromARGB(255, 66, 103, 178)),
           _buildSocialBtn(() => googleLogin(), MdiIcons.google,
               Color.fromARGB(255, 234, 67, 53)),
-          _buildSocialBtn(() => print('Login with Google'), MdiIcons.twitter,
-              Color.fromARGB(255, 29, 161, 242)),
         ],
       ),
     );
@@ -211,7 +211,7 @@ class _LoginState extends State<Login> {
 
   Widget _buildSignupBtn() {
     return GestureDetector(
-      onTap: () => {Navigator.of(context).pushNamed('/signup'), print('hello')},
+      onTap: () => {Navigator.of(context).pushNamed('/signup')},
       child: RichText(
         text: TextSpan(
           children: [
@@ -219,7 +219,8 @@ class _LoginState extends State<Login> {
               text: 'Don\'t have an account? ',
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 16.0,
+                fontFamily: 'Alata',
+                fontSize: 17.0,
                 fontWeight: FontWeight.w400,
               ),
             ),
@@ -227,7 +228,8 @@ class _LoginState extends State<Login> {
               text: 'Sign Up',
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 16.0,
+                fontFamily: 'Alata',
+                fontSize: 17.0,
                 fontWeight: FontWeight.bold,
               ),
             ),
