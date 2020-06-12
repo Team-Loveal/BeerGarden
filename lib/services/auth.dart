@@ -103,7 +103,8 @@ class AuthService {
   }
 
   // reset password (NOT NEEDED?!?)
-  Future sendPasswordResetEmail(String email) async {
+  //Commented out the following on 6/12 at 4pm, in case it dies, this is why
+  /*Future sendPasswordResetEmail(String email) async {
     return await _auth.sendPasswordResetEmail(email: email);
   }
-}
+}*/

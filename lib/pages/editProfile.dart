@@ -134,7 +134,7 @@ class _EditProfileState extends State<EditProfile> {
                               textDirection: TextDirection.ltr,
                               children: <Widget>[
                                 TextFormField(
-                                  onChanged: (val) {
+                                  onSaved: (val) {
                                     if (val != userData.nickname) {
                                       setState(() => nickname = val);
                                     } else {
@@ -152,7 +152,7 @@ class _EditProfileState extends State<EditProfile> {
                                   keyboardType: TextInputType.text,
                                 ),
                                 TextFormField(
-                                  onChanged: (val) {
+                                  onSaved: (val) {
                                     if (val != userData.location) {
                                       setState(() => location = val);
                                     } else {
