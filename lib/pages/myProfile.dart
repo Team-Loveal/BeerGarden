@@ -3,8 +3,6 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:provider/provider.dart';
 import 'package:lovealapp/models/user.dart';
 import 'package:lovealapp/services/auth.dart';
-import 'package:hexcolor/hexcolor.dart';
-
 
 class MyProfile extends StatefulWidget {
   @override
@@ -18,6 +16,8 @@ class _MyProfileState extends State<MyProfile> {
     //get userData from the DB
     final AuthService _auth = AuthService();
     final userData = Provider.of<UserData>(context);
+    final user = Provider.of<User>(context);
+    print("I AM USER ID ${user.uid}");
     return Scaffold(
       body: ListView(
         children: <Widget>[

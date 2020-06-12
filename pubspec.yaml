@@ -24,7 +24,7 @@ dependencies:
   chips_choice: ^1.2.0
   flutter:
     sdk: flutter
-  material_design_icons_flutter: 4.0.5345
+  material_design_icons_flutter: ^4.0.5345
   google_sign_in: ^4.5.1
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -40,7 +40,6 @@ dependencies:
   image_picker: ^0.6.7+1
   intl: ^0.16.1
   hexcolor: ^1.0.2
-
 
 dev_dependencies:
   flutter_test:
@@ -80,8 +79,6 @@ flutter:
     - family: NTR
       fonts:
         - asset: fonts/NTR-Regular.ttf
-
-
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
