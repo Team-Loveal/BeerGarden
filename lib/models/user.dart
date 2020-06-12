@@ -57,3 +57,11 @@ class UserImg {
     this.imgUrl,
   });
 }
+
+class MatchData {
+  final String matchID;
+  final String chatID;
+  final int matches;
+
+  MatchData({this.matchID, this.chatID, this.matches});
+}
