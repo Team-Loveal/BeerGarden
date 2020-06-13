@@ -30,26 +30,23 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
           title: 'Loveal',
           debugShowCheckedModeBanner: false,
-//home: CreateProfile(),
           theme: ThemeData(
             fontFamily: 'Alata',
             primaryColor: Hexcolor("#fdeac6"),
             accentColor: Hexcolor("#fdeac6"),
           ),
-// this goes under theme
-      home: UploadPhoto(),
-//          initialRoute: '/',
-//          routes: {
-//            '/': (_) => Wrapper(),
-//            '/signup': (_) => SignUp(),
-//            '/login': (_) => Login(),
-//            '/forgotpassword': (_) => ForgotPassword(),
-//            '/createProfile': (_) => CreateProfile(),
-//            '/uploadphoto': (_) => UploadPhoto(),
-//            '/editProfile': (_) => EditProfile(),
-//            '/getMatch': (_) => GetMatch(),
-//            '/navigationHome': (_) => NavigationHome(),
-//          }
+          initialRoute: '/',
+          routes: {
+            '/': (_) => Wrapper(),
+            '/signup': (_) => SignUp(),
+            '/login': (_) => Login(),
+            '/forgotpassword': (_) => ForgotPassword(),
+            '/createProfile': (_) => CreateProfile(),
+            '/uploadphoto': (_) => UploadPhoto(),
+            '/editProfile': (_) => EditProfile(),
+            '/getMatch': (_) => GetMatch(),
+            '/navigationHome': (_) => NavigationHome(),
+          }
           ),
     );
   }
