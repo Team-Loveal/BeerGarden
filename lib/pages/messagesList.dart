@@ -1,21 +1,21 @@
-//import 'package:flutter/material.dart';
-//import 'package:cloud_firestore/cloud_firestore.dart';
-//import 'package:lovealapp/models/user.dart';
-//import 'package:provider/provider.dart';
-//import 'message.dart';
-//import 'package:intl/intl.dart';
-//import 'package:hexcolor/hexcolor.dart';
-//
-//class Messages extends StatefulWidget {
-//  @override
-//  _MessagesState createState() => _MessagesState();
-//}
-//
-//class _MessagesState extends State<Messages> {
-//  @override
-//  Widget build(BuildContext context) {
-//    final user = Provider.of<User>(context);
-//
+import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:lovealapp/models/user.dart';
+import 'package:provider/provider.dart';
+import 'message.dart';
+import 'package:intl/intl.dart';
+import 'package:hexcolor/hexcolor.dart';
+
+class Messages extends StatefulWidget {
+  @override
+  _MessagesState createState() => _MessagesState();
+}
+
+class _MessagesState extends State<Messages> {
+  @override
+  Widget build(BuildContext context) {
+    final user = Provider.of<User>(context);
+
 //    return Scaffold(
 //        backgroundColor: Hexcolor("#FFF4EB"),
 //        appBar: PreferredSize(
@@ -92,12 +92,11 @@
 //            ),
 //          ],
 //        ));
-//  }
-//
+  }
+
 //  Widget buildChatroom(DocumentSnapshot document, BuildContext context) {
 //    final user = Provider.of<User>(context);
 //    var matchID = document['matchedUsers'].firstWhere((id) => id != user.uid);
-//    print('IA M MATCHID $matchID');
 //    var formatter = new DateFormat('MMMMd');
 //    bool unread = false;
 //    DateTime date;
@@ -211,4 +210,4 @@
 //      ),
 //    );
 //  }
-//}
+}

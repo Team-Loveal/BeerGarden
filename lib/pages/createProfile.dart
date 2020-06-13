@@ -8,7 +8,6 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:provider/provider.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-
 //CHANGE LOCATION TO DROPDOWN OF PREFECTURES IN JAPAN
 
 class CreateProfile extends StatefulWidget {
@@ -54,31 +53,39 @@ class _CreateProfileState extends State<CreateProfile> {
               padding: const EdgeInsets.all(30),
               child: Column(
                 children: <Widget>[
-                  TextFormField(
-                    cursorWidth: 3,
-                    maxLength: 35,
-                    onChanged: (val) {
-                      setState(() => nickname = val);
-                    },
-                    onSaved: (String value){
-                      //this block is used to run code when a user save the form
-                    },
-                    decoration: InputDecoration(
-                        hintText: 'Choose a nickname to display to users',
-                        labelText:
-                        'Nickname *'),
-                    validator: (String value) {
-                      return value.length < 3 ? 'Nickname is required' : null;
-                    },
-                    keyboardType: TextInputType.text,
-                  ),
+                        TextFormField(
+                          cursorWidth: 3,
+                          maxLength: 20,
+                          onChanged: (val) {
+                            setState(() => nickname = val);
+                          },
+                          onSaved: (String value) {
+                            //this block is used to run code when a user save the form
+                          },
+                          decoration: InputDecoration(
+                              hintText: 'Choose a nickname to display to users',
+                              labelStyle: TextStyle(
+                                color: Colors.black,
+                              ),
+                              labelText: 'Nickname *'),
+                          validator: (String value) {
+                            return value.length < 3
+                                ? 'Nickname is required'
+                                : null;
+                          },
+                          keyboardType: TextInputType.text,
+                        ),
                   TextField(
                     cursorWidth: 3,
                     onChanged: (val) {
                       setState(() => location = val);
                     },
-                    decoration:
-                    InputDecoration(labelText: 'Enter your Location'),
+                    decoration: InputDecoration(
+                        hintText: 'Where do you live now?',
+                        labelStyle: TextStyle(
+                          color: Colors.black,
+                        ),
+                        labelText: 'Enter your Location *'),
                     keyboardType: TextInputType.text,
                   ),
                   Row(
@@ -134,7 +141,11 @@ class _CreateProfileState extends State<CreateProfile> {
                       setState(() => occupation = val);
                     },
                     decoration: InputDecoration(
-                        labelText: 'Enter your occupation'),
+                        hintText: 'Tell me your occupation',
+                        labelStyle: TextStyle(
+                          color: Colors.black,
+                        ),
+                        labelText: 'Occupation *'),
                     keyboardType: TextInputType.text,
                   ),
                   TextField(
@@ -142,7 +153,10 @@ class _CreateProfileState extends State<CreateProfile> {
                       setState(() => about = val);
                     },
                     decoration: InputDecoration(
-                        labelText: 'Share something about yourself'),
+                        labelStyle: TextStyle(
+                          color: Colors.black,
+                        ),
+                        labelText: 'Share something about yourself *'),
                     keyboardType: TextInputType.text,
                   ),
                   Padding(
@@ -165,7 +179,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                 yodeling = isSelected;
                               });
                             },
-                            selectedColor: Hexcolor("#80F0F0"),
+                            selectedColor: Colors.pink[400],
 //                                  checkmarkColor: Colors.white,
                           ),
                           FilterChip(
@@ -342,3 +356,7 @@ class _CreateProfileState extends State<CreateProfile> {
 //    );
 //  }
 //}
+
+
+
+

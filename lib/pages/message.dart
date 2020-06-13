@@ -1,45 +1,45 @@
-//import 'package:flutter/material.dart';
-//import 'package:cloud_firestore/cloud_firestore.dart';
-//import 'package:fluttertoast/fluttertoast.dart';
-//import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-//import 'package:provider/provider.dart';
-//import 'package:lovealapp/models/user.dart';
-//import 'package:hexcolor/hexcolor.dart';
-//import 'package:intl/intl.dart';
-//
-//class Message extends StatefulWidget {
-//  final String chatRoomID;
-//  final String matchID;
-//  final String nickname;
-//  final String imgUrl;
-//  Message(
-//      {Key key,
-//      @required this.chatRoomID,
-//      this.matchID,
-//      this.nickname,
-//      this.imgUrl})
-//      : super(key: key);
-//
-//  @override
-//  _MessageState createState() =>
-//      _MessageState(chatRoomID, matchID, nickname, imgUrl);
-//}
-//
-//class _MessageState extends State<Message> {
-//  final String chatRoomID;
-//  final String matchID;
-//  final String nickname;
-//  final String imgUrl;
-//  _MessageState(this.chatRoomID, this.matchID, this.nickname, this.imgUrl);
-//
-//  // user context from provider
-//  var user;
-//  var toID;
-//
+import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:lovealapp/models/user.dart';
+import 'package:hexcolor/hexcolor.dart';
+import 'package:intl/intl.dart';
+
+class Message extends StatefulWidget {
+  final String chatRoomID;
+  final String matchID;
+  final String nickname;
+  final String imgUrl;
+  Message(
+      {Key key,
+      @required this.chatRoomID,
+      this.matchID,
+      this.nickname,
+      this.imgUrl})
+      : super(key: key);
+
+  @override
+  _MessageState createState() =>
+      _MessageState(chatRoomID, matchID, nickname, imgUrl);
+}
+
+class _MessageState extends State<Message> {
+  final String chatRoomID;
+  final String matchID;
+  final String nickname;
+  final String imgUrl;
+  _MessageState(this.chatRoomID, this.matchID, this.nickname, this.imgUrl);
+
+  // user context from provider
+  var user;
+  var toID;
+
 //  final dbRef = Firestore.instance;
-//  bool activeChat;
-//
-//  // check if chatroom is active
+  bool activeChat;
+
+  // check if chatroom is active
 //  void getChatted() {
 //    dbRef
 //        .collection('messages')
@@ -47,7 +47,7 @@
 //        .get()
 //        .then((snapshot) => activeChat = snapshot['active']);
 //  }
-//
+
 //  void activateChat() {
 //    try {
 //      dbRef
@@ -58,7 +58,7 @@
 //      print(err.toString());
 //    }
 //  }
-//
+
 //  void toggleUnread(DocumentSnapshot document) {
 //    dbRef
 //        .collection('messages')
@@ -67,10 +67,10 @@
 //        .document(document.documentID)
 //        .updateData({'unread': false});
 //  }
-//
-//  //for reading the contents of the input field and for clearing the field after the text message is sent
-//  final _textController = TextEditingController();
-//
+
+  //for reading the contents of the input field and for clearing the field after the text message is sent
+  final _textController = TextEditingController();
+
 //  void _onSendMessage(String text) {
 //    // toggle chatted if first message
 //    if (!activeChat) {
@@ -103,12 +103,12 @@
 //      Fluttertoast.showToast(msg: 'Nothing to send');
 //    }
 //  }
-//
-//  // BODY
-//  @override
-//  Widget build(BuildContext context) {
-//    user = Provider.of<User>(context);
-//
+
+  // BODY
+  @override
+  Widget build(BuildContext context) {
+    user = Provider.of<User>(context);
+
 //    return Scaffold(
 //        backgroundColor: Colors.pink,
 //        appBar: PreferredSize(
@@ -210,10 +210,10 @@
 //            ],
 //          ),
 //        ));
-//  }
-//
-//  // MESSAGE INPUT AND SEND
-//  Widget _buildTextInput() {
+  }
+
+  // MESSAGE INPUT AND SEND
+  Widget _buildTextInput() {
 //    return Container(
 //      padding: EdgeInsets.symmetric(horizontal: 15.0),
 //      color: Colors.white,
@@ -243,10 +243,10 @@
 //        ],
 //      ),
 //    );
-//  }
-//
-//  // For each message bubble
-//  Widget buildMessage(DocumentSnapshot document, BuildContext context) {
+  }
+
+  // For each message bubble
+  Widget buildMessage(DocumentSnapshot document, BuildContext context) {
 //    if (document['fromID'] != user.uid) {
 //      toggleUnread(document);
 //    }
@@ -307,5 +307,5 @@
 //        ],
 //      ),
 //    );
-//  }
-//}
+}
+}

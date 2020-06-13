@@ -10,7 +10,6 @@ import 'package:lovealapp/models/user.dart';
 import 'package:provider/provider.dart';
 import 'package:path/path.dart' as Path;
 
-// enable to resize the picture
 
 class UploadPhoto extends StatefulWidget {
   @override
@@ -44,35 +43,61 @@ class _UploadPhotoState extends State<UploadPhoto> {
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                Text(
-                  'Upload Picture!',
-                  style: TextStyle(fontSize: 28),
-                ),
-                Container(
-                  child: _image == null
-                      ? Image.asset('images/blank.jpg')
-                      : Image.file(_image),
-                ),
-                (_image == null)
-                    ? Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          FloatingActionButton(
-                            child: Icon(Icons.photo_camera),
-                            onPressed: getImageFromCamera,
-                          ),
-                          FloatingActionButton(
-                            child: Icon(Icons.photo_library),
-                            onPressed: getImageFromGallery,
-                          )
-                        ],
-                      )
-                    : enableUpload(),
-              ],
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: _image == null
+                      ? Text(
+                      'Upload Picture!',
+                      style: TextStyle(fontSize: 30),
+                    ) : Text(
+                      'Tap next button!',
+                      style: TextStyle(fontSize: 30),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      child: _image == null
+                          ? Image.asset('images/blank.jpg')
+                          : Image.file(_image),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      child: _image == null
+                          ? Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: <Widget>[
+                                FloatingActionButton(
+                                  heroTag: null,
+                                  child: Icon(
+                                    Icons.photo_camera,
+                                    size: 30,
+                                  ),
+                                  onPressed: getImageFromCamera,
+                                ),
+                                FloatingActionButton(
+                                  heroTag: null,
+                                  child: Icon(
+                                    Icons.photo_library,
+                                    size: 30,
+                                  ),
+                                  onPressed: getImageFromGallery,
+                                )
+                              ],
+                            )
+                          : enableUpload(),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -85,7 +110,7 @@ class _UploadPhotoState extends State<UploadPhoto> {
       child: Column(
         children: <Widget>[
           RaisedButton(
-//            color: Colors.pink,
+            color: Colors.pink,
             child: Text('Next', style: TextStyle(fontWeight: FontWeight.bold)),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
