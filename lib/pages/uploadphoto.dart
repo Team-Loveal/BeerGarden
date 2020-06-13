@@ -18,7 +18,9 @@ class UploadPhoto extends StatefulWidget {
 class _UploadPhotoState extends State<UploadPhoto> {
   File _image;
 
-  Future getImage() async {
+
+  // select image via either folder of camera
+  Future getImageFromGallery() async {
     PickedFile image =
         await ImagePicker().getImage(source: ImageSource.gallery);
 
@@ -26,6 +28,15 @@ class _UploadPhotoState extends State<UploadPhoto> {
       _image = File(image.path);
     });
   }
+
+  Future getImageFromCamera() async {
+    PickedFile image = await ImagePicker().getImage(source: ImageSource.camera);
+
+    setState(() {
+      _image = File(image.path);
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +78,14 @@ class _UploadPhotoState extends State<UploadPhoto> {
           ),
         ),
       ),
+//      bottomNavigationBar: BottomAppBar(
+//        child: Row(
+//          children: <Widget>[
+//            IconButton(icon: Icon(Icons.photo_camera), onPressed: null),
+//            IconButton(icon: Icon(Icons.photo_library), onPressed: null),
+//          ],
+//        ),
+//      ),
     );
   }
 
@@ -81,7 +100,7 @@ class _UploadPhotoState extends State<UploadPhoto> {
               borderRadius: BorderRadius.circular(20),
             ),
             onPressed: () async {
-              uploadFile();
+//              uploadFile(); //comment out this
 //              Navigator.of(context).pushNamed('/profilePreview');
               Navigator.push(
                   context,
@@ -95,19 +114,19 @@ class _UploadPhotoState extends State<UploadPhoto> {
     );
   }
 
-  Future uploadFile() async {
-    final user = Provider.of<User>(context, listen: false);
-    StorageReference storageReference = FirebaseStorage.instance
-        .ref()
-        .child('users/${Path.basename(_image.path)}}');
-    StorageUploadTask uploadTask = storageReference.putFile(_image);
-    await uploadTask.onComplete;
-    print('File Uploaded');
-    storageReference.getDownloadURL().then((fileURL) {
-      Firestore.instance
-          .collection("users")
-          .document(user.uid)
-          .updateData({"imgUrl": fileURL});
-    });
-  }
+//  Future uploadFile() async {
+//    final user = Provider.of<User>(context, listen: false);
+//    StorageReference storageReference = FirebaseStorage.instance
+//        .ref()
+//        .child('users/${Path.basename(_image.path)}}');
+//    StorageUploadTask uploadTask = storageReference.putFile(_image);
+//    await uploadTask.onComplete;
+//    print('File Uploaded');
+//    storageReference.getDownloadURL().then((fileURL) {
+//      Firestore.instance
+//          .collection("users")
+//          .document(user.uid)
+//          .updateData({"imgUrl": fileURL});
+//    });
+//  } comment out this
 }

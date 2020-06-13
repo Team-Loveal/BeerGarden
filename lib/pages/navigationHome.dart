@@ -15,8 +15,8 @@ class NavigationHome extends StatefulWidget {
 class _NavigationHomeState extends State<NavigationHome> {
   int _currentIndex = 0;
   final List<Widget> _children = [
-    Match(),
-    Messages(),
+//    Match(),
+//    Messages(),
     MyProfile(),
   ];
 

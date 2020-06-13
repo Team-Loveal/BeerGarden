@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
             accentColor: Hexcolor("#fdeac6"),
           ),
 // this goes under theme
-      home: CreateProfile(),
+      home: UploadPhoto(),
 //          initialRoute: '/',
 //          routes: {
 //            '/': (_) => Wrapper(),
