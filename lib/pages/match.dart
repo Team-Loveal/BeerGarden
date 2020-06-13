@@ -348,14 +348,15 @@ class _MatchState extends State<Match> {
                                 .collection("messages")
                                 .document(chatID)
                                 .updateData({'matched': true}),
-
-                            Navigator.push(
+//commetned out for testing
+                           /* Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
                                         Message(
                                             chatRoomID: chatID,
-                                            matchID: matchID)))
+                                            matchID: matchID)
+                                ))*/
                           }),
                     ),
                   ),

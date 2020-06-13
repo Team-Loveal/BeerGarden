@@ -16,7 +16,8 @@ class _NavigationHomeState extends State<NavigationHome> {
   int _currentIndex = 0;
   final List<Widget> _children = [
     Match(),
-    Messages(),
+    //below is commented out for testing purposes for DB and message list
+   // Messages(),
     MyProfile(),
   ];
 

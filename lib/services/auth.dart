@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import "package:lovealapp/models/user.dart";
 import 'package:lovealapp/services/database.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -11,8 +12,8 @@ class AuthService {
   User _userFromFirebaseUser(FirebaseUser user) {
     return user != null
         ? User(
-            uid: user.uid,
-          )
+      uid: user.uid,
+    )
         : null;
   }
 
@@ -28,6 +29,7 @@ class AuthService {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
+
       FirebaseUser user = result.user;
 
       //create a new document for the user with the uid and add email field
@@ -70,7 +72,7 @@ class AuthService {
       GoogleSignInAccount account = await googleSignIn.signIn();
       if (account == null) return false;
       AuthResult result =
-          await _auth.signInWithCredential(GoogleAuthProvider.getCredential(
+      await _auth.signInWithCredential(GoogleAuthProvider.getCredential(
         idToken: (await account.authentication).idToken,
         accessToken: (await account.authentication).accessToken,
       ));
@@ -90,7 +92,7 @@ class AuthService {
       GoogleSignInAccount account = await googleSignIn.signIn();
       if (account == null) return false;
       AuthResult result =
-          await _auth.signInWithCredential(GoogleAuthProvider.getCredential(
+      await _auth.signInWithCredential(GoogleAuthProvider.getCredential(
         idToken: (await account.authentication).idToken,
         accessToken: (await account.authentication).accessToken,
       ));
@@ -102,9 +104,10 @@ class AuthService {
     }
   }
 
-  // reset password (NOT NEEDED?!?)
-  //Commented out the following on 6/12 at 4pm, in case it dies, this is why
-  /*Future sendPasswordResetEmail(String email) async {
+// reset password (NOT NEEDED?!?)
+//Commented out the following on 6/12 at 4pm, in case it dies, this is why
+/*Future sendPasswordResetEmail(String email) async {
     return await _auth.sendPasswordResetEmail(email: email);
   }
 }*/
+}
