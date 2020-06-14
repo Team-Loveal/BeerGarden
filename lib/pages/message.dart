@@ -122,17 +122,23 @@ class _MessageState extends State<Message> {
                   Navigator.pop(context);
                 },
                 icon: Icon(MdiIcons.arrowLeft)),
-            title: Row(
-              children: <Widget>[
-                CircleAvatar(
-                  radius: 25,
-                  backgroundImage: NetworkImage(imgUrl),
+            flexibleSpace: Container(
+              child: Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    CircleAvatar(
+                      radius: 25,
+                      backgroundImage: NetworkImage(imgUrl),
+                    ),
+                    SizedBox(width: 10.0),
+                    Text(
+                      nickname,
+                      style: TextStyle(fontSize: 30, color: Colors.white),
+                    ),
+                  ],
                 ),
-                Text(
-                  nickname,
-                  style: TextStyle(fontSize: 30, color: Colors.white),
-                ),
-              ],
+              ),
             ),
             elevation: 0.0,
             centerTitle: true,
@@ -225,7 +231,7 @@ class _MessageState extends State<Message> {
           Expanded(
             child: Container(
               decoration: BoxDecoration(
-                color: Hexcolor("#F4AA33"),
+                color: Hexcolor('#f1f4f5'),
                 borderRadius: BorderRadius.circular(35.0),
               ),
               child: TextField(
@@ -239,7 +245,7 @@ class _MessageState extends State<Message> {
           ),
           SizedBox(width: 12),
           IconButton(
-              color: Colors.pinkAccent,
+              color: Hexcolor('#F4AA33'),
               icon: Icon(Icons.send, size: 38.0),
               onPressed: () => _onSendMessage(_textController.text)),
         ],

@@ -151,7 +151,7 @@ class _MessagesState extends State<Messages> {
                           children: <Widget>[
                             CircleAvatar(
                               backgroundColor:
-                                  unread ? Colors.pink : Hexcolor('#f1f4f5'),
+                                  unread ? Hexcolor('#F4AA33') : Colors.grey,
                               radius: 38,
                               child: CircleAvatar(
                                   radius: 35,
@@ -192,7 +192,7 @@ class _MessagesState extends State<Messages> {
                                     width: 40.0,
                                     height: 20.0,
                                     decoration: BoxDecoration(
-                                        color: Colors.pink,
+                                        color: Hexcolor("#F4AA33"),
                                         borderRadius:
                                             BorderRadius.circular(30.0)),
                                     alignment: Alignment.center,
