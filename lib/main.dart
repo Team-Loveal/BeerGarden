@@ -1,20 +1,20 @@
-import 'package:lovealapp/pages/createprofile.dart';
-import 'package:lovealapp/pages/editprofile.dart';
-import 'package:lovealapp/pages/forgotpassword.dart';
-import 'package:lovealapp/pages/login.dart';
-import 'package:lovealapp/pages/navigationhome.dart';
-import 'package:lovealapp/pages/signup.dart';
-import 'package:lovealapp/pages/loginfirsttime.dart';
-import 'package:lovealapp/pages/uploadphoto.dart';
-import 'package:lovealapp/pages/wrapper.dart';
-import 'package:lovealapp/services/auth.dart';
 import 'package:flutter/material.dart';
+import 'package:lovealapp/pages/getMatch.dart';
+import 'package:lovealapp/pages/myProfile.dart';
+import 'package:lovealapp/pages/navigationHome.dart';
+import 'package:lovealapp/pages/uploadphoto.dart';
+import 'package:lovealapp/pages/login.dart';
+import 'package:lovealapp/pages/signup.dart';
+import 'package:lovealapp/pages/wrapper.dart';
+import 'package:lovealapp/pages/forgotpassword.dart';
+import 'package:lovealapp/services/auth.dart';
+import 'package:lovealapp/pages/createProfile.dart';
+import 'package:lovealapp/pages/editProfile.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 //provide user data to Wrapper file
 import 'package:provider/provider.dart';
-
-import 'models/user.dart';
+import "package:lovealapp/models/user.dart";
 
 //main function is the first function that fires when dart file starts
 void main() {
@@ -29,14 +29,13 @@ class MyApp extends StatelessWidget {
     return StreamProvider<User>.value(
       value: AuthService().user,
       child: MaterialApp(
-          title: 'BeerGarden',
+          title: 'Loveal',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             fontFamily: 'Alata',
             primaryColor: Hexcolor("#fdeac6"),
             accentColor: Hexcolor("#fdeac6"),
           ),
-// this goes under theme
           initialRoute: '/',
           routes: {
             '/': (_) => Wrapper(),
@@ -46,10 +45,11 @@ class MyApp extends StatelessWidget {
             '/createProfile': (_) => CreateProfile(),
             '/uploadphoto': (_) => UploadPhoto(),
             '/editProfile': (_) => EditProfile(),
+            '/getMatch': (_) => GetMatch(),
             '/navigationHome': (_) => NavigationHome(),
-            '/loginfirsttime': (_) => LoginFirstTime(),
-
-          }),
+            '/myprofile': (_) => MyProfile(),
+          }
+          ),
     );
   }
 }
