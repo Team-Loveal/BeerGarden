@@ -51,7 +51,7 @@ class _SignUpState extends State<SignUp> {
 
     Timer(Duration(seconds: 3), () {
       {
-        Navigator.of(context).pushNamed('/loginfirsttime');
+        Navigator.of(context).pushNamed('/loginFirstTime');
       }
     });
     //}
