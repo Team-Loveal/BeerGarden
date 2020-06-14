@@ -7,6 +7,7 @@ import 'package:lovealapp/models/user.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:intl/intl.dart';
 import 'profile.dart';
+
 class Message extends StatefulWidget {
   final String chatRoomID;
   final String matchID;
@@ -14,21 +15,23 @@ class Message extends StatefulWidget {
   final String imgUrl;
   Message(
       {Key key,
-        @required this.chatRoomID,
-        this.matchID,
-        this.nickname,
-        this.imgUrl})
+      @required this.chatRoomID,
+      this.matchID,
+      this.nickname,
+      this.imgUrl})
       : super(key: key);
   @override
   _MessageState createState() =>
       _MessageState(chatRoomID, matchID, nickname, imgUrl);
 }
+
 class _MessageState extends State<Message> {
   @override
   void initState() {
     super.initState();
     getChatted();
   }
+
   final String chatRoomID;
   final String matchID;
   final String nickname;
@@ -42,12 +45,13 @@ class _MessageState extends State<Message> {
   // check if chatroom is active
   void getChatted() {
     dbRef.collection('messages').document(chatRoomID).get().then((snapshot) => {
-      if (snapshot['active'] != null)
-        {activeChat = snapshot['active']}
-      else
-        {activateChat(false), activeChat = false}
-    });
+          if (snapshot['active'] != null)
+            {activeChat = snapshot['active']}
+          else
+            {activateChat(false), activeChat = false}
+        });
   }
+
   // activate chatroom (a chatroom that has at least one message)
   void activateChat(bool) {
     try {
@@ -59,6 +63,7 @@ class _MessageState extends State<Message> {
       print(err.toString());
     }
   }
+
   void toggleUnread(DocumentSnapshot document) {
     dbRef
         .collection('messages')
@@ -67,6 +72,7 @@ class _MessageState extends State<Message> {
         .document(document.documentID)
         .updateData({'unread': false});
   }
+
   //for reading the contents of the input field and for clearing the field after the text message is sent
   final _textController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
@@ -99,6 +105,7 @@ class _MessageState extends State<Message> {
       Fluttertoast.showToast(msg: 'Nothing to send');
     }
   }
+
   // BODY
   @override
   Widget build(BuildContext context) {
@@ -107,7 +114,7 @@ class _MessageState extends State<Message> {
         backgroundColor: Hexcolor("#F4AA33"),
         appBar: PreferredSize(
           preferredSize:
-          Size.fromHeight(MediaQuery.of(context).size.height * 0.15),
+              Size.fromHeight(MediaQuery.of(context).size.height * 0.15),
           child: AppBar(
             backgroundColor: Hexcolor("#F4AA33"),
             leading: IconButton(
@@ -203,7 +210,7 @@ class _MessageState extends State<Message> {
                                                 snapshot.data.documents[index],
                                                 context),
                                         itemCount:
-                                        snapshot.data.documents.length,
+                                            snapshot.data.documents.length,
                                       ),
                                     );
                                   }
@@ -212,7 +219,7 @@ class _MessageState extends State<Message> {
                       //INPUT MESSAGE FIELD
                       Container(
                         decoration:
-                        BoxDecoration(color: Theme.of(context).cardColor),
+                            BoxDecoration(color: Theme.of(context).cardColor),
                         child: _buildTextInput(),
                       ),
                     ],
@@ -223,6 +230,7 @@ class _MessageState extends State<Message> {
           ),
         ));
   }
+
   // MESSAGE INPUT AND SEND
   Widget _buildTextInput() {
     return Container(
@@ -257,6 +265,7 @@ class _MessageState extends State<Message> {
       ),
     );
   }
+
   // For each message bubble
   Widget buildMessage(DocumentSnapshot document, BuildContext context) {
     if (document['fromID'] != user.uid) {
@@ -274,14 +283,14 @@ class _MessageState extends State<Message> {
       child: Flex(
         direction: Axis.horizontal,
         mainAxisAlignment:
-        isUser ? MainAxisAlignment.end : MainAxisAlignment.start,
+            isUser ? MainAxisAlignment.end : MainAxisAlignment.start,
         children: <Widget>[
           Row(
             children: <Widget>[
               isUser
                   ? Row(
-                children: <Widget>[time, SizedBox(width: 10.0)],
-              )
+                      children: <Widget>[time, SizedBox(width: 10.0)],
+                    )
                   : Container(),
               Container(
                 padding: const EdgeInsets.all(15.0),
@@ -292,15 +301,15 @@ class _MessageState extends State<Message> {
                   color: isUser ? Colors.white : Hexcolor("#F4AA33"),
                   borderRadius: isUser
                       ? BorderRadius.only(
-                    topLeft: Radius.circular(25),
-                    topRight: Radius.circular(25),
-                    bottomLeft: Radius.circular(25),
-                  )
+                          topLeft: Radius.circular(25),
+                          topRight: Radius.circular(25),
+                          bottomLeft: Radius.circular(25),
+                        )
                       : BorderRadius.only(
-                    topLeft: Radius.circular(25),
-                    topRight: Radius.circular(25),
-                    bottomRight: Radius.circular(25),
-                  ),
+                          topLeft: Radius.circular(25),
+                          topRight: Radius.circular(25),
+                          bottomRight: Radius.circular(25),
+                        ),
                 ),
                 child: Text(document['text'],
                     style: TextStyle(
@@ -309,8 +318,8 @@ class _MessageState extends State<Message> {
               ),
               !isUser
                   ? Row(
-                children: <Widget>[SizedBox(width: 10.0), time],
-              )
+                      children: <Widget>[SizedBox(width: 10.0), time],
+                    )
                   : Container(),
             ],
           ),
@@ -319,5 +328,3 @@ class _MessageState extends State<Message> {
     );
   }
 }
-
-

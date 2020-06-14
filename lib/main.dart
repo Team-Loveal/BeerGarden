@@ -12,13 +12,41 @@ import 'package:lovealapp/services/auth.dart';
 import 'package:lovealapp/pages/createProfile.dart';
 import 'package:lovealapp/pages/editProfile.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:workmanager/workmanager.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 
 //provide user data to Wrapper file
 import 'package:provider/provider.dart';
 import "package:lovealapp/models/user.dart";
 
+void resetUserMatches() {
+  Workmanager.executeTask((task, inputData) {
+    final user = AuthService().user;
+    print(user);
+    // Firestore.instance
+    //     .collection('users')
+    //     .document(user.uid['uid'])
+    //     .updateData({
+    //   'matches': 0,
+    // });
+
+    return Future.value(true);
+  });
+}
+
 //main function is the first function that fires when dart file starts
 void main() {
+  Workmanager.initialize(
+      resetUserMatches, // The top level function, aka callbackDispatcher
+      isInDebugMode:
+          true // If enabled it will post a notification whenever the task is running. Handy for debugging tasks
+      );
+  Workmanager.registerPeriodicTask(
+    "2",
+    "simplePeriodicTask",
+    frequency: Duration(days: 1),
+    constraints: Constraints(networkType: NetworkType.connected),
+  );
   runApp(MyApp());
 }
 
