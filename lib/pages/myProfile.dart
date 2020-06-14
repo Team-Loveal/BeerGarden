@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:lovealapp/models/user.dart';
 import 'package:lovealapp/services/auth.dart';
 import 'package:lovealapp/shared/loading.dart';
-import 'package:lovealapp/services/database.dart';
 
 class MyProfile extends StatefulWidget {
   @override
@@ -89,9 +88,9 @@ class _MyProfileState extends State<MyProfile> {
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Colors.grey))
-                            ],
+                        ],
                           ),
-                        ]),
+              ]),
                   ),
                   Expanded(
                     child: CircleAvatar(
