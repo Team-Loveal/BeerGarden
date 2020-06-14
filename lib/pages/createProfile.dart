@@ -364,6 +364,9 @@ class _CreateProfileState extends State<CreateProfile> {
                                 padding: EdgeInsets.fromLTRB(30, 10, 20, 0),
                                 child: RaisedButton(
                                   onPressed: () async {
+                                    print("IDDDDDDDDDDDD ${user.uid}");
+                                    print(user.isEmailVerified);
+                                    print(user);
                                     //write profile info into the db
                                     await DatabaseService(uid: user.uid)
                                         .updateUserData(
