@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:lovealapp/models/user.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:intl/intl.dart';
-import 'package:lovealapp/pages/profile.dart';
+import 'profile.dart';
 
 class Message extends StatefulWidget {
   final String chatRoomID;
@@ -117,13 +117,13 @@ class _MessageState extends State<Message> {
                 icon: Icon(MdiIcons.arrowLeft)),
             flexibleSpace: GestureDetector(
               onTap: () {
-//                Navigator.push(
-//                    context,
-//                    MaterialPageRoute(
-//                        builder: (context) => MyProfile(
-//                            userID: matchID,
-//                            nickname: nickname,
-//                            imgUrl: imgUrl)));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Profile(
+                            userID: matchID,
+                            nickname: nickname,
+                            imgUrl: imgUrl)));
               },
               child: Container(
                 child: Center(
