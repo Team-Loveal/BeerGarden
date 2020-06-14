@@ -1,5 +1,5 @@
 import 'dart:ui';
-
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -22,8 +22,22 @@ class _ProfileState extends State<Profile> {
   _ProfileState(this.userID, this.nickname, this.imgUrl);
 
   //to set blur
-  double sigmaX = 50;
-  double sigmaY = 50;
+  double sigmaX;
+  double sigmaY;
+
+  //get blur value from the DB
+  //TODO test that the values are successfully being pulled from the db
+  @override
+  void initState() {
+    super.initState();
+    //get matchID and chatID from db
+    Firestore.instance.collection('messages').document(userID).get().then((doc) {
+      setState(() {
+        sigmaX = doc['blur'].toDouble();
+        sigmaY = doc['blur'].toDouble();
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -124,7 +138,7 @@ class _ProfileState extends State<Profile> {
                                   borderRadius: BorderRadius.circular(10.0),
                                   child: BackdropFilter(
                                       filter: ImageFilter.blur(
-                                          sigmaX: sigmaX, sigmaY: sigmaY),
+                                          sigmaX: sigmaX , sigmaY: sigmaY ),
                                       child: Container(
                                           color: Colors.black.withOpacity(0))),
                                 )),
