@@ -117,7 +117,7 @@ class _CreateProfileState extends State<CreateProfile> {
                               ),
                               Row(
                                 children: <Widget>[
-                                  Text('Age'),
+                                  Text('Age  '),
                                   DropdownButton<String>(
                                     value: age,
                                     iconSize: 24,
@@ -141,7 +141,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                     }).toList(),
                                   ),
                                   Text(
-                                    "Gender",
+                                    "Gender  ",
                                   ),
                                   DropdownButton<String>(
                                     value: gender,
