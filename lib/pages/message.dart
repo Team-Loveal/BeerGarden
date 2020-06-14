@@ -20,7 +20,6 @@ class Message extends StatefulWidget {
       this.nickname,
       this.imgUrl})
       : super(key: key);
-
   @override
   _MessageState createState() =>
       _MessageState(chatRoomID, matchID, nickname, imgUrl);
@@ -38,14 +37,11 @@ class _MessageState extends State<Message> {
   final String nickname;
   final String imgUrl;
   _MessageState(this.chatRoomID, this.matchID, this.nickname, this.imgUrl);
-
   // user context from provider
   var user;
   var toID;
-
   final dbRef = Firestore.instance;
   bool activeChat;
-
   // check if chatroom is active
   void getChatted() {
     dbRef.collection('messages').document(chatRoomID).get().then((snapshot) => {
@@ -80,22 +76,18 @@ class _MessageState extends State<Message> {
   //for reading the contents of the input field and for clearing the field after the text message is sent
   final _textController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
-
   void _onSendMessage(String text) {
     // toggle chatted if first message
     if (!activeChat) {
       activateChat(true);
     }
-
     if (text.trim() != "") {
       _textController.clear();
-
       var documentReference = dbRef
           .collection('messages')
           .document(chatRoomID)
           .collection('chatroom')
           .document(DateTime.now().millisecondsSinceEpoch.toString());
-
       Firestore.instance.runTransaction((transaction) async {
         await transaction.set(
           documentReference,
@@ -118,7 +110,6 @@ class _MessageState extends State<Message> {
   @override
   Widget build(BuildContext context) {
     user = Provider.of<User>(context);
-
     return Scaffold(
         backgroundColor: Hexcolor("#F4AA33"),
         appBar: PreferredSize(
@@ -281,14 +272,12 @@ class _MessageState extends State<Message> {
       toggleUnread(document);
     }
     bool isUser = document['fromID'] == user.uid;
-
     // Format time to readable HH:MM
     var formatter = new DateFormat('Hm');
     DateTime date = new DateTime.fromMillisecondsSinceEpoch(
         int.parse(document['timestamp']));
     Widget time = Text(formatter.format(date),
         style: TextStyle(fontSize: 12.0, color: Colors.grey));
-
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
       child: Flex(

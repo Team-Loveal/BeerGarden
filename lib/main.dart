@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lovealapp/pages/getMatch.dart';
 import 'package:lovealapp/pages/myProfile.dart';
 import 'package:lovealapp/pages/navigationHome.dart';
+import 'package:lovealapp/pages/preferences.dart';
 import 'package:lovealapp/pages/uploadphoto.dart';
 import 'package:lovealapp/pages/login.dart';
 import 'package:lovealapp/pages/signup.dart';
@@ -61,8 +62,8 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             fontFamily: 'Alata',
-            primaryColor: Hexcolor("#fdeac6"),
-            accentColor: Hexcolor("#fdeac6"),
+            primaryColor: Hexcolor("#000000"),
+            accentColor: Hexcolor("#8CC63E"),
           ),
           initialRoute: '/',
           routes: {
@@ -76,7 +77,9 @@ class MyApp extends StatelessWidget {
             '/getMatch': (_) => GetMatch(),
             '/navigationHome': (_) => NavigationHome(),
             '/myprofile': (_) => MyProfile(),
-          }),
-    );
+            '/setPreferences': (_) => SetPreferences(),
+          }
+          ),
+          );
   }
 }
