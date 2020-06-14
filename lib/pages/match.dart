@@ -396,7 +396,7 @@ class _MatchState extends State<Match> {
                           )),
                       onPressed: () async {
                         //add matches by one
-                        await _auth.signOut();
+                        
                         int matches = myUserData.matches + 1;
 
                         //find a user where matched is false
