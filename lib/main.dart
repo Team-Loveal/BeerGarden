@@ -104,6 +104,7 @@ import 'package:lovealapp/pages/createProfile.dart';
 import 'package:lovealapp/pages/editProfile.dart';
 import 'package:lovealapp/pages/loginFIrstTime.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:lovealapp/pages/questions.dart';
 
 //provide user data to Wrapper file
 import 'package:provider/provider.dart';
@@ -129,7 +130,7 @@ class MyApp extends StatelessWidget {
             primaryColor: Hexcolor("#000000"),
             accentColor: Hexcolor("#8CC63E"),
           ),
-          initialRoute: '/',
+          initialRoute: '/questions',
           routes: {
             '/': (_) => Wrapper(),
             '/signup': (_) => SignUp(),
@@ -143,6 +144,7 @@ class MyApp extends StatelessWidget {
             '/myprofile': (_) => MyProfile(),
             '/setPreferences': (_) => SetPreferences(),
             '/loginFirstTime': (_) => LoginFirstTime(),
+            '/questions': (_) => Questions(),
           }
       ),
     );
