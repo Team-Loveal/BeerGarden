@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -31,7 +32,17 @@ class _ProfileState extends State<Profile> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return Scaffold(
-              body: ListView(
+              body: Container(
+                height: double.infinity,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [Hexcolor("#FFF1BA"), Hexcolor("#F4AA33")],
+          stops: [0.2, 0.7],
+          )),
+          child: ListView(
                 children: <Widget>[
                   Row(
                     children: <Widget>[
@@ -316,6 +327,7 @@ class _ProfileState extends State<Profile> {
                         ]),
                   ),
                 ],
+              ),
               ),
             );
           } else {
