@@ -36,8 +36,6 @@ class MyApp extends StatelessWidget {
             primaryColor: Hexcolor("#fdeac6"),
             accentColor: Hexcolor("#fdeac6"),
           ),
-// this goes under theme
-
           initialRoute: '/',
           routes: {
             '/': (_) => Wrapper(),
@@ -50,7 +48,8 @@ class MyApp extends StatelessWidget {
             '/getMatch': (_) => GetMatch(),
             '/navigationHome': (_) => NavigationHome(),
             '/myprofile': (_) => MyProfile(),
-          }),
+          }
+          ),
     );
   }
 }
