@@ -65,6 +65,7 @@ class _MatchState extends State<Match> {
                             icon: Icon(Icons.person),
                             label: Text("logout"),
                             onPressed: () async {
+                              Navigator.of(context).popUntil((route) => route.isFirst);
                               await _auth.signOut();
                             },
                           ),
@@ -348,8 +349,10 @@ class _MatchState extends State<Match> {
                                     MaterialPageRoute(
                                         builder: (context) => Message(
                                             chatRoomID: chatID,
-                                            matchID: matchID)))
-                              }),
+                                            matchID: matchID,
+                                        nickname: userData.nickname,
+                                        imgUrl: userData.imgUrl,)))
+                          }),
                     ),
                   ),
                 ],
