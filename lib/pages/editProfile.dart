@@ -35,16 +35,19 @@ class _EditProfileState extends State<EditProfile> {
   double _highValue = 100;
   String genderPreference;
 
+
+
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
 
     return StreamBuilder<UserData>(
+
         stream: DatabaseService(uid: user.uid).userData,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            UserData userData = snapshot.data;
 
+            UserData userData = snapshot.data;
             return Scaffold(
               appBar: AppBar(
                 backgroundColor: Hexcolor("#8CC63E"),
@@ -469,6 +472,14 @@ class _EditProfileState extends State<EditProfile> {
                                           sports ?? userData.sports,
                                           writing ?? userData.writing,
                                           drinking ?? userData.drinking,
+                                        );
+
+                                        //write preference into db
+                                        await DatabaseService(uid: user.uid)
+                                            .updatePreference(
+                                          _lowValue,
+                                          _highValue,
+                                          genderPreference,
                                         );
 
                                         Navigator.pop(context);

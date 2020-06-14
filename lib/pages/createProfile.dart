@@ -47,7 +47,9 @@ class _CreateProfileState extends State<CreateProfile> {
   Widget build(BuildContext context) {
     //this is providing the user object
     final user = Provider.of<User>(context);
-
+    print(_lowValue);
+    print(_highValue);
+    print(genderPreference);
     return loading
         ? Loading()
         : Scaffold(
@@ -381,6 +383,14 @@ class _CreateProfileState extends State<CreateProfile> {
                                       writing,
                                       drinking,
                                     );
+                                    //write preference into db
+                                    await DatabaseService(uid: user.uid)
+                                        .updatePreference(
+                                        _lowValue,
+                                    _highValue,
+                                    genderPreference,
+                                    );
+
                                     Navigator.of(context)
                                         .pushNamed('/uploadphoto');
                                   },

@@ -20,6 +20,8 @@ class _MatchState extends State<Match> {
   String matchID;
   String chatID;
   int matches;
+  double sigmaX = 50.0;
+  double sigmaY = 50.0;
 
   final AuthService _auth = AuthService();
 
@@ -130,7 +132,7 @@ class _MatchState extends State<Match> {
                                     borderRadius: BorderRadius.circular(10.0),
                                     child: BackdropFilter(
                                         filter: ImageFilter.blur(
-                                            sigmaX: 5, sigmaY: 5),
+                                            sigmaX: sigmaX, sigmaY: sigmaY),
                                         child: Container(
                                             color: Colors.black.withOpacity(0))),
                                   )),
