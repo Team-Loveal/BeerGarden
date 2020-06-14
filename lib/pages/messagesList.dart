@@ -17,19 +17,23 @@ class _MessagesState extends State<Messages> {
     final user = Provider.of<User>(context);
 
     return Scaffold(
-        backgroundColor: Hexcolor("#FFF4EB"),
+        backgroundColor: Hexcolor("#F4AA33"),
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(80.0),
+          preferredSize:
+              Size.fromHeight(MediaQuery.of(context).size.height * 0.15),
           child: AppBar(
-            backgroundColor: Hexcolor("#FFF4EB"),
-            title: Text('Messages',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 38)),
+            backgroundColor: Hexcolor("#F4AA33"),
+            flexibleSpace: Container(
+              child: Center(
+                child: Text('Messages',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 48.0)),
+              ),
+            ),
             elevation: 0.0,
-            centerTitle: true,
-            leading: Container(),
+            automaticallyImplyLeading: false,
           ),
         ),
         body: Column(
@@ -37,7 +41,6 @@ class _MessagesState extends State<Messages> {
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.pink,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(30.0),
                     topRight: Radius.circular(30.0),
@@ -64,7 +67,7 @@ class _MessagesState extends State<Messages> {
                             builder: (context, snapshot) {
                               if (!snapshot.hasData) {
                                 return Center(
-                                  child: CircularProgressIndicator(),
+                                  child: Text("No messages..."),
                                 );
                               } else {
                                 return ClipRRect(

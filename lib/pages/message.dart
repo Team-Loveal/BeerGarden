@@ -110,11 +110,12 @@ class _MessageState extends State<Message> {
     user = Provider.of<User>(context);
 
     return Scaffold(
-        backgroundColor: Colors.pink,
+        backgroundColor: Hexcolor("#F4AA33"),
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(80.0),
+          preferredSize:
+              Size.fromHeight(MediaQuery.of(context).size.height * 0.15),
           child: AppBar(
-            backgroundColor: Colors.pink,
+            backgroundColor: Hexcolor("#F4AA33"),
             leading: IconButton(
                 onPressed: () {
                   Navigator.pop(context);
@@ -174,7 +175,7 @@ class _MessageState extends State<Message> {
                                 builder: (context, snapshot) {
                                   if (!snapshot.hasData) {
                                     return Center(
-                                      child: CircularProgressIndicator(),
+                                      child: Text('No messages...'),
                                     );
                                   } else {
                                     return ClipRRect(
@@ -223,7 +224,7 @@ class _MessageState extends State<Message> {
           Expanded(
             child: Container(
               decoration: BoxDecoration(
-                color: Hexcolor('#f1f4f5'),
+                color: Hexcolor("#F4AA33"),
                 borderRadius: BorderRadius.circular(35.0),
               ),
               child: TextField(
@@ -279,7 +280,7 @@ class _MessageState extends State<Message> {
                   maxWidth: MediaQuery.of(context).size.width * 0.6,
                 ),
                 decoration: BoxDecoration(
-                  color: isUser ? Colors.white : Colors.pink,
+                  color: isUser ? Colors.white : Hexcolor("#F4AA33"),
                   borderRadius: isUser
                       ? BorderRadius.only(
                           topLeft: Radius.circular(25),
