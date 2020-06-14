@@ -24,12 +24,18 @@ class _SignUpState extends State<SignUp> {
   void handleSignUp() async {
 
     //changed to false
-    setState(() => loading = false);
     String trimmedEmail = email.trim();
+    String trimmedPassword = password.trim();
+    setState(() => {
+      loading= false,
+        _warning = 'A verification email has been sent to $trimmedEmail'
+      }
+    );
+   /* String trimmedEmail = email.trim();
     String trimmedPassword = password.trim();
     setState(() {
       _warning = 'A verification email has been sent to $trimmedEmail';
-    });
+    });*/
 
     dynamic result =
 

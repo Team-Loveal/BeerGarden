@@ -84,7 +84,7 @@ class _LoginFirstTimeState extends State<LoginFirstTime> {
                 borderRadius: BorderRadius.all(Radius.circular(30.0))),
             contentPadding: EdgeInsets.only(top: 14.0),
             prefixIcon: Icon(MdiIcons.email, color: Hexcolor('#F4AA33')),
-            labelText: 'Email!!!!!!!',
+            labelText: 'Email',
             labelStyle: TextStyle(
                 fontSize: 18.0,
                 color: Hexcolor('#F4AA33'),
