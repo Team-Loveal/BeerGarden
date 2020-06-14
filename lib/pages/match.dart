@@ -20,8 +20,8 @@ class _MatchState extends State<Match> {
   String matchID;
   String chatID;
   int matches;
-  double sigmaX = 50.0;
-  double sigmaY = 50.0;
+  double sigmaX = 50;
+  double sigmaY = 50;
 
   final AuthService _auth = AuthService();
 
