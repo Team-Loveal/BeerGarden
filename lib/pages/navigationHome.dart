@@ -3,7 +3,7 @@ import 'package:lovealapp/models/user.dart';
 import 'package:lovealapp/pages/match.dart';
 import 'package:lovealapp/pages/messagesList.dart';
 import 'package:lovealapp/pages/myProfile.dart';
-
+import 'package:hexcolor/hexcolor.dart';
 import 'package:lovealapp/services/database.dart';
 import 'package:provider/provider.dart';
 
@@ -36,6 +36,7 @@ class _NavigationHomeState extends State<NavigationHome> {
         body: _children[_currentIndex],
         bottomNavigationBar: BottomNavigationBar(
           // new
+            backgroundColor: Hexcolor("#8CC63E"),
             onTap: onTabTapped,
             currentIndex: _currentIndex,
             items: [
