@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:hexcolor/hexcolor.dart';
+
 
 class Welcome extends StatefulWidget {
   @override
@@ -10,9 +12,15 @@ class _WelcomeState extends State<Welcome> {
   @override
   Widget build(BuildContext context) {
     return Container(
+        height: double.infinity,
+        width: double.infinity,
         decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage('images/scary.jpg'), fit: BoxFit.cover)),
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [Hexcolor("#FFF1BA"), Hexcolor("#F4AA33")],
+              stops: [0.2, 0.7],
+            )),
         child: Scaffold(
           backgroundColor: Colors.transparent,
           body: SafeArea(
@@ -23,12 +31,12 @@ class _WelcomeState extends State<Welcome> {
               //mainAxisSize: MainAxisSize.max,
               // mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
-                Spacer(flex: 2),
-                Text(
-                  'Welcome to Loveal',
-                  style: TextStyle(fontSize: 45),
-                ),
-                Text('Reveal your true love', style: TextStyle(fontSize: 20)),
+                Spacer(flex: 3),
+                Image(
+                    image: AssetImage('images/logo.png'),
+                  ),
+//                Spacer(flex: 2),
+                Text('Grow your relationships over a beer', style: TextStyle(fontSize: 20)),
                 Spacer(flex: 4),
                 MaterialButton(
                     child: Text('Login',
