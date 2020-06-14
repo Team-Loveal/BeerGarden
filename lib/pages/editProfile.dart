@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:lovealapp/services/database.dart';
 import 'package:lovealapp/shared/loading.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:lovealapp/pages/profilePreview.dart';
 
 
 class EditProfile extends StatefulWidget {
@@ -127,7 +129,7 @@ class _EditProfileState extends State<EditProfile> {
                                           if (val != userData.nickname) {
                                             setState(() => nickname = val);
                                           } else {
-                                            nickname = userData.nickname;
+                                            nickname = data['nicknameEdit'];
                                             };
                                         },
                                         style: TextStyle(
@@ -494,7 +496,12 @@ class _EditProfileState extends State<EditProfile> {
                                           _highValue,
                                           genderPreference,
                                         );
+                                        //Navigator.of(context).pushNamed('/profilePreview');
+                                       // Navigator.pushReplacementNamed(context, '/myProfile');
+                                       /* Navigator.of(context)
+                                            .pushNamed('/myProfile');*/
 
+                                        //changed the below to the above to fix bug?!?
                                         Navigator.pop(context);
 
                                       },
