@@ -146,6 +146,7 @@ class DatabaseService {
     return usersCollection.document(uid).snapshots().map(_userImgFromSnapshot);
   }
 
+  //set and update preferences to filter out matches
   Future updatePreference(
       double lowValue,
       double highValue,
@@ -157,4 +158,5 @@ class DatabaseService {
       'genderPreference': genderPreference,
     });
   }
+
 }
