@@ -34,8 +34,8 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             fontFamily: 'Alata',
-            primaryColor: Hexcolor("#fdeac6"),
-            accentColor: Hexcolor("#fdeac6"),
+            primaryColor: Hexcolor("#000000"),
+            accentColor: Hexcolor("#8CC63E"),
           ),
           initialRoute: '/',
           routes: {
