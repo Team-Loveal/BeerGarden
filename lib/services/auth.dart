@@ -1,8 +1,7 @@
-//for auth service
+import 'package:lovealapp/models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import "package:lovealapp/models/user.dart";
-import 'package:lovealapp/services/database.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'database.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -11,8 +10,9 @@ class AuthService {
   User _userFromFirebaseUser(FirebaseUser user) {
     return user != null
         ? User(
-            uid: user.uid,
-          )
+      uid: user.uid,
+      isEmailVerified: user.isEmailVerified,
+    )
         : null;
   }
 
@@ -25,15 +25,20 @@ class AuthService {
 
   //register with email and password
   Future registerWithEmailAndPassword(String email, String password) async {
+
+    AuthResult result = await _auth.createUserWithEmailAndPassword(
+        email: email, password: password);
+
     try {
-      AuthResult result = await _auth.createUserWithEmailAndPassword(
-          email: email, password: password);
       FirebaseUser user = result.user;
-
-      //create a new document for the user with the uid and add email field
-      await DatabaseService(uid: user.uid).setUserData(email);
-
-      return _userFromFirebaseUser(user);
+      await user.sendEmailVerification();
+      print('isemailedverified ${user.isEmailVerified}');
+     // if (user.isEmailVerified) {
+        //create a new document for the user with the uid and add email field
+        print('yESSSSSSSSSSSSSS VERIFIEDDDDDDDDDDDDD');
+        await DatabaseService(uid: user.uid, isEmailVerified: user.isEmailVerified).setUserData(email);
+        return _userFromFirebaseUser(user);
+      //}
     } catch (e) {
       print(e.toString());
       return null;
@@ -46,7 +51,9 @@ class AuthService {
       AuthResult result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       FirebaseUser user = result.user;
-      return _userFromFirebaseUser(user);
+      if (user.isEmailVerified == true) {
+        return _userFromFirebaseUser(user);
+      }
     } catch (e) {
       print(e.toString());
       return null;
@@ -70,7 +77,7 @@ class AuthService {
       GoogleSignInAccount account = await googleSignIn.signIn();
       if (account == null) return false;
       AuthResult result =
-          await _auth.signInWithCredential(GoogleAuthProvider.getCredential(
+      await _auth.signInWithCredential(GoogleAuthProvider.getCredential(
         idToken: (await account.authentication).idToken,
         accessToken: (await account.authentication).accessToken,
       ));
@@ -90,7 +97,7 @@ class AuthService {
       GoogleSignInAccount account = await googleSignIn.signIn();
       if (account == null) return false;
       AuthResult result =
-          await _auth.signInWithCredential(GoogleAuthProvider.getCredential(
+      await _auth.signInWithCredential(GoogleAuthProvider.getCredential(
         idToken: (await account.authentication).idToken,
         accessToken: (await account.authentication).accessToken,
       ));

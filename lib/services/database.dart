@@ -3,7 +3,8 @@ import 'package:lovealapp/models/user.dart';
 
 class DatabaseService {
   final String uid;
-  DatabaseService({this.uid});
+  bool isEmailVerified = false;
+  DatabaseService({this.uid, this.isEmailVerified});
 
   final CollectionReference usersCollection =
       Firestore.instance.collection("users");
