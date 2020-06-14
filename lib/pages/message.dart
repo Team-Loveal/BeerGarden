@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:lovealapp/models/user.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:intl/intl.dart';
+import 'package:lovealapp/pages/profile.dart';
 
 class Message extends StatefulWidget {
   final String chatRoomID;
@@ -14,37 +15,31 @@ class Message extends StatefulWidget {
   final String imgUrl;
   Message(
       {Key key,
-      @required this.chatRoomID,
-      this.matchID,
-      this.nickname,
-      this.imgUrl})
+        @required this.chatRoomID,
+        this.matchID,
+        this.nickname,
+        this.imgUrl})
       : super(key: key);
-
   @override
   _MessageState createState() =>
       _MessageState(chatRoomID, matchID, nickname, imgUrl);
 }
-
 class _MessageState extends State<Message> {
   @override
   void initState() {
     super.initState();
     getChatted();
   }
-
   final String chatRoomID;
   final String matchID;
   final String nickname;
   final String imgUrl;
   _MessageState(this.chatRoomID, this.matchID, this.nickname, this.imgUrl);
-
   // user context from provider
   var user;
   var toID;
-
   final dbRef = Firestore.instance;
   bool activeChat;
-
   // check if chatroom is active
   void getChatted() {
     dbRef
@@ -53,7 +48,6 @@ class _MessageState extends State<Message> {
         .get()
         .then((snapshot) => activeChat = snapshot['active']);
   }
-
   // activate chatroom (a chatroom that has at least one message)
   void activateChat() {
     try {
@@ -65,7 +59,6 @@ class _MessageState extends State<Message> {
       print(err.toString());
     }
   }
-
   void toggleUnread(DocumentSnapshot document) {
     dbRef
         .collection('messages')
@@ -74,26 +67,21 @@ class _MessageState extends State<Message> {
         .document(document.documentID)
         .updateData({'unread': false});
   }
-
   //for reading the contents of the input field and for clearing the field after the text message is sent
   final _textController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
-
   void _onSendMessage(String text) {
     // toggle chatted if first message
     if (!activeChat) {
       activateChat();
     }
-
     if (text.trim() != "") {
       _textController.clear();
-
       var documentReference = dbRef
           .collection('messages')
           .document(chatRoomID)
           .collection('chatroom')
           .document(DateTime.now().millisecondsSinceEpoch.toString());
-
       Firestore.instance.runTransaction((transaction) async {
         await transaction.set(
           documentReference,
@@ -111,17 +99,15 @@ class _MessageState extends State<Message> {
       Fluttertoast.showToast(msg: 'Nothing to send');
     }
   }
-
   // BODY
   @override
   Widget build(BuildContext context) {
     user = Provider.of<User>(context);
-
     return Scaffold(
         backgroundColor: Hexcolor("#F4AA33"),
         appBar: PreferredSize(
           preferredSize:
-              Size.fromHeight(MediaQuery.of(context).size.height * 0.15),
+          Size.fromHeight(MediaQuery.of(context).size.height * 0.15),
           child: AppBar(
             backgroundColor: Hexcolor("#F4AA33"),
             leading: IconButton(
@@ -130,7 +116,15 @@ class _MessageState extends State<Message> {
                 },
                 icon: Icon(MdiIcons.arrowLeft)),
             flexibleSpace: GestureDetector(
-              onTap: () => {Navigator.of(context).pushNamed('/signup')},
+              onTap: () {
+//                Navigator.push(
+//                    context,
+//                    MaterialPageRoute(
+//                        builder: (context) => MyProfile(
+//                            userID: matchID,
+//                            nickname: nickname,
+//                            imgUrl: imgUrl)));
+              },
               child: Container(
                 child: Center(
                   child: Row(
@@ -209,7 +203,7 @@ class _MessageState extends State<Message> {
                                                 snapshot.data.documents[index],
                                                 context),
                                         itemCount:
-                                            snapshot.data.documents.length,
+                                        snapshot.data.documents.length,
                                       ),
                                     );
                                   }
@@ -218,7 +212,7 @@ class _MessageState extends State<Message> {
                       //INPUT MESSAGE FIELD
                       Container(
                         decoration:
-                            BoxDecoration(color: Theme.of(context).cardColor),
+                        BoxDecoration(color: Theme.of(context).cardColor),
                         child: _buildTextInput(),
                       ),
                     ],
@@ -229,7 +223,6 @@ class _MessageState extends State<Message> {
           ),
         ));
   }
-
   // MESSAGE INPUT AND SEND
   Widget _buildTextInput() {
     return Container(
@@ -264,34 +257,31 @@ class _MessageState extends State<Message> {
       ),
     );
   }
-
   // For each message bubble
   Widget buildMessage(DocumentSnapshot document, BuildContext context) {
     if (document['fromID'] != user.uid) {
       toggleUnread(document);
     }
     bool isUser = document['fromID'] == user.uid;
-
     // Format time to readable HH:MM
     var formatter = new DateFormat('Hm');
     DateTime date = new DateTime.fromMillisecondsSinceEpoch(
         int.parse(document['timestamp']));
     Widget time = Text(formatter.format(date),
         style: TextStyle(fontSize: 12.0, color: Colors.grey));
-
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
       child: Flex(
         direction: Axis.horizontal,
         mainAxisAlignment:
-            isUser ? MainAxisAlignment.end : MainAxisAlignment.start,
+        isUser ? MainAxisAlignment.end : MainAxisAlignment.start,
         children: <Widget>[
           Row(
             children: <Widget>[
               isUser
                   ? Row(
-                      children: <Widget>[time, SizedBox(width: 10.0)],
-                    )
+                children: <Widget>[time, SizedBox(width: 10.0)],
+              )
                   : Container(),
               Container(
                 padding: const EdgeInsets.all(15.0),
@@ -302,15 +292,15 @@ class _MessageState extends State<Message> {
                   color: isUser ? Colors.white : Hexcolor("#F4AA33"),
                   borderRadius: isUser
                       ? BorderRadius.only(
-                          topLeft: Radius.circular(25),
-                          topRight: Radius.circular(25),
-                          bottomLeft: Radius.circular(25),
-                        )
+                    topLeft: Radius.circular(25),
+                    topRight: Radius.circular(25),
+                    bottomLeft: Radius.circular(25),
+                  )
                       : BorderRadius.only(
-                          topLeft: Radius.circular(25),
-                          topRight: Radius.circular(25),
-                          bottomRight: Radius.circular(25),
-                        ),
+                    topLeft: Radius.circular(25),
+                    topRight: Radius.circular(25),
+                    bottomRight: Radius.circular(25),
+                  ),
                 ),
                 child: Text(document['text'],
                     style: TextStyle(
@@ -319,8 +309,8 @@ class _MessageState extends State<Message> {
               ),
               !isUser
                   ? Row(
-                      children: <Widget>[SizedBox(width: 10.0), time],
-                    )
+                children: <Widget>[SizedBox(width: 10.0), time],
+              )
                   : Container(),
             ],
           ),
@@ -329,3 +319,4 @@ class _MessageState extends State<Message> {
     );
   }
 }
+

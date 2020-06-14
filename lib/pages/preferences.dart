@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class setPreferences extends StatefulWidget {
+class SetPreferences extends StatefulWidget {
   @override
-  _setPreferencesState createState() => _setPreferencesState();
+  _SetPreferencesState createState() => _SetPreferencesState();
 }
 
-class _setPreferencesState extends State<setPreferences> {
+class _SetPreferencesState extends State<SetPreferences> {
   @override
   Widget build(BuildContext context) {
     return Container();
