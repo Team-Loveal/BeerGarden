@@ -385,9 +385,8 @@ class _EditProfileState extends State<EditProfile> {
                                       drinking ?? userData.drinking,
                                     );
 
-                                    Navigator.of(context)
-                                        .pushNamed('/navigationHome');
-                                    //changeRoute(),
+                                    Navigator.pop(context);
+
                                   },
                                 ),
                               )
