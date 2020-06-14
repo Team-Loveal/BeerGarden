@@ -39,7 +39,7 @@ class _CreateProfileState extends State<CreateProfile> {
   bool loading = false;
 
   //preferences
-  double _lowValue = 18;
+  double _lowValue = 20;
   double _highValue = 100;
   String genderPreference;
 

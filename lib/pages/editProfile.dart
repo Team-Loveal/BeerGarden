@@ -12,6 +12,9 @@ class EditProfile extends StatefulWidget {
 }
 
 class _EditProfileState extends State<EditProfile> {
+
+  Map data = {};
+
   String nickname;
   String location;
   String age = '20 - 29';
@@ -31,7 +34,7 @@ class _EditProfileState extends State<EditProfile> {
   bool drinking = false;
 
   //preferences
-  double _lowValue = 18;
+  double _lowValue = 20;
   double _highValue = 100;
   String genderPreference;
 
@@ -39,6 +42,10 @@ class _EditProfileState extends State<EditProfile> {
 
   @override
   Widget build(BuildContext context) {
+
+    data = ModalRoute.of(context).settings.arguments;
+    print('DATAAAAAAAAAA ${data}');
+
     final user = Provider.of<User>(context);
 
     return StreamBuilder<UserData>(
@@ -126,9 +133,7 @@ class _EditProfileState extends State<EditProfile> {
                                         style: TextStyle(
                                             color: Colors.black,
                                             fontWeight: FontWeight.w300),
-                                        initialValue: (userData.nickname == null
-                                            ? ' '
-                                            : userData.nickname),
+                                        initialValue: data['nicknameEdit'],
                                         decoration: InputDecoration(
                                           labelText: 'Nickname',
                                         ),
@@ -146,9 +151,7 @@ class _EditProfileState extends State<EditProfile> {
                                         style: TextStyle(
                                             color: Colors.black,
                                             fontWeight: FontWeight.w300),
-                                        initialValue: (userData.location == null
-                                            ? ' '
-                                            : userData.location),
+                                        initialValue: data['locationEdit'],
                                         decoration: InputDecoration(
                                           labelText: 'Location',
                                         ),
@@ -254,9 +257,10 @@ class _EditProfileState extends State<EditProfile> {
                                         occupation = userData.occupation;
                                       }
                                     },
-                                    initialValue: (userData.occupation == null
+                                    /*initialValue: (userData.occupation == null
                                         ? ' '
-                                        : userData.occupation),
+                                        : userData.occupation),*/
+                                    initialValue: data['occupationEdit'],
                                     decoration: InputDecoration(
                                         labelText: 'Enter your occupation'),
                                     keyboardType: TextInputType.text,
@@ -269,9 +273,7 @@ class _EditProfileState extends State<EditProfile> {
                                         about = userData.about;
                                       }
                                     },
-                                    initialValue: (userData.about == null
-                                        ? ' '
-                                        : userData.about),
+                                    initialValue: data['aboutEdit'],
                                     decoration: InputDecoration(
                                         labelText:
                                             'Share something about yourself'),
@@ -437,9 +439,9 @@ class _EditProfileState extends State<EditProfile> {
                                             ],
                                           ),
                                           RangeSlider(
-                                            min: 18,
+                                            min: 20,
                                             max: 100,
-                                            divisions: 82,
+                                            divisions: 80,
                                             inactiveColor: Colors.black,
                                             activeColor: Colors.black,
                                             values: RangeValues(_lowValue, _highValue),

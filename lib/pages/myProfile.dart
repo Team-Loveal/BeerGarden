@@ -73,7 +73,13 @@ class _MyProfileState extends State<MyProfile> {
                         color: Colors.orange,
                       ),
                       onPressed: () async {
-                        Navigator.of(context).pushNamed('/editProfile');
+                       // Navigator.of(context).pushNamed('/editProfile');
+                        Navigator.pushReplacementNamed(context, '/editProfile', arguments: {
+                          'nicknameEdit': userData.nickname,
+                          'locationEdit': userData.location,
+                          'occupationEdit': userData.occupation,
+                          'aboutEdit': userData.about,
+                        });
                       },
                     ),
                   )
