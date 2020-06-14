@@ -187,8 +187,10 @@ class _MatchState extends State<Match> {
                                 fontWeight: FontWeight.bold,
                               )),
                           SizedBox(height: 5),
-                          Text(userData.occupation,
-                              style: TextStyle(fontSize: 16))
+                          Expanded(
+                            child: Text(userData.occupation,
+                                style: TextStyle(fontSize: 16)),
+                          )
                         ]),
                   ),
                   //INTERESTS
@@ -364,7 +366,7 @@ class _MatchState extends State<Match> {
               ),
             );
           }
-          else if (matches == 0 || matchID == null) {
+          else if ((snapshot.hasData && matches == 0) || matchID == null) {
             final user = Provider.of<User>(context);
             return Scaffold(
               body: ListView(
@@ -372,17 +374,18 @@ class _MatchState extends State<Match> {
                   //GET NEW MATCH BUTTON
                   FlatButton(
                     color: Colors.pinkAccent,
-                    child: Text('Get your new match for the day <3',
+                    child: Text('Meet someone new today🍺',
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         )),
-                    onPressed: () {
+                    onPressed: () async {
+                      await _auth.signOut();
                       //add matches by one
                       int matches = myUserData.matches + 1;
 
                       //find a user where matched is false
-                      Firestore.instance
+                      await Firestore.instance
                           .collection("messages")
                           .where('fromID', isEqualTo: user.uid)
                           .getDocuments()
@@ -403,7 +406,6 @@ class _MatchState extends State<Match> {
                                 'updated user collection with matchID: $doc.toID')
                           }
                       }));
-
                       //go to matched Profile page
                       Navigator.of(context).pushNamed('/navigationHome');
                     },

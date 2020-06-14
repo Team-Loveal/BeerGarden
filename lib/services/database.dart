@@ -3,7 +3,8 @@ import 'package:lovealapp/models/user.dart';
 
 class DatabaseService {
   final String uid;
-  DatabaseService({this.uid});
+  bool isEmailVerified = false;
+  DatabaseService({this.uid, this.isEmailVerified});
 
   final CollectionReference usersCollection =
       Firestore.instance.collection("users");
@@ -21,7 +22,7 @@ class DatabaseService {
     });
   }
 
-  //update user data when creating profile or editing profile
+  //update user data when creating profile
   Future updateUserData(
       String nickname,
       String location,
@@ -58,23 +59,41 @@ class DatabaseService {
     });
   }
 
-///GC DELETE THSSSSS
-  Future updateUserDataSmall(
+  Future editUserData(
       String nickname,
       String location,
+      String age,
+      String gender,
       String occupation,
       String about,
+      bool yodeling,
+      bool shopping,
+      bool makingBalloonAnimals,
+      bool cooking,
+      bool painting,
+      bool movies,
+      bool sports,
+      bool writing,
+      bool drinking
       ) async {
     return await usersCollection.document(uid).updateData({
       'nickname': nickname,
       'location': location,
+      'age': age,
+      'gender': gender,
       'occupation': occupation,
       'about': about,
-      'matchedToday': false,
+      'yodeling': yodeling,
+      'shopping': shopping,
+      'makingBalloonAnimals': makingBalloonAnimals,
+      'cooking': cooking,
+      'painting': painting,
+      'movies': movies,
+      'sports': sports,
+      'writing': writing,
+      'drinking': drinking,
     });
   }
-
-  //matchData from snapshot
 
   //userData from snapshot
   UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
@@ -122,8 +141,6 @@ class DatabaseService {
       imgUrl: snapshot.data['imgUrl'],
     );
   }
-
-  //
 
   Stream<UserImg> get userImg {
     return usersCollection.document(uid).snapshots().map(_userImgFromSnapshot);

@@ -1,9 +1,7 @@
-//for auth service
+import 'package:lovealapp/models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import "package:lovealapp/models/user.dart";
-import 'package:lovealapp/services/database.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'database.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -13,6 +11,7 @@ class AuthService {
     return user != null
         ? User(
       uid: user.uid,
+      isEmailVerified: user.isEmailVerified,
     )
         : null;
   }
@@ -26,16 +25,28 @@ class AuthService {
 
   //register with email and password
   Future registerWithEmailAndPassword(String email, String password) async {
-    try {
-      AuthResult result = await _auth.createUserWithEmailAndPassword(
+    // try {
+    /*AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
-
       FirebaseUser user = result.user;
 
       //create a new document for the user with the uid and add email field
       await DatabaseService(uid: user.uid).setUserData(email);
 
-      return _userFromFirebaseUser(user);
+      return _userFromFirebaseUser(user);*/
+
+    AuthResult result = await _auth.createUserWithEmailAndPassword(
+        email: email, password: password);
+
+    try {
+      FirebaseUser user = result.user;
+      await user.sendEmailVerification();
+      print('isemailedverified ${user.isEmailVerified}');
+      if (user.isEmailVerified) {
+        //create a new document for the user with the uid and add email field
+        await DatabaseService(uid: user.uid, isEmailVerified: user.isEmailVerified).setUserData(email);
+        return _userFromFirebaseUser(user);
+      }
     } catch (e) {
       print(e.toString());
       return null;
@@ -48,7 +59,9 @@ class AuthService {
       AuthResult result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       FirebaseUser user = result.user;
-      return _userFromFirebaseUser(user);
+      if (user.isEmailVerified == true) {
+        return _userFromFirebaseUser(user);
+      }
     } catch (e) {
       print(e.toString());
       return null;
@@ -104,10 +117,8 @@ class AuthService {
     }
   }
 
-// reset password (NOT NEEDED?!?)
-//Commented out the following on 6/12 at 4pm, in case it dies, this is why
-/*Future sendPasswordResetEmail(String email) async {
+  // reset password (NOT NEEDED?!?)
+  Future sendPasswordResetEmail(String email) async {
     return await _auth.sendPasswordResetEmail(email: email);
   }
-}*/
 }

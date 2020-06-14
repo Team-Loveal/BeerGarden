@@ -1,7 +1,17 @@
 class User {
   final String uid;
-  User({this.uid});
+  bool isEmailVerified = false;
+  final String creationTimeStamp;
+  final String lastSignInTimeStamp;
+
+  User({
+    this.uid,
+    this.isEmailVerified,
+    this.creationTimeStamp,
+    this.lastSignInTimeStamp
+  });
 }
+
 
 class UserData {
   final String uid;

@@ -148,8 +148,10 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                                 fontWeight: FontWeight.bold,
                               )),
                           SizedBox(height: 5),
-                          Text(userData.occupation,
-                              style: TextStyle(fontSize: 16))
+                          Expanded(
+                            child: Text(userData.occupation,
+                                style: TextStyle(fontSize: 16)),
+                          )
                         ]),
                   ),
                   Container(
