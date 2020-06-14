@@ -1,102 +1,55 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lovealapp/models/user.dart';
-import 'package:lovealapp/services/database.dart';
-import 'package:lovealapp/shared/loading.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'dart:io';
-import 'package:provider/provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class ProfilePreview extends StatefulWidget {
-  final File profileImg;
-
-  ProfilePreview({Key key, @required this.profileImg}) : super(key: key);
+class Profile extends StatefulWidget {
+  final String userID;
+  final String nickname;
+  final String imgUrl;
+  Profile({Key key, this.userID, this.nickname, this.imgUrl}) : super(key: key);
 
   @override
-  _ProfilePreviewState createState() => _ProfilePreviewState(profileImg);
+  _ProfileState createState() => _ProfileState(userID, nickname, imgUrl);
 }
 
-class _ProfilePreviewState extends State<ProfilePreview> {
-  final File profileImg;
-
-  _ProfilePreviewState(this.profileImg);
+class _ProfileState extends State<Profile> {
+  final String userID;
+  final String nickname;
+  final String imgUrl;
+  _ProfileState(this.userID, this.nickname, this.imgUrl);
 
   @override
   Widget build(BuildContext context) {
-    //get userData from the DB
-    final user = Provider.of<User>(context);
-
-    return StreamBuilder<UserData>(
-        stream: DatabaseService(uid: user.uid).userData,
+    return FutureBuilder(
+        future: Firestore.instance.collection('users').document(userID).get(),
         builder: (context, snapshot) {
-          //snapshot is data coming down the stream
           if (snapshot.hasData) {
-            UserData userData = snapshot.data;
-
             return Scaffold(
-              floatingActionButton: FloatingActionButton.extended(
-                onPressed: () {
-                  //get potential matches for the user
-                  Firestore.instance
-                      .collection("users")
-                      .getDocuments()
-                      .then((querySnapshot) {
-                    querySnapshot.documents.forEach((document) {
-                      if (document.documentID != user.uid) {
-                        //concat and make into a string and push into chatIds array
-                        String toID = document.documentID;
-                        String chatId1 = '${user.uid} - ${document.documentID}';
-                        String chatId2 = '${document.documentID} - ${user.uid}';
-
-                        //check messages documents, if it doesn't exist write to the db
-                        Firestore.instance
-                            .collection("messages")
-                            .getDocuments()
-                            .then((querySnapshot) {
-                          querySnapshot.documents.forEach((document) {
-                            if (chatId1 != document.documentID &&
-                                chatId2 != document.documentID) {
-                              Firestore.instance
-                                  .collection("messages")
-                                  .document(chatId1)
-                                  .setData({
-                                'fromID': user.uid,
-                                'toID': toID,
-                                //'chatted': false,
-                                'matched': false,
-                                'matchedUsers': [user.uid, toID],
-                              });
-                            }
-                          });
-                        });
-                      }
-                    });
-                  });
-                  Navigator.of(context).popUntil((route) => route.isFirst);
-//                  Navigator.push(
-//                    context,
-//                    MaterialPageRoute(builder: (context) => NavigationHome()),
-//                  );
-                },
-                isExtended: true,
-                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                icon: Icon(Icons.check),
-                label: Text('CONFIRM'),
-                backgroundColor: Colors.pink,
-              ),
-              floatingActionButtonLocation:
-                  FloatingActionButtonLocation.centerFloat,
               body: ListView(
                 children: <Widget>[
-                  Container(
-                      margin: const EdgeInsets.symmetric(
-                          vertical: 10.0, horizontal: 20.0),
-                      child: Text('Profile',
-                          style: TextStyle(
-                            fontSize: 40.0,
-                            fontWeight: FontWeight.bold,
-                          ))),
+                  Row(
+                    children: <Widget>[
+                      IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon: Icon(MdiIcons.arrowLeft)),
+                      Expanded(
+                        flex: 3,
+                        child: Container(
+                          margin: const EdgeInsets.symmetric(
+                              vertical: 10.0, horizontal: 20.0),
+                          child: Text(
+                            'Profile',
+                            style: TextStyle(
+                              fontSize: 40.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                   Container(
                     margin: const EdgeInsets.fromLTRB(20, 0, 20, 10),
                     height: 80,
@@ -110,7 +63,8 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text('${userData.nickname}, ${userData.age}',
+                                Text(
+                                    '${snapshot.data['nickname']}, ${snapshot.data['age']}',
                                     style: TextStyle(
                                         fontSize: 28,
                                         fontWeight: FontWeight.bold)),
@@ -118,7 +72,7 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                                   children: <Widget>[
                                     Icon(MdiIcons.mapMarker,
                                         size: 18, color: Colors.grey),
-                                    Text('Tokyo, Japan',
+                                    Text('${snapshot.data['location']}, Japan',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             color: Colors.grey))
@@ -128,9 +82,8 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                         ),
                         Expanded(
                           child: CircleAvatar(
-                            radius: 50,
-                            backgroundImage: FileImage(profileImg),
-                          ),
+                              radius: 65,
+                              backgroundImage: NetworkImage(imgUrl)),
                         ),
                       ],
                     ),
@@ -149,9 +102,8 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                               )),
                           SizedBox(height: 5),
                           Expanded(
-                            child: Text(userData.occupation,
-                                style: TextStyle(fontSize: 16)),
-                          )
+                              child: Text(snapshot.data['occupation'],
+                                  style: TextStyle(fontSize: 16)))
                         ]),
                   ),
                   Container(
@@ -169,7 +121,7 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                           Wrap(
                             children: <Widget>[
                               //WHEN REFACTORING CREATE SEPARATE WIDGET AND MAP THROUGH INTERESTS
-                              if (userData.yodeling)
+                              if (snapshot.data['yodeling'])
                                 Container(
                                     margin: EdgeInsets.only(right: 10),
                                     child: OutlineButton(
@@ -180,7 +132,7 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(10.0)))),
-                              if (userData.shopping)
+                              if (snapshot.data['shopping'])
                                 Container(
                                     margin: EdgeInsets.only(right: 10),
                                     child: OutlineButton(
@@ -191,18 +143,18 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(10.0)))),
-                              if (userData.makingBalloonAnimals)
+                              if (snapshot.data['makingBalloonAnimals'])
                                 Container(
                                     margin: EdgeInsets.only(right: 10),
                                     child: OutlineButton(
-                                        child: Text("MakingBalloonAnimals",
+                                        child: Text("Making Balloon Animals",
                                             style:
                                                 TextStyle(color: Colors.pink)),
                                         onPressed: null,
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(10.0)))),
-                              if (userData.cooking)
+                              if (snapshot.data['cooking'])
                                 Container(
                                     margin: EdgeInsets.only(right: 10),
                                     child: OutlineButton(
@@ -213,7 +165,7 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(10.0)))),
-                              if (userData.painting)
+                              if (snapshot.data['painting'])
                                 Container(
                                     margin: EdgeInsets.only(right: 10),
                                     child: OutlineButton(
@@ -224,7 +176,7 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(10.0)))),
-                              if (userData.movies)
+                              if (snapshot.data['movies'])
                                 Container(
                                     margin: EdgeInsets.only(right: 10),
                                     child: OutlineButton(
@@ -235,7 +187,7 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(10.0)))),
-                              if (userData.sports)
+                              if (snapshot.data['sports'])
                                 Container(
                                     margin: EdgeInsets.only(right: 10),
                                     child: OutlineButton(
@@ -246,7 +198,7 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(10.0)))),
-                              if (userData.writing)
+                              if (snapshot.data['writing'])
                                 Container(
                                     margin: EdgeInsets.only(right: 10),
                                     child: OutlineButton(
@@ -257,7 +209,7 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(10.0)))),
-                              if (userData.drinking)
+                              if (snapshot.data['drinking'])
                                 Container(
                                     margin: EdgeInsets.only(right: 10),
                                     child: OutlineButton(
@@ -284,14 +236,17 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                                 fontWeight: FontWeight.bold,
                               )),
                           SizedBox(height: 5),
-                          Text(userData.about, style: TextStyle(fontSize: 16))
+                          Text(snapshot.data['about'],
+                              style: TextStyle(fontSize: 16))
                         ]),
                   ),
                 ],
               ),
             );
           } else {
-            return Loading();
+            return Center(
+              child: CircularProgressIndicator(),
+            );
           }
         });
   }

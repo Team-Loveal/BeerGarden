@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:lovealapp/models/user.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:intl/intl.dart';
+import 'profile.dart';
 
 class Message extends StatefulWidget {
   final String chatRoomID;
@@ -26,6 +27,12 @@ class Message extends StatefulWidget {
 }
 
 class _MessageState extends State<Message> {
+  @override
+  void initState() {
+    super.initState();
+    getChatted();
+  }
+
   final String chatRoomID;
   final String matchID;
   final String nickname;
@@ -48,6 +55,7 @@ class _MessageState extends State<Message> {
         .then((snapshot) => activeChat = snapshot['active']);
   }
 
+  // activate chatroom (a chatroom that has at least one message)
   void activateChat() {
     try {
       dbRef
@@ -70,6 +78,7 @@ class _MessageState extends State<Message> {
 
   //for reading the contents of the input field and for clearing the field after the text message is sent
   final _textController = TextEditingController();
+  final FocusNode _focusNode = FocusNode();
 
   void _onSendMessage(String text) {
     // toggle chatted if first message
@@ -110,27 +119,45 @@ class _MessageState extends State<Message> {
     user = Provider.of<User>(context);
 
     return Scaffold(
-        backgroundColor: Colors.pink,
+        backgroundColor: Hexcolor("#F4AA33"),
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(80.0),
+          preferredSize:
+              Size.fromHeight(MediaQuery.of(context).size.height * 0.15),
           child: AppBar(
-            backgroundColor: Colors.pink,
+            backgroundColor: Hexcolor("#F4AA33"),
             leading: IconButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
                 icon: Icon(MdiIcons.arrowLeft)),
-            title: Row(
-              children: <Widget>[
-                CircleAvatar(
-                  radius: 25,
-                  backgroundImage: NetworkImage(imgUrl),
+            flexibleSpace: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Profile(
+                            userID: matchID,
+                            nickname: nickname,
+                            imgUrl: imgUrl)));
+              },
+              child: Container(
+                child: Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      CircleAvatar(
+                        radius: 25,
+                        backgroundImage: NetworkImage(imgUrl),
+                      ),
+                      SizedBox(width: 10.0),
+                      Text(
+                        nickname,
+                        style: TextStyle(fontSize: 30, color: Colors.white),
+                      ),
+                    ],
+                  ),
                 ),
-                Text(
-                  nickname,
-                  style: TextStyle(fontSize: 30, color: Colors.white),
-                ),
-              ],
+              ),
             ),
             elevation: 0.0,
             centerTitle: true,
@@ -174,7 +201,7 @@ class _MessageState extends State<Message> {
                                 builder: (context, snapshot) {
                                   if (!snapshot.hasData) {
                                     return Center(
-                                      child: CircularProgressIndicator(),
+                                      child: Text('No messages...'),
                                     );
                                   } else {
                                     return ClipRRect(
@@ -228,6 +255,8 @@ class _MessageState extends State<Message> {
               ),
               child: TextField(
                 controller: _textController,
+                onSubmitted: _onSendMessage,
+                focusNode: _focusNode,
                 decoration: InputDecoration(
                     hintText: "Send a message...",
                     border: InputBorder.none,
@@ -237,7 +266,7 @@ class _MessageState extends State<Message> {
           ),
           SizedBox(width: 12),
           IconButton(
-              color: Colors.pinkAccent,
+              color: Hexcolor('#F4AA33'),
               icon: Icon(Icons.send, size: 38.0),
               onPressed: () => _onSendMessage(_textController.text)),
         ],
@@ -279,7 +308,7 @@ class _MessageState extends State<Message> {
                   maxWidth: MediaQuery.of(context).size.width * 0.6,
                 ),
                 decoration: BoxDecoration(
-                  color: isUser ? Colors.white : Colors.pink,
+                  color: isUser ? Colors.white : Hexcolor("#F4AA33"),
                   borderRadius: isUser
                       ? BorderRadius.only(
                           topLeft: Radius.circular(25),

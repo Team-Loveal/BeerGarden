@@ -17,19 +17,23 @@ class _MessagesState extends State<Messages> {
     final user = Provider.of<User>(context);
 
     return Scaffold(
-        backgroundColor: Hexcolor("#FFF4EB"),
+        backgroundColor: Hexcolor("#F4AA33"),
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(80.0),
+          preferredSize:
+              Size.fromHeight(MediaQuery.of(context).size.height * 0.15),
           child: AppBar(
-            backgroundColor: Hexcolor("#FFF4EB"),
-            title: Text('Messages',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 38)),
+            backgroundColor: Hexcolor("#F4AA33"),
+            flexibleSpace: Container(
+              child: Center(
+                child: Text('Messages',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 48.0)),
+              ),
+            ),
             elevation: 0.0,
-            centerTitle: true,
-            leading: Container(),
+            automaticallyImplyLeading: false,
           ),
         ),
         body: Column(
@@ -37,7 +41,6 @@ class _MessagesState extends State<Messages> {
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.pink,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(30.0),
                     topRight: Radius.circular(30.0),
@@ -64,7 +67,7 @@ class _MessagesState extends State<Messages> {
                             builder: (context, snapshot) {
                               if (!snapshot.hasData) {
                                 return Center(
-                                  child: CircularProgressIndicator(),
+                                  child: Text("No messages..."),
                                 );
                               } else {
                                 return ClipRRect(
@@ -76,7 +79,7 @@ class _MessagesState extends State<Messages> {
                                     shrinkWrap: true,
                                     scrollDirection: Axis.vertical,
                                     itemBuilder: (context, index) =>
-                                        buildChatroom(
+                                        _buildChatroom(
                                             snapshot.data.documents[index],
                                             context),
                                     itemCount: snapshot.data.documents.length,
@@ -94,7 +97,7 @@ class _MessagesState extends State<Messages> {
         ));
   }
 
-  Widget buildChatroom(DocumentSnapshot document, BuildContext context) {
+  Widget _buildChatroom(DocumentSnapshot document, BuildContext context) {
     final user = Provider.of<User>(context);
     var matchID = document['matchedUsers'].firstWhere((id) => id != user.uid);
     var formatter = new DateFormat('MMMMd');
@@ -132,77 +135,83 @@ class _MessagesState extends State<Messages> {
                       .limit(1)
                       .snapshots(),
                   builder: (context, messages) {
-                    // Format timestamp to "Month Day"
-                    date = new DateTime.fromMillisecondsSinceEpoch(
-                        int.parse(messages.data.documents[0]['timestamp']));
-                    unread = messages.data.documents[0]['fromID'] != user.uid &&
-                        messages.data.documents[0]['unread'];
-                    nickname = snapshot.data['nickname'];
-                    imgUrl = snapshot.data['imgUrl'];
+                    if (!messages.hasData) {
+                      return Center(child: CircularProgressIndicator());
+                    } else {
+                      // Format timestamp to "Month Day"
+                      date = new DateTime.fromMillisecondsSinceEpoch(
+                          int.parse(messages.data.documents[0]['timestamp']));
+                      unread =
+                          messages.data.documents[0]['fromID'] != user.uid &&
+                              messages.data.documents[0]['unread'];
+                      nickname = snapshot.data['nickname'];
+                      imgUrl = snapshot.data['imgUrl'];
 
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            CircleAvatar(
-                              backgroundColor:
-                                  unread ? Colors.pink : Hexcolor('#f1f4f5'),
-                              radius: 38,
-                              child: CircleAvatar(
-                                  radius: 35,
-                                  backgroundImage: NetworkImage(imgUrl)),
-                            ),
-                            SizedBox(width: 10.0),
-                            Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text(nickname,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18.0)),
-                                  SizedBox(height: 10.0),
-                                  Container(
-                                    width: MediaQuery.of(context).size.width *
-                                        0.45,
-                                    child: Text(
-                                      messages.data.documents[0]['text'],
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 15.0,
-                                          color: Colors.grey),
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ),
-                                ]),
-                          ],
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: <Widget>[
-                            Text(formatter.format(date),
-                                style: TextStyle(fontSize: 12.0)),
-                            SizedBox(height: 10.0),
-                            unread
-                                ? Container(
-                                    width: 40.0,
-                                    height: 20.0,
-                                    decoration: BoxDecoration(
-                                        color: Colors.pink,
-                                        borderRadius:
-                                            BorderRadius.circular(30.0)),
-                                    alignment: Alignment.center,
-                                    child: Text('NEW',
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              CircleAvatar(
+                                backgroundColor: unread
+                                    ? Hexcolor('#F4AA33')
+                                    : Hexcolor('#f1f4f5'),
+                                radius: 38,
+                                child: CircleAvatar(
+                                    radius: 35,
+                                    backgroundImage: NetworkImage(imgUrl)),
+                              ),
+                              SizedBox(width: 10.0),
+                              Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(nickname,
                                         style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 12.0,
-                                            fontWeight: FontWeight.bold)))
-                                : Text('')
-                          ],
-                        ),
-                      ],
-                    );
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18.0)),
+                                    SizedBox(height: 5.0),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.45,
+                                      child: Text(
+                                        messages.data.documents[0]['text'],
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 15.0,
+                                            color: Colors.grey),
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                  ]),
+                            ],
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: <Widget>[
+                              Text(formatter.format(date),
+                                  style: TextStyle(fontSize: 12.0)),
+                              SizedBox(height: 5.0),
+                              unread
+                                  ? Container(
+                                      width: 40.0,
+                                      height: 20.0,
+                                      decoration: BoxDecoration(
+                                          color: Hexcolor("#F4AA33"),
+                                          borderRadius:
+                                              BorderRadius.circular(30.0)),
+                                      alignment: Alignment.center,
+                                      child: Text('NEW',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 12.0,
+                                              fontWeight: FontWeight.bold)))
+                                  : Text('')
+                            ],
+                          ),
+                        ],
+                      );
+                    }
                   }),
             );
           }

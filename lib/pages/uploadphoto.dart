@@ -10,6 +10,7 @@ import 'package:lovealapp/models/user.dart';
 import 'package:provider/provider.dart';
 import 'package:path/path.dart' as Path;
 
+
 class UploadPhoto extends StatefulWidget {
   @override
   _UploadPhotoState createState() => _UploadPhotoState();
@@ -18,9 +19,18 @@ class UploadPhoto extends StatefulWidget {
 class _UploadPhotoState extends State<UploadPhoto> {
   File _image;
 
-  Future getImage() async {
+  // select image via either folder of camera
+  Future getImageFromGallery() async {
     PickedFile image =
         await ImagePicker().getImage(source: ImageSource.gallery);
+
+    setState(() {
+      _image = File(image.path);
+    });
+  }
+
+  Future getImageFromCamera() async {
+    PickedFile image = await ImagePicker().getImage(source: ImageSource.camera);
 
     setState(() {
       _image = File(image.path);
@@ -33,36 +43,61 @@ class _UploadPhotoState extends State<UploadPhoto> {
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                Text(
-                  'Upload Picture!',
-                  style: TextStyle(fontSize: 28),
-                ),
-                Container(
-                  child: _image == null
-                      ? Image.asset('images/blank.jpg')
-                      : Image.file(_image),
-                ),
-                RaisedButton(
-                  child: _image == null
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: _image == null
                       ? Text(
-                          'Upload',
-                          style: TextStyle(
-                            color: Colors.grey[900],
-                            fontWeight: FontWeight.bold,
-                          ),
-                        )
-                      : enableUpload(),
-                  color: Colors.pink,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
+                      'Upload Picture!',
+                      style: TextStyle(fontSize: 30),
+                    ) : Text(
+                      'Tap next button!',
+                      style: TextStyle(fontSize: 30),
+                    ),
                   ),
-                  onPressed: _image == null ? () => {getImage()} : () => {},
-                ),
-              ],
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      child: _image == null
+                          ? Image.asset('images/blank.jpg')
+                          : Image.file(_image),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      child: _image == null
+                          ? Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: <Widget>[
+                                FloatingActionButton(
+                                  heroTag: null,
+                                  child: Icon(
+                                    Icons.photo_camera,
+                                    size: 30,
+                                  ),
+                                  onPressed: getImageFromCamera,
+                                ),
+                                FloatingActionButton(
+                                  heroTag: null,
+                                  child: Icon(
+                                    Icons.photo_library,
+                                    size: 30,
+                                  ),
+                                  onPressed: getImageFromGallery,
+                                )
+                              ],
+                            )
+                          : enableUpload(),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
