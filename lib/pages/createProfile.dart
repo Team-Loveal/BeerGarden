@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lovealapp/models/user.dart';
+import 'package:lovealapp/pages/uploadphoto.dart';
 import 'package:lovealapp/services/database.dart';
 import 'package:lovealapp/shared/loading.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -278,6 +279,8 @@ class _CreateProfileState extends State<CreateProfile> {
                     padding: EdgeInsets.fromLTRB(30, 10, 20, 0),
                     child: RaisedButton(
                       onPressed: () async {
+                        Navigator.of(context).pushNamed('/forgotpassword');
+                        print('this is iDDDDDDDDDD: ${user.uid}');
                         //write profile info into the db
                         await DatabaseService(uid: user.uid)
                             .updateUserData(
@@ -297,7 +300,7 @@ class _CreateProfileState extends State<CreateProfile> {
                           writing,
                           drinking,
                         );
-                        Navigator.of(context).pushNamed('/uploadphoto');
+                        //Navigator.of(context).pushNamed('/forgotpassword');
                       },
                       textColor: Colors.white,
                       color: Hexcolor("#215a00"),

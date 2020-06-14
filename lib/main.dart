@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lovealapp/pages/getMatch.dart';
 import 'package:lovealapp/pages/myProfile.dart';
 import 'package:lovealapp/pages/navigationHome.dart';
+import 'package:lovealapp/pages/preferences.dart';
 import 'package:lovealapp/pages/uploadphoto.dart';
 import 'package:lovealapp/pages/login.dart';
 import 'package:lovealapp/pages/signup.dart';
@@ -37,6 +38,7 @@ class MyApp extends StatelessWidget {
             primaryColor: Hexcolor("#fdeac6"),
             accentColor: Hexcolor("#fdeac6"),
           ),
+          //home: CreateProfile(),
           initialRoute: '/',
           routes: {
             '/': (_) => Wrapper(),
@@ -50,6 +52,7 @@ class MyApp extends StatelessWidget {
             '/navigationHome': (_) => NavigationHome(),
             '/myprofile': (_) => MyProfile(),
             '/loginFirstTime': (_) => LoginFirstTime(),
+            '/setPreferences': (_) => SetPreferences(),
           }
           ),
     );

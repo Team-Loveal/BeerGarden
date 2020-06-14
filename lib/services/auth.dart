@@ -44,6 +44,7 @@ class AuthService {
       print('isemailedverified ${user.isEmailVerified}');
       if (user.isEmailVerified) {
         //create a new document for the user with the uid and add email field
+        print('yESSSSSSSSSSSSSS VERIFIEDDDDDDDDDDDDD');
         await DatabaseService(uid: user.uid, isEmailVerified: user.isEmailVerified).setUserData(email);
         return _userFromFirebaseUser(user);
       }
