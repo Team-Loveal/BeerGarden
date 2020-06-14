@@ -48,20 +48,21 @@ class _MessageState extends State<Message> {
 
   // check if chatroom is active
   void getChatted() {
-    dbRef
-        .collection('messages')
-        .document(chatRoomID)
-        .get()
-        .then((snapshot) => activeChat = snapshot['active']);
+    dbRef.collection('messages').document(chatRoomID).get().then((snapshot) => {
+          if (snapshot['active'] != null)
+            {activeChat = snapshot['active']}
+          else
+            {activateChat(false), activeChat = false}
+        });
   }
 
   // activate chatroom (a chatroom that has at least one message)
-  void activateChat() {
+  void activateChat(bool) {
     try {
       dbRef
           .collection('messages')
           .document(chatRoomID)
-          .updateData({'active': true});
+          .updateData({'active': bool});
     } catch (err) {
       print(err.toString());
     }
@@ -83,7 +84,7 @@ class _MessageState extends State<Message> {
   void _onSendMessage(String text) {
     // toggle chatted if first message
     if (!activeChat) {
-      activateChat();
+      activateChat(true);
     }
 
     if (text.trim() != "") {

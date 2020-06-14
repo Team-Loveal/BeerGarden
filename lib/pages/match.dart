@@ -24,7 +24,6 @@ class _MatchState extends State<Match> {
   @override
   void initState() {
     super.initState();
-    print('I AM RUNNING');
     final user = Provider.of<User>(context, listen: false);
 
     //get matchID and chatID from db
