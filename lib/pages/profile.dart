@@ -1,35 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:provider/provider.dart';
-import 'package:lovealapp/models/user.dart';
-import 'package:lovealapp/services/auth.dart';
-import 'package:lovealapp/shared/loading.dart';
-import 'package:lovealapp/services/database.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class MyProfile extends StatefulWidget {
-  // final String userID;
-  // final String nickname;
+class Profile extends StatefulWidget {
+  final String userID;
+  final String nickname;
+  final String imgUrl;
+  Profile({Key key, this.userID, this.nickname, this.imgUrl}) : super(key: key);
 
   @override
-  _MyProfileState createState() => _MyProfileState();
+  _ProfileState createState() => _ProfileState(userID, nickname, imgUrl);
 }
 
-class _MyProfileState extends State<MyProfile> {
+class _ProfileState extends State<Profile> {
+  final String userID;
+  final String nickname;
+  final String imgUrl;
+  _ProfileState(this.userID, this.nickname, this.imgUrl);
+
   @override
   Widget build(BuildContext context) {
-    final AuthService _auth = AuthService();
-    final user = Provider.of<User>(context);
-
-    return StreamBuilder(
-        stream: DatabaseService(uid: user.uid).userData,
+    return FutureBuilder(
+        future: Firestore.instance.collection('users').document(userID).get(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            UserData userData = snapshot.data;
             return Scaffold(
               body: ListView(
                 children: <Widget>[
                   Row(
                     children: <Widget>[
+                      IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon: Icon(MdiIcons.arrowLeft)),
                       Expanded(
                         flex: 3,
                         child: Container(
@@ -44,31 +48,6 @@ class _MyProfileState extends State<MyProfile> {
                           ),
                         ),
                       ),
-                      Expanded(
-                        flex: 2,
-                        child: FlatButton.icon(
-                          icon: Icon(Icons.person),
-                          label: Text("logout"),
-                          onPressed: () async {
-                            await _auth.signOut();
-                            Navigator.of(context)
-                                .popUntil((route) => route.isFirst);
-                          },
-                        ),
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.settings,
-                            size: 35,
-                            color: Colors.white,
-                          ),
-                          onPressed: () async {
-                            Navigator.of(context).pushNamed('/editProfile');
-                          },
-                        ),
-                      )
                     ],
                   ),
                   Container(
@@ -84,7 +63,8 @@ class _MyProfileState extends State<MyProfile> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text('${userData.nickname}, ${userData.age}',
+                                Text(
+                                    '${snapshot.data['nickname']}, ${snapshot.data['age']}',
                                     style: TextStyle(
                                         fontSize: 28,
                                         fontWeight: FontWeight.bold)),
@@ -92,7 +72,7 @@ class _MyProfileState extends State<MyProfile> {
                                   children: <Widget>[
                                     Icon(MdiIcons.mapMarker,
                                         size: 18, color: Colors.grey),
-                                    Text('${userData.location}, Japan',
+                                    Text('${snapshot.data['location']}, Japan',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             color: Colors.grey))
@@ -103,7 +83,7 @@ class _MyProfileState extends State<MyProfile> {
                         Expanded(
                           child: CircleAvatar(
                               radius: 65,
-                              backgroundImage: NetworkImage(userData.imgUrl)),
+                              backgroundImage: NetworkImage(imgUrl)),
                         ),
                       ],
                     ),
@@ -122,7 +102,7 @@ class _MyProfileState extends State<MyProfile> {
                               )),
                           SizedBox(height: 5),
                           Expanded(
-                              child: Text(userData.occupation,
+                              child: Text(snapshot.data['occupation'],
                                   style: TextStyle(fontSize: 16)))
                         ]),
                   ),
@@ -141,7 +121,7 @@ class _MyProfileState extends State<MyProfile> {
                           Wrap(
                             children: <Widget>[
                               //WHEN REFACTORING CREATE SEPARATE WIDGET AND MAP THROUGH INTERESTS
-                              if (userData.yodeling)
+                              if (snapshot.data['yodeling'])
                                 Container(
                                     margin: EdgeInsets.only(right: 10),
                                     child: OutlineButton(
@@ -152,7 +132,7 @@ class _MyProfileState extends State<MyProfile> {
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(10.0)))),
-                              if (userData.shopping)
+                              if (snapshot.data['shopping'])
                                 Container(
                                     margin: EdgeInsets.only(right: 10),
                                     child: OutlineButton(
@@ -163,18 +143,18 @@ class _MyProfileState extends State<MyProfile> {
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(10.0)))),
-                              if (userData.makingBalloonAnimals)
+                              if (snapshot.data['makingBalloonAnimals'])
                                 Container(
                                     margin: EdgeInsets.only(right: 10),
                                     child: OutlineButton(
-                                        child: Text("MakingBalloonAnimals",
+                                        child: Text("Making Balloon Animals",
                                             style:
                                                 TextStyle(color: Colors.pink)),
                                         onPressed: null,
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(10.0)))),
-                              if (userData.cooking)
+                              if (snapshot.data['cooking'])
                                 Container(
                                     margin: EdgeInsets.only(right: 10),
                                     child: OutlineButton(
@@ -185,7 +165,7 @@ class _MyProfileState extends State<MyProfile> {
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(10.0)))),
-                              if (userData.painting)
+                              if (snapshot.data['painting'])
                                 Container(
                                     margin: EdgeInsets.only(right: 10),
                                     child: OutlineButton(
@@ -196,7 +176,7 @@ class _MyProfileState extends State<MyProfile> {
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(10.0)))),
-                              if (userData.movies)
+                              if (snapshot.data['movies'])
                                 Container(
                                     margin: EdgeInsets.only(right: 10),
                                     child: OutlineButton(
@@ -207,7 +187,7 @@ class _MyProfileState extends State<MyProfile> {
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(10.0)))),
-                              if (userData.sports)
+                              if (snapshot.data['sports'])
                                 Container(
                                     margin: EdgeInsets.only(right: 10),
                                     child: OutlineButton(
@@ -218,7 +198,7 @@ class _MyProfileState extends State<MyProfile> {
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(10.0)))),
-                              if (userData.writing)
+                              if (snapshot.data['writing'])
                                 Container(
                                     margin: EdgeInsets.only(right: 10),
                                     child: OutlineButton(
@@ -229,7 +209,7 @@ class _MyProfileState extends State<MyProfile> {
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(10.0)))),
-                              if (userData.drinking)
+                              if (snapshot.data['drinking'])
                                 Container(
                                     margin: EdgeInsets.only(right: 10),
                                     child: OutlineButton(
@@ -256,14 +236,17 @@ class _MyProfileState extends State<MyProfile> {
                                 fontWeight: FontWeight.bold,
                               )),
                           SizedBox(height: 5),
-                          Text(userData.about, style: TextStyle(fontSize: 16))
+                          Text(snapshot.data['about'],
+                              style: TextStyle(fontSize: 16))
                         ]),
                   ),
                 ],
               ),
             );
           } else {
-            return Loading();
+            return Center(
+              child: Text('Couldn\'t find user...'),
+            );
           }
         });
   }

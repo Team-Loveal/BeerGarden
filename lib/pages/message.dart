@@ -130,7 +130,15 @@ class _MessageState extends State<Message> {
                 },
                 icon: Icon(MdiIcons.arrowLeft)),
             flexibleSpace: GestureDetector(
-              onTap: () => {Navigator.of(context).pushNamed('/signup')},
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Profile(
+                            userID: matchID,
+                            nickname: nickname,
+                            imgUrl: imgUrl)));
+              },
               child: Container(
                 child: Center(
                   child: Row(
