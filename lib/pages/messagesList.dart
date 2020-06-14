@@ -155,8 +155,9 @@ class _MessagesState extends State<Messages> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
                               CircleAvatar(
-                                backgroundColor:
-                                    unread ? Hexcolor('#F4AA33') : Colors.grey,
+                                backgroundColor: unread
+                                    ? Hexcolor('#F4AA33')
+                                    : Hexcolor('#f1f4f5'),
                                 radius: 38,
                                 child: CircleAvatar(
                                     radius: 35,
@@ -170,7 +171,7 @@ class _MessagesState extends State<Messages> {
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 18.0)),
-                                    SizedBox(height: 10.0),
+                                    SizedBox(height: 5.0),
                                     Container(
                                       width: MediaQuery.of(context).size.width *
                                           0.45,
@@ -191,7 +192,7 @@ class _MessagesState extends State<Messages> {
                             children: <Widget>[
                               Text(formatter.format(date),
                                   style: TextStyle(fontSize: 12.0)),
-                              SizedBox(height: 10.0),
+                              SizedBox(height: 5.0),
                               unread
                                   ? Container(
                                       width: 40.0,

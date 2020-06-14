@@ -26,6 +26,12 @@ class Message extends StatefulWidget {
 }
 
 class _MessageState extends State<Message> {
+  @override
+  void initState() {
+    super.initState();
+    getChatted();
+  }
+
   final String chatRoomID;
   final String matchID;
   final String nickname;
@@ -71,6 +77,7 @@ class _MessageState extends State<Message> {
 
   //for reading the contents of the input field and for clearing the field after the text message is sent
   final _textController = TextEditingController();
+  final FocusNode _focusNode = FocusNode();
 
   void _onSendMessage(String text) {
     // toggle chatted if first message
@@ -122,21 +129,24 @@ class _MessageState extends State<Message> {
                   Navigator.pop(context);
                 },
                 icon: Icon(MdiIcons.arrowLeft)),
-            flexibleSpace: Container(
-              child: Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    CircleAvatar(
-                      radius: 25,
-                      backgroundImage: NetworkImage(imgUrl),
-                    ),
-                    SizedBox(width: 10.0),
-                    Text(
-                      nickname,
-                      style: TextStyle(fontSize: 30, color: Colors.white),
-                    ),
-                  ],
+            flexibleSpace: GestureDetector(
+              onTap: () => {Navigator.of(context).pushNamed('/signup')},
+              child: Container(
+                child: Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      CircleAvatar(
+                        radius: 25,
+                        backgroundImage: NetworkImage(imgUrl),
+                      ),
+                      SizedBox(width: 10.0),
+                      Text(
+                        nickname,
+                        style: TextStyle(fontSize: 30, color: Colors.white),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -236,6 +246,8 @@ class _MessageState extends State<Message> {
               ),
               child: TextField(
                 controller: _textController,
+                onSubmitted: _onSendMessage,
+                focusNode: _focusNode,
                 decoration: InputDecoration(
                     hintText: "Send a message...",
                     border: InputBorder.none,
