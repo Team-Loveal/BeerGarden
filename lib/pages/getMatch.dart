@@ -5,6 +5,7 @@ import 'package:lovealapp/services/database.dart';
 import 'package:lovealapp/shared/loading.dart';
 import 'package:provider/provider.dart';
 import 'package:lovealapp/services/auth.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class GetMatch extends StatefulWidget {
   @override
@@ -27,6 +28,15 @@ class _GetMatchState extends State<GetMatch> {
 //            int matches = userData.matches;
             return Scaffold(
               body: Container(
+                height: double.infinity,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [Hexcolor("#FFF1BA"), Hexcolor("#F4AA33")],
+                  stops: [0.2, 0.7],
+                )),
                 child: Center(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,

@@ -11,7 +11,6 @@ import 'package:lovealapp/pages/forgotpassword.dart';
 import 'package:lovealapp/services/auth.dart';
 import 'package:lovealapp/pages/createProfile.dart';
 import 'package:lovealapp/pages/editProfile.dart';
-import 'package:lovealapp/pages/loginFirstTime.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 //provide user data to Wrapper file
@@ -35,10 +34,9 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             fontFamily: 'Alata',
-            primaryColor: Hexcolor("#fdeac6"),
-            accentColor: Hexcolor("#fdeac6"),
+            primaryColor: Hexcolor("#000000"),
+            accentColor: Hexcolor("#8CC63E"),
           ),
-          //home: CreateProfile(),
           initialRoute: '/',
           routes: {
             '/': (_) => Wrapper(),
@@ -51,10 +49,9 @@ class MyApp extends StatelessWidget {
             '/getMatch': (_) => GetMatch(),
             '/navigationHome': (_) => NavigationHome(),
             '/myprofile': (_) => MyProfile(),
-            '/loginFirstTime': (_) => LoginFirstTime(),
             '/setPreferences': (_) => SetPreferences(),
           }
           ),
-    );
+          );
   }
 }
