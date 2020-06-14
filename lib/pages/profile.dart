@@ -21,6 +21,8 @@ class _ProfileState extends State<Profile> {
   _ProfileState(this.userID, this.nickname, this.imgUrl);
 
   //for blur
+  //TODO blur values must be pulled from the database
+  //set as 50 in the beginning and then decreases every day
   double sigmaX = 50;
   double sigmaY = 50;
 
