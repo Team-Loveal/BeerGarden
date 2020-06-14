@@ -245,7 +245,7 @@ class _ProfileState extends State<Profile> {
             );
           } else {
             return Center(
-              child: Text('Couldn\'t find user...'),
+              child: CircularProgressIndicator(),
             );
           }
         });
