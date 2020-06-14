@@ -27,18 +27,18 @@ class _SignUpState extends State<SignUp> {
     String trimmedEmail = email.trim();
     String trimmedPassword = password.trim();
     setState(() => {
-      loading= false,
+      //loading= false,
         _warning = 'A verification email has been sent to $trimmedEmail'
       }
     );
+    print('this is a warning ${_warning}');
    /* String trimmedEmail = email.trim();
     String trimmedPassword = password.trim();
     setState(() {
       _warning = 'A verification email has been sent to $trimmedEmail';
     });*/
-
+    ShowAlert();
     dynamic result =
-
     await _auth.registerWithEmailAndPassword(trimmedEmail, trimmedPassword);
 
     //Probably dont need the this if statment?!?
@@ -50,7 +50,7 @@ class _SignUpState extends State<SignUp> {
       });
     } else {*/
 
-    ShowAlert();
+    //ShowAlert();
     // clearTextInput();
     print("HELLLOOOOOOOOOOO");
     //Navigator.of(context).pushNamed('/login');
@@ -255,9 +255,10 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
-    return loading
+    /*return loading
         ? Loading()
-        : Scaffold(
+        : Scaffold(*/
+    return Scaffold(
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: Stack(
@@ -343,7 +344,8 @@ class _ShowAlertState extends State<ShowAlert> {
             child: Text(
               _warning,
               style: TextStyle(
-                color: Colors.cyan,
+                //color: Colors.cyan,
+                color: Colors.black,
               ),
               maxLines: 3,
             ),
