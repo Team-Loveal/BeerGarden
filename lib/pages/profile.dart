@@ -20,9 +20,7 @@ class _ProfileState extends State<Profile> {
   final String imgUrl;
   _ProfileState(this.userID, this.nickname, this.imgUrl);
 
-  //for blur
-  //TODO blur values must be pulled from the database
-  //set as 50 in the beginning and then decreases every day
+  //to set blur
   double sigmaX = 50;
   double sigmaY = 50;
 
@@ -88,11 +86,7 @@ class _ProfileState extends State<Profile> {
                                 ),
                               ]),
                         ),
-//                        Expanded(
-//                          child: CircleAvatar(
-//                              radius: 65,
-//                              backgroundImage: NetworkImage(imgUrl)),
-//                        ),
+
                       ],
                     ),
                   ),
