@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
             primaryColor: Hexcolor("#fdeac6"),
             accentColor: Hexcolor("#fdeac6"),
           ),
-          initialRoute: '/',
+          initialRoute: '/setPreferences',
           routes: {
             '/': (_) => Wrapper(),
             '/signup': (_) => SignUp(),
