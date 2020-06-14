@@ -35,6 +35,11 @@ class _CreateProfileState extends State<CreateProfile> {
   bool writing = false;
   bool drinking = false;
 
+  //preferences
+  double _lowValue = 18;
+  double _highValue = 100;
+  String genderPreference;
+
   //for loading spinner
   bool loading = false;
 
@@ -273,6 +278,65 @@ class _CreateProfileState extends State<CreateProfile> {
                         ],
                       ),
                     ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(30.0),
+                    child: Text('Set Preferences', style:TextStyle(fontSize: 30.0),),
+                  ),
+
+                    Text(
+                      "Show Me", style:TextStyle(fontSize: 20.0),
+                    ),
+
+                  Center(
+                    child: DropdownButton<String>(
+                      isExpanded: true,
+                      value: genderPreference,
+                      iconSize: 24,
+                      onChanged: (String newValue) {
+                        setState(() {
+                          genderPreference = newValue;
+                        });
+                      },
+                      items: <String>['Women', 'Men', 'Everyone']
+                          .map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value, style:TextStyle(fontSize: 20.0)),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                  Container(
+                      child: Column(
+                        children: <Widget>[
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.all(30.0),
+                                child: Text('Age Range',style:TextStyle(fontSize: 20.0),),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(30.0),
+                                child: Text('${_lowValue.toInt().toString()} - ${_highValue.toInt().toString()}', style:TextStyle(fontSize: 20.0),),
+                              )
+                            ],
+                          ),
+                          RangeSlider(
+                            min: 18,
+                            max: 100,
+                            divisions: 82,
+                            inactiveColor: Colors.orange,
+                            activeColor: Colors.orange,
+                            values: RangeValues(_lowValue, _highValue),
+                            onChanged: (_range) {
+                              setState(() =>
+                              {_lowValue = _range.start, _highValue = _range.end});
+                            },
+                          ),
+                        ],
+                      )
                   ),
                   Container(
                     padding: EdgeInsets.fromLTRB(30, 10, 20, 0),
