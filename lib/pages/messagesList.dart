@@ -79,7 +79,7 @@ class _MessagesState extends State<Messages> {
                                     shrinkWrap: true,
                                     scrollDirection: Axis.vertical,
                                     itemBuilder: (context, index) =>
-                                        buildChatroom(
+                                        _buildChatroom(
                                             snapshot.data.documents[index],
                                             context),
                                     itemCount: snapshot.data.documents.length,
@@ -97,7 +97,7 @@ class _MessagesState extends State<Messages> {
         ));
   }
 
-  Widget buildChatroom(DocumentSnapshot document, BuildContext context) {
+  Widget _buildChatroom(DocumentSnapshot document, BuildContext context) {
     final user = Provider.of<User>(context);
     var matchID = document['matchedUsers'].firstWhere((id) => id != user.uid);
     var formatter = new DateFormat('MMMMd');
@@ -135,77 +135,82 @@ class _MessagesState extends State<Messages> {
                       .limit(1)
                       .snapshots(),
                   builder: (context, messages) {
-                    // Format timestamp to "Month Day"
-                    date = new DateTime.fromMillisecondsSinceEpoch(
-                        int.parse(messages.data.documents[0]['timestamp']));
-                    unread = messages.data.documents[0]['fromID'] != user.uid &&
-                        messages.data.documents[0]['unread'];
-                    nickname = snapshot.data['nickname'];
-                    imgUrl = snapshot.data['imgUrl'];
+                    if (!messages.hasData) {
+                      return Center(child: CircularProgressIndicator());
+                    } else {
+                      // Format timestamp to "Month Day"
+                      date = new DateTime.fromMillisecondsSinceEpoch(
+                          int.parse(messages.data.documents[0]['timestamp']));
+                      unread =
+                          messages.data.documents[0]['fromID'] != user.uid &&
+                              messages.data.documents[0]['unread'];
+                      nickname = snapshot.data['nickname'];
+                      imgUrl = snapshot.data['imgUrl'];
 
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            CircleAvatar(
-                              backgroundColor:
-                                  unread ? Hexcolor('#F4AA33') : Colors.grey,
-                              radius: 38,
-                              child: CircleAvatar(
-                                  radius: 35,
-                                  backgroundImage: NetworkImage(imgUrl)),
-                            ),
-                            SizedBox(width: 10.0),
-                            Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text(nickname,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18.0)),
-                                  SizedBox(height: 10.0),
-                                  Container(
-                                    width: MediaQuery.of(context).size.width *
-                                        0.45,
-                                    child: Text(
-                                      messages.data.documents[0]['text'],
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 15.0,
-                                          color: Colors.grey),
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ),
-                                ]),
-                          ],
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: <Widget>[
-                            Text(formatter.format(date),
-                                style: TextStyle(fontSize: 12.0)),
-                            SizedBox(height: 10.0),
-                            unread
-                                ? Container(
-                                    width: 40.0,
-                                    height: 20.0,
-                                    decoration: BoxDecoration(
-                                        color: Hexcolor("#F4AA33"),
-                                        borderRadius:
-                                            BorderRadius.circular(30.0)),
-                                    alignment: Alignment.center,
-                                    child: Text('NEW',
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              CircleAvatar(
+                                backgroundColor:
+                                    unread ? Hexcolor('#F4AA33') : Colors.grey,
+                                radius: 38,
+                                child: CircleAvatar(
+                                    radius: 35,
+                                    backgroundImage: NetworkImage(imgUrl)),
+                              ),
+                              SizedBox(width: 10.0),
+                              Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(nickname,
                                         style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 12.0,
-                                            fontWeight: FontWeight.bold)))
-                                : Text('')
-                          ],
-                        ),
-                      ],
-                    );
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18.0)),
+                                    SizedBox(height: 10.0),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.45,
+                                      child: Text(
+                                        messages.data.documents[0]['text'],
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 15.0,
+                                            color: Colors.grey),
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                  ]),
+                            ],
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: <Widget>[
+                              Text(formatter.format(date),
+                                  style: TextStyle(fontSize: 12.0)),
+                              SizedBox(height: 10.0),
+                              unread
+                                  ? Container(
+                                      width: 40.0,
+                                      height: 20.0,
+                                      decoration: BoxDecoration(
+                                          color: Hexcolor("#F4AA33"),
+                                          borderRadius:
+                                              BorderRadius.circular(30.0)),
+                                      alignment: Alignment.center,
+                                      child: Text('NEW',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 12.0,
+                                              fontWeight: FontWeight.bold)))
+                                  : Text('')
+                            ],
+                          ),
+                        ],
+                      );
+                    }
                   }),
             );
           }
