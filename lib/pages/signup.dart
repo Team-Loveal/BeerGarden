@@ -52,8 +52,6 @@ class _SignUpState extends State<SignUp> {
 
     //ShowAlert();
     // clearTextInput();
-    print("HELLLOOOOOOOOOOO");
-    //Navigator.of(context).pushNamed('/login');
 
     Timer(Duration(seconds: 3), () {
       {
