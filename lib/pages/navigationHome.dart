@@ -35,7 +35,7 @@ class _NavigationHomeState extends State<NavigationHome> {
       child: Scaffold(
         body: _children[_currentIndex],
         bottomNavigationBar: BottomNavigationBar(
-            // new
+          // new
             onTap: onTabTapped,
             currentIndex: _currentIndex,
             items: [

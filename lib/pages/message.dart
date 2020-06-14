@@ -48,6 +48,7 @@ class _MessageState extends State<Message> {
         .then((snapshot) => activeChat = snapshot['active']);
   }
 
+  // activate chatroom (a chatroom that has at least one message)
   void activateChat() {
     try {
       dbRef
