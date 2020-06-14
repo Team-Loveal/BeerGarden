@@ -48,8 +48,7 @@ class MyApp extends StatelessWidget {
             '/getMatch': (_) => GetMatch(),
             '/navigationHome': (_) => NavigationHome(),
             '/myprofile': (_) => MyProfile(),
-          }
-          ),
+          }),
     );
   }
 }

@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:lovealapp/models/user.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:intl/intl.dart';
+import 'profile.dart';
 
 class Message extends StatefulWidget {
   final String chatRoomID;
