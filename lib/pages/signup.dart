@@ -42,13 +42,13 @@ class _SignUpState extends State<SignUp> {
     await _auth.registerWithEmailAndPassword(trimmedEmail, trimmedPassword);
 
     //Probably dont need the this if statment?!?
-    //print("This is resullllllllt: ${result}");
-    /*if (result == null) {
+    print("This is resullllllllt: ${result}");
+    if (result == null) {
       setState(() {
         error = 'Could not sign in with those credentials';
         loading = false;
       });
-    } else {*/
+    } else {
 
     //ShowAlert();
     // clearTextInput();
@@ -60,7 +60,7 @@ class _SignUpState extends State<SignUp> {
         Navigator.of(context).pushNamed('/loginFirstTime');
       }
     });
-    //}
+    }
   }
 
   void googleSignUp() async {

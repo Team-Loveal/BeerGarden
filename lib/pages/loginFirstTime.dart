@@ -29,8 +29,11 @@ class _LoginFirstTimeState extends State<LoginFirstTime> {
     String trimmedEmail = email.trim();
     String trimmedPassword = password.trim();
 
+
+
     dynamic result =
     await _auth.signIWithEmailAndPassword(trimmedEmail, trimmedPassword);
+
     if (result == null) {
       setState(() {
         error = 'Could not sign in with those credentials';
