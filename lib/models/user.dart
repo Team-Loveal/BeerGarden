@@ -67,3 +67,15 @@ class UserImg {
     this.imgUrl,
   });
 }
+
+class Preferences {
+  double lowValue;
+  double highValue;
+  String genderPreference;
+
+  Preferences({
+    this.lowValue,
+    this.highValue,
+    this.genderPreference
+});
+}

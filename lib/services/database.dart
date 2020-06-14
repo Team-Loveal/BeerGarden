@@ -145,4 +145,18 @@ class DatabaseService {
   Stream<UserImg> get userImg {
     return usersCollection.document(uid).snapshots().map(_userImgFromSnapshot);
   }
+
+  //set and update preferences to filter out matches
+  Future updatePreference(
+      double lowValue,
+      double highValue,
+      String genderPreference,
+      ) async {
+    return await usersCollection.document(uid).updateData({
+      'lowAge': lowValue,
+      'highAge': highValue,
+      'genderPreference': genderPreference,
+    });
+  }
+
 }

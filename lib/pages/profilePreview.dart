@@ -37,6 +37,8 @@ class _ProfilePreviewState extends State<ProfilePreview> {
             return Scaffold(
               floatingActionButton: FloatingActionButton.extended(
                 onPressed: () {
+                  //TODO move this function to database.dart
+                  //TODO read preferences and filter out matches
                   //get potential matches for the user
                   Firestore.instance
                       .collection("users")
@@ -66,6 +68,7 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                                 //'chatted': false,
                                 'matched': false,
                                 'matchedUsers': [user.uid, toID],
+                                'blur': 50,
                               });
                             }
                           });
