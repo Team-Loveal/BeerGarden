@@ -137,46 +137,47 @@ class _MatchState extends State<Match> {
                                   )),
                             ],
                           ),
-                          Positioned(
-                            bottom: 0,
-                            child: Container(
-                                height: 80,
-                                width: double.infinity,
-                                padding: const EdgeInsets.fromLTRB(35, 5, 0, 5),
-                                decoration: BoxDecoration(
-                                  color: Colors.white.withOpacity(0.7),
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Align(
-                                      alignment: Alignment.topLeft,
-                                      child: Container(
-                                        child: Text("John Smith, 28",
-                                            style: TextStyle(
-                                              fontSize: 23,
-                                              fontWeight: FontWeight.bold,
-                                            )),
-                                      ),
-                                    ),
-                                    Align(
-                                      alignment: Alignment.topLeft,
-                                      child: Row(
-                                        children: <Widget>[
-                                          Icon(MdiIcons.mapMarker,
-                                              size: 18, color: Colors.pink),
-                                          Text('Tokyo, Japan',
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 18,
-                                                  color: Colors.pink))
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                )),
-                          ),
+//CAN THIS BE DELETED?
+//                          Positioned(
+//                            bottom: 0,
+//                            child: Container(
+//                                height: 80,
+//                                width: double.infinity,
+//                                padding: const EdgeInsets.fromLTRB(35, 5, 0, 5),
+//                                decoration: BoxDecoration(
+//                                  color: Colors.white.withOpacity(0.7),
+//                                  borderRadius: BorderRadius.circular(10.0),
+//                                ),
+//                                child: Column(
+//                                  mainAxisAlignment: MainAxisAlignment.center,
+//                                  children: <Widget>[
+//                                    Align(
+//                                      alignment: Alignment.topLeft,
+//                                      child: Container(
+//                                        child: Text("John Smith, 28",
+//                                            style: TextStyle(
+//                                              fontSize: 23,
+//                                              fontWeight: FontWeight.bold,
+//                                            )),
+//                                      ),
+//                                    ),
+//                                    Align(
+//                                      alignment: Alignment.topLeft,
+//                                      child: Row(
+//                                        children: <Widget>[
+//                                          Icon(MdiIcons.mapMarker,
+//                                              size: 18, color: Colors.pink),
+//                                          Text('Tokyo, Japan',
+//                                              style: TextStyle(
+//                                                  fontWeight: FontWeight.bold,
+//                                                  fontSize: 18,
+//                                                  color: Colors.pink))
+//                                        ],
+//                                      ),
+//                                    ),
+//                                  ],
+//                                )),
+//                          ),
                         ],
                       ),
                     ),

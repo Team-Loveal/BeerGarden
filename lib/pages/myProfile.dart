@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
@@ -12,6 +14,9 @@ class MyProfile extends StatefulWidget {
 }
 
 class _MyProfileState extends State<MyProfile> {
+  double sigmaX = 0;
+  double sigmaY = 0;
+
   @override
   Widget build(BuildContext context) {
     final AuthService _auth = AuthService();
@@ -106,11 +111,80 @@ class _MyProfileState extends State<MyProfile> {
                             ),
                           ]),
                     ),
-                    Expanded(
-                      child: CircleAvatar(
-                          radius: 65,
-                          backgroundImage: NetworkImage(userData.imgUrl)),
+                    //IMAGE
+                  ],
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 30.0),
+                width: 380,
+                height: 380,
+                child: Stack(
+                  children: <Widget>[
+                    Stack(
+                      children: <Widget>[
+                        Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: 380,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10.0),
+                              child: Image.network(userData.imgUrl,
+                                  fit: BoxFit.cover),
+                            )),
+                        Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: 380,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10.0),
+                              child: BackdropFilter(
+                                  filter: ImageFilter.blur(
+                                      sigmaX: sigmaX, sigmaY: sigmaY),
+                                  child: Container(
+                                      color: Colors.black.withOpacity(0))),
+                            )),
+                      ],
                     ),
+//CAN THIS BE DELETED?
+//                          Positioned(
+//                            bottom: 0,
+//                            child: Container(
+//                                height: 80,
+//                                width: double.infinity,
+//                                padding: const EdgeInsets.fromLTRB(35, 5, 0, 5),
+//                                decoration: BoxDecoration(
+//                                  color: Colors.white.withOpacity(0.7),
+//                                  borderRadius: BorderRadius.circular(10.0),
+//                                ),
+//                                child: Column(
+//                                  mainAxisAlignment: MainAxisAlignment.center,
+//                                  children: <Widget>[
+//                                    Align(
+//                                      alignment: Alignment.topLeft,
+//                                      child: Container(
+//                                        child: Text("John Smith, 28",
+//                                            style: TextStyle(
+//                                              fontSize: 23,
+//                                              fontWeight: FontWeight.bold,
+//                                            )),
+//                                      ),
+//                                    ),
+//                                    Align(
+//                                      alignment: Alignment.topLeft,
+//                                      child: Row(
+//                                        children: <Widget>[
+//                                          Icon(MdiIcons.mapMarker,
+//                                              size: 18, color: Colors.pink),
+//                                          Text('Tokyo, Japan',
+//                                              style: TextStyle(
+//                                                  fontWeight: FontWeight.bold,
+//                                                  fontSize: 18,
+//                                                  color: Colors.pink))
+//                                        ],
+//                                      ),
+//                                    ),
+//                                  ],
+//                                )),
+//                          ),
                   ],
                 ),
               ),

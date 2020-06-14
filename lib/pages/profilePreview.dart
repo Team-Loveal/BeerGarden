@@ -68,6 +68,7 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                                 //'chatted': false,
                                 'matched': false,
                                 'matchedUsers': [user.uid, toID],
+                                'blur': 50,
                               });
                             }
                           });
