@@ -11,6 +11,7 @@ import 'package:lovealapp/pages/forgotpassword.dart';
 import 'package:lovealapp/services/auth.dart';
 import 'package:lovealapp/pages/createProfile.dart';
 import 'package:lovealapp/pages/editProfile.dart';
+import 'package:lovealapp/pages/loginFIrstTime.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 //provide user data to Wrapper file
@@ -50,6 +51,7 @@ class MyApp extends StatelessWidget {
             '/navigationHome': (_) => NavigationHome(),
             '/myprofile': (_) => MyProfile(),
             '/setPreferences': (_) => SetPreferences(),
+            '/loginFirstTime': (_) => LoginFirstTime(),
           }
           ),
           );

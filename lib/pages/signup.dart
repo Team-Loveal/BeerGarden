@@ -1,8 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:lovealapp/services/auth.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:lovealapp/shared/loading.dart';
+import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'dart:async';
 
 class SignUp extends StatefulWidget {
   @override
@@ -21,18 +22,42 @@ class _SignUpState extends State<SignUp> {
   bool loading = false;
 
   void handleSignUp() async {
-    setState(() => loading = true);
+
+    //changed to false
     String trimmedEmail = email.trim();
     String trimmedPassword = password.trim();
+    setState(() => {
+      //loading= false,
+        _warning = 'A verification email has been sent to $trimmedEmail'
+      }
+    );
+    print('this is a warning ${_warning}');
+   /* String trimmedEmail = email.trim();
+    String trimmedPassword = password.trim();
+    setState(() {
+      _warning = 'A verification email has been sent to $trimmedEmail';
+    });*/
+    ShowAlert();
     dynamic result =
-        await _auth.registerWithEmailAndPassword(trimmedEmail, trimmedPassword);
+    await _auth.registerWithEmailAndPassword(trimmedEmail, trimmedPassword);
+
+    //Probably dont need the this if statment?!?
+    print("This is resullllllllt: ${result}");
     if (result == null) {
       setState(() {
         error = 'Could not sign in with those credentials';
         loading = false;
       });
     } else {
-      Navigator.of(context).pushNamed('/createProfile');
+
+    //ShowAlert();
+    // clearTextInput();
+
+    Timer(Duration(seconds: 3), () {
+      {
+        Navigator.of(context).pushNamed('/loginFirstTime');
+      }
+    });
     }
   }
 
@@ -228,67 +253,116 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
-    return loading
+    /*return loading
         ? Loading()
-        : Scaffold(
-            body: GestureDetector(
-              onTap: () => FocusScope.of(context).unfocus(),
-              child: Stack(
-                children: <Widget>[
-                  Container(
-                    height: double.infinity,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          Hexcolor('#FFF1BA'),
-                          Hexcolor('#F4AA33'),
-                        ],
-                        stops: [0.2, 0.7],
-                      ),
-                    ),
-                  ),
-                  Container(
-                    height: double.infinity,
-                    child: SingleChildScrollView(
-                      physics: AlwaysScrollableScrollPhysics(),
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 40.0,
-                        vertical: 120.0,
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            'Sign up',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 52.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(height: 50.0),
-                          _buildEmail(),
-                          SizedBox(
-                            height: 12.0,
-                          ),
-                          _buildPassword(),
-                          SizedBox(
-                            height: 40.0,
-                          ),
-                          _buildSignUpBtn(),
-                          _buildSignInWithText(),
-                          _buildSocialBtnRow(),
-                          _buildLoginBtn(),
-                        ],
-                      ),
-                    ),
-                  )
-                ],
+        : Scaffold(*/
+    return Scaffold(
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: Stack(
+          children: <Widget>[
+            Container(
+              height: double.infinity,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Hexcolor('#FFF1BA'),
+                    Hexcolor('#F4AA33'),
+                  ],
+                  stops: [0.2, 0.7],
+                ),
               ),
             ),
-          );
+            Container(
+              height: double.infinity,
+              child: SingleChildScrollView(
+                physics: AlwaysScrollableScrollPhysics(),
+                padding: EdgeInsets.symmetric(
+                  horizontal: 40.0,
+                  vertical: 120.0,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      'Sign up',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 52.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 50.0),
+                    _buildEmail(),
+                    SizedBox(
+                      height: 12.0,
+                    ),
+                    _buildPassword(),
+                    SizedBox(
+                      height: 40.0,
+                    ),
+                    _buildSignUpBtn(),
+                    _buildSignInWithText(),
+                    _buildSocialBtnRow(),
+                    _buildLoginBtn(),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+String _warning;
+
+class ShowAlert extends StatefulWidget {
+  @override
+  _ShowAlertState createState() => _ShowAlertState();
+}
+
+class _ShowAlertState extends State<ShowAlert> {
+  @override
+  Widget build(BuildContext context) {
+    if (_warning != null) {
+      return Container(
+        color: Colors.amberAccent,
+        width: double.infinity,
+        padding: EdgeInsets.all(8.0),
+        child: Row(children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: Icon(Icons.error_outline),
+          ),
+          Expanded(
+            child: Text(
+              _warning,
+              style: TextStyle(
+                //color: Colors.cyan,
+                color: Colors.black,
+              ),
+              maxLines: 3,
+            ),
+          ),
+          Padding(
+              padding: const EdgeInsets.only(left: 8.0),
+              child: IconButton(
+                icon: Icon(Icons.close),
+                onPressed: () {
+                  setState(() {
+                    _warning = null;
+                  });
+                },
+              ))
+        ]),
+      );
+    }
+    return SizedBox(
+      height: 0,
+    );
   }
 }
