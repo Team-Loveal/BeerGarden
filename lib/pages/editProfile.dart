@@ -3,9 +3,6 @@ import 'package:lovealapp/models/user.dart';
 import 'package:provider/provider.dart';
 import 'package:lovealapp/services/database.dart';
 import 'package:lovealapp/shared/loading.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:lovealapp/pages/uploadphoto.dart';
 
 class EditProfile extends StatefulWidget {
   @override
@@ -90,7 +87,7 @@ class _EditProfileState extends State<EditProfile> {
                                 children: <Widget>[
                                   TextFormField(
                                     onChanged: (val) {
-                                        nickname = userData.nickname;
+                                      nickname = userData.nickname;
                                     },
                                     style: TextStyle(
                                         color: Colors.black,
@@ -106,7 +103,7 @@ class _EditProfileState extends State<EditProfile> {
                                   ),
                                   TextFormField(
                                     onChanged: (val) {
-                                        location = userData.location;
+                                      location = userData.location;
                                     },
                                     style: TextStyle(
                                         color: Colors.black,
@@ -388,7 +385,8 @@ class _EditProfileState extends State<EditProfile> {
                                       drinking ?? userData.drinking,
                                     );
 
-                                    Navigator.of(context).pushNamed('/navigationHome');
+                                    Navigator.of(context)
+                                        .pushNamed('/navigationHome');
                                     //changeRoute(),
                                   },
                                 ),
