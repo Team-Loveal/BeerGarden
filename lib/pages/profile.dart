@@ -7,6 +7,9 @@ import 'package:lovealapp/shared/loading.dart';
 import 'package:lovealapp/services/database.dart';
 
 class MyProfile extends StatefulWidget {
+  // final String userID;
+  // final String nickname;
+
   @override
   _MyProfileState createState() => _MyProfileState();
 }
