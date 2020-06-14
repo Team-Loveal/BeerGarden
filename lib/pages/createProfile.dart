@@ -131,7 +131,10 @@ class _CreateProfileState extends State<CreateProfile> {
                                       '30 - 39',
                                       '40 - 49',
                                       '50 - 59',
-                                      '60 - 69'
+                                      '60 - 69',
+                                      '70 - 79',
+                                      '80 - 89',
+                                      '90 - 99'
                                     ].map<DropdownMenuItem<String>>(
                                         (String value) {
                                       return DropdownMenuItem<String>(
@@ -346,9 +349,9 @@ class _CreateProfileState extends State<CreateProfile> {
                                         ],
                                       ),
                                       RangeSlider(
-                                        min: 18,
+                                        min: 20,
                                         max: 100,
-                                        divisions: 82,
+                                        divisions: 80,
                                         inactiveColor: Colors.black,
                                         activeColor: Colors.black,
                                         values: RangeValues(_lowValue, _highValue),
