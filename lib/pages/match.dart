@@ -358,7 +358,9 @@ class _MatchState extends State<Match> {
                                     builder: (context) =>
                                         Message(
                                             chatRoomID: chatID,
-                                            matchID: matchID)))
+                                            matchID: matchID,
+                                        nickname: userData.nickname,
+                                        imgUrl: userData.imgUrl,)))
                           }),
                     ),
                   ),

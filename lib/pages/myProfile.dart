@@ -54,7 +54,7 @@ class _MyProfileState extends State<MyProfile> {
                     icon: Icon(
                       Icons.settings,
                       size: 35,
-                      color: Colors.white,
+                      color: Colors.orange,
                     ),
                     onPressed: () async {
                       Navigator.of(context).pushNamed('/editProfile');
