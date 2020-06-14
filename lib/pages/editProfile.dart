@@ -117,7 +117,11 @@ class _EditProfileState extends State<EditProfile> {
                                     children: <Widget>[
                                       TextFormField(
                                         onChanged: (val) {
-                                          nickname = userData.nickname;
+                                          if (val != userData.nickname) {
+                                            setState(() => nickname = val);
+                                          } else {
+                                            nickname = userData.nickname;
+                                            };
                                         },
                                         style: TextStyle(
                                             color: Colors.black,
@@ -133,7 +137,11 @@ class _EditProfileState extends State<EditProfile> {
                                       ),
                                       TextFormField(
                                         onChanged: (val) {
-                                          location = userData.location;
+                                          if (val != userData.location) {
+                                            setState(() => location = val);
+                                          } else {
+                                            location = userData.location;
+                                          };
                                         },
                                         style: TextStyle(
                                             color: Colors.black,
