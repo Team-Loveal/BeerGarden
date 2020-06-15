@@ -72,39 +72,6 @@ class _CreateProfileState extends State<CreateProfile> {
                       ),
                     ),
                   ),
-//FORM
-//                Form(
-//                  key: _formKey,
-//                  child: Column(
-//                      children: <Widget>[
-//    TextFormField(
-//      validator: (value) {
-//        if (value.isEmpty) {
-//          return 'Please enter your nickname';
-//        }
-//        return null;
-//      },
-//                                cursorWidth: 3,
-//                                maxLength: 20,
-//                                onChanged: (val) {
-//                                  setState(() => nickname = val);
-//                                },
-//                                onSaved: (String value) {
-//                                  //this block is used to run code when a user save the form
-//                                },
-//                                decoration: InputDecoration(
-//                                    hintText:
-//                                        'Choose a nickname to display to users',
-//                                    labelStyle: TextStyle(
-//                                      color: Colors.black,
-//                                    ),
-//                                    labelText: 'Nickname *'),
-//                                keyboardType: TextInputType.text,
-//                              ),
-//                        // Add TextFormFields and RaisedButton here.
-//                      ]
-//                  )
-//                )
                   Container(
                     child: SingleChildScrollView(
                       child: Padding(
@@ -113,10 +80,10 @@ class _CreateProfileState extends State<CreateProfile> {
                             key: _formKey,
                             child: Column(
                               children: <Widget>[
-//                                Padding(
-//                                  padding: const EdgeInsets.all(10.0),
-//                                  child: Text('Your Profile', style:TextStyle(fontSize: 30.0),),
-//                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Text('Your Profile', style:TextStyle(fontSize: 30.0),),
+                                ),
                                 TextFormField(
                                   cursorWidth: 3,
                                   maxLength: 20,
@@ -163,6 +130,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                   },
                                 ),
                                 Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
                                     Text('Age'),
                                     DropdownButton<String>(
@@ -174,11 +142,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                         });
                                       },
                                       items: <String>[
-                                        '20 - 29',
-                                        '30 - 39',
-                                        '40 - 49',
-                                        '50 - 59',
-                                        '60 - 69'
+                                        '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80'
                                       ].map<DropdownMenuItem<String>>(
                                           (String value) {
                                         return DropdownMenuItem<String>(
@@ -198,7 +162,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                           gender = newValue;
                                         });
                                       },
-                                      items: <String>['Female', 'Male', 'Other']
+                                      items: <String>['Female', 'Male', 'Rather not say']
                                           .map<DropdownMenuItem<String>>(
                                               (String value) {
                                         return DropdownMenuItem<String>(
