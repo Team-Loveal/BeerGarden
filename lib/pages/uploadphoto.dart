@@ -132,7 +132,7 @@ class _UploadPhotoState extends State<UploadPhoto> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           RaisedButton(
-              color: Hexcolor("#215a00"),
+              color: Colors.pinkAccent,
               child: Text(
                 'Select again',
                 style: TextStyle(fontWeight: FontWeight.bold),
@@ -140,12 +140,14 @@ class _UploadPhotoState extends State<UploadPhoto> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
               ),
-              onPressed: (){
-                Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => UploadPhoto()),)
-              })
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => UploadPhoto()),
+                );
+              }),
           RaisedButton(
-            color: Hexcolor("#215a00"),
+            color: Hexcolor("#8CC63E"),
             child: Text(
               'Next',
               style: TextStyle(fontWeight: FontWeight.bold),
