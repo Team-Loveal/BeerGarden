@@ -9,6 +9,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 import 'message.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:pimp_my_button/pimp_my_button.dart';
 
 
 class Match extends StatefulWidget {
@@ -458,47 +459,55 @@ class _MatchState extends State<Match> {
                       colors: [Hexcolor("#FFF1BA"), Hexcolor("#F4AA33")],
                       stops: [0.2, 0.7],
                     )),
-                child: ListView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     //GET NEW MATCH BUTTON
-                    FlatButton(
-                      color: Colors.pinkAccent,
-                      child: Text('Meet someone new today🍺',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          )),
-                      onPressed: () async {
-                        //add matches by one
+                PimpedButton(
+                  particle: DemoParticle(),
+                  pimpedWidgetBuilder: (context, controller) {
+                    return Padding(
+                      padding: const EdgeInsets.all(30.0),
+                      child: FloatingActionButton.extended(
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
+                        label: Text("Meet someone new today🍺", style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        )),
+                        onPressed: ()  async {
+                        controller.forward(from: 0.0);
+                          //add matches by one
+                          int matches = myUserData.matches + 1;
 
-                        int matches = myUserData.matches + 1;
-
-                        //find a user where matched is false
-                        await Firestore.instance
-                            .collection("messages")
-                            .where('fromID', isEqualTo: user.uid)
-                            .getDocuments()
-                            .then((data) => data.documents.forEach((doc) => {
-                          if (!doc['matched'])
-                            {
-                              print(
-                                  'found unmatched user $doc.toID and $doc.documentID'),
-                              Firestore.instance
-                                  .collection('users')
-                                  .document(user.uid)
-                                  .updateData({
-                                'matchID': doc['toID'],
-                                'chatID': doc.documentID,
-                                'matches': matches,
-                              }),
-                              print(
-                                  'updated user collection with matchID: $doc.toID')
-                            }
-                        }));
-                        //go to matched Profile page
-                        Navigator.of(context).pushNamed('/navigationHome');
+                          //find a user where matched is false
+                          await Firestore.instance
+                              .collection("messages")
+                              .where('fromID', isEqualTo: user.uid)
+                              .getDocuments()
+                              .then((data) => data.documents.forEach((doc) => {
+                            if (!doc['matched'])
+                              {
+                                print(
+                                    'found unmatched user $doc.toID and $doc.documentID'),
+                                Firestore.instance
+                                    .collection('users')
+                                    .document(user.uid)
+                                    .updateData({
+                                  'matchID': doc['toID'],
+                                  'chatID': doc.documentID,
+                                  'matches': matches,
+                                }),
+                                print(
+                                    'updated user collection with matchID: $doc.toID')
+                              }
+                          }));
+                          //go to matched Profile page
+                          Navigator.of(context).pushNamed('/navigationHome');
                       },
-                    ),
+                      ),
+                    );
+                  },
+                ),
                   ],
                 ),
               ),
