@@ -20,9 +20,9 @@ class _EditProfileState extends State<EditProfile> {
   String nickname;
   String location;
   String age;
-  String gender = 'Female';
+  String gender;
   String occupation;
-  String about;    
+  String about;
 
   //for interests
   bool yodeling = false;

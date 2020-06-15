@@ -79,6 +79,8 @@ class _MyProfileState extends State<MyProfile> {
                           'locationEdit': userData.location,
                           'occupationEdit': userData.occupation,
                           'aboutEdit': userData.about,
+                          'ageEdit': userData.age,
+                          'genderEdit': userData.gender,
                         });
                       },
                     ),
