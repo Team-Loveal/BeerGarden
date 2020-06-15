@@ -104,6 +104,7 @@ import 'package:lovealapp/pages/createProfile.dart';
 import 'package:lovealapp/pages/editProfile.dart';
 import 'package:lovealapp/pages/loginFirstTime.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:lovealapp/pages/questions.dart';
 
 //provide user data to Wrapper file
 import 'package:provider/provider.dart';
@@ -143,6 +144,7 @@ class MyApp extends StatelessWidget {
             '/myProfile': (_) => MyProfile(),
             '/setPreferences': (_) => SetPreferences(),
             '/loginFirstTime': (_) => LoginFirstTime(),
+            '/questions': (_) => Questions(),
           }
       ),
     );

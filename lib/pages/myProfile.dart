@@ -322,7 +322,7 @@ class _MyProfileState extends State<MyProfile> {
                     ]),
               ),
               Container(
-                margin: const EdgeInsets.fromLTRB(20, 10, 20, 80),
+                margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -334,6 +334,90 @@ class _MyProfileState extends State<MyProfile> {
                           )),
                       SizedBox(height: 5),
                       Text(userData.about, style: TextStyle(fontSize: 16))
+                    ]),
+              ),
+              //ANSWERS
+              Container(
+                margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                child: Wrap(
+                    children: <Widget>[
+                      Text('Do you make your bed in the morning?',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          )),
+                      SizedBox(height: 5),
+
+                      Text(userData.bed ?? "fill it out!",
+                          style: TextStyle(fontSize: 16)),
+
+                    ]),
+              ),
+              Container(
+
+                margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                child: Wrap(
+
+                    children: <Widget>[
+                      Text('Do you read reviews, or just go with your gut?',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          )),
+                      SizedBox(height: 5),
+
+                      Text(userData.reviews ?? "fill it out!",
+                          style: TextStyle(fontSize: 16)),
+
+                    ]),
+              ),
+              Container(
+                margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                child: Wrap(
+                    children: <Widget>[
+
+                      Text('If you could only eat one thing for the rest of your life, what would it be?',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          )),
+
+                      SizedBox(height: 5),
+
+                      Text(userData.foreverEat ?? "fill it out!",
+                          style: TextStyle(fontSize: 16)),
+
+                    ]),
+              ),
+              Container(
+                margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                child: Wrap(
+                    children: <Widget>[
+                      Text("If you're eating a meal do you save the best thing for last or eat it first?",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          )),
+                      SizedBox(height: 5),
+
+                      Text(userData.bestForLast ?? "fill it out!",
+                          style: TextStyle(fontSize: 16)),
+
+                    ]),
+              ),
+              Container(
+                margin: const EdgeInsets.fromLTRB(20, 10, 20, 30),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text('Do you believe in aliens?',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          )),
+                      SizedBox(height: 5),
+                      Text(userData.aliens ?? "fill it out!", style: TextStyle(fontSize: 16))
                     ]),
               ),
             ],

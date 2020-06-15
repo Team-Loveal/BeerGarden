@@ -336,9 +336,93 @@ class _MatchState extends State<Match> {
                             Text(userData.about, style: TextStyle(fontSize: 16))
                           ]),
                     ),
+                    //ANSWERS
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                      child: Wrap(
+                          children: <Widget>[
+                            Text('Do you make your bed in the morning?',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            SizedBox(height: 5),
+
+                            Text(userData.bed ?? "start a conversation and ask!",
+                                style: TextStyle(fontSize: 16)),
+
+                          ]),
+                    ),
+                    Container(
+
+                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                      child: Wrap(
+
+                          children: <Widget>[
+                            Text('Do you read reviews, or just go with your gut?',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            SizedBox(height: 5),
+
+                            Text(userData.reviews ?? "start a conversation and ask!",
+                                style: TextStyle(fontSize: 16)),
+
+                          ]),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                      child: Wrap(
+                          children: <Widget>[
+
+                            Text('If you could only eat one thing for the rest of your life, what would it be?',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                )),
+
+                            SizedBox(height: 5),
+
+                            Text(userData.foreverEat ?? "start a conversation and ask!",
+                                style: TextStyle(fontSize: 16)),
+
+                          ]),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                      child: Wrap(
+                          children: <Widget>[
+                            Text("If you're eating a meal do you save the best thing for last or eat it first?",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            SizedBox(height: 5),
+
+                            Text(userData.bestForLast ?? "start a conversation and ask!",
+                                style: TextStyle(fontSize: 16)),
+
+                          ]),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 30),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text('Do you believe in aliens?',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            SizedBox(height: 5),
+                            Text(userData.aliens ?? "start a conversation and ask!", style: TextStyle(fontSize: 16))
+                          ]),
+                    ),
                     //START A CONVERSATION BUTTON
                     Container(
-                      margin: const EdgeInsets.fromLTRB(60, 5, 60, 0),
+                      margin: const EdgeInsets.fromLTRB(60, 5, 60, 30),
                       child: ButtonTheme(
                         height: 40.0,
                         child: RaisedButton(
@@ -357,7 +441,6 @@ class _MatchState extends State<Match> {
                                   .collection("messages")
                                   .document(chatID)
                                   .updateData({'matched': true}),
-
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
