@@ -10,7 +10,6 @@ import 'package:provider/provider.dart';
 import 'message.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-
 class Match extends StatefulWidget {
   @override
   _MatchState createState() => _MatchState();
@@ -20,6 +19,8 @@ class _MatchState extends State<Match> {
   String matchID;
   String chatID;
   int matches;
+  double sigmaX = 50;
+  double sigmaY = 50;
 
   final AuthService _auth = AuthService();
 
@@ -53,11 +54,11 @@ class _MatchState extends State<Match> {
                 width: double.infinity,
                 decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [Hexcolor("#FFF1BA"), Hexcolor("#F4AA33")],
-                      stops: [0.2, 0.7],
-                    )),
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [Hexcolor("#FFF1BA"), Hexcolor("#F4AA33")],
+                  stops: [0.2, 0.7],
+                )),
                 child: ListView(
                   children: <Widget>[
                     //TODAY'S MATCH
@@ -76,7 +77,8 @@ class _MatchState extends State<Match> {
                               icon: Icon(Icons.person),
                               label: Text("logout"),
                               onPressed: () async {
-                                Navigator.of(context).popUntil((route) => route.isFirst);
+                                Navigator.of(context)
+                                    .popUntil((route) => route.isFirst);
                                 await _auth.signOut();
                               },
                             ),
@@ -91,7 +93,8 @@ class _MatchState extends State<Match> {
                             children: <Widget>[
                               Text('${userData.nickname}, ${userData.age}',
                                   style: TextStyle(
-                                      fontSize: 28, fontWeight: FontWeight.bold)),
+                                      fontSize: 28,
+                                      fontWeight: FontWeight.bold)),
                               Row(
                                 children: <Widget>[
                                   Icon(MdiIcons.mapMarker,
@@ -129,52 +132,54 @@ class _MatchState extends State<Match> {
                                     borderRadius: BorderRadius.circular(10.0),
                                     child: BackdropFilter(
                                         filter: ImageFilter.blur(
-                                            sigmaX: 5, sigmaY: 5),
+                                            sigmaX: sigmaX, sigmaY: sigmaY),
                                         child: Container(
-                                            color: Colors.black.withOpacity(0))),
+                                            color:
+                                                Colors.black.withOpacity(0))),
                                   )),
                             ],
                           ),
-                          Positioned(
-                            bottom: 0,
-                            child: Container(
-                                height: 80,
-                                width: double.infinity,
-                                padding: const EdgeInsets.fromLTRB(35, 5, 0, 5),
-                                decoration: BoxDecoration(
-                                  color: Colors.white.withOpacity(0.7),
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Align(
-                                      alignment: Alignment.topLeft,
-                                      child: Container(
-                                        child: Text("John Smith, 28",
-                                            style: TextStyle(
-                                              fontSize: 23,
-                                              fontWeight: FontWeight.bold,
-                                            )),
-                                      ),
-                                    ),
-                                    Align(
-                                      alignment: Alignment.topLeft,
-                                      child: Row(
-                                        children: <Widget>[
-                                          Icon(MdiIcons.mapMarker,
-                                              size: 18, color: Colors.pink),
-                                          Text('Tokyo, Japan',
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 18,
-                                                  color: Colors.pink))
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                )),
-                          ),
+//CAN THIS BE DELETED?
+//                          Positioned(
+//                            bottom: 0,
+//                            child: Container(
+//                                height: 80,
+//                                width: double.infinity,
+//                                padding: const EdgeInsets.fromLTRB(35, 5, 0, 5),
+//                                decoration: BoxDecoration(
+//                                  color: Colors.white.withOpacity(0.7),
+//                                  borderRadius: BorderRadius.circular(10.0),
+//                                ),
+//                                child: Column(
+//                                  mainAxisAlignment: MainAxisAlignment.center,
+//                                  children: <Widget>[
+//                                    Align(
+//                                      alignment: Alignment.topLeft,
+//                                      child: Container(
+//                                        child: Text("John Smith, 28",
+//                                            style: TextStyle(
+//                                              fontSize: 23,
+//                                              fontWeight: FontWeight.bold,
+//                                            )),
+//                                      ),
+//                                    ),
+//                                    Align(
+//                                      alignment: Alignment.topLeft,
+//                                      child: Row(
+//                                        children: <Widget>[
+//                                          Icon(MdiIcons.mapMarker,
+//                                              size: 18, color: Colors.pink),
+//                                          Text('Tokyo, Japan',
+//                                              style: TextStyle(
+//                                                  fontWeight: FontWeight.bold,
+//                                                  fontSize: 18,
+//                                                  color: Colors.pink))
+//                                        ],
+//                                      ),
+//                                    ),
+//                                  ],
+//                                )),
+//                          ),
                         ],
                       ),
                     ),
@@ -219,100 +224,109 @@ class _MatchState extends State<Match> {
                                       margin: EdgeInsets.only(right: 10),
                                       child: OutlineButton(
                                           child: Text("Yodeling",
-                                              style:
-                                              TextStyle(color: Colors.pink)),
+                                              style: TextStyle(
+                                                  color: Colors.pink)),
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
-                                              BorderRadius.circular(10.0)))),
+                                                  BorderRadius.circular(
+                                                      10.0)))),
                                 if (userData.shopping)
                                   Container(
                                       margin: EdgeInsets.only(right: 10),
                                       child: OutlineButton(
                                           child: Text("Shopping",
-                                              style:
-                                              TextStyle(color: Colors.pink)),
+                                              style: TextStyle(
+                                                  color: Colors.pink)),
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
-                                              BorderRadius.circular(10.0)))),
+                                                  BorderRadius.circular(
+                                                      10.0)))),
                                 if (userData.makingBalloonAnimals)
                                   Container(
                                       margin: EdgeInsets.only(right: 10),
                                       child: OutlineButton(
                                           child: Text("MakingBalloonAnimals",
-                                              style:
-                                              TextStyle(color: Colors.pink)),
+                                              style: TextStyle(
+                                                  color: Colors.pink)),
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
-                                              BorderRadius.circular(10.0)))),
+                                                  BorderRadius.circular(
+                                                      10.0)))),
                                 if (userData.cooking)
                                   Container(
                                       margin: EdgeInsets.only(right: 10),
                                       child: OutlineButton(
                                           child: Text("Cooking",
-                                              style:
-                                              TextStyle(color: Colors.pink)),
+                                              style: TextStyle(
+                                                  color: Colors.pink)),
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
-                                              BorderRadius.circular(10.0)))),
+                                                  BorderRadius.circular(
+                                                      10.0)))),
                                 if (userData.painting)
                                   Container(
                                       margin: EdgeInsets.only(right: 10),
                                       child: OutlineButton(
                                           child: Text("Painting",
-                                              style:
-                                              TextStyle(color: Colors.pink)),
+                                              style: TextStyle(
+                                                  color: Colors.pink)),
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
-                                              BorderRadius.circular(10.0)))),
+                                                  BorderRadius.circular(
+                                                      10.0)))),
                                 if (userData.movies)
                                   Container(
                                       margin: EdgeInsets.only(right: 10),
                                       child: OutlineButton(
                                           child: Text("Movies",
-                                              style:
-                                              TextStyle(color: Colors.pink)),
+                                              style: TextStyle(
+                                                  color: Colors.pink)),
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
-                                              BorderRadius.circular(10.0)))),
+                                                  BorderRadius.circular(
+                                                      10.0)))),
                                 if (userData.sports)
                                   Container(
                                       margin: EdgeInsets.only(right: 10),
                                       child: OutlineButton(
                                           child: Text("Sports",
-                                              style:
-                                              TextStyle(color: Colors.pink)),
+                                              style: TextStyle(
+                                                  color: Colors.pink)),
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
-                                              BorderRadius.circular(10.0)))),
+                                                  BorderRadius.circular(
+                                                      10.0)))),
                                 if (userData.writing)
                                   Container(
                                       margin: EdgeInsets.only(right: 10),
                                       child: OutlineButton(
                                           child: Text("Writing",
-                                              style:
-                                              TextStyle(color: Colors.pink)),
+                                              style: TextStyle(
+                                                  color: Colors.pink)),
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
-                                              BorderRadius.circular(10.0)))),
+                                                  BorderRadius.circular(
+                                                      10.0)))),
                                 if (userData.drinking)
                                   Container(
                                       margin: EdgeInsets.only(right: 10),
                                       child: OutlineButton(
                                           child: Text("Drinking",
-                                              style:
-                                              TextStyle(color: Colors.pink)),
+                                              style: TextStyle(
+                                                  color: Colors.pink)),
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
-                                              BorderRadius.circular(10.0)))),
+                                                  BorderRadius.circular(
+                                                      10.0)))),
                               ],
                             )
                           ]),
@@ -333,9 +347,87 @@ class _MatchState extends State<Match> {
                             Text(userData.about, style: TextStyle(fontSize: 16))
                           ]),
                     ),
+                    //ANSWERS
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                      child: Wrap(children: <Widget>[
+                        Text('Do you make your bed in the morning?',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            )),
+                        SizedBox(height: 5),
+                        Text(userData.bed ?? "start a conversation and ask!",
+                            style: TextStyle(fontSize: 16)),
+                      ]),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                      child: Wrap(children: <Widget>[
+                        Text('Do you read reviews, or just go with your gut?',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            )),
+                        SizedBox(height: 5),
+                        Text(
+                            userData.reviews ?? "start a conversation and ask!",
+                            style: TextStyle(fontSize: 16)),
+                      ]),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                      child: Wrap(children: <Widget>[
+                        Text(
+                            'If you could only eat one thing for the rest of your life, what would it be?',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            )),
+                        SizedBox(height: 5),
+                        Text(
+                            userData.foreverEat ??
+                                "start a conversation and ask!",
+                            style: TextStyle(fontSize: 16)),
+                      ]),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                      child: Wrap(children: <Widget>[
+                        Text(
+                            "If you're eating a meal do you save the best thing for last or eat it first?",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            )),
+                        SizedBox(height: 5),
+                        Text(
+                            userData.bestForLast ??
+                                "start a conversation and ask!",
+                            style: TextStyle(fontSize: 16)),
+                      ]),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 30),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text('Do you believe in aliens?',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            SizedBox(height: 5),
+                            Text(
+                                userData.aliens ??
+                                    "start a conversation and ask!",
+                                style: TextStyle(fontSize: 16))
+                          ]),
+                    ),
                     //START A CONVERSATION BUTTON
                     Container(
-                      margin: const EdgeInsets.fromLTRB(60, 5, 60, 0),
+                      margin: const EdgeInsets.fromLTRB(60, 5, 60, 30),
                       child: ButtonTheme(
                         height: 40.0,
                         child: RaisedButton(
@@ -349,21 +441,21 @@ class _MatchState extends State<Match> {
                               borderRadius: BorderRadius.circular(20),
                             ),
                             onPressed: () => {
-                              //set chatted to true in db
-                              Firestore.instance
-                                  .collection("messages")
-                                  .document(chatID)
-                                  .updateData({'matched': true}),
-
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Message(
-                                        chatRoomID: chatID,
-                                        matchID: matchID,
-                                        nickname: userData.nickname,
-                                        imgUrl: userData.imgUrl,)))
-                            }),
+                                  //set chatted to true in db
+                                  Firestore.instance
+                                      .collection("messages")
+                                      .document(chatID)
+                                      .updateData({'matched': true}),
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Message(
+                                                chatRoomID: chatID,
+                                                matchID: matchID,
+                                                nickname: userData.nickname,
+                                                imgUrl: userData.imgUrl,
+                                              )))
+                                }),
                       ),
                     ),
                   ],
@@ -378,11 +470,11 @@ class _MatchState extends State<Match> {
                 width: double.infinity,
                 decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [Hexcolor("#FFF1BA"), Hexcolor("#F4AA33")],
-                      stops: [0.2, 0.7],
-                    )),
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [Hexcolor("#FFF1BA"), Hexcolor("#F4AA33")],
+                  stops: [0.2, 0.7],
+                )),
                 child: ListView(
                   children: <Widget>[
                     //GET NEW MATCH BUTTON
@@ -395,6 +487,7 @@ class _MatchState extends State<Match> {
                           )),
                       onPressed: () async {
                         //add matches by one
+
                         int matches = myUserData.matches + 1;
 
                         //find a user where matched is false
@@ -403,22 +496,22 @@ class _MatchState extends State<Match> {
                             .where('fromID', isEqualTo: user.uid)
                             .getDocuments()
                             .then((data) => data.documents.forEach((doc) => {
-                          if (!doc['matched'])
-                            {
-                              print(
-                                  'found unmatched user $doc.toID and $doc.documentID'),
-                              Firestore.instance
-                                  .collection('users')
-                                  .document(user.uid)
-                                  .updateData({
-                                'matchID': doc['toID'],
-                                'chatID': doc.documentID,
-                                'matches': matches,
-                              }),
-                              print(
-                                  'updated user collection with matchID: $doc.toID')
-                            }
-                        }));
+                                  if (!doc['matched'])
+                                    {
+                                      print(
+                                          'found unmatched user $doc.toID and $doc.documentID'),
+                                      Firestore.instance
+                                          .collection('users')
+                                          .document(user.uid)
+                                          .updateData({
+                                        'matchID': doc['toID'],
+                                        'chatID': doc.documentID,
+                                        'matches': matches,
+                                      }),
+                                      print(
+                                          'updated user collection with matchID: $doc.toID')
+                                    }
+                                }));
                         //go to matched Profile page
                         Navigator.of(context).pushNamed('/navigationHome');
                       },

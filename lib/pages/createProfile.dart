@@ -47,7 +47,6 @@ class _CreateProfileState extends State<CreateProfile> {
   Widget build(BuildContext context) {
     //this is providing the user object
     final user = Provider.of<User>(context);
-
     return loading
         ? Loading()
         : Scaffold(
@@ -362,6 +361,9 @@ class _CreateProfileState extends State<CreateProfile> {
                                 padding: EdgeInsets.fromLTRB(30, 10, 20, 0),
                                 child: RaisedButton(
                                   onPressed: () async {
+                                    print("IDDDDDDDDDDDD ${user.uid}");
+                                    print(user.isEmailVerified);
+                                    print(user);
                                     //write profile info into the db
                                     await DatabaseService(uid: user.uid)
                                         .updateUserData(
@@ -381,8 +383,16 @@ class _CreateProfileState extends State<CreateProfile> {
                                       writing,
                                       drinking,
                                     );
+                                    //write preference into db
+                                    await DatabaseService(uid: user.uid)
+                                        .updatePreference(
+                                        _lowValue,
+                                    _highValue,
+                                    genderPreference,
+                                    );
+
                                     Navigator.of(context)
-                                        .pushNamed('/uploadphoto');
+                                        .pushNamed('/questions');
                                   },
                                   textColor: Colors.white,
                                   color: Hexcolor("#215a00"),
@@ -390,7 +400,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                       borderRadius: BorderRadius.circular(50)),
                                   child: Row(
                                     children: <Widget>[
-                                      Text('GO TO UPLOAD PHOTO  ',
+                                      Text('QUESTION TIME  ',
                                           style: TextStyle(
                                               fontSize: 18,
                                               fontWeight: FontWeight.bold)),

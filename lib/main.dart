@@ -11,9 +11,11 @@ import 'package:lovealapp/pages/forgotpassword.dart';
 import 'package:lovealapp/services/auth.dart';
 import 'package:lovealapp/pages/createProfile.dart';
 import 'package:lovealapp/pages/editProfile.dart';
+import 'package:lovealapp/pages/loginFIrstTime.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:android_alarm_manager/android_alarm_manager.dart';
-// import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:lovealapp/pages/questions.dart';
 
 //provide user data to Wrapper file
 import 'package:provider/provider.dart';
@@ -21,25 +23,34 @@ import "package:lovealapp/models/user.dart";
 
 //main function is the first function that fires when dart file starts
 void main() async {
-  var now = new DateTime.now();
-  print(now);
+  var difference = secondsToAlarm();
+
   WidgetsFlutterBinding.ensureInitialized();
   await AndroidAlarmManager.initialize();
   await AndroidAlarmManager.periodic(
-      const Duration(minutes: 1), 0, resetUserMatches);
+      Duration(seconds: difference), 0, resetUserMatches);
+
   runApp(MyApp());
-  print('ran Main()');
 }
 
-void resetUserMatches() {
-  final user = AuthService().user;
-  print(user);
-  // Firestore.instance
-  //     .collection('users')
-  //     .document(user.uid['uid'])
-  //     .updateData({
-  //   'matches': 0,
-  // }).then((result));
+int secondsToAlarm() {
+  var today = new DateTime.now();
+  // schedule time for function invokation at 7AM
+  var tomorrow = new DateTime(today.year, today.month, today.day + 1, 7, 0);
+  // calculate hour difference
+  return tomorrow.difference(today).inHours;
+}
+
+void resetUserMatches() async {
+  Firestore.instance
+      .collection("users")
+      .getDocuments()
+      .then((querySnapshot) => {
+            querySnapshot.documents.forEach((doc) {
+              doc.reference.updateData({'matches': 0});
+            })
+          })
+      .catchError((error) => {print('Error resetting matches: $error')});
 }
 
 //create new widget called MyApp which is the root widget
@@ -70,6 +81,8 @@ class MyApp extends StatelessWidget {
             '/navigationHome': (_) => NavigationHome(),
             '/myprofile': (_) => MyProfile(),
             '/setPreferences': (_) => SetPreferences(),
+            '/loginFirstTime': (_) => LoginFirstTime(),
+            '/questions': (_) => Questions(),
           }),
     );
   }

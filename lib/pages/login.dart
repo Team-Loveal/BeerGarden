@@ -1,8 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:lovealapp/services/auth.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:lovealapp/shared/loading.dart';
+import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
+// import 'package:provider/provider.dart';
+// import 'package:beergarden/models/user.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -10,6 +12,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  @override
   final AuthService _auth = AuthService();
 
   //text field state
@@ -24,6 +27,7 @@ class _LoginState extends State<Login> {
     setState(() => loading = true);
     String trimmedEmail = email.trim();
     String trimmedPassword = password.trim();
+
     dynamic result =
         await _auth.signIWithEmailAndPassword(trimmedEmail, trimmedPassword);
     if (result == null) {
@@ -134,7 +138,7 @@ class _LoginState extends State<Login> {
       width: double.infinity,
       child: RaisedButton(
         elevation: 5.0,
-        onPressed: () => handleLogin(),
+        onPressed: () => {handleLogin()},
         padding: EdgeInsets.all(12.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),

@@ -1,8 +1,7 @@
-//for auth service
+import 'package:lovealapp/models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import "package:lovealapp/models/user.dart";
-import 'package:lovealapp/services/database.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'database.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -12,6 +11,7 @@ class AuthService {
     return user != null
         ? User(
             uid: user.uid,
+            isEmailVerified: user.isEmailVerified,
           )
         : null;
   }
@@ -25,15 +25,19 @@ class AuthService {
 
   //register with email and password
   Future registerWithEmailAndPassword(String email, String password) async {
+    AuthResult result = await _auth.createUserWithEmailAndPassword(
+        email: email, password: password);
+
     try {
-      AuthResult result = await _auth.createUserWithEmailAndPassword(
-          email: email, password: password);
       FirebaseUser user = result.user;
-
+      await user.sendEmailVerification();
+      // if (user.isEmailVerified) {
       //create a new document for the user with the uid and add email field
-      await DatabaseService(uid: user.uid).setUserData(email);
-
+      await DatabaseService(
+              uid: user.uid, isEmailVerified: user.isEmailVerified)
+          .setUserData(email);
       return _userFromFirebaseUser(user);
+      //}
     } catch (e) {
       print(e.toString());
       return null;
@@ -46,7 +50,9 @@ class AuthService {
       AuthResult result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       FirebaseUser user = result.user;
-      return _userFromFirebaseUser(user);
+      if (user.isEmailVerified == true) {
+        return _userFromFirebaseUser(user);
+      }
     } catch (e) {
       print(e.toString());
       return null;

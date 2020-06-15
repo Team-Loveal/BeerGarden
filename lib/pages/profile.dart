@@ -1,4 +1,7 @@
+import 'dart:ui';
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -6,17 +9,37 @@ class Profile extends StatefulWidget {
   final String userID;
   final String nickname;
   final String imgUrl;
-  Profile({Key key, this.userID, this.nickname, this.imgUrl}) : super(key: key);
+  final String chatRoomID;
+  Profile({Key key, this.userID, this.nickname, this.imgUrl, this.chatRoomID,}) : super(key: key);
 
   @override
-  _ProfileState createState() => _ProfileState(userID, nickname, imgUrl);
+  _ProfileState createState() => _ProfileState(userID, nickname, imgUrl, chatRoomID,);
 }
 
 class _ProfileState extends State<Profile> {
   final String userID;
   final String nickname;
   final String imgUrl;
-  _ProfileState(this.userID, this.nickname, this.imgUrl);
+  final String chatRoomID;
+  _ProfileState(this.userID, this.nickname, this.imgUrl, this.chatRoomID);
+
+  //to set blur
+  double sigmaX;
+  double sigmaY;
+
+  //get blur value from the DB
+  @override
+  void initState() {
+    super.initState();
+    //get matchID and chatID from db
+    Firestore.instance.collection('messages').document(chatRoomID).get().then((doc) {
+      setState(() {
+        sigmaX = doc['blur'].toDouble();
+        sigmaY = doc['blur'].toDouble();
+        print(doc['blur']);
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +48,17 @@ class _ProfileState extends State<Profile> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return Scaffold(
-              body: ListView(
+              body: Container(
+                height: double.infinity,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [Hexcolor("#FFF1BA"), Hexcolor("#F4AA33")],
+          stops: [0.2, 0.7],
+          )),
+          child: ListView(
                 children: <Widget>[
                   Row(
                     children: <Widget>[
@@ -80,11 +113,80 @@ class _ProfileState extends State<Profile> {
                                 ),
                               ]),
                         ),
-                        Expanded(
-                          child: CircleAvatar(
-                              radius: 65,
-                              backgroundImage: NetworkImage(imgUrl)),
+
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 30.0),
+                    width: 380,
+                    height: 380,
+                    child: Stack(
+                      children: <Widget>[
+                        Stack(
+                          children: <Widget>[
+                            Container(
+                                width: MediaQuery.of(context).size.width,
+                                height: 380,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  child: Image.network(imgUrl,
+                                      fit: BoxFit.cover),
+                                )),
+                            Container(
+                                width: MediaQuery.of(context).size.width,
+                                height: 380,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  child: BackdropFilter(
+                                      filter: ImageFilter.blur(
+                                          sigmaX: sigmaX ?? 50 , sigmaY: sigmaY ?? 50 ),
+                                      child: Container(
+                                          color: Colors.black.withOpacity(0))),
+                                )),
+                          ],
                         ),
+//CAN THIS BE DELETED?
+//                          Positioned(
+//                            bottom: 0,
+//                            child: Container(
+//                                height: 80,
+//                                width: double.infinity,
+//                                padding: const EdgeInsets.fromLTRB(35, 5, 0, 5),
+//                                decoration: BoxDecoration(
+//                                  color: Colors.white.withOpacity(0.7),
+//                                  borderRadius: BorderRadius.circular(10.0),
+//                                ),
+//                                child: Column(
+//                                  mainAxisAlignment: MainAxisAlignment.center,
+//                                  children: <Widget>[
+//                                    Align(
+//                                      alignment: Alignment.topLeft,
+//                                      child: Container(
+//                                        child: Text("John Smith, 28",
+//                                            style: TextStyle(
+//                                              fontSize: 23,
+//                                              fontWeight: FontWeight.bold,
+//                                            )),
+//                                      ),
+//                                    ),
+//                                    Align(
+//                                      alignment: Alignment.topLeft,
+//                                      child: Row(
+//                                        children: <Widget>[
+//                                          Icon(MdiIcons.mapMarker,
+//                                              size: 18, color: Colors.pink),
+//                                          Text('Tokyo, Japan',
+//                                              style: TextStyle(
+//                                                  fontWeight: FontWeight.bold,
+//                                                  fontSize: 18,
+//                                                  color: Colors.pink))
+//                                        ],
+//                                      ),
+//                                    ),
+//                                  ],
+//                                )),
+//                          ),
                       ],
                     ),
                   ),
@@ -225,7 +327,7 @@ class _ProfileState extends State<Profile> {
                         ]),
                   ),
                   Container(
-                    margin: const EdgeInsets.fromLTRB(20, 10, 20, 80),
+                    margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                     child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -239,8 +341,94 @@ class _ProfileState extends State<Profile> {
                           Text(snapshot.data['about'],
                               style: TextStyle(fontSize: 16))
                         ]),
+
+                  ),
+                  //ANSWERS
+                  Container(
+                    margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text('Do you make your bed in the morning?' ,
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              )),
+                          SizedBox(height: 5),
+                          Text(snapshot.data['bed'] ?? "ask me",
+                              style: TextStyle(fontSize: 16)),
+                        ]),
+                  ),
+                  Container(
+
+                    margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                    child: Wrap(
+
+                        children: <Widget>[
+                          Text('Do you read reviews, or just go with your gut?',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              )),
+                          SizedBox(height: 5),
+
+                          Text(snapshot.data['reviews'] ?? "ask me",
+                              style: TextStyle(fontSize: 16)),
+
+                        ]),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                    child: Wrap(
+                        children: <Widget>[
+
+                          Text('If you could only eat one thing for the rest of your life, what would it be?',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              )),
+
+                          SizedBox(height: 5),
+
+                          Text(snapshot.data['foreverEat'] ?? "ask me",
+                              style: TextStyle(fontSize: 16)),
+
+                        ]),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                    child: Wrap(
+                        children: <Widget>[
+                          Text("If you're eating a meal do you save the best thing for last or eat it first?",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              )),
+                          SizedBox(height: 5),
+
+                          Text(snapshot.data['bestForLast'] ?? "ask me",
+                              style: TextStyle(fontSize: 16)),
+
+                        ]),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.fromLTRB(20, 10, 20, 30),
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text('Do you believe in aliens?',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              )),
+                          SizedBox(height: 5),
+                          Text(snapshot.data['aliens'] ?? "ask me", style: TextStyle(fontSize: 16))
+                        ]),
                   ),
                 ],
+              ),
               ),
             );
           } else {

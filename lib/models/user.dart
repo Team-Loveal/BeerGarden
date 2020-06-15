@@ -1,7 +1,17 @@
 class User {
   final String uid;
-  User({this.uid});
+  bool isEmailVerified = false;
+  final String creationTimeStamp;
+  final String lastSignInTimeStamp;
+
+  User({
+    this.uid,
+    this.isEmailVerified,
+    this.creationTimeStamp,
+    this.lastSignInTimeStamp
+  });
 }
+
 
 class UserData {
   final String uid;
@@ -25,6 +35,11 @@ class UserData {
   final String imgUrl;
   final String matchID;
   final String chatID;
+  final String bed;
+  final String reviews;
+  final String foreverEat;
+  final String bestForLast;
+  final String aliens;
 
   UserData(
       {this.uid,
@@ -47,7 +62,13 @@ class UserData {
       this.matches,
       this.imgUrl,
       this.matchID,
-      this.chatID});
+      this.chatID,
+      this.bed,
+      this.reviews,
+      this.foreverEat,
+      this.bestForLast,
+      this.aliens,
+      });
 }
 
 class UserImg {
@@ -56,4 +77,32 @@ class UserImg {
   UserImg({
     this.imgUrl,
   });
+}
+
+class Preferences {
+  double lowValue;
+  double highValue;
+  String genderPreference;
+
+  Preferences({
+    this.lowValue,
+    this.highValue,
+    this.genderPreference
+});
+}
+
+class Answers {
+  String bed;
+  String reviews;
+  String foreverEat;
+  String bestForLast;
+  String aliens;
+
+  Answers({
+    this.bed,
+    this.reviews,
+    this.foreverEat,
+    this.bestForLast,
+    this.aliens
+});
 }

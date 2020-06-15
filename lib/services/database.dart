@@ -3,7 +3,8 @@ import 'package:lovealapp/models/user.dart';
 
 class DatabaseService {
   final String uid;
-  DatabaseService({this.uid});
+  bool isEmailVerified = false;
+  DatabaseService({this.uid, this.isEmailVerified});
 
   final CollectionReference usersCollection =
       Firestore.instance.collection("users");
@@ -116,6 +117,11 @@ class DatabaseService {
       drinking: snapshot.data['drinking'],
       matches: snapshot.data['matches'],
       imgUrl: snapshot.data['imgUrl'],
+      bed: snapshot.data['bed'],
+        reviews: snapshot.data['reviews'],
+        foreverEat: snapshot.data['foreverEat'],
+        bestForLast: snapshot.data['bestForLast'],
+        aliens: snapshot.data['aliens'],
     );
   }
 
@@ -143,5 +149,35 @@ class DatabaseService {
 
   Stream<UserImg> get userImg {
     return usersCollection.document(uid).snapshots().map(_userImgFromSnapshot);
+  }
+
+  //set and update preferences to filter out matches
+  Future updatePreference(
+      double lowValue,
+      double highValue,
+      String genderPreference,
+      ) async {
+    return await usersCollection.document(uid).updateData({
+      'lowAge': lowValue,
+      'highAge': highValue,
+      'genderPreference': genderPreference,
+    });
+  }
+
+  //write answers to questions
+  Future updateAnswers(
+      String bed,
+      String reviews,
+      String foreverEat,
+      String bestForLast,
+      String aliens,
+      ) async {
+    return await usersCollection.document(uid).updateData({
+      'bed': bed,
+      'reviews': reviews,
+      'foreverEat': foreverEat,
+      'bestForLast': bestForLast,
+      'aliens': aliens,
+    });
   }
 }
