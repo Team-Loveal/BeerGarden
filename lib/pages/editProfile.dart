@@ -50,7 +50,7 @@ class _EditProfileState extends State<EditProfile> {
 
     final user = Provider.of<User>(context);
 
-/*
+    //Setting the default values
     yodeling = data['yodelingEdit'];
     shopping = data['shoppingEdit'];
     makingBalloonAnimals = data['makingBalloonAnimalsEdit'];
@@ -60,7 +60,6 @@ class _EditProfileState extends State<EditProfile> {
     sports = data['sportsEdit'];
     writing = data['writingEdit'];
     drinking = data['drinkingEdit'];
-*/
 
     return StreamBuilder<UserData>(
 
@@ -259,9 +258,6 @@ class _EditProfileState extends State<EditProfile> {
                                         occupation = userData.occupation;
                                       }
                                     },
-                                    /*initialValue: (userData.occupation == null
-                                        ? ' '
-                                        : userData.occupation),*/
                                     initialValue: data['occupationEdit'],
                                     decoration: InputDecoration(
                                         labelText: 'Enter your occupation'),
@@ -297,104 +293,88 @@ class _EditProfileState extends State<EditProfile> {
                                             label: Text('yodeling'),
                                             selected: data['yodelingEdit'],
                                             onSelected: (isSelected) => {
-                                              setState(() => {
-                                                data['yodelingEdit'] = isSelected,
-                                              });
+                                            data['yodelingEdit'] = !data['yodelingEdit'],
+                                              setState(() => {})
                                             },
-
                                             selectedColor: Colors.pink[400],
                                             checkmarkColor: Colors.white,
                                           ),
                                           FilterChip(
                                             label: Text('shopping'),
-                                            selected: shopping || data['shoppingEdit'],
-                                           /* onSelected: (isSelected) {
-                                              setState(() {
-                                                shopping = isSelected;
-                                              });
-                                            },*/
-                                            onSelected: (isSelected) {
-                                              setState(() {
-                                              shopping = isSelected;
-                                              });
-
+                                            selected: data['shoppingEdit'],
+                                            onSelected: (isSelected) => {
+                                              data['shoppingEdit'] = !data['shoppingEdit'],
+                                              setState(() {})
                                             },
                                             selectedColor: Colors.pink[400],
                                             checkmarkColor: Colors.white,
                                           ),
                                           FilterChip(
                                             label: Text('making balloon animals'),
-                                            selected: makingBalloonAnimals,
-                                            onSelected: (isSelected) {
-                                              setState(() {
-                                                makingBalloonAnimals = isSelected;
-                                              });
+                                            selected: data['makingBalloonAnimalsEdit'],
+                                            onSelected: (isSelected) => {
+                                              data['makingBalloonAnimalsEdit'] = !data['makingBalloonAnimalsEdit'],
+                                              setState(() {})
                                             },
                                             selectedColor: Colors.pink[400],
                                             checkmarkColor: Colors.white,
                                           ),
                                           FilterChip(
                                             label: Text('cooking'),
-                                            selected: cooking,
-                                            onSelected: (isSelected) {
-                                              setState(() {
-                                                cooking = isSelected;
-                                              });
+                                            selected: data['cookingEdit'],
+                                            onSelected: (isSelected) => {
+                                              data['cookingEdit'] = !data['cookingEdit'],
+                                              setState(() {})
                                             },
                                             selectedColor: Colors.pink[400],
                                             checkmarkColor: Colors.white,
                                           ),
                                           FilterChip(
                                             label: Text('painting'),
-                                            selected: painting,
-                                            onSelected: (isSelected) {
-                                              setState(() {
-                                                painting = isSelected;
-                                              });
+                                            selected: data['paintingEdit'],
+                                            onSelected: (isSelected) => {
+                                              data['paintingEdit'] = !data['paintingEdit'],
+                                              setState(() {})
                                             },
                                             selectedColor: Colors.pink[400],
                                             checkmarkColor: Colors.white,
                                           ),
                                           FilterChip(
                                             label: Text('writing'),
-                                            selected: writing,
-                                            onSelected: (isSelected) {
-                                              setState(() {
-                                                writing = isSelected;
-                                              });
+                                            selected: data['writingEdit'],
+                                            onSelected: (isSelected) => {
+                                              data['writingEdit'] = !data['writingEdit'],
+                                              setState(() {})
                                             },
                                             selectedColor: Colors.pink[400],
                                             checkmarkColor: Colors.white,
                                           ),
                                           FilterChip(
                                             label: Text('sports'),
-                                            selected: sports,
-                                            onSelected: (isSelected) {
-                                              setState(() {
-                                                sports = isSelected;
-                                              });
+                                            selected: data['sportsEdit'],
+                                            onSelected: (isSelected) => {
+                                              data['sportsEdit'] = !data['sportsEdit'],
+                                              setState(() {})
                                             },
                                             selectedColor: Colors.pink[400],
                                             checkmarkColor: Colors.white,
                                           ),
                                           FilterChip(
                                             label: Text('movies'),
-                                            selected: movies,
-                                            onSelected: (isSelected) {
-                                              setState(() {
-                                                movies = isSelected;
-                                              });
+                                            selected: data['moviesEdit'],
+                                            onSelected: (isSelected) => {
+                                              data['moviesEdit'] = !data['moviesEdit'],
+                                              setState(() {})
                                             },
                                             selectedColor: Colors.pink[400],
                                             checkmarkColor: Colors.white,
                                           ),
                                           FilterChip(
                                             label: Text('drinking'),
-                                            selected: drinking,
-                                            onSelected: (isSelected) {
-                                              setState(() {
-                                                drinking = isSelected;
-                                              });
+                                            selected: data['drinkingEdit'],
+                                            onSelected: (isSelected) => {
+                                              data['drinkingEdit'] = !data['drinkingEdit'],
+                                              setState(() {})
                                             },
                                             selectedColor: Colors.pink[400],
                                             checkmarkColor: Colors.white,
