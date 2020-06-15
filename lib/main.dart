@@ -32,8 +32,8 @@
 //
 //    //TODO FOR BLUR FUNCTIONALITY:
 //     create blur field in message document and set it as 50
-      //every day decrease blur field by 1 or 3 or whatever
-      // when loading profile page read the blur field from the db and set it as sigmaX and sigmaY
+//every day decrease blur field by 1 or 3 or whatever
+// when loading profile page read the blur field from the db and set it as sigmaX and sigmaY
 //
 //    return Future.value(true);
 //  });
@@ -123,13 +123,13 @@ class MyApp extends StatelessWidget {
     return StreamProvider<User>.value(
       value: AuthService().user,
       child: MaterialApp(
-          title: 'Loveal',
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            fontFamily: 'Alata',
-            primaryColor: Hexcolor("#000000"),
-            accentColor: Hexcolor("#8CC63E"),
-          ),
+        title: 'Loveal',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          fontFamily: 'Alata',
+          primaryColor: Hexcolor("#000000"),
+          accentColor: Hexcolor("#8CC63E"),
+        ),
           initialRoute: '/',
           routes: {
             '/': (_) => Wrapper(),

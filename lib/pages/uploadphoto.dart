@@ -83,11 +83,8 @@ class _UploadPhotoState extends State<UploadPhoto> {
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
                           // ignore: unrelated_type_equality_checks
-                          child: _image != null
-                              ? Image.file(_image)
-                              : null,
-
-                      ),
+                          child: _image != null ? Image.file(_image) : null,
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -131,11 +128,30 @@ class _UploadPhotoState extends State<UploadPhoto> {
 
   Widget enableUpload() {
     return Container(
-      child: Column(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           RaisedButton(
-            color: Colors.pink,
-            child: Text('Next', style: TextStyle(fontWeight: FontWeight.bold)),
+              color: Colors.pinkAccent,
+              child: Text(
+                'Select again',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => UploadPhoto()),
+                );
+              }),
+          RaisedButton(
+            color: Hexcolor("#8CC63E"),
+            child: Text(
+              'Next',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
             ),
@@ -148,7 +164,7 @@ class _UploadPhotoState extends State<UploadPhoto> {
                       builder: (context) =>
                           ProfilePreview(profileImg: _image)));
             },
-          )
+          ),
         ],
       ),
     );
