@@ -182,7 +182,7 @@ class _EditProfileState extends State<EditProfile> {
                                                       ),
                                                     ),
                                                     DropdownButton<String>(
-                                                      value: age,
+                                                      value: age != null  ? age : data['ageEdit'],
                                                       iconSize: 24,
                                                       onChanged: (String newValue) {
                                                         setState(() {
@@ -194,7 +194,7 @@ class _EditProfileState extends State<EditProfile> {
                                                       ].map<DropdownMenuItem<String>>(
                                                           (String value) {
                                                         return DropdownMenuItem<String>(
-                                                          value: data['ageEdit'], //value,
+                                                          value: value,
                                                           child: Text(value),
                                                         );
                                                       }).toList(),
@@ -215,7 +215,7 @@ class _EditProfileState extends State<EditProfile> {
                                                   ),
                                                 ),
                                                 DropdownButton<String>(
-                                                  value: gender,
+                                                  value: gender != null  ? gender :data['genderEdit'],
                                                   iconSize: 24,
                                                   onChanged: (String newValue) {
                                                     setState(() {
@@ -223,9 +223,7 @@ class _EditProfileState extends State<EditProfile> {
                                                     });
                                                   },
                                                   items: <String>[
-                                                    'Female',
-                                                    'Male',
-                                                    'Other'
+                                                    'Female', 'Male', 'Rather not say'
                                                   ].map<DropdownMenuItem<String>>(
                                                       (String value) {
                                                     return DropdownMenuItem<String>(
