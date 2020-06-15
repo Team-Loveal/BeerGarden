@@ -47,9 +47,6 @@ class _CreateProfileState extends State<CreateProfile> {
   Widget build(BuildContext context) {
     //this is providing the user object
     final user = Provider.of<User>(context);
-    print(_lowValue);
-    print(_highValue);
-    print(genderPreference);
     return loading
         ? Loading()
         : Scaffold(
@@ -395,7 +392,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                     );
 
                                     Navigator.of(context)
-                                        .pushNamed('/uploadphoto');
+                                        .pushNamed('/questions');
                                   },
                                   textColor: Colors.white,
                                   color: Hexcolor("#215a00"),
@@ -403,7 +400,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                       borderRadius: BorderRadius.circular(50)),
                                   child: Row(
                                     children: <Widget>[
-                                      Text('GO TO UPLOAD PHOTO  ',
+                                      Text('QUESTION TIME  ',
                                           style: TextStyle(
                                               fontSize: 18,
                                               fontWeight: FontWeight.bold)),

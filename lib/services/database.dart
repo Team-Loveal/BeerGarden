@@ -117,6 +117,11 @@ class DatabaseService {
       drinking: snapshot.data['drinking'],
       matches: snapshot.data['matches'],
       imgUrl: snapshot.data['imgUrl'],
+      bed: snapshot.data['bed'],
+        reviews: snapshot.data['reviews'],
+        foreverEat: snapshot.data['foreverEat'],
+        bestForLast: snapshot.data['bestForLast'],
+        aliens: snapshot.data['aliens'],
     );
   }
 
@@ -159,4 +164,20 @@ class DatabaseService {
     });
   }
 
+  //write answers to questions
+  Future updateAnswers(
+      String bed,
+      String reviews,
+      String foreverEat,
+      String bestForLast,
+      String aliens,
+      ) async {
+    return await usersCollection.document(uid).updateData({
+      'bed': bed,
+      'reviews': reviews,
+      'foreverEat': foreverEat,
+      'bestForLast': bestForLast,
+      'aliens': aliens,
+    });
+  }
 }

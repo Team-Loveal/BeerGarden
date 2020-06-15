@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:lovealapp/models/user.dart';
+import 'package:lovealapp/services/database.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:provider/provider.dart';
 
 class Questions extends StatefulWidget {
   @override
@@ -8,12 +11,19 @@ class Questions extends StatefulWidget {
 }
 
 class _QuestionsState extends State<Questions> {
-  //TODO write answers to questions in the db
-  //create class in user.dart
-  //read from db and display on profile pages
-  //add questions to edit profile
+  //TODO get rid of limit for answer fields
+  //TODO answer fields conflict with question field when question is long
+  //TODO add ability to edit answers to edit profile
+
+  String bed;
+  String reviews;
+  String foreverEat;
+  String bestForLast;
+  String aliens;
+
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<User>(context);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -57,7 +67,7 @@ class _QuestionsState extends State<Questions> {
                           cursorWidth: 3,
                           maxLength: 20,
                           onChanged: (val) {
-
+                            setState(() => bed = val);
                           },
                           onSaved: (String value) {
                             //this block is used to run code when a user save the form
@@ -73,7 +83,7 @@ class _QuestionsState extends State<Questions> {
                           cursorWidth: 3,
                           maxLength: 20,
                           onChanged: (val) {
-
+                            setState(() => reviews = val);
                           },
                           onSaved: (String value) {
                             //this block is used to run code when a user save the form
@@ -89,7 +99,7 @@ class _QuestionsState extends State<Questions> {
                           cursorWidth: 3,
                           maxLength: 20,
                           onChanged: (val) {
-
+                            setState(() => foreverEat = val);
                           },
                           onSaved: (String value) {
                             //this block is used to run code when a user save the form
@@ -106,7 +116,7 @@ class _QuestionsState extends State<Questions> {
                           maxLength: 20,
 
                           onChanged: (val) {
-
+                            setState(() => bestForLast = val);
                           },
                           onSaved: (String value) {
                             //this block is used to run code when a user save the form
@@ -124,7 +134,7 @@ class _QuestionsState extends State<Questions> {
                           cursorWidth: 3,
                           maxLength: 20,
                           onChanged: (val) {
-
+                            setState(() => aliens = val);
                           },
                           onSaved: (String value) {
                             //this block is used to run code when a user save the form
@@ -142,6 +152,18 @@ class _QuestionsState extends State<Questions> {
                           child: RaisedButton(
                             onPressed: () async {
 
+                              //write answers into db
+                              await DatabaseService(uid: user.uid)
+                                  .updateAnswers(
+                                bed ?? "",
+                                reviews ?? "",
+                                foreverEat ?? "" ,
+                                bestForLast ?? "",
+                                  aliens ?? "",
+                              );
+
+                              Navigator.of(context)
+                                  .pushNamed('/uploadphoto');
                             },
                             textColor: Colors.white,
                             color: Hexcolor("#215a00"),
@@ -149,6 +171,7 @@ class _QuestionsState extends State<Questions> {
                                 borderRadius: BorderRadius.circular(50)),
                             child: Row(
                               children: <Widget>[
+                                //change to just upload photo?
                                 Text('GO TO UPLOAD PHOTO  ',
                                     style: TextStyle(
                                         fontSize: 18,
