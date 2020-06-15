@@ -469,6 +469,7 @@ class _EditProfileState extends State<EditProfile> {
                                       shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(20)),
                                       onPressed: () async {
+
                                         await DatabaseService(uid: user.uid)
                                             .editUserData(
                                           nickname ?? userData.nickname,
@@ -496,13 +497,14 @@ class _EditProfileState extends State<EditProfile> {
                                           _highValue,
                                           genderPreference,
                                         );
-                                        //Navigator.of(context).pushNamed('/profilePreview');
-                                       // Navigator.pushReplacementNamed(context, '/myProfile');
+                                       //Navigator.pushReplacementNamed(context, '/myProfile');                                        //Navigator.of(context).pushNamed('/profilePreview');
+                                        Navigator.of(context)
+                                            .pushNamed('/myProfile');
                                        /* Navigator.of(context)
                                             .pushNamed('/myProfile');*/
 
                                         //changed the below to the above to fix bug?!?
-                                        Navigator.pop(context);
+                                      //  Navigator.pop(context);
 
                                       },
                                     ),
