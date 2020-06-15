@@ -1,5 +1,4 @@
 import 'package:lovealapp/services/auth.dart';
-import 'package:lovealapp/shared/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -22,42 +21,39 @@ class _SignUpState extends State<SignUp> {
   bool loading = false;
 
   void handleSignUp() async {
-
     //changed to false
     String trimmedEmail = email.trim();
     String trimmedPassword = password.trim();
     setState(() => {
-      //loading= false,
-        _warning = 'A verification email has been sent to $trimmedEmail'
-      }
-    );
-    print('this is a warning ${_warning}');
-   /* String trimmedEmail = email.trim();
+          //loading= false,
+          _warning = 'A verification email has been sent to $trimmedEmail'
+        });
+//    print('this is a warning ${_warning}');
+    /* String trimmedEmail = email.trim();
     String trimmedPassword = password.trim();
     setState(() {
       _warning = 'A verification email has been sent to $trimmedEmail';
     });*/
     ShowAlert();
     dynamic result =
-    await _auth.registerWithEmailAndPassword(trimmedEmail, trimmedPassword);
+        await _auth.registerWithEmailAndPassword(trimmedEmail, trimmedPassword);
 
     //Probably dont need the this if statment?!?
-    print("This is resullllllllt: ${result}");
+//    print("This is resullllllllt: ${result}");
     if (result == null) {
       setState(() {
         error = 'Could not sign in with those credentials';
         loading = false;
       });
     } else {
+      //ShowAlert();
+      // clearTextInput();
 
-    //ShowAlert();
-    // clearTextInput();
-
-    Timer(Duration(seconds: 3), () {
-      {
-        Navigator.of(context).pushNamed('/loginFirstTime');
-      }
-    });
+      Timer(Duration(seconds: 3), () {
+        {
+          Navigator.of(context).pushNamed('/loginFirstTime');
+        }
+      });
     }
   }
 
@@ -287,14 +283,14 @@ class _SignUpState extends State<SignUp> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text(
-                      'Sign up',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 52.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    (_warning == null) ? Text(
+                          'Sign up',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 52.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ) : ShowAlert(),
                     SizedBox(height: 50.0),
                     _buildEmail(),
                     SizedBox(
@@ -319,9 +315,7 @@ class _SignUpState extends State<SignUp> {
   }
 }
 
-//for the warning message
 String _warning;
-
 
 class ShowAlert extends StatefulWidget {
   @override
@@ -331,8 +325,6 @@ class ShowAlert extends StatefulWidget {
 class _ShowAlertState extends State<ShowAlert> {
   @override
   Widget build(BuildContext context) {
-    print("AAA");
-    print("AAAAAAA: ${_warning}");
     if (_warning != null) {
       return Container(
         color: Colors.green,
