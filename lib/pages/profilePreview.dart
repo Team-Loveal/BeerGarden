@@ -44,8 +44,11 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                   //TODO move this function to database.dart
                   //TODO read preferences and filter out matches
                   //get potential matches for the user
+                  var genderPreference = userData.genderPreference;
+                  print(genderPreference);
                   Firestore.instance
                       .collection("users")
+                  .where('gender', isEqualTo: genderPreference)
                       .getDocuments()
                       .then((querySnapshot) {
                     querySnapshot.documents.forEach((document) {
