@@ -343,7 +343,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                         genderPreference = newValue;
                                       });
                                     },
-                                    items: <String>['Women', 'Men', 'Everyone']
+                                    items: <String>['Female', 'Male', 'Everyone']
                                         .map<DropdownMenuItem<String>>((String value) {
                                       return DropdownMenuItem<String>(
                                         value: value,

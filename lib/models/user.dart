@@ -40,6 +40,9 @@ class UserData {
   final String foreverEat;
   final String bestForLast;
   final String aliens;
+  final String genderPreference;
+  final double highAge;
+  final double lowAge;
 
   UserData(
       {this.uid,
@@ -68,6 +71,9 @@ class UserData {
       this.foreverEat,
       this.bestForLast,
       this.aliens,
+        this.genderPreference,
+        this.highAge,
+        this.lowAge,
       });
 }
 
