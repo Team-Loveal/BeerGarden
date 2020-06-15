@@ -50,6 +50,18 @@ class _EditProfileState extends State<EditProfile> {
 
     final user = Provider.of<User>(context);
 
+/*
+    yodeling = data['yodelingEdit'];
+    shopping = data['shoppingEdit'];
+    makingBalloonAnimals = data['makingBalloonAnimalsEdit'];
+    cooking = data['cookingEdit'];
+    painting = data['paintingEdit'];
+    movies = data['moviesEdit'];
+    sports = data['sportsEdit'];
+    writing = data['writingEdit'];
+    drinking = data['drinkingEdit'];
+*/
+
     return StreamBuilder<UserData>(
 
         stream: DatabaseService(uid: user.uid).userData,
@@ -283,22 +295,29 @@ class _EditProfileState extends State<EditProfile> {
                                         children: <Widget>[
                                           FilterChip(
                                             label: Text('yodeling'),
-                                            selected: yodeling,
-                                            onSelected: (isSelected) {
-                                              setState(() {
-                                                yodeling = isSelected;
+                                            selected: data['yodelingEdit'],
+                                            onSelected: (isSelected) => {
+                                              setState(() => {
+                                                data['yodelingEdit'] = isSelected,
                                               });
                                             },
+
                                             selectedColor: Colors.pink[400],
                                             checkmarkColor: Colors.white,
                                           ),
                                           FilterChip(
                                             label: Text('shopping'),
-                                            selected: shopping,
-                                            onSelected: (isSelected) {
+                                            selected: shopping || data['shoppingEdit'],
+                                           /* onSelected: (isSelected) {
                                               setState(() {
                                                 shopping = isSelected;
                                               });
+                                            },*/
+                                            onSelected: (isSelected) {
+                                              setState(() {
+                                              shopping = isSelected;
+                                              });
+
                                             },
                                             selectedColor: Colors.pink[400],
                                             checkmarkColor: Colors.white,
@@ -485,13 +504,9 @@ class _EditProfileState extends State<EditProfile> {
                                           _highValue,
                                           genderPreference,
                                         );
-                                       //Navigator.pushReplacementNamed(context, '/myProfile');                                        //Navigator.of(context).pushNamed('/profilePreview');
-                                        Navigator.of(context)
-                                            .pushNamed('/myProfile');
-                                       /* Navigator.of(context)
-                                            .pushNamed('/myProfile');*/
 
-                                        //changed the below to the above to fix bug?!?
+                                        Navigator.of(context)
+                                         .pushNamed('/navigationHome');
                                       //  Navigator.pop(context);
 
                                       },
