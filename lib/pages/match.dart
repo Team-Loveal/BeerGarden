@@ -41,7 +41,6 @@ class _MatchState extends State<Match> {
 
   @override
   Widget build(BuildContext context) {
-    print(matches);
     final myUserData = Provider.of<UserData>(context);
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: matchID).userData,
