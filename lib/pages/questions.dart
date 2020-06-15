@@ -108,7 +108,6 @@ class _QuestionsState extends State<Questions> {
                                 padding: EdgeInsets.fromLTRB(30, 30, 20, 0),
                                 child: RaisedButton(
                                   onPressed: () async {
-
                                     //write answers into db
                                     await DatabaseService(uid: user.uid)
                                         .updateAnswers(
@@ -118,7 +117,7 @@ class _QuestionsState extends State<Questions> {
                                       bestForLast ?? "",
                                       aliens ?? "",
                                     );
-
+                                    //route to upload photo page
                                     Navigator.of(context)
                                         .pushNamed('/uploadphoto');
                                   },
