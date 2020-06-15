@@ -29,7 +29,6 @@ class _MatchState extends State<Match> {
   void initState() {
     super.initState();
     final user = Provider.of<User>(context, listen: false);
-
     //get matchID and chatID from db
     Firestore.instance.collection('users').document(user.uid).get().then((doc) {
       setState(() {
@@ -347,10 +346,8 @@ class _MatchState extends State<Match> {
                                   fontWeight: FontWeight.bold,
                                 )),
                             SizedBox(height: 5),
-
-                            Text(userData.bed ?? "start a conversation and ask!",
+                            Text(userData.bed == "" ? "start a conversation and ask!" : userData.bed,
                                 style: TextStyle(fontSize: 16)),
-
                           ]),
                     ),
                     Container(
@@ -365,28 +362,22 @@ class _MatchState extends State<Match> {
                                   fontWeight: FontWeight.bold,
                                 )),
                             SizedBox(height: 5),
-
-                            Text(userData.reviews ?? "start a conversation and ask!",
+                            Text(userData.reviews == "" ? "start a conversation and ask!" : userData.reviews,
                                 style: TextStyle(fontSize: 16)),
-
                           ]),
                     ),
                     Container(
                       margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                       child: Wrap(
                           children: <Widget>[
-
                             Text('If you could only eat one thing for the rest of your life, what would it be?',
                                 style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                 )),
-
                             SizedBox(height: 5),
-
-                            Text(userData.foreverEat ?? "start a conversation and ask!",
+                            Text(userData.foreverEat == "" ? "start a conversation and ask!" : userData.foreverEat,
                                 style: TextStyle(fontSize: 16)),
-
                           ]),
                     ),
                     Container(
@@ -399,10 +390,8 @@ class _MatchState extends State<Match> {
                                   fontWeight: FontWeight.bold,
                                 )),
                             SizedBox(height: 5),
-
-                            Text(userData.bestForLast ?? "start a conversation and ask!",
+                            Text(userData.bestForLast == "" ? "start a conversation and ask!" : userData.bestForLast,
                                 style: TextStyle(fontSize: 16)),
-
                           ]),
                     ),
                     Container(
@@ -417,7 +406,7 @@ class _MatchState extends State<Match> {
                                   fontWeight: FontWeight.bold,
                                 )),
                             SizedBox(height: 5),
-                            Text(userData.aliens ?? "start a conversation and ask!", style: TextStyle(fontSize: 16))
+                            Text(userData.aliens == "" ? "start a conversation and ask!" : userData.aliens, style: TextStyle(fontSize: 16))
                           ]),
                     ),
                     //START A CONVERSATION BUTTON
@@ -481,7 +470,7 @@ class _MatchState extends State<Match> {
                           )),
                       onPressed: () async {
                         //add matches by one
-                        
+
                         int matches = myUserData.matches + 1;
 
                         //find a user where matched is false
