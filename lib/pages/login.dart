@@ -13,7 +13,6 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   @override
-
   final AuthService _auth = AuthService();
 
   //text field state
@@ -30,7 +29,7 @@ class _LoginState extends State<Login> {
     String trimmedPassword = password.trim();
 
     dynamic result =
-    await _auth.signIWithEmailAndPassword(trimmedEmail, trimmedPassword);
+        await _auth.signIWithEmailAndPassword(trimmedEmail, trimmedPassword);
     if (result == null) {
       setState(() {
         error = 'Could not sign in with those credentials';
@@ -139,8 +138,7 @@ class _LoginState extends State<Login> {
       width: double.infinity,
       child: RaisedButton(
         elevation: 5.0,
-        onPressed: () => {
-          handleLogin()},
+        onPressed: () => {handleLogin()},
         padding: EdgeInsets.all(12.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
@@ -250,62 +248,62 @@ class _LoginState extends State<Login> {
     return loading
         ? Loading()
         : Scaffold(
-      body: GestureDetector(
-        onTap: () => FocusScope.of(context).unfocus(),
-        child: Stack(
-          children: <Widget>[
-            Container(
-              height: double.infinity,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Hexcolor('#FFF1BA'),
-                    Hexcolor('#F4AA33'),
-                  ],
-                  stops: [0.2, 0.7],
-                ),
-              ),
-            ),
-            Container(
-              height: double.infinity,
-              child: SingleChildScrollView(
-                physics: AlwaysScrollableScrollPhysics(),
-                padding: EdgeInsets.symmetric(
-                  horizontal: 40.0,
-                  vertical: 120.0,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      'Login',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 52.0,
-                        fontWeight: FontWeight.bold,
+            body: GestureDetector(
+              onTap: () => FocusScope.of(context).unfocus(),
+              child: Stack(
+                children: <Widget>[
+                  Container(
+                    height: double.infinity,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Hexcolor('#FFF1BA'),
+                          Hexcolor('#F4AA33'),
+                        ],
+                        stops: [0.2, 0.7],
                       ),
                     ),
-                    SizedBox(height: 50.0),
-                    _buildEmail(),
-                    SizedBox(
-                      height: 12.0,
+                  ),
+                  Container(
+                    height: double.infinity,
+                    child: SingleChildScrollView(
+                      physics: AlwaysScrollableScrollPhysics(),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 40.0,
+                        vertical: 120.0,
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            'Login',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 52.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: 50.0),
+                          _buildEmail(),
+                          SizedBox(
+                            height: 12.0,
+                          ),
+                          _buildPassword(),
+                          _buildForgotPasswordBtn(),
+                          _buildLoginBtn(),
+                          _buildSignInWithText(),
+                          _buildSocialBtnRow(),
+                          _buildSignupBtn(),
+                        ],
+                      ),
                     ),
-                    _buildPassword(),
-                    _buildForgotPasswordBtn(),
-                    _buildLoginBtn(),
-                    _buildSignInWithText(),
-                    _buildSocialBtnRow(),
-                    _buildSignupBtn(),
-                  ],
-                ),
+                  )
+                ],
               ),
-            )
-          ],
-        ),
-      ),
-    );
+            ),
+          );
   }
 }

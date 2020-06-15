@@ -1,5 +1,4 @@
 import 'package:lovealapp/services/auth.dart';
-import 'package:lovealapp/shared/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -22,24 +21,22 @@ class _SignUpState extends State<SignUp> {
   bool loading = false;
 
   void handleSignUp() async {
-
     //changed to false
     String trimmedEmail = email.trim();
     String trimmedPassword = password.trim();
     setState(() => {
-      //loading= false,
-        _warning = 'A verification email has been sent to $trimmedEmail'
-      }
-    );
+          //loading= false,
+          _warning = 'A verification email has been sent to $trimmedEmail'
+        });
     print('this is a warning ${_warning}');
-   /* String trimmedEmail = email.trim();
+    /* String trimmedEmail = email.trim();
     String trimmedPassword = password.trim();
     setState(() {
       _warning = 'A verification email has been sent to $trimmedEmail';
     });*/
     ShowAlert();
     dynamic result =
-    await _auth.registerWithEmailAndPassword(trimmedEmail, trimmedPassword);
+        await _auth.registerWithEmailAndPassword(trimmedEmail, trimmedPassword);
 
     //Probably dont need the this if statment?!?
     print("This is resullllllllt: ${result}");
@@ -49,15 +46,14 @@ class _SignUpState extends State<SignUp> {
         loading = false;
       });
     } else {
+      //ShowAlert();
+      // clearTextInput();
 
-    //ShowAlert();
-    // clearTextInput();
-
-    Timer(Duration(seconds: 3), () {
-      {
-        Navigator.of(context).pushNamed('/loginFirstTime');
-      }
-    });
+      Timer(Duration(seconds: 3), () {
+        {
+          Navigator.of(context).pushNamed('/loginFirstTime');
+        }
+      });
     }
   }
 
@@ -318,6 +314,7 @@ class _SignUpState extends State<SignUp> {
     );
   }
 }
+
 String _warning;
 
 class ShowAlert extends StatefulWidget {
