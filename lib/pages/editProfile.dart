@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:lovealapp/services/database.dart';
 import 'package:lovealapp/shared/loading.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:lovealapp/pages/profilePreview.dart';
 
 
 class EditProfile extends StatefulWidget {
@@ -12,10 +14,13 @@ class EditProfile extends StatefulWidget {
 }
 
 class _EditProfileState extends State<EditProfile> {
+
+  Map data = {};
+
   String nickname;
   String location;
-  String age = '20 - 29';
-  String gender = 'Female';
+  String age;
+  String gender;
   String occupation;
   String about;
 
@@ -31,7 +36,7 @@ class _EditProfileState extends State<EditProfile> {
   bool drinking = false;
 
   //preferences
-  double _lowValue = 18;
+  double _lowValue = 20;
   double _highValue = 100;
   String genderPreference;
 
@@ -39,7 +44,22 @@ class _EditProfileState extends State<EditProfile> {
 
   @override
   Widget build(BuildContext context) {
+
+    data = ModalRoute.of(context).settings.arguments;
+    print('DATAAAAAAAAAA ${data}');
+
     final user = Provider.of<User>(context);
+
+    //Setting the default values
+    yodeling = data['yodelingEdit'];
+    shopping = data['shoppingEdit'];
+    makingBalloonAnimals = data['makingBalloonAnimalsEdit'];
+    cooking = data['cookingEdit'];
+    painting = data['paintingEdit'];
+    movies = data['moviesEdit'];
+    sports = data['sportsEdit'];
+    writing = data['writingEdit'];
+    drinking = data['drinkingEdit'];
 
     return StreamBuilder<UserData>(
 
@@ -117,14 +137,16 @@ class _EditProfileState extends State<EditProfile> {
                                     children: <Widget>[
                                       TextFormField(
                                         onChanged: (val) {
-                                          nickname = userData.nickname;
+                                          if (val != userData.nickname) {
+                                            setState(() => nickname = val);
+                                          } else {
+                                            nickname = data['nicknameEdit'];
+                                            };
                                         },
                                         style: TextStyle(
                                             color: Colors.black,
                                             fontWeight: FontWeight.w300),
-                                        initialValue: (userData.nickname == null
-                                            ? ' '
-                                            : userData.nickname),
+                                        initialValue: data['nicknameEdit'],
                                         decoration: InputDecoration(
                                           labelText: 'Nickname',
                                         ),
@@ -133,14 +155,16 @@ class _EditProfileState extends State<EditProfile> {
                                       ),
                                       TextFormField(
                                         onChanged: (val) {
-                                          location = userData.location;
+                                          if (val != userData.location) {
+                                            setState(() => location = val);
+                                          } else {
+                                            location = userData.location;
+                                          };
                                         },
                                         style: TextStyle(
                                             color: Colors.black,
                                             fontWeight: FontWeight.w300),
-                                        initialValue: (userData.location == null
-                                            ? ' '
-                                            : userData.location),
+                                        initialValue: data['locationEdit'],
                                         decoration: InputDecoration(
                                           labelText: 'Location',
                                         ),
@@ -169,7 +193,7 @@ class _EditProfileState extends State<EditProfile> {
                                                       ),
                                                     ),
                                                     DropdownButton<String>(
-                                                      value: age,
+                                                      value: age != null  ? age : data['ageEdit'],
                                                       iconSize: 24,
                                                       onChanged: (String newValue) {
                                                         setState(() {
@@ -177,17 +201,10 @@ class _EditProfileState extends State<EditProfile> {
                                                         });
                                                       },
                                                       items: <String>[
-                                                        '20 - 29',
-                                                        '30 - 39',
-                                                        '40 - 49',
-                                                        '50 - 59',
-                                                        '60 - 69'
-                                                      ].map<
-                                                              DropdownMenuItem<
-                                                                  String>>(
+                                                        '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80'
+                                                      ].map<DropdownMenuItem<String>>(
                                                           (String value) {
-                                                        return DropdownMenuItem<
-                                                            String>(
+                                                        return DropdownMenuItem<String>(
                                                           value: value,
                                                           child: Text(value),
                                                         );
@@ -209,7 +226,7 @@ class _EditProfileState extends State<EditProfile> {
                                                   ),
                                                 ),
                                                 DropdownButton<String>(
-                                                  value: gender,
+                                                  value: gender != null  ? gender :data['genderEdit'],
                                                   iconSize: 24,
                                                   onChanged: (String newValue) {
                                                     setState(() {
@@ -217,9 +234,7 @@ class _EditProfileState extends State<EditProfile> {
                                                     });
                                                   },
                                                   items: <String>[
-                                                    'Female',
-                                                    'Male',
-                                                    'Other'
+                                                    'Female', 'Male', 'Rather not say'
                                                   ].map<DropdownMenuItem<String>>(
                                                       (String value) {
                                                     return DropdownMenuItem<String>(
@@ -243,9 +258,7 @@ class _EditProfileState extends State<EditProfile> {
                                         occupation = userData.occupation;
                                       }
                                     },
-                                    initialValue: (userData.occupation == null
-                                        ? ' '
-                                        : userData.occupation),
+                                    initialValue: data['occupationEdit'],
                                     decoration: InputDecoration(
                                         labelText: 'Enter your occupation'),
                                     keyboardType: TextInputType.text,
@@ -258,9 +271,7 @@ class _EditProfileState extends State<EditProfile> {
                                         about = userData.about;
                                       }
                                     },
-                                    initialValue: (userData.about == null
-                                        ? ' '
-                                        : userData.about),
+                                    initialValue: data['aboutEdit'],
                                     decoration: InputDecoration(
                                         labelText:
                                             'Share something about yourself'),
@@ -280,99 +291,90 @@ class _EditProfileState extends State<EditProfile> {
                                         children: <Widget>[
                                           FilterChip(
                                             label: Text('yodeling'),
-                                            selected: yodeling,
-                                            onSelected: (isSelected) {
-                                              setState(() {
-                                                yodeling = isSelected;
-                                              });
+                                            selected: data['yodelingEdit'],
+                                            onSelected: (isSelected) => {
+                                            data['yodelingEdit'] = !data['yodelingEdit'],
+                                              setState(() => {})
                                             },
                                             selectedColor: Colors.pink[400],
                                             checkmarkColor: Colors.white,
                                           ),
                                           FilterChip(
                                             label: Text('shopping'),
-                                            selected: shopping,
-                                            onSelected: (isSelected) {
-                                              setState(() {
-                                                shopping = isSelected;
-                                              });
+                                            selected: data['shoppingEdit'],
+                                            onSelected: (isSelected) => {
+                                              data['shoppingEdit'] = !data['shoppingEdit'],
+                                              setState(() {})
                                             },
                                             selectedColor: Colors.pink[400],
                                             checkmarkColor: Colors.white,
                                           ),
                                           FilterChip(
                                             label: Text('making balloon animals'),
-                                            selected: makingBalloonAnimals,
-                                            onSelected: (isSelected) {
-                                              setState(() {
-                                                makingBalloonAnimals = isSelected;
-                                              });
+                                            selected: data['makingBalloonAnimalsEdit'],
+                                            onSelected: (isSelected) => {
+                                              data['makingBalloonAnimalsEdit'] = !data['makingBalloonAnimalsEdit'],
+                                              setState(() {})
                                             },
                                             selectedColor: Colors.pink[400],
                                             checkmarkColor: Colors.white,
                                           ),
                                           FilterChip(
                                             label: Text('cooking'),
-                                            selected: cooking,
-                                            onSelected: (isSelected) {
-                                              setState(() {
-                                                cooking = isSelected;
-                                              });
+                                            selected: data['cookingEdit'],
+                                            onSelected: (isSelected) => {
+                                              data['cookingEdit'] = !data['cookingEdit'],
+                                              setState(() {})
                                             },
                                             selectedColor: Colors.pink[400],
                                             checkmarkColor: Colors.white,
                                           ),
                                           FilterChip(
                                             label: Text('painting'),
-                                            selected: painting,
-                                            onSelected: (isSelected) {
-                                              setState(() {
-                                                painting = isSelected;
-                                              });
+                                            selected: data['paintingEdit'],
+                                            onSelected: (isSelected) => {
+                                              data['paintingEdit'] = !data['paintingEdit'],
+                                              setState(() {})
                                             },
                                             selectedColor: Colors.pink[400],
                                             checkmarkColor: Colors.white,
                                           ),
                                           FilterChip(
                                             label: Text('writing'),
-                                            selected: writing,
-                                            onSelected: (isSelected) {
-                                              setState(() {
-                                                writing = isSelected;
-                                              });
+                                            selected: data['writingEdit'],
+                                            onSelected: (isSelected) => {
+                                              data['writingEdit'] = !data['writingEdit'],
+                                              setState(() {})
                                             },
                                             selectedColor: Colors.pink[400],
                                             checkmarkColor: Colors.white,
                                           ),
                                           FilterChip(
                                             label: Text('sports'),
-                                            selected: sports,
-                                            onSelected: (isSelected) {
-                                              setState(() {
-                                                sports = isSelected;
-                                              });
+                                            selected: data['sportsEdit'],
+                                            onSelected: (isSelected) => {
+                                              data['sportsEdit'] = !data['sportsEdit'],
+                                              setState(() {})
                                             },
                                             selectedColor: Colors.pink[400],
                                             checkmarkColor: Colors.white,
                                           ),
                                           FilterChip(
                                             label: Text('movies'),
-                                            selected: movies,
-                                            onSelected: (isSelected) {
-                                              setState(() {
-                                                movies = isSelected;
-                                              });
+                                            selected: data['moviesEdit'],
+                                            onSelected: (isSelected) => {
+                                              data['moviesEdit'] = !data['moviesEdit'],
+                                              setState(() {})
                                             },
                                             selectedColor: Colors.pink[400],
                                             checkmarkColor: Colors.white,
                                           ),
                                           FilterChip(
                                             label: Text('drinking'),
-                                            selected: drinking,
-                                            onSelected: (isSelected) {
-                                              setState(() {
-                                                drinking = isSelected;
-                                              });
+                                            selected: data['drinkingEdit'],
+                                            onSelected: (isSelected) => {
+                                              data['drinkingEdit'] = !data['drinkingEdit'],
+                                              setState(() {})
                                             },
                                             selectedColor: Colors.pink[400],
                                             checkmarkColor: Colors.white,
@@ -426,9 +428,9 @@ class _EditProfileState extends State<EditProfile> {
                                             ],
                                           ),
                                           RangeSlider(
-                                            min: 18,
+                                            min: 20,
                                             max: 100,
-                                            divisions: 82,
+                                            divisions: 80,
                                             inactiveColor: Colors.black,
                                             activeColor: Colors.black,
                                             values: RangeValues(_lowValue, _highValue),
@@ -454,6 +456,7 @@ class _EditProfileState extends State<EditProfile> {
                                       shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(20)),
                                       onPressed: () async {
+
                                         await DatabaseService(uid: user.uid)
                                             .editUserData(
                                           nickname ?? userData.nickname,
@@ -482,7 +485,9 @@ class _EditProfileState extends State<EditProfile> {
                                           genderPreference,
                                         );
 
-                                        Navigator.pop(context);
+                                        Navigator.of(context)
+                                         .pushNamed('/navigationHome');
+                                      //  Navigator.pop(context);
 
                                       },
                                     ),
