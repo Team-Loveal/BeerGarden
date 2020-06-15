@@ -43,6 +43,7 @@ dependencies:
   android_alarm_manager: ^0.4.5+11
   workmanager: ^0.2.0
   pimp_my_button: ^1.0.0
+  flutter_form_builder: ^3.11.0
 
 dev_dependencies:
   flutter_test:
