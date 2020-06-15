@@ -194,7 +194,7 @@ class _EditProfileState extends State<EditProfile> {
                                                       ].map<DropdownMenuItem<String>>(
                                                           (String value) {
                                                         return DropdownMenuItem<String>(
-                                                          value: value,
+                                                          value: data['ageEdit'], //value,
                                                           child: Text(value),
                                                         );
                                                       }).toList(),
