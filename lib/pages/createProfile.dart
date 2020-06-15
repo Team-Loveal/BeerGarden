@@ -387,11 +387,11 @@ class _CreateProfileState extends State<CreateProfile> {
                                   padding: EdgeInsets.fromLTRB(30, 10, 20, 0),
                                   child: RaisedButton(
                                     onPressed: () async {
-                                      if (_formKey.currentState.validate()) {
-                                        // If the form is valid, display a Snackbar.
-                                        Scaffold.of(context)
-                                            .showSnackBar(SnackBar(content: Text('Processing Data')));
-                                      }
+//                                      if (_formKey.currentState.validate()) {
+//                                        // If the form is valid, display a Snackbar.
+//                                        Scaffold.of(context)
+//                                            .showSnackBar(SnackBar(content: Text('Processing Data')));
+//                                      }
 
                                       print("IDDDDDDDDDDDD ${user.uid}");
                                       print(user.isEmailVerified);
