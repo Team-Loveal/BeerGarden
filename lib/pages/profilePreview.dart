@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +12,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
 
 class ProfilePreview extends StatefulWidget {
+  //instead of reading from db, could try and pass values from previous widgets
   final File profileImg;
 
   ProfilePreview({Key key, @required this.profileImg}) : super(key: key);
@@ -66,7 +69,6 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                                   .setData({
                                 'fromID': user.uid,
                                 'toID': toID,
-                                //'chatted': false,
                                 'matched': false,
                                 'matchedUsers': [user.uid, toID],
                                 'blur': 50,
@@ -78,10 +80,6 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                     });
                   });
                   Navigator.of(context).popUntil((route) => route.isFirst);
-//                  Navigator.push(
-//                    context,
-//                    MaterialPageRoute(builder: (context) => NavigationHome()),
-//                  );
                 },
                 isExtended: true,
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -106,7 +104,7 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                     Container(
                         margin: const EdgeInsets.symmetric(
                             vertical: 10.0, horizontal: 20.0),
-                        child: Text('Profile',
+                        child: Text('Profile Preview',
                             style: TextStyle(
                               fontSize: 40.0,
                               fontWeight: FontWeight.bold,
@@ -132,7 +130,7 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                                     children: <Widget>[
                                       Icon(MdiIcons.mapMarker,
                                           size: 18, color: Colors.grey),
-                                      Text('Tokyo, Japan',
+                                      Text('${userData.location}, Japan',
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               color: Colors.grey))
@@ -140,12 +138,80 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                                   ),
                                 ]),
                           ),
-                          Expanded(
-                            child: CircleAvatar(
-                              radius: 50,
-                              backgroundImage: FileImage(profileImg),
-                            ),
+                        ],
+                      ),
+                    ),
+                    //IMAGE
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 30.0),
+                      width: 380,
+                      height: 380,
+                      child: Stack(
+                        children: <Widget>[
+                          Stack(
+                            children: <Widget>[
+                              Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  height: 380,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    child: Image.network(userData.imgUrl,
+                                        fit: BoxFit.cover),
+                                  )),
+                              Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  height: 380,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    child: BackdropFilter(
+                                        filter: ImageFilter.blur(
+                                            sigmaX: 0, sigmaY: 0),
+                                        child: Container(
+                                            color: Colors.black.withOpacity(0))),
+                                  )),
+                            ],
                           ),
+//CAN THIS BE DELETED?
+//                          Positioned(
+//                            bottom: 0,
+//                            child: Container(
+//                                height: 80,
+//                                width: double.infinity,
+//                                padding: const EdgeInsets.fromLTRB(35, 5, 0, 5),
+//                                decoration: BoxDecoration(
+//                                  color: Colors.white.withOpacity(0.7),
+//                                  borderRadius: BorderRadius.circular(10.0),
+//                                ),
+//                                child: Column(
+//                                  mainAxisAlignment: MainAxisAlignment.center,
+//                                  children: <Widget>[
+//                                    Align(
+//                                      alignment: Alignment.topLeft,
+//                                      child: Container(
+//                                        child: Text("John Smith, 28",
+//                                            style: TextStyle(
+//                                              fontSize: 23,
+//                                              fontWeight: FontWeight.bold,
+//                                            )),
+//                                      ),
+//                                    ),
+//                                    Align(
+//                                      alignment: Alignment.topLeft,
+//                                      child: Row(
+//                                        children: <Widget>[
+//                                          Icon(MdiIcons.mapMarker,
+//                                              size: 18, color: Colors.pink),
+//                                          Text('Tokyo, Japan',
+//                                              style: TextStyle(
+//                                                  fontWeight: FontWeight.bold,
+//                                                  fontSize: 18,
+//                                                  color: Colors.pink))
+//                                        ],
+//                                      ),
+//                                    ),
+//                                  ],
+//                                )),
+//                          ),
                         ],
                       ),
                     ),
@@ -287,10 +353,8 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                           ]),
                     ),
                     Container(
-                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 80),
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                      child: Wrap(
                           children: <Widget>[
                             Text('About me',
                                 style: TextStyle(
@@ -298,7 +362,92 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                                   fontWeight: FontWeight.bold,
                                 )),
                             SizedBox(height: 5),
-                            Text(userData.about, style: TextStyle(fontSize: 16))
+                              Text(userData.about,
+                                  style: TextStyle(fontSize: 16)),
+                          ]),
+                    ),
+                    //ANSWERS
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                      child: Wrap(
+                          children: <Widget>[
+                            Text('Do you make your bed in the morning?',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            SizedBox(height: 5),
+
+                              Text(userData.bed,
+                                  style: TextStyle(fontSize: 16)),
+
+                          ]),
+                    ),
+                    Container(
+
+                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                      child: Wrap(
+
+                          children: <Widget>[
+                            Text('Do you read reviews, or just go with your gut?',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            SizedBox(height: 5),
+
+                              Text(userData.reviews,
+                                  style: TextStyle(fontSize: 16)),
+
+                          ]),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                      child: Wrap(
+                          children: <Widget>[
+
+                              Text('If you could only eat one thing for the rest of your life, what would it be?',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  )),
+
+                            SizedBox(height: 5),
+
+                              Text(userData.foreverEat,
+                                  style: TextStyle(fontSize: 16)),
+
+                          ]),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                      child: Wrap(
+                          children: <Widget>[
+                            Text("If you're eating a meal do you save the best thing for last or eat it first?",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            SizedBox(height: 5),
+
+                              Text(userData.bestForLast,
+                                  style: TextStyle(fontSize: 16)),
+
+                          ]),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 80),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text('Do you believe in aliens?',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            SizedBox(height: 5),
+                            Text(userData.aliens, style: TextStyle(fontSize: 16))
                           ]),
                     ),
                   ],

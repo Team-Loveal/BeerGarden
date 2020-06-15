@@ -35,6 +35,11 @@ class UserData {
   final String imgUrl;
   final String matchID;
   final String chatID;
+  final String bed;
+  final String reviews;
+  final String foreverEat;
+  final String bestForLast;
+  final String aliens;
 
   UserData(
       {this.uid,
@@ -57,7 +62,13 @@ class UserData {
       this.matches,
       this.imgUrl,
       this.matchID,
-      this.chatID});
+      this.chatID,
+      this.bed,
+      this.reviews,
+      this.foreverEat,
+      this.bestForLast,
+      this.aliens,
+      });
 }
 
 class UserImg {
@@ -77,5 +88,21 @@ class Preferences {
     this.lowValue,
     this.highValue,
     this.genderPreference
+});
+}
+
+class Answers {
+  String bed;
+  String reviews;
+  String foreverEat;
+  String bestForLast;
+  String aliens;
+
+  Answers({
+    this.bed,
+    this.reviews,
+    this.foreverEat,
+    this.bestForLast,
+    this.aliens
 });
 }
