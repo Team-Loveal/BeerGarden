@@ -130,7 +130,8 @@ class _MessageState extends State<Message> {
                         builder: (context) => Profile(
                             userID: matchID,
                             nickname: nickname,
-                            imgUrl: imgUrl)));
+                            imgUrl: imgUrl,
+                            chatRoomID: chatRoomID)));
               },
               child: Container(
                 child: Center(

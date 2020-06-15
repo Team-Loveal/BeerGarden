@@ -13,7 +13,6 @@ class Questions extends StatefulWidget {
 class _QuestionsState extends State<Questions> {
   //TODO get rid of limit for answer fields
   //TODO answer fields conflict with question field when question is long
-  //TODO add ability to edit answers to edit profile
 
   String bed;
   String reviews;
