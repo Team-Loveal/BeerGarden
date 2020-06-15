@@ -42,7 +42,6 @@ class _MatchState extends State<Match> {
   @override
   Widget build(BuildContext context) {
     final myUserData = Provider.of<UserData>(context);
-
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: matchID).userData,
         builder: (context, snapshot) {
@@ -461,6 +460,7 @@ class _MatchState extends State<Match> {
                                   fontWeight: FontWeight.bold,
                                 )),
                             onPressed: () async {
+                              _auth.signOut();
                               controller.forward(from: 0.0);
                               //add matches by one
                               int matches = myUserData.matches + 1;
