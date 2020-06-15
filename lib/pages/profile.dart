@@ -140,7 +140,7 @@ class _ProfileState extends State<Profile> {
                                   borderRadius: BorderRadius.circular(10.0),
                                   child: BackdropFilter(
                                       filter: ImageFilter.blur(
-                                          sigmaX: sigmaX , sigmaY: sigmaY ),
+                                          sigmaX: sigmaX ?? 50 , sigmaY: sigmaY ?? 50 ),
                                       child: Container(
                                           color: Colors.black.withOpacity(0))),
                                 )),
