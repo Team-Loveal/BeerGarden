@@ -318,7 +318,10 @@ class _SignUpState extends State<SignUp> {
     );
   }
 }
+
+//for the warning message
 String _warning;
+
 
 class ShowAlert extends StatefulWidget {
   @override
@@ -328,9 +331,11 @@ class ShowAlert extends StatefulWidget {
 class _ShowAlertState extends State<ShowAlert> {
   @override
   Widget build(BuildContext context) {
+    print("AAA");
+    print("AAAAAAA: ${_warning}");
     if (_warning != null) {
       return Container(
-        color: Colors.amberAccent,
+        color: Colors.green,
         width: double.infinity,
         padding: EdgeInsets.all(8.0),
         child: Row(children: <Widget>[
@@ -342,8 +347,8 @@ class _ShowAlertState extends State<ShowAlert> {
             child: Text(
               _warning,
               style: TextStyle(
-                //color: Colors.cyan,
-                color: Colors.black,
+                color: Colors.white,
+                fontSize: 15,
               ),
               maxLines: 3,
             ),
