@@ -9,6 +9,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 import 'message.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:pimp_my_button/pimp_my_button.dart';
 
 class Match extends StatefulWidget {
   @override
@@ -28,7 +29,6 @@ class _MatchState extends State<Match> {
   void initState() {
     super.initState();
     final user = Provider.of<User>(context, listen: false);
-
     //get matchID and chatID from db
     Firestore.instance.collection('users').document(user.uid).get().then((doc) {
       setState(() {
@@ -139,47 +139,6 @@ class _MatchState extends State<Match> {
                                   )),
                             ],
                           ),
-//CAN THIS BE DELETED?
-//                          Positioned(
-//                            bottom: 0,
-//                            child: Container(
-//                                height: 80,
-//                                width: double.infinity,
-//                                padding: const EdgeInsets.fromLTRB(35, 5, 0, 5),
-//                                decoration: BoxDecoration(
-//                                  color: Colors.white.withOpacity(0.7),
-//                                  borderRadius: BorderRadius.circular(10.0),
-//                                ),
-//                                child: Column(
-//                                  mainAxisAlignment: MainAxisAlignment.center,
-//                                  children: <Widget>[
-//                                    Align(
-//                                      alignment: Alignment.topLeft,
-//                                      child: Container(
-//                                        child: Text("John Smith, 28",
-//                                            style: TextStyle(
-//                                              fontSize: 23,
-//                                              fontWeight: FontWeight.bold,
-//                                            )),
-//                                      ),
-//                                    ),
-//                                    Align(
-//                                      alignment: Alignment.topLeft,
-//                                      child: Row(
-//                                        children: <Widget>[
-//                                          Icon(MdiIcons.mapMarker,
-//                                              size: 18, color: Colors.pink),
-//                                          Text('Tokyo, Japan',
-//                                              style: TextStyle(
-//                                                  fontWeight: FontWeight.bold,
-//                                                  fontSize: 18,
-//                                                  color: Colors.pink))
-//                                        ],
-//                                      ),
-//                                    ),
-//                                  ],
-//                                )),
-//                          ),
                         ],
                       ),
                     ),
@@ -357,7 +316,10 @@ class _MatchState extends State<Match> {
                               fontWeight: FontWeight.bold,
                             )),
                         SizedBox(height: 5),
-                        Text(userData.bed ?? "start a conversation and ask!",
+                        Text(
+                            userData.bed == ""
+                                ? "start a conversation and ask!"
+                                : userData.bed,
                             style: TextStyle(fontSize: 16)),
                       ]),
                     ),
@@ -371,7 +333,9 @@ class _MatchState extends State<Match> {
                             )),
                         SizedBox(height: 5),
                         Text(
-                            userData.reviews ?? "start a conversation and ask!",
+                            userData.reviews == ""
+                                ? "start a conversation and ask!"
+                                : userData.reviews,
                             style: TextStyle(fontSize: 16)),
                       ]),
                     ),
@@ -386,8 +350,9 @@ class _MatchState extends State<Match> {
                             )),
                         SizedBox(height: 5),
                         Text(
-                            userData.foreverEat ??
-                                "start a conversation and ask!",
+                            userData.foreverEat == ""
+                                ? "start a conversation and ask!"
+                                : userData.foreverEat,
                             style: TextStyle(fontSize: 16)),
                       ]),
                     ),
@@ -402,8 +367,9 @@ class _MatchState extends State<Match> {
                             )),
                         SizedBox(height: 5),
                         Text(
-                            userData.bestForLast ??
-                                "start a conversation and ask!",
+                            userData.bestForLast == ""
+                                ? "start a conversation and ask!"
+                                : userData.bestForLast,
                             style: TextStyle(fontSize: 16)),
                       ]),
                     ),
@@ -420,8 +386,9 @@ class _MatchState extends State<Match> {
                                 )),
                             SizedBox(height: 5),
                             Text(
-                                userData.aliens ??
-                                    "start a conversation and ask!",
+                                userData.aliens == ""
+                                    ? "start a conversation and ask!"
+                                    : userData.aliens,
                                 style: TextStyle(fontSize: 16))
                           ]),
                     ),
@@ -475,45 +442,58 @@ class _MatchState extends State<Match> {
                   colors: [Hexcolor("#FFF1BA"), Hexcolor("#F4AA33")],
                   stops: [0.2, 0.7],
                 )),
-                child: ListView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     //GET NEW MATCH BUTTON
-                    FlatButton(
-                      color: Colors.pinkAccent,
-                      child: Text('Meet someone new today🍺',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          )),
-                      onPressed: () async {
-                        //add matches by one
+                    PimpedButton(
+                      particle: DemoParticle(),
+                      pimpedWidgetBuilder: (context, controller) {
+                        return Padding(
+                          padding: const EdgeInsets.all(30.0),
+                          child: FloatingActionButton.extended(
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(16.0))),
+                            label: Text("Meet someone new today🍺",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            onPressed: () async {
+                              controller.forward(from: 0.0);
+                              //add matches by one
+                              int matches = myUserData.matches + 1;
 
-                        int matches = myUserData.matches + 1;
-
-                        //find a user where matched is false
-                        await Firestore.instance
-                            .collection("messages")
-                            .where('fromID', isEqualTo: user.uid)
-                            .getDocuments()
-                            .then((data) => data.documents.forEach((doc) => {
-                                  if (!doc['matched'])
-                                    {
-                                      print(
-                                          'found unmatched user $doc.toID and $doc.documentID'),
-                                      Firestore.instance
-                                          .collection('users')
-                                          .document(user.uid)
-                                          .updateData({
-                                        'matchID': doc['toID'],
-                                        'chatID': doc.documentID,
-                                        'matches': matches,
-                                      }),
-                                      print(
-                                          'updated user collection with matchID: $doc.toID')
-                                    }
-                                }));
-                        //go to matched Profile page
-                        Navigator.of(context).pushNamed('/navigationHome');
+                              //find a user where matched is false
+                              await Firestore.instance
+                                  .collection("messages")
+                                  .where('fromID', isEqualTo: user.uid)
+                                  .getDocuments()
+                                  .then((data) =>
+                                      data.documents.forEach((doc) => {
+                                            if (!doc['matched'])
+                                              {
+                                                print(
+                                                    'found unmatched user $doc.toID and $doc.documentID'),
+                                                Firestore.instance
+                                                    .collection('users')
+                                                    .document(user.uid)
+                                                    .updateData({
+                                                  'matchID': doc['toID'],
+                                                  'chatID': doc.documentID,
+                                                  'matches': matches,
+                                                }),
+                                                print(
+                                                    'updated user collection with matchID: $doc.toID')
+                                              }
+                                          }));
+                              //go to matched Profile page
+                              Navigator.of(context)
+                                  .pushNamed('/navigationHome');
+                            },
+                          ),
+                        );
                       },
                     ),
                   ],

@@ -356,7 +356,7 @@ class _ProfileState extends State<Profile> {
                                 fontWeight: FontWeight.bold,
                               )),
                           SizedBox(height: 5),
-                          Text(snapshot.data['bed'] ?? "ask me",
+                          Text(snapshot.data['bed'] == "" ? "Ask me!" : snapshot.data['bed'],
                               style: TextStyle(fontSize: 16)),
                         ]),
                   ),
@@ -373,7 +373,7 @@ class _ProfileState extends State<Profile> {
                               )),
                           SizedBox(height: 5),
 
-                          Text(snapshot.data['reviews'] ?? "ask me",
+                          Text(snapshot.data['reviews'] == "" ? "Ask me!" : snapshot.data['reviews'],
                               style: TextStyle(fontSize: 16)),
 
                         ]),
@@ -391,7 +391,7 @@ class _ProfileState extends State<Profile> {
 
                           SizedBox(height: 5),
 
-                          Text(snapshot.data['foreverEat'] ?? "ask me",
+                          Text(snapshot.data['foreverEat'] == "" ? "Ask me!" : snapshot.data['foreverEat'],
                               style: TextStyle(fontSize: 16)),
 
                         ]),
@@ -407,7 +407,7 @@ class _ProfileState extends State<Profile> {
                               )),
                           SizedBox(height: 5),
 
-                          Text(snapshot.data['bestForLast'] ?? "ask me",
+                          Text(snapshot.data['bestForLast'] == "" ? "Ask me!" : snapshot.data['bestForLast'],
                               style: TextStyle(fontSize: 16)),
 
                         ]),
@@ -424,7 +424,7 @@ class _ProfileState extends State<Profile> {
                                 fontWeight: FontWeight.bold,
                               )),
                           SizedBox(height: 5),
-                          Text(snapshot.data['aliens'] ?? "ask me", style: TextStyle(fontSize: 16))
+                          Text(snapshot.data['aliens'] == "" ? "Ask me!" : snapshot.data['aliens'], style: TextStyle(fontSize: 16))
                         ]),
                   ),
                 ],

@@ -64,7 +64,7 @@ class _QuestionsState extends State<Questions> {
                         Text("The more questions you answer about yourself, the more likely someone will buy you a drink🍺 You'll have a chance to answer more questions in the future too!"),
                         TextFormField(
                           cursorWidth: 3,
-                          maxLength: 20,
+                          //maxLength: 20,
                           onChanged: (val) {
                             setState(() => bed = val);
                           },
@@ -80,7 +80,7 @@ class _QuestionsState extends State<Questions> {
                         ),
                         TextFormField(
                           cursorWidth: 3,
-                          maxLength: 20,
+                          //maxLength: 20,
                           onChanged: (val) {
                             setState(() => reviews = val);
                           },
@@ -112,7 +112,7 @@ class _QuestionsState extends State<Questions> {
                         ),
                         TextFormField(
                           cursorWidth: 3,
-                          maxLength: 20,
+                          //maxLength: 20,
 
                           onChanged: (val) {
                             setState(() => bestForLast = val);
@@ -131,7 +131,7 @@ class _QuestionsState extends State<Questions> {
                         ),
                         TextFormField(
                           cursorWidth: 3,
-                          maxLength: 20,
+                          //maxLength: 20,
                           onChanged: (val) {
                             setState(() => aliens = val);
                           },
