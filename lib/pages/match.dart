@@ -460,7 +460,6 @@ class _MatchState extends State<Match> {
                                   fontWeight: FontWeight.bold,
                                 )),
                             onPressed: () async {
-
                               controller.forward(from: 0.0);
                               //add matches by one
                               int matches = myUserData.matches + 1;

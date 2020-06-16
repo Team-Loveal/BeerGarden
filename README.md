@@ -1,24 +1,20 @@
-# Loveal
+# Beer Garden 🌱
+### Grow your relationships over a beer 🍻
 
-(This was created during our time as students at Code Chrysalis.)
+###### This was created during our time as students at Code Chrysalis.
 
-There is hope for ugly people.
+Beer Garden is a dating app with a twist ✨ It's an online beer garden where you can meet new people and make wonderful relationships *through conversations rather than by looks*!
 
-Find your true love:
-Available at the Google Play store:
-[Loveal](https://play.google.com/store/)
+Meet a new person everyday with both your photos blurred. As you build your new relationship through conversations, the photos will gradually reveal itself! 🎉
 
-### Here's a preview of the welcome screen
+**Find true love ♥️ It all starts with a hearty *cheers!*🍻**
 
-![Welcome Screen](/images/splash.png)
+Available NOW at Google Play store 👉 [BeerGarden](https://play.google.com/store/)
 
-### This is a preview of the result screen:
-
-![Loveal2](./kampai2.png)
 
 ## Installation
 
-1. Please clone the repo
+1. Please clone the repository.
 
 2. Install packages
 
@@ -33,24 +29,23 @@ yarn start
 
 5.  Find true love
 
-## Built With
-
-- [Dart](https://dart.dev/)
-- [Flutter](https://flutter.dev/)
-- [Firebase](https://firebase.google.com/)
-
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
 
 ## Authors
 
-- [Jeff Bentley](https://github.com/jbentleyjp)
-- [Garrett Chun](https://github.com/Kapakahi)
-- [Yuya Harada](https://github.com/yuya-h-29)
-- [Riku Kawano](https://github.com/rikukawano)
-- [Yurika Namba](https://github.com/yurikanamba)
+👻 [Jeff Bentley](https://github.com/jbentleyjp)
+
+😸 [Garrett Chun](https://github.com/Kapakahi)
+
+🌝 [Yuya Harada](https://github.com/yuya-h-29)
+
+🐸 [Riku Kawano](https://github.com/rikukawano)
+
+🦄 [Yurika Namba](https://github.com/yurikanamba)
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
