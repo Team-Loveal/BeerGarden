@@ -13,8 +13,6 @@ import 'package:lovealapp/pages/createProfile.dart';
 import 'package:lovealapp/pages/editProfile.dart';
 import 'package:lovealapp/pages/loginFirstTime.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:android_alarm_manager/android_alarm_manager.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:lovealapp/pages/questions.dart';
 
 //provide user data to Wrapper file
@@ -23,34 +21,7 @@ import "package:lovealapp/models/user.dart";
 
 //main function is the first function that fires when dart file starts
 void main() async {
-  var difference = secondsToAlarm();
-
-  WidgetsFlutterBinding.ensureInitialized();
-  await AndroidAlarmManager.initialize();
-  await AndroidAlarmManager.periodic(
-      Duration(seconds: difference), 0, resetUserMatches);
-
   runApp(MyApp());
-}
-
-int secondsToAlarm() {
-  var today = new DateTime.now();
-  // schedule time for function invokation at 7AM
-  var tomorrow = new DateTime(today.year, today.month, today.day + 1, 7, 0);
-  // calculate hour difference
-  return tomorrow.difference(today).inHours;
-}
-
-void resetUserMatches() async {
-  Firestore.instance
-      .collection("users")
-      .getDocuments()
-      .then((querySnapshot) => {
-            querySnapshot.documents.forEach((doc) {
-              doc.reference.updateData({'matches': 0});
-            })
-          })
-      .catchError((error) => {print('Error resetting matches: $error')});
 }
 
 //create new widget called MyApp which is the root widget

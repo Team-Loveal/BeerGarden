@@ -13,6 +13,19 @@ class GetMatch extends StatefulWidget {
 }
 
 class _GetMatchState extends State<GetMatch> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  int secondsToAlarm() {
+    var today = new DateTime.now();
+    // schedule time for function invokation at 7AM
+    var tomorrow = new DateTime(today.year, today.month, today.day + 1, 7, 0);
+    // calculate hour difference
+    return tomorrow.difference(today).inHours;
+  }
+
   final AuthService _auth = AuthService();
 
   @override
