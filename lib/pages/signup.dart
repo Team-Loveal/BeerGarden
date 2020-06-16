@@ -26,20 +26,11 @@ class _SignUpState extends State<SignUp> {
     String trimmedPassword = password.trim();
     setState(() => {
           //loading= false,
-          _warning = 'A verification email has been sent to $trimmedEmail'
+          _warning = 'A verification email has been sent to $trimmedEmail. Check your email and please login!'
         });
-//    print('this is a warning ${_warning}');
-    /* String trimmedEmail = email.trim();
-    String trimmedPassword = password.trim();
-    setState(() {
-      _warning = 'A verification email has been sent to $trimmedEmail';
-    });*/
     ShowAlert();
     dynamic result =
         await _auth.registerWithEmailAndPassword(trimmedEmail, trimmedPassword);
-
-    //Probably dont need the this if statment?!?
-//    print("This is resullllllllt: ${result}");
     if (result == null) {
       setState(() {
         error = 'Could not sign in with those credentials';
