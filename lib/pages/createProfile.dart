@@ -387,44 +387,39 @@ class _CreateProfileState extends State<CreateProfile> {
                                   padding: EdgeInsets.fromLTRB(30, 10, 20, 0),
                                   child: RaisedButton(
                                     onPressed: () async {
-//                                      if (_formKey.currentState.validate()) {
-//                                        // If the form is valid, display a Snackbar.
-//                                        Scaffold.of(context)
-//                                            .showSnackBar(SnackBar(content: Text('Processing Data')));
-//                                      }
-
-                                      print("IDDDDDDDDDDDD ${user.uid}");
-                                      print(user.isEmailVerified);
-                                      print(user);
-                                      //write profile info into the db
-                                      await DatabaseService(uid: user.uid)
-                                          .updateUserData(
-                                        nickname,
-                                        location,
-                                        age,
-                                        gender,
-                                        occupation,
-                                        about,
-                                        yodeling,
-                                        shopping,
-                                        makingBalloonAnimals,
-                                        cooking,
-                                        painting,
-                                        movies,
-                                        sports,
-                                        writing,
-                                        drinking,
-                                      );
-                                      //write preference into db
-                                      await DatabaseService(uid: user.uid)
-                                          .updatePreference(
+                                      // If the form is valid you can move on
+                                      if (_formKey.currentState.validate()) {
+                                        //write profile info into the db
+                                        await DatabaseService(uid: user.uid)
+                                            .updateUserData(
+                                          nickname,
+                                          location,
+                                          age,
+                                          gender,
+                                          occupation,
+                                          about,
+                                          yodeling,
+                                          shopping,
+                                          makingBalloonAnimals,
+                                          cooking,
+                                          painting,
+                                          movies,
+                                          sports,
+                                          writing,
+                                          drinking,
+                                        );
+                                        //write preference into db
+                                        await DatabaseService(uid: user.uid)
+                                            .updatePreference(
                                           _lowValue,
-                                      _highValue,
-                                      genderPreference,
-                                      );
+                                          _highValue,
+                                          genderPreference,
+                                        );
 
-                                      Navigator.of(context)
-                                          .pushNamed('/questions');
+                                        Navigator.of(context)
+                                            .pushNamed('/questions');
+                                      }
+
                                     },
                                     textColor: Colors.white,
                                     color: Hexcolor("#215a00"),
