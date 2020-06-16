@@ -19,50 +19,44 @@ class _MessagesState extends State<Messages> {
   double sigmaX;
   double sigmaY;
 
-  @override
-  void initState() {
-    super.initState();
+  //RIKUS BLUR CODE
+//  @override
+//  void initState() {
+//    super.initState();
+//
+//    decreaseBlur();
+//  }
 
-    decreaseBlur();
-  }
-
-  //also try decreasing blur based on match value since it will reset to zero per day
-  void decreaseBlurWhenMatchEqualsZero() async {
-//if match = 0 it means a new day so just check for this when the user gets to this page
-  //if its zero, change the sigmaX, sigmaY values in the DB
-    // if its not zero don't change the sigmaX, sigmaY vales
-  }
-
-  void decreaseBlur() async {
-    final user = Provider.of<User>(context);
-    // decrease blur everyday by 5
-    var querySnapshot = await Firestore.instance
-        .collection('messages')
-        .where('matchedUsers', arrayContains: user.uid)
-        .where('matched', isEqualTo: true)
-        .where('active', isEqualTo: true)
-        .getDocuments();
-
-    querySnapshot.documents.forEach((document) => {
-          Firestore.instance
-              .collection('messages')
-              .document(document.documentID)
-              .collection('chatroom')
-              .orderBy('timestamp', descending: false)
-              .limit(1)
-              .getDocuments()
-              .then((document) => {print(document.documents[0]['timestamp'])})
-
-          // print(timestamp);
-        });
-
-    getBlur();
-  }
+//  void decreaseBlur() async {
+//    final user = Provider.of<User>(context);
+//    // decrease blur everyday by 5
+//    var querySnapshot = await Firestore.instance
+//        .collection('messages')
+//        .where('matchedUsers', arrayContains: user.uid)
+//        .where('matched', isEqualTo: true)
+//        .where('active', isEqualTo: true)
+//        .getDocuments();
+//
+//    querySnapshot.documents.forEach((document) => {
+//          Firestore.instance
+//              .collection('messages')
+//              .document(document.documentID)
+//              .collection('chatroom')
+//              .orderBy('timestamp', descending: false)
+//              .limit(1)
+//              .getDocuments()
+//              .then((document) => {print(document.documents[0]['timestamp'])})
+//
+//          // print(timestamp);
+//        });
+//
+//    getBlur();
+//  }
 
   // calculates blur
-  void getBlur() {
-    // var now = new DateTime.now();
-  }
+//  void getBlur() {
+//    // var now = new DateTime.now();
+//  }
 
   @override
   Widget build(BuildContext context) {

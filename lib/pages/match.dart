@@ -20,6 +20,7 @@ class _MatchState extends State<Match> {
   String matchID;
   String chatID;
   int matches;
+
   double sigmaX = 50;
   double sigmaY = 50;
 
@@ -30,13 +31,35 @@ class _MatchState extends State<Match> {
     super.initState();
     final user = Provider.of<User>(context, listen: false);
     //get matchID and chatID from db
-    Firestore.instance.collection('users').document(user.uid).get().then((doc) {
+    Firestore.instance.collection('users').document(user.uid).get().then((
+        doc) {
       setState(() {
         matchID = doc['matchID'];
         chatID = doc['chatID'];
         matches = doc['matches'];
       });
     });
+
+    //decrease blur if matches have been reset to zero and you are not a new user
+    if (matches == 0 && matchID != null) {
+      var blur;
+      //get blur value from the DB and subtract 5
+      Firestore.instance
+          .collection('messages')
+          .document(chatID)
+          .get()
+          .then((doc) {
+        setState(() {
+          blur = doc['blur'] - 45;
+        });
+      });
+
+      //update blur value in the DB
+      Firestore.instance
+          .collection("messages")
+          .document(chatID)
+          .updateData({'blur': blur});
+    }
   }
 
   @override
