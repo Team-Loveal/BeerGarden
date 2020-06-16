@@ -94,7 +94,7 @@ class _MyProfileState extends State<MyProfile> {
                           children: <Widget>[
                             Expanded(
                               child: Text(
-                                  '${userData.nickname}, ${userData.age}',
+                                  '${userData.nickname}, ${userData.age.toString()}',
                                   style: TextStyle(
                                       fontSize: 28,
                                       fontWeight: FontWeight.bold)),
