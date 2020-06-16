@@ -22,18 +22,18 @@ import 'package:provider/provider.dart';
 import "package:lovealapp/models/user.dart";
 
 //main function is the first function that fires when dart file starts
-void main() async {
-  var difference = secondsToAlarm();
+void main()  {
+ /* var difference = secondsToAlarm();
 
   WidgetsFlutterBinding.ensureInitialized();
   await AndroidAlarmManager.initialize();
   await AndroidAlarmManager.periodic(
-      Duration(seconds: difference), 0, resetUserMatches);
+      Duration(seconds: difference), 0, resetUserMatches);*/
 
   runApp(MyApp());
 }
 
-int secondsToAlarm() {
+/*int secondsToAlarm() {
   var today = new DateTime.now();
   // schedule time for function invokation at 7AM
   var tomorrow = new DateTime(today.year, today.month, today.day + 1, 7, 0);
@@ -51,7 +51,7 @@ void resetUserMatches() async {
             })
           })
       .catchError((error) => {print('Error resetting matches: $error')});
-}
+}*/
 
 //create new widget called MyApp which is the root widget
 class MyApp extends StatelessWidget {
