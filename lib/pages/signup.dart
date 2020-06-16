@@ -26,7 +26,7 @@ class _SignUpState extends State<SignUp> {
     String trimmedPassword = password.trim();
     setState(() => {
           //loading= false,
-          _warning = 'A verification email has been sent to $trimmedEmail. Check your email and please login!'
+          _warning = 'A verification email has been sent to $trimmedEmail! Check your email and please login!'
         });
     ShowAlert();
     dynamic result =
@@ -40,7 +40,7 @@ class _SignUpState extends State<SignUp> {
       //ShowAlert();
       // clearTextInput();
 
-      Timer(Duration(seconds: 3), () {
+      Timer(Duration(seconds: 10), () {
         {
           Navigator.of(context).pushNamed('/loginFirstTime');
         }
@@ -269,7 +269,7 @@ class _SignUpState extends State<SignUp> {
                 physics: AlwaysScrollableScrollPhysics(),
                 padding: EdgeInsets.symmetric(
                   horizontal: 40.0,
-                  vertical: 120.0,
+                  vertical: 50.0,
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -329,11 +329,12 @@ class _ShowAlertState extends State<ShowAlert> {
           Expanded(
             child: Text(
               _warning,
+              textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 15,
               ),
-              maxLines: 3,
+              maxLines: 5,
             ),
           ),
           Padding(
