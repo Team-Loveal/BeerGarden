@@ -357,7 +357,8 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                     ),
                     Container(
                       margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                      child: Wrap(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text('About me',
                                 style: TextStyle(
@@ -380,17 +381,13 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                                   fontWeight: FontWeight.bold,
                                 )),
                             SizedBox(height: 5),
-
                               Text(userData.bed,
                                   style: TextStyle(fontSize: 16)),
-
                           ]),
                     ),
                     Container(
-
                       margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                       child: Wrap(
-
                           children: <Widget>[
                             Text('Do you read reviews, or just go with your gut?',
                                 style: TextStyle(
