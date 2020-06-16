@@ -26,6 +26,13 @@ class _MessagesState extends State<Messages> {
     decreaseBlur();
   }
 
+  //also try decreasing blur based on match value since it will reset to zero per day
+  void decreaseBlurWhenMatchEqualsZero() async {
+//if match = 0 it means a new day so just check for this when the user gets to this page
+  //if its zero, change the sigmaX, sigmaY values in the DB
+    // if its not zero don't change the sigmaX, sigmaY vales
+  }
+
   void decreaseBlur() async {
     final user = Provider.of<User>(context);
     // decrease blur everyday by 5
