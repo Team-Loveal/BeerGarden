@@ -11,7 +11,7 @@ import 'package:lovealapp/pages/forgotpassword.dart';
 import 'package:lovealapp/services/auth.dart';
 import 'package:lovealapp/pages/createProfile.dart';
 import 'package:lovealapp/pages/editProfile.dart';
-import 'package:lovealapp/pages/loginFIrstTime.dart';
+import 'package:lovealapp/pages/loginFirstTime.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:android_alarm_manager/android_alarm_manager.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -79,7 +79,7 @@ class MyApp extends StatelessWidget {
             '/editProfile': (_) => EditProfile(),
             '/getMatch': (_) => GetMatch(),
             '/navigationHome': (_) => NavigationHome(),
-            '/myprofile': (_) => MyProfile(),
+            '/myProfile': (_) => MyProfile(),
             '/setPreferences': (_) => SetPreferences(),
             '/loginFirstTime': (_) => LoginFirstTime(),
             '/questions': (_) => Questions(),
