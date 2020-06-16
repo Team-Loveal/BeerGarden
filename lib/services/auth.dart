@@ -10,9 +10,9 @@ class AuthService {
   User _userFromFirebaseUser(FirebaseUser user) {
     return user != null
         ? User(
-      uid: user.uid,
-      isEmailVerified: user.isEmailVerified,
-    )
+            uid: user.uid,
+            isEmailVerified: user.isEmailVerified,
+          )
         : null;
   }
 
@@ -25,19 +25,18 @@ class AuthService {
 
   //register with email and password
   Future registerWithEmailAndPassword(String email, String password) async {
-
     AuthResult result = await _auth.createUserWithEmailAndPassword(
         email: email, password: password);
 
     try {
       FirebaseUser user = result.user;
       await user.sendEmailVerification();
-      print('isemailedverified ${user.isEmailVerified}');
-     // if (user.isEmailVerified) {
-        //create a new document for the user with the uid and add email field
-        print('yESSSSSSSSSSSSSS VERIFIEDDDDDDDDDDDDD');
-        await DatabaseService(uid: user.uid, isEmailVerified: user.isEmailVerified).setUserData(email);
-        return _userFromFirebaseUser(user);
+      // if (user.isEmailVerified) {
+      //create a new document for the user with the uid and add email field
+      await DatabaseService(
+              uid: user.uid, isEmailVerified: user.isEmailVerified)
+          .setUserData(email);
+      return _userFromFirebaseUser(user);
       //}
     } catch (e) {
       print(e.toString());
@@ -77,7 +76,7 @@ class AuthService {
       GoogleSignInAccount account = await googleSignIn.signIn();
       if (account == null) return false;
       AuthResult result =
-      await _auth.signInWithCredential(GoogleAuthProvider.getCredential(
+          await _auth.signInWithCredential(GoogleAuthProvider.getCredential(
         idToken: (await account.authentication).idToken,
         accessToken: (await account.authentication).accessToken,
       ));
@@ -97,7 +96,7 @@ class AuthService {
       GoogleSignInAccount account = await googleSignIn.signIn();
       if (account == null) return false;
       AuthResult result =
-      await _auth.signInWithCredential(GoogleAuthProvider.getCredential(
+          await _auth.signInWithCredential(GoogleAuthProvider.getCredential(
         idToken: (await account.authentication).idToken,
         accessToken: (await account.authentication).accessToken,
       ));

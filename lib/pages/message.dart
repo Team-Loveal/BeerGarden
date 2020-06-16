@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -26,10 +28,23 @@ class Message extends StatefulWidget {
 }
 
 class _MessageState extends State<Message> {
+
+  //for blur
+  double sigmaX;
+  double sigmaY;
+
   @override
   void initState() {
     super.initState();
     getChatted();
+
+    //get matchID and chatID from db
+    Firestore.instance.collection('messages').document(chatRoomID).get().then((doc) {
+      setState(() {
+        sigmaX = doc['blur'].toDouble();
+        sigmaY = doc['blur'].toDouble();
+      });
+    });
   }
 
   final String chatRoomID;
@@ -138,10 +153,27 @@ class _MessageState extends State<Message> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      CircleAvatar(
-                        radius: 25,
-                        backgroundImage: NetworkImage(imgUrl),
+                      Stack(
+
+                        children: <Widget>[
+                          CircleAvatar(
+                            radius: 29,
+                            backgroundImage: NetworkImage(imgUrl),
+                          ),
+                          Container(
+                              width: 58,
+                              height: 58,
+                              child: ClipOval(
+                                child: BackdropFilter(
+                                    filter: ImageFilter.blur(
+                                        sigmaX: sigmaX  ?? 50, sigmaY: sigmaY  ?? 50),
+                                    child: Container(
+                                        color:
+                                        Colors.black.withOpacity(0))),
+                              )),
+                        ],
                       ),
+
                       SizedBox(width: 10.0),
                       Text(
                         nickname,

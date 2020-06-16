@@ -1,3 +1,4 @@
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -13,6 +14,11 @@ class Messages extends StatefulWidget {
 }
 
 class _MessagesState extends State<Messages> {
+
+  //for blur
+  double sigmaX;
+  double sigmaY;
+
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
@@ -107,6 +113,15 @@ class _MessagesState extends State<Messages> {
     String nickname;
     String imgUrl;
 
+// get blur values (not sure if this is the right place to put it
+//        Firestore.instance.collection('messages').document(document.documentID).get().then((doc) {
+//      setState(() {
+//        sigmaX = doc['blur'].toDouble();
+//        sigmaY = doc['blur'].toDouble();
+//        print(doc['blur']);
+//      });
+//    });
+
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -154,14 +169,29 @@ class _MessagesState extends State<Messages> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
-                              CircleAvatar(
-                                backgroundColor: unread
-                                    ? Hexcolor('#F4AA33')
-                                    : Hexcolor('#f1f4f5'),
-                                radius: 38,
-                                child: CircleAvatar(
-                                    radius: 35,
-                                    backgroundImage: NetworkImage(imgUrl)),
+                              Stack(
+                                children: <Widget>[
+                                  CircleAvatar(
+                                    backgroundColor: unread
+                                        ? Hexcolor('#F4AA33')
+                                        : Hexcolor('#f1f4f5'),
+                                    radius: 38,
+                                    child: CircleAvatar(
+                                        radius: 35,
+                                        backgroundImage: NetworkImage(imgUrl)),
+                                  ),
+                                  Container(
+                                      width: 75,
+                                      height: 75,
+                                      child: ClipOval(
+                                        child: BackdropFilter(
+                                            filter: ImageFilter.blur(
+                                                sigmaX: sigmaX ?? 50, sigmaY: sigmaY ?? 50),
+                                            child: Container(
+                                                color:
+                                                Colors.black.withOpacity(0))),
+                                      )),
+                                ],
                               ),
                               SizedBox(width: 10.0),
                               Column(

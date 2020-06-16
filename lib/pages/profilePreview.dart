@@ -45,15 +45,17 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                   //TODO read preferences and filter out matches
                   //get potential matches for the user
                   var genderPreference = userData.genderPreference;
-                  var lowAge = userData.lowAge;
-                  var highAge = userData.highAge;
+//                  var lowAge = userData.lowAge;
+//                  var highAge = userData.highAge;
+//                  var intLowAge = lowAge.toInt();
+//                  var intHighAge = highAge.toInt();
 
                   print(genderPreference);
                   Firestore.instance
                       .collection("users")
                   .where('gender', isEqualTo: genderPreference)
-                  .where('age', isGreaterThanOrEqualTo: lowAge, isLessThanOrEqualTo: highAge)
-//                  .where('age', isLessThanOrEqualTo: highAge)
+//                  .where('age', isGreaterThanOrEqualTo: intLowAge, isLessThanOrEqualTo: intHighAge)
+//                  .where('age', isLessThanOrEqualTo: intHighAge)
                       .getDocuments()
                       .then((querySnapshot) {
                     querySnapshot.documents.forEach((document) {

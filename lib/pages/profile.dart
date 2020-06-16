@@ -36,7 +36,6 @@ class _ProfileState extends State<Profile> {
       setState(() {
         sigmaX = doc['blur'].toDouble();
         sigmaY = doc['blur'].toDouble();
-        print(doc['blur']);
       });
     });
   }
