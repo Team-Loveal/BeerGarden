@@ -78,7 +78,6 @@ class _MatchState extends State<Match> {
                               onPressed: () async {
                                 Navigator.of(context)
                                     .popUntil((route) => route.isFirst);
-                                await _auth.signOut();
                               },
                             ),
                           ],
