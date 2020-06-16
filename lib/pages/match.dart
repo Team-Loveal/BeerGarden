@@ -490,12 +490,15 @@ class _MatchState extends State<Match> {
                               //find a user where matched is false
                               await Firestore.instance
                                   .collection("messages")
+                              //.where('matchedUsers', arrayContains: user.uid)
                                   .where('fromID', isEqualTo: user.uid)
                                   .getDocuments()
                                   .then((data) =>
                                       data.documents.forEach((doc) => {
                                             if (!doc['matched'])
                                               {
+                                                //if fromID is not equal to user.uid
+                                                //set fromID to user.uid and toID to original fromID value
                                                 print(
                                                     'found unmatched user $doc.toID and $doc.documentID'),
                                                 Firestore.instance
