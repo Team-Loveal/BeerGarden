@@ -193,7 +193,7 @@ class _EditProfileState extends State<EditProfile> {
                                                         ),
                                                       ),
                                                       DropdownButton<int>(
-                                                        value: age,
+                                                        value: age != null  ? age : data['ageEdit'],
                                                         iconSize: 24,
                                                         onChanged: (int newValue) {
                                                           setState(() {
@@ -402,7 +402,7 @@ class _EditProfileState extends State<EditProfile> {
                                             genderPreference = newValue;
                                           });
                                         },
-                                        items: <String>['Women', 'Men', 'Everyone']
+                                        items: <String>['Female', 'Male', 'Everyone']
                                             .map<DropdownMenuItem<String>>((String value) {
                                           return DropdownMenuItem<String>(
                                             value: value,
