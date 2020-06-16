@@ -20,6 +20,44 @@ class _MessagesState extends State<Messages> {
   double sigmaY;
 
   @override
+  void initState() {
+    super.initState();
+
+    decreaseBlur();
+  }
+
+  void decreaseBlur() async {
+    final user = Provider.of<User>(context);
+    // decrease blur everyday by 5
+    var querySnapshot = await Firestore.instance
+        .collection('messages')
+        .where('matchedUsers', arrayContains: user.uid)
+        .where('matched', isEqualTo: true)
+        .where('active', isEqualTo: true)
+        .getDocuments();
+
+    querySnapshot.documents.forEach((document) => {
+          Firestore.instance
+              .collection('messages')
+              .document(document.documentID)
+              .collection('chatroom')
+              .orderBy('timestamp', descending: false)
+              .limit(1)
+              .getDocuments()
+              .then((document) => {print(document.documents[0]['timestamp'])})
+
+          // print(timestamp);
+        });
+
+    getBlur();
+  }
+
+  // calculates blur
+  void getBlur() {
+    // var now = new DateTime.now();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
 
