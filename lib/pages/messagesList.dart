@@ -19,7 +19,7 @@ class _MessagesState extends State<Messages> {
   double sigmaX;
   double sigmaY;
 
-  //RIKUS BLUR CODE
+  //RIKUS BLUR CODE - OK TO DELETE??
 //  @override
 //  void initState() {
 //    super.initState();

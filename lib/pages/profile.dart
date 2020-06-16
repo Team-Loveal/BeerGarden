@@ -46,6 +46,7 @@ class _ProfileState extends State<Profile> {
         .document(chatRoomID)
         .get()
         .then((doc) {
+          print(doc['blur']);
       setState(() {
         sigmaX = doc['blur'].toDouble();
         sigmaY = doc['blur'].toDouble();

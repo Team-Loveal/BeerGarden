@@ -21,8 +21,10 @@ class _MyProfileState extends State<MyProfile> {
   Widget build(BuildContext context) {
     final AuthService _auth = AuthService();
     final userData = Provider.of<UserData>(context);
-
     if (userData != null) {
+      print(userData.lowAge);
+      print(userData.highAge);
+    print(userData.genderPreference);
       return Scaffold(
         body: Container(
           height: double.infinity,
@@ -111,7 +113,7 @@ class _MyProfileState extends State<MyProfile> {
                           children: <Widget>[
                             Expanded(
                               child: Text(
-                                  '${userData.nickname}, ${userData.age}',
+                                  '${userData.nickname}, ${userData.age.toString()}',
                                   style: TextStyle(
                                       fontSize: 28,
                                       fontWeight: FontWeight.bold)),
