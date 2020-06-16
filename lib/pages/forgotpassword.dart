@@ -148,19 +148,20 @@ class _ShowAlertState extends State<ShowAlert> {
   Widget build(BuildContext context) {
     if (_warning != null) {
       return Container(
-        color: Colors.amberAccent,
+        color: Colors.green,
         width: double.infinity,
         padding: EdgeInsets.all(8.0),
         child: Row(children: <Widget>[
           Padding(
             padding: const EdgeInsets.only(right: 8.0),
-            child: Icon(Icons.error_outline),
+            child: Icon(Icons.error_outline, color: Colors.white,),
           ),
           Expanded(
             child: Text(
               _warning,
               style: TextStyle(
-                color: Colors.cyan,
+                color: Colors.white,
+                fontSize: 15,
               ),
               maxLines: 3,
             ),
@@ -168,6 +169,7 @@ class _ShowAlertState extends State<ShowAlert> {
           Padding(
               padding: const EdgeInsets.only(left: 8.0),
               child: IconButton(
+                color: Colors.white,
                 icon: Icon(Icons.close),
                 onPressed: () {
                   setState(() {
