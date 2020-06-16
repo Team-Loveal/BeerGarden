@@ -62,6 +62,7 @@ class _MatchState extends State<Match> {
 
   @override
   Widget build(BuildContext context) {
+    final AuthService _auth = AuthService();
     final myUserData = Provider.of<UserData>(context);
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: matchID).userData,
@@ -99,6 +100,7 @@ class _MatchState extends State<Match> {
                               onPressed: () async {
                                 Navigator.of(context)
                                     .popUntil((route) => route.isFirst);
+                                await _auth.signOut();
                               },
                             ),
                           ],
