@@ -26,20 +26,11 @@ class _SignUpState extends State<SignUp> {
     String trimmedPassword = password.trim();
     setState(() => {
           //loading= false,
-          _warning = 'A verification email has been sent to $trimmedEmail'
+          _warning = 'A verification email has been sent to $trimmedEmail! Check your email and please login!'
         });
-    print('this is a warning ${_warning}');
-    /* String trimmedEmail = email.trim();
-    String trimmedPassword = password.trim();
-    setState(() {
-      _warning = 'A verification email has been sent to $trimmedEmail';
-    });*/
     ShowAlert();
     dynamic result =
         await _auth.registerWithEmailAndPassword(trimmedEmail, trimmedPassword);
-
-    //Probably dont need the this if statment?!?
-    print("This is resullllllllt: ${result}");
     if (result == null) {
       setState(() {
         error = 'Could not sign in with those credentials';
@@ -49,7 +40,7 @@ class _SignUpState extends State<SignUp> {
       //ShowAlert();
       // clearTextInput();
 
-      Timer(Duration(seconds: 3), () {
+      Timer(Duration(seconds: 10), () {
         {
           Navigator.of(context).pushNamed('/loginFirstTime');
         }
@@ -278,19 +269,19 @@ class _SignUpState extends State<SignUp> {
                 physics: AlwaysScrollableScrollPhysics(),
                 padding: EdgeInsets.symmetric(
                   horizontal: 40.0,
-                  vertical: 120.0,
+                  vertical: 50.0,
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text(
-                      'Sign up',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 52.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    (_warning == null) ? Text(
+                          'Sign up',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 52.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ) : ShowAlert(),
                     SizedBox(height: 50.0),
                     _buildEmail(),
                     SizedBox(
@@ -327,7 +318,7 @@ class _ShowAlertState extends State<ShowAlert> {
   Widget build(BuildContext context) {
     if (_warning != null) {
       return Container(
-        color: Colors.amberAccent,
+        color: Colors.green,
         width: double.infinity,
         padding: EdgeInsets.all(8.0),
         child: Row(children: <Widget>[
@@ -338,11 +329,12 @@ class _ShowAlertState extends State<ShowAlert> {
           Expanded(
             child: Text(
               _warning,
+              textAlign: TextAlign.center,
               style: TextStyle(
-                //color: Colors.cyan,
-                color: Colors.black,
+                color: Colors.white,
+                fontSize: 15,
               ),
-              maxLines: 3,
+              maxLines: 5,
             ),
           ),
           Padding(
