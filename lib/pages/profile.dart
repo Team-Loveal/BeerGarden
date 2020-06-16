@@ -96,7 +96,7 @@ class _ProfileState extends State<Profile> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Text(
-                                    '${snapshot.data['nickname']}, ${snapshot.data['age']}',
+                                    '${snapshot.data['nickname']}, ${snapshot.data['age'].toString()}',
                                     style: TextStyle(
                                         fontSize: 28,
                                         fontWeight: FontWeight.bold)),
