@@ -22,6 +22,7 @@ class _WrapperState extends State<Wrapper> {
     if (user == null) {
       return Welcome();
     } else {
+
       return NavigationHome();
     }
   }
