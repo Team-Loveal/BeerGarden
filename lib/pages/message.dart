@@ -57,6 +57,7 @@ class _MessageState extends State<Message> {
   var toID;
   final dbRef = Firestore.instance;
   bool activeChat;
+
   // check if chatroom is active
   void getChatted() {
     dbRef.collection('messages').document(chatRoomID).get().then((snapshot) => {
