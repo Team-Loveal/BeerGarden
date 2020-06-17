@@ -20,13 +20,50 @@ class _MatchState extends State<Match> {
   String matchID;
   String chatID;
   int matches;
+
   double sigmaX = 50;
   double sigmaY = 50;
 
-  final AuthService _auth = AuthService();
+  @override
+  void initState() {
+    super.initState();
+    final user = Provider.of<User>(context, listen: false);
+
+    //get matches, matchID and chatID from db
+    Firestore.instance.collection('users').document(user.uid).get().then((doc) {
+      //get values for the widget build
+      setState(() {
+        matchID = doc['matchID'];
+        chatID = doc['chatID'];
+        matches = doc['matches'];
+      });
+
+      //decrease blur of active messages if matches have been reset to zero and you are not a new user
+      if (doc['matches'] == 0 && doc['matchID'] != null) {
+        Firestore.instance
+            .collection("messages")
+            .where('fromID', isEqualTo: user.uid)
+            .where('matched', isEqualTo: true)
+            .getDocuments()
+            .then((querySnapshot) {
+          querySnapshot.documents.forEach((document) {
+            var documentID = document.documentID;
+            var blur = document.data['blur'] - 5;
+
+            //for each message document update the blur value
+            Firestore.instance
+                .collection("messages")
+                .document(documentID)
+                .updateData({'blur': blur});
+          });
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    final AuthService _auth = AuthService();
     final myUserData = Provider.of<UserData>(context);
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: matchID).userData,
@@ -383,12 +420,13 @@ class _MatchState extends State<Match> {
                       child: ButtonTheme(
                         height: 40.0,
                         child: RaisedButton(
-                            child: Text('Start a conversation',
+                            child: Text('Share a 🍺 and chat!',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
+                                  fontSize: 20,
                                 )),
-                            color: Colors.pink,
+                            color: Colors.lightGreen,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20),
                             ),
@@ -446,7 +484,6 @@ class _MatchState extends State<Match> {
                                   fontWeight: FontWeight.bold,
                                 )),
                             onPressed: () async {
-                              _auth.signOut();
                               controller.forward(from: 0.0);
                               //add matches by one
                               int matches = myUserData.matches + 1;

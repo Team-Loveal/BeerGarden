@@ -20,7 +20,7 @@ import 'package:provider/provider.dart';
 import "package:lovealapp/models/user.dart";
 
 //main function is the first function that fires when dart file starts
-void main() async {
+void main() {
   runApp(MyApp());
 }
 

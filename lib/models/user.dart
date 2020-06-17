@@ -18,7 +18,7 @@ class UserData {
   final String email;
   final String nickname;
   final String location;
-  final String age;
+  final int age;
   final String gender;
   final String occupation;
   final String about;
