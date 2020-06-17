@@ -7,6 +7,7 @@ import 'dart:io';
 import 'package:lovealapp/pages/profilePreview.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:lovealapp/models/user.dart';
+import 'package:lovealapp/shared/loading.dart';
 import 'package:provider/provider.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:path/path.dart' as Path;
