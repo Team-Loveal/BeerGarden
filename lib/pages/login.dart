@@ -50,8 +50,10 @@ class _LoginState extends State<Login> {
 
   void googleLogin() async {
     dynamic result = await AuthService().loginWithGoogle();
-    FirebaseUser user = result.user;
-    print('AAAAAAAAAAAAAAAAAAAA ${user}');
+   // FirebaseUser user = result.user;
+   // print('AAAAAAAAAAAAAAAAAAAA ${userData.}');
+  //  final userData = Provider.of<UserData>(context);
+   // print("VVVBBBBBBBBBB ${userData.uid}");
     if (result == null) {
       setState(() {
         error = 'Could not sign in with those credentials';
