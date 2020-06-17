@@ -179,6 +179,8 @@ class _MessagesState extends State<Messages> {
                                 messages.data.documents[0]['unread'];
                         nickname = snapshot.data['nickname'];
                         imgUrl = snapshot.data['imgUrl'];
+                        var sigmaX = document['blur'].toDouble();
+                        var sigmaY = document['blur'].toDouble();
 
                         return Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
