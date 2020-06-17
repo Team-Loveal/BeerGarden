@@ -183,4 +183,24 @@ class DatabaseService {
       'aliens': aliens,
     });
   }
+
+  //write answers to more questions
+  //update this when you add more questions
+  Future updateMoreAnswers(
+  String furniture,
+  String beachOrMountain,
+  String takeOutFood,
+  String desertedIsland,
+  String wedding,
+  String yourPlaceOrMine,
+      ) async {
+    return await usersCollection.document(uid).updateData({
+      'furniture' : furniture,
+      'beachOrMountain' : beachOrMountain,
+      'takeoutFood' : takeOutFood,
+      'desertedIsland' : desertedIsland,
+      'wedding' : wedding,
+      'yourPlaceOrMine' : yourPlaceOrMine,
+    });
+  }
 }

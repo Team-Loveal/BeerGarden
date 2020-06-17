@@ -364,7 +364,6 @@ class _MyProfileState extends State<MyProfile> {
                     ]),
               ),
               Container(
-
                 margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                 child: Wrap(
 
@@ -429,6 +428,28 @@ class _MyProfileState extends State<MyProfile> {
                       SizedBox(height: 5),
                       Text(userData.aliens ?? "fill it out!", style: TextStyle(fontSize: 16))
                     ]),
+              ),
+              //START A CONVERSATION BUTTON
+              Container(
+                margin: const EdgeInsets.fromLTRB(60, 5, 60, 30),
+                child: ButtonTheme(
+                  height: 40.0,
+                  child: RaisedButton(
+                      child: Text('Answer some more questions',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          )),
+                      color: Colors.lightGreen,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      onPressed: () => {
+                      Navigator.of(context)
+                          .pushNamed('/moreQuestions')
+                      }),
+                ),
               ),
             ],
           ),

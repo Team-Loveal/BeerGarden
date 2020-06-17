@@ -112,3 +112,22 @@ class Answers {
     this.aliens
 });
 }
+
+//update this when you add more questions
+class MoreAnswers {
+  String furniture;
+  String beachOrMountain;
+  String takeOutFood;
+  String desertedIsland;
+  String wedding;
+  String yourPlaceOrMine;
+
+  MoreAnswers({
+    this.furniture,
+    this.beachOrMountain,
+    this.takeOutFood,
+    this.desertedIsland,
+    this.wedding,
+    this.yourPlaceOrMine,
+  });
+}

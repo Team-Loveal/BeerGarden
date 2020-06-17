@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
+
+//provide user data to Wrapper file
+import 'package:provider/provider.dart';
+import "package:lovealapp/models/user.dart";
+import 'package:lovealapp/services/auth.dart';
+
+//routes
 import 'package:lovealapp/pages/editPhoto.dart';
 import 'package:lovealapp/pages/getMatch.dart';
+import 'package:lovealapp/pages/moreQuestions.dart';
 import 'package:lovealapp/pages/myProfile.dart';
 import 'package:lovealapp/pages/navigationHome.dart';
 import 'package:lovealapp/pages/preferences.dart';
@@ -9,18 +18,10 @@ import 'package:lovealapp/pages/login.dart';
 import 'package:lovealapp/pages/signup.dart';
 import 'package:lovealapp/pages/wrapper.dart';
 import 'package:lovealapp/pages/forgotpassword.dart';
-import 'package:lovealapp/services/auth.dart';
 import 'package:lovealapp/pages/createProfile.dart';
 import 'package:lovealapp/pages/editProfile.dart';
 import 'package:lovealapp/pages/loginFirstTime.dart';
-import 'package:hexcolor/hexcolor.dart';
-import 'package:android_alarm_manager/android_alarm_manager.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:lovealapp/pages/questions.dart';
-
-//provide user data to Wrapper file
-import 'package:provider/provider.dart';
-import "package:lovealapp/models/user.dart";
 
 //main function is the first function that fires when dart file starts
 void main() {
@@ -58,6 +59,7 @@ class MyApp extends StatelessWidget {
             '/setPreferences': (_) => SetPreferences(),
             '/loginFirstTime': (_) => LoginFirstTime(),
             '/questions': (_) => Questions(),
+            '/moreQuestions': (_) => MoreQuestions(),
           }),
     );
   }
