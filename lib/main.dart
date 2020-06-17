@@ -14,8 +14,6 @@ import 'package:lovealapp/pages/createProfile.dart';
 import 'package:lovealapp/pages/editProfile.dart';
 import 'package:lovealapp/pages/loginFirstTime.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:android_alarm_manager/android_alarm_manager.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:lovealapp/pages/questions.dart';
 
 //provide user data to Wrapper file
