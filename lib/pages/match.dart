@@ -478,8 +478,9 @@ class _MatchState extends State<Match> {
                             shape: RoundedRectangleBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(16.0))),
-                            label: Text("Meet someone new today🍺",
+                            label: Text("Meet someone new today! 🍺",
                                 style: TextStyle(
+                                  color: Colors.white,
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                 )),

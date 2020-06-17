@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -44,15 +43,15 @@ class _ProfilePreviewState extends State<ProfilePreview> {
             return Scaffold(
               floatingActionButton: FloatingActionButton.extended(
                 onPressed: () {
-                  //TODO move this function to database.dart
-                  //TODO read preferences and filter out matches
+                  //Todo move this function to database.dart
+                  //Todo read preferences and filter out matches
                   //get potential matches for the user
                   var genderPreference = userData.genderPreference;
 //                  var lowAge = userData.lowAge;
 //                  var highAge = userData.highAge;
 //                  var intLowAge = lowAge.toInt();
 //                  var intHighAge = highAge.toInt();
-                  if(genderPreference == "Everyone"){
+                  if (genderPreference == "Everyone") {
                     Firestore.instance
                         .collection("users")
                         .getDocuments()
@@ -61,8 +60,10 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                         if (document.documentID != user.uid) {
                           //concat and make into a string and push into chatIds array
                           String toID = document.documentID;
-                          String chatId1 = '${user.uid} - ${document.documentID}';
-                          String chatId2 = '${document.documentID} - ${user.uid}';
+                          String chatId1 =
+                              '${user.uid} - ${document.documentID}';
+                          String chatId2 =
+                              '${document.documentID} - ${user.uid}';
 
                           //check messages documents, if it doesn't exist write to the db
                           Firestore.instance
@@ -100,8 +101,10 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                         if (document.documentID != user.uid) {
                           //concat and make into a string and push into chatIds array
                           String toID = document.documentID;
-                          String chatId1 = '${user.uid} - ${document.documentID}';
-                          String chatId2 = '${document.documentID} - ${user.uid}';
+                          String chatId1 =
+                              '${user.uid} - ${document.documentID}';
+                          String chatId2 =
+                              '${document.documentID} - ${user.uid}';
 
                           //check messages documents, if it doesn't exist write to the db
                           Firestore.instance
@@ -143,11 +146,11 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                 width: double.infinity,
                 decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [Hexcolor("#FFF1BA"), Hexcolor("#F4AA33")],
-                      stops: [0.2, 0.7],
-                    )),
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [Hexcolor("#FFF1BA"), Hexcolor("#F4AA33")],
+                  stops: [0.2, 0.7],
+                )),
                 child: ListView(
                   children: <Widget>[
                     Container(
@@ -168,7 +171,8 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                           Expanded(
                             flex: 3,
                             child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   Text('${userData.nickname}, ${userData.age}',
@@ -216,51 +220,11 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                                         filter: ImageFilter.blur(
                                             sigmaX: 0, sigmaY: 0),
                                         child: Container(
-                                            color: Colors.black.withOpacity(0))),
+                                            color:
+                                                Colors.black.withOpacity(0))),
                                   )),
                             ],
                           ),
-//CAN THIS BE DELETED?
-//                          Positioned(
-//                            bottom: 0,
-//                            child: Container(
-//                                height: 80,
-//                                width: double.infinity,
-//                                padding: const EdgeInsets.fromLTRB(35, 5, 0, 5),
-//                                decoration: BoxDecoration(
-//                                  color: Colors.white.withOpacity(0.7),
-//                                  borderRadius: BorderRadius.circular(10.0),
-//                                ),
-//                                child: Column(
-//                                  mainAxisAlignment: MainAxisAlignment.center,
-//                                  children: <Widget>[
-//                                    Align(
-//                                      alignment: Alignment.topLeft,
-//                                      child: Container(
-//                                        child: Text("John Smith, 28",
-//                                            style: TextStyle(
-//                                              fontSize: 23,
-//                                              fontWeight: FontWeight.bold,
-//                                            )),
-//                                      ),
-//                                    ),
-//                                    Align(
-//                                      alignment: Alignment.topLeft,
-//                                      child: Row(
-//                                        children: <Widget>[
-//                                          Icon(MdiIcons.mapMarker,
-//                                              size: 18, color: Colors.pink),
-//                                          Text('Tokyo, Japan',
-//                                              style: TextStyle(
-//                                                  fontWeight: FontWeight.bold,
-//                                                  fontSize: 18,
-//                                                  color: Colors.pink))
-//                                        ],
-//                                      ),
-//                                    ),
-//                                  ],
-//                                )),
-//                          ),
                         ],
                       ),
                     ),
@@ -303,100 +267,109 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                                       margin: EdgeInsets.only(right: 10),
                                       child: OutlineButton(
                                           child: Text("Yodeling",
-                                              style:
-                                                  TextStyle(color: Colors.pink)),
+                                              style: TextStyle(
+                                                  color: Colors.pink)),
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
-                                                  BorderRadius.circular(10.0)))),
+                                                  BorderRadius.circular(
+                                                      10.0)))),
                                 if (userData.shopping)
                                   Container(
                                       margin: EdgeInsets.only(right: 10),
                                       child: OutlineButton(
                                           child: Text("Shopping",
-                                              style:
-                                                  TextStyle(color: Colors.pink)),
+                                              style: TextStyle(
+                                                  color: Colors.pink)),
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
-                                                  BorderRadius.circular(10.0)))),
+                                                  BorderRadius.circular(
+                                                      10.0)))),
                                 if (userData.makingBalloonAnimals)
                                   Container(
                                       margin: EdgeInsets.only(right: 10),
                                       child: OutlineButton(
                                           child: Text("MakingBalloonAnimals",
-                                              style:
-                                                  TextStyle(color: Colors.pink)),
+                                              style: TextStyle(
+                                                  color: Colors.pink)),
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
-                                                  BorderRadius.circular(10.0)))),
+                                                  BorderRadius.circular(
+                                                      10.0)))),
                                 if (userData.cooking)
                                   Container(
                                       margin: EdgeInsets.only(right: 10),
                                       child: OutlineButton(
                                           child: Text("Cooking",
-                                              style:
-                                                  TextStyle(color: Colors.pink)),
+                                              style: TextStyle(
+                                                  color: Colors.pink)),
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
-                                                  BorderRadius.circular(10.0)))),
+                                                  BorderRadius.circular(
+                                                      10.0)))),
                                 if (userData.painting)
                                   Container(
                                       margin: EdgeInsets.only(right: 10),
                                       child: OutlineButton(
                                           child: Text("Painting",
-                                              style:
-                                                  TextStyle(color: Colors.pink)),
+                                              style: TextStyle(
+                                                  color: Colors.pink)),
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
-                                                  BorderRadius.circular(10.0)))),
+                                                  BorderRadius.circular(
+                                                      10.0)))),
                                 if (userData.movies)
                                   Container(
                                       margin: EdgeInsets.only(right: 10),
                                       child: OutlineButton(
                                           child: Text("Movies",
-                                              style:
-                                                  TextStyle(color: Colors.pink)),
+                                              style: TextStyle(
+                                                  color: Colors.pink)),
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
-                                                  BorderRadius.circular(10.0)))),
+                                                  BorderRadius.circular(
+                                                      10.0)))),
                                 if (userData.sports)
                                   Container(
                                       margin: EdgeInsets.only(right: 10),
                                       child: OutlineButton(
                                           child: Text("Sports",
-                                              style:
-                                                  TextStyle(color: Colors.pink)),
+                                              style: TextStyle(
+                                                  color: Colors.pink)),
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
-                                                  BorderRadius.circular(10.0)))),
+                                                  BorderRadius.circular(
+                                                      10.0)))),
                                 if (userData.writing)
                                   Container(
                                       margin: EdgeInsets.only(right: 10),
                                       child: OutlineButton(
                                           child: Text("Writing",
-                                              style:
-                                                  TextStyle(color: Colors.pink)),
+                                              style: TextStyle(
+                                                  color: Colors.pink)),
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
-                                                  BorderRadius.circular(10.0)))),
+                                                  BorderRadius.circular(
+                                                      10.0)))),
                                 if (userData.drinking)
                                   Container(
                                       margin: EdgeInsets.only(right: 10),
                                       child: OutlineButton(
                                           child: Text("Drinking",
-                                              style:
-                                                  TextStyle(color: Colors.pink)),
+                                              style: TextStyle(
+                                                  color: Colors.pink)),
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
-                                                  BorderRadius.circular(10.0)))),
+                                                  BorderRadius.circular(
+                                                      10.0)))),
                               ],
                             )
                           ]),
@@ -404,7 +377,7 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                     Container(
                       margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text('About me',
                                 style: TextStyle(
@@ -412,74 +385,62 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                                   fontWeight: FontWeight.bold,
                                 )),
                             SizedBox(height: 5),
-                              Text(userData.about,
-                                  style: TextStyle(fontSize: 16)),
+                            Text(userData.about,
+                                style: TextStyle(fontSize: 16)),
                           ]),
                     ),
                     //ANSWERS
                     Container(
                       margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                      child: Wrap(
-                          children: <Widget>[
-                            Text('Do you make your bed in the morning?',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                )),
-                            SizedBox(height: 5),
-                              Text(userData.bed,
-                                  style: TextStyle(fontSize: 16)),
-                          ]),
+                      child: Wrap(children: <Widget>[
+                        Text('Do you make your bed in the morning?',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            )),
+                        SizedBox(height: 5),
+                        Text(userData.bed, style: TextStyle(fontSize: 16)),
+                      ]),
                     ),
                     Container(
                       margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                      child: Wrap(
-                          children: <Widget>[
-                            Text('Do you read reviews, or just go with your gut?',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                )),
-                            SizedBox(height: 5),
-
-                              Text(userData.reviews,
-                                  style: TextStyle(fontSize: 16)),
-
-                          ]),
+                      child: Wrap(children: <Widget>[
+                        Text('Do you read reviews, or just go with your gut?',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            )),
+                        SizedBox(height: 5),
+                        Text(userData.reviews, style: TextStyle(fontSize: 16)),
+                      ]),
                     ),
                     Container(
                       margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                      child: Wrap(
-                          children: <Widget>[
-
-                              Text('If you could only eat one thing for the rest of your life, what would it be?',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                  )),
-
-                            SizedBox(height: 5),
-
-                              Text(userData.foreverEat,
-                                  style: TextStyle(fontSize: 16)),
-
-                          ]),
+                      child: Wrap(children: <Widget>[
+                        Text(
+                            'If you could only eat one thing for the rest of your life, what would it be?',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            )),
+                        SizedBox(height: 5),
+                        Text(userData.foreverEat,
+                            style: TextStyle(fontSize: 16)),
+                      ]),
                     ),
                     Container(
                       margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                      child: Wrap(
-                          children: <Widget>[
-                            Text("If you're eating a meal do you save the best thing for last or eat it first?",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                )),
-                            SizedBox(height: 5),
-
-                              Text(userData.bestForLast,
-                                  style: TextStyle(fontSize: 16)),
-
-                          ]),
+                      child: Wrap(children: <Widget>[
+                        Text(
+                            "If you're eating a meal do you save the best thing for last or eat it first?",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            )),
+                        SizedBox(height: 5),
+                        Text(userData.bestForLast,
+                            style: TextStyle(fontSize: 16)),
+                      ]),
                     ),
                     Container(
                       margin: const EdgeInsets.fromLTRB(20, 10, 20, 80),
@@ -493,7 +454,8 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                                   fontWeight: FontWeight.bold,
                                 )),
                             SizedBox(height: 5),
-                            Text(userData.aliens, style: TextStyle(fontSize: 16))
+                            Text(userData.aliens,
+                                style: TextStyle(fontSize: 16))
                           ]),
                     ),
                   ],

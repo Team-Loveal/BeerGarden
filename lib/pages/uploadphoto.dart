@@ -7,7 +7,6 @@ import 'dart:io';
 import 'package:lovealapp/pages/profilePreview.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:lovealapp/models/user.dart';
-import 'package:lovealapp/shared/loading.dart';
 import 'package:provider/provider.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:path/path.dart' as Path;
@@ -82,60 +81,69 @@ class _UploadPhotoState extends State<UploadPhoto> {
                             : Text(
                                 'See what your picture looks like to others!',
                                 style: TextStyle(fontSize: 30),
-                          textAlign: TextAlign.center,
+                                textAlign: TextAlign.center,
                               ),
                       ),
                       Container(
-                        child: _image != null ? Center(
-                          child: Transform.scale(
-                            scale: 1.5,
-                            child: Switch(
-                              value: isSwitched,
-                              onChanged: (value) {
-                                setState(() {
-                                  isSwitched = value;
-                                });
-                              },
-                              activeTrackColor: Hexcolor("#8CC63E"),
-                              activeColor: Colors.green,
-                            ),
-                          ),
-                        ): null,
+                        child: _image != null
+                            ? Center(
+                                child: Transform.scale(
+                                  scale: 1.5,
+                                  child: Switch(
+                                    value: isSwitched,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        isSwitched = value;
+                                      });
+                                    },
+                                    activeTrackColor: Hexcolor("#8CC63E"),
+                                    activeColor: Colors.green,
+                                  ),
+                                ),
+                              )
+                            : null,
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: _image != null
-                            ? !isSwitched ? Container(
-                          width: 350,
-                          height: 350,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10.0),
-                            child: Image.file(_image, fit: BoxFit.cover),
-                          ),
-                        ) : Stack(
-                          children: <Widget>[
-                            Container(
-                              width: 350,
-                              height: 350,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(10.0),
-                                child: Image.file(_image, fit: BoxFit.cover),
-                              ),
-                            ),
-                            Container(
-                              width: 350,
-                              height: 350,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  child: BackdropFilter(
-                                      filter: ImageFilter.blur(
-                                          sigmaX: 50, sigmaY: 50),
-                                      child: Container(
-                                          color: Colors.black.withOpacity(0))),
-                                )
-                            )
-                          ],
-                        ) : null,
+                            ? !isSwitched
+                                ? Container(
+                                    width: 350,
+                                    height: 350,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      child:
+                                          Image.file(_image, fit: BoxFit.cover),
+                                    ),
+                                  )
+                                : Stack(
+                                    children: <Widget>[
+                                      Container(
+                                        width: 350,
+                                        height: 350,
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                          child: Image.file(_image,
+                                              fit: BoxFit.cover),
+                                        ),
+                                      ),
+                                      Container(
+                                          width: 350,
+                                          height: 350,
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                            child: BackdropFilter(
+                                                filter: ImageFilter.blur(
+                                                    sigmaX: 50, sigmaY: 50),
+                                                child: Container(
+                                                    color: Colors.black
+                                                        .withOpacity(0))),
+                                          ))
+                                    ],
+                                  )
+                            : null,
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
