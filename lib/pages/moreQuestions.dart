@@ -93,7 +93,7 @@ class _MoreQuestionsState extends State<MoreQuestions> {
                                 ],
                                 onSelected: (val) {
                                   print(val);
-                                  beachOrMountain = val;
+                                  beachOrMountain = val ?? "🏖Beach";
                                 },
                               ),
                               SizedBox(height: 20.0),
@@ -158,7 +158,7 @@ class _MoreQuestionsState extends State<MoreQuestions> {
                                     );
 
                                     Navigator.of(context)
-                                        .pushNamed('/myProfile');
+                                        .pushNamed('/navigationHome');
                                   },
                                   textColor: Colors.white,
                                   color: Hexcolor("#8CC63E"),

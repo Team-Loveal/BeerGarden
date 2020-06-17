@@ -4,15 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:async';
 import 'dart:io';
-import 'package:lovealapp/pages/profilePreview.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:lovealapp/models/user.dart';
 import 'package:provider/provider.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:path/path.dart' as Path;
-
-import 'editProfile.dart';
-import 'myProfile.dart';
 
 class EditPhoto extends StatefulWidget {
   @override
@@ -25,7 +21,7 @@ class _EditPhotoState extends State<EditPhoto> {
   // select image via either folder of camera
   Future getImageFromGallery() async {
     PickedFile image =
-    await ImagePicker().getImage(source: ImageSource.gallery);
+        await ImagePicker().getImage(source: ImageSource.gallery);
 
     setState(() {
       _image = File(image.path);
@@ -44,89 +40,89 @@ class _EditPhotoState extends State<EditPhoto> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
-          child: Stack(
-            children: <Widget>[
-              Container(
-                height: double.infinity,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Hexcolor('#FFF1BA'),
-                      Hexcolor('#F4AA33'),
+      child: Stack(
+        children: <Widget>[
+          Container(
+            height: double.infinity,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Hexcolor('#FFF1BA'),
+                  Hexcolor('#F4AA33'),
+                ],
+                stops: [0.2, 0.7],
+              ),
+            ),
+          ),
+          Container(
+            child: Center(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: _image == null
+                            ? Text(
+                                'Upload a new picture!',
+                                style: TextStyle(fontSize: 30),
+                              )
+                            : Text(
+                                'Tap next button!',
+                                style: TextStyle(fontSize: 30),
+                              ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          // ignore: unrelated_type_equality_checks
+                          child: _image != null ? Image.file(_image) : null,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          child: _image == null
+                              ? Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    FloatingActionButton(
+                                      heroTag: null,
+                                      child: Icon(
+                                        Icons.photo_camera,
+                                        size: 30,
+                                      ),
+                                      onPressed: getImageFromCamera,
+                                    ),
+                                    FloatingActionButton(
+                                      heroTag: null,
+                                      child: Icon(
+                                        Icons.photo_library,
+                                        size: 30,
+                                      ),
+                                      onPressed: getImageFromGallery,
+                                    )
+                                  ],
+                                )
+                              : enableUpload(),
+                        ),
+                      ),
                     ],
-                    stops: [0.2, 0.7],
                   ),
                 ),
               ),
-              Container(
-                child: Center(
-                  child: SingleChildScrollView(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: _image == null
-                                ? Text(
-                              'Upload a new picture!',
-                              style: TextStyle(fontSize: 30),
-                            )
-                                : Text(
-                              'Tap next button!',
-                              style: TextStyle(fontSize: 30),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              // ignore: unrelated_type_equality_checks
-                              child: _image != null ? Image.file(_image) : null,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              child: _image == null
-                                  ? Row(
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceEvenly,
-                                children: <Widget>[
-                                  FloatingActionButton(
-                                    heroTag: null,
-                                    child: Icon(
-                                      Icons.photo_camera,
-                                      size: 30,
-                                    ),
-                                    onPressed: getImageFromCamera,
-                                  ),
-                                  FloatingActionButton(
-                                    heroTag: null,
-                                    child: Icon(
-                                      Icons.photo_library,
-                                      size: 30,
-                                    ),
-                                    onPressed: getImageFromGallery,
-                                  )
-                                ],
-                              )
-                                  : enableUpload(),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              )
-            ],
-          ),
-        ));
+            ),
+          )
+        ],
+      ),
+    ));
   }
 
   Widget enableUpload() {
@@ -161,8 +157,7 @@ class _EditPhotoState extends State<EditPhoto> {
             onPressed: () async {
               uploadFile();
               //somehow change this to route to editProfile page
-              Navigator.of(context)
-                  .pushNamed('/navigationHome');
+              Navigator.of(context).pushNamed('/navigationHome');
             },
           ),
         ],

@@ -414,6 +414,96 @@ class _MatchState extends State<Match> {
                                 style: TextStyle(fontSize: 16))
                           ]),
                     ),
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 30),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text('🚽If you were a piece of furniture, what piece of furniture would you be?',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            SizedBox(height: 5),
+                            Text(userData.furniture ?? "start a conversation and ask!", style: TextStyle(fontSize: 16))
+                          ]),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 30),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text('Would you rather have a home in the beach or the mountains?',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            SizedBox(height: 5),
+                            Text(userData.beachOrMountain ?? "start a conversation and ask!", style: TextStyle(fontSize: 16))
+                          ]),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 30),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text('🍱When you get take-out food do you eat out of the container or transfer the food to dishes?',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            SizedBox(height: 5),
+                            Text(userData.takeOutFood ?? "start a conversation and ask!", style: TextStyle(fontSize: 16))
+                          ]),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 30),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text('🏝If you were deserted on an island what items would you bring with you?',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            SizedBox(height: 5),
+                            Text(userData.desertedIsland ?? "start a conversation and ask!", style: TextStyle(fontSize: 16))
+                          ]),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 30),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text('💒If you were to choose between a glamorous wedding or a small ceremony at the city hall, which would you choose?',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            SizedBox(height: 5),
+                            Text(userData.wedding ?? "start a conversation and ask!", style: TextStyle(fontSize: 16))
+                          ]),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 30),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text('🏡Your place or mine?',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            SizedBox(height: 5),
+                            Text(userData.yourPlaceOrMine ?? "start a conversation and ask!", style: TextStyle(fontSize: 16))
+                          ]),
+                    ),
                     //START A CONVERSATION BUTTON
                     Container(
                       margin: const EdgeInsets.fromLTRB(60, 5, 60, 30),
@@ -478,8 +568,9 @@ class _MatchState extends State<Match> {
                             shape: RoundedRectangleBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(16.0))),
-                            label: Text("Meet someone new today🍺",
+                            label: Text("Meet someone new today! 🍺",
                                 style: TextStyle(
+                                  color: Colors.white,
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                 )),
