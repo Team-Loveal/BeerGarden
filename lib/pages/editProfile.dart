@@ -66,7 +66,6 @@ class _EditProfileState extends State<EditProfile> {
         stream: DatabaseService(uid: user.uid).userData,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-
             UserData userData = snapshot.data;
             return Scaffold(
               appBar: AppBar(
@@ -82,7 +81,6 @@ class _EditProfileState extends State<EditProfile> {
               ),
               body: SafeArea(
                 child: Stack(
-
                   children: [
                     Container(
                       height: double.infinity,
@@ -108,11 +106,17 @@ class _EditProfileState extends State<EditProfile> {
                             children: <Widget>[
                               Column(
                                 children: <Widget>[
-                                  Padding(
-                                    padding: EdgeInsets.all(10),
-                                    child: CircleAvatar(
-                                      radius: 60,
-                                      backgroundImage: NetworkImage(userData.imgUrl),
+                                  GestureDetector(
+                                    onTap: (){
+                                      Navigator.of(context)
+                                          .pushNamed('/editphoto');
+                                    },
+                                    child: Padding(
+                                      padding: EdgeInsets.all(10),
+                                      child: CircleAvatar(
+                                        radius: 60,
+                                        backgroundImage: NetworkImage(userData.imgUrl),
+                                      ),
                                     ),
                                   ),
                                   Padding(

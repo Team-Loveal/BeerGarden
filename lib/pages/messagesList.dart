@@ -16,8 +16,8 @@ class Messages extends StatefulWidget {
 class _MessagesState extends State<Messages> {
 
   //for blur
-  double sigmaX;
-  double sigmaY;
+//  double sigmaX;
+//  double sigmaY;
 
   //RIKUS BLUR CODE - OK TO DELETE??
 //  @override
@@ -152,14 +152,8 @@ class _MessagesState extends State<Messages> {
     String nickname;
     String imgUrl;
 
-// get blur values (not sure if this is the right place to put it
-//        Firestore.instance.collection('messages').document(document.documentID).get().then((doc) {
-//      setState(() {
-//        sigmaX = doc['blur'].toDouble();
-//        sigmaY = doc['blur'].toDouble();
-//        print(doc['blur']);
-//      });
-//    });
+    var sigmaX = document['blur'].toDouble();
+    var sigmaY = document['blur'].toDouble();
 
     return GestureDetector(
       onTap: () {
