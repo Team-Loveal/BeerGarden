@@ -31,7 +31,6 @@ class _MatchState extends State<Match> {
 
     //get matches, matchID and chatID from db
     Firestore.instance.collection('users').document(user.uid).get().then((doc) {
-
       //get values for the widget build
       setState(() {
         matchID = doc['matchID'];
@@ -52,11 +51,13 @@ class _MatchState extends State<Match> {
             var blur = document.data['blur'] - 5;
 
             //for each message document update the blur value
-            Firestore.instance.collection("messages").document(documentID).updateData({'blur': blur});
+            Firestore.instance
+                .collection("messages")
+                .document(documentID)
+                .updateData({'blur': blur});
           });
         });
       }
-
     });
   }
 
@@ -490,24 +491,52 @@ class _MatchState extends State<Match> {
                               //find a user where matched is false
                               await Firestore.instance
                                   .collection("messages")
-                                  .where('fromID', isEqualTo: user.uid)
+                                  .where('matchedUsers', arrayContains: user.uid)
+                                  //.where('fromID', isEqualTo: user.uid)
                                   .getDocuments()
                                   .then((data) =>
                                       data.documents.forEach((doc) => {
                                             if (!doc['matched'])
                                               {
-                                                print(
-                                                    'found unmatched user $doc.toID and $doc.documentID'),
-                                                Firestore.instance
-                                                    .collection('users')
-                                                    .document(user.uid)
-                                                    .updateData({
-                                                  'matchID': doc['toID'],
-                                                  'chatID': doc.documentID,
-                                                  'matches': matches,
-                                                }),
-                                                print(
-                                                    'updated user collection with matchID: $doc.toID')
+                                                //if fromID is not yours
+                                                //set fromID to user.uid and toID to original fromID value
+                                                if (doc['fromID'] != user.uid)
+                                                  {
+                                                    //check doc['fromID'] gender is equal to my gender pref
+                                                    Firestore.instance
+                                                        .collection("messages")
+                                                        .document(
+                                                            doc.documentID)
+                                                        .updateData({
+                                                      'fromID': user.uid,
+                                                      'toID': doc['fromID']
+                                                    }),
+
+                                                    print('RESETTING fromID to $user.uid and toID to $doc.fromID'),
+                                                    Firestore.instance
+                                                        .collection('users')
+                                                        .document(user.uid)
+                                                        .updateData({
+                                                      'matchID': doc['fromID'],
+                                                      'chatID': doc.documentID,
+                                                      'matches': matches,
+                                                    }),
+                                                    print(
+                                                        'updated user collection with UPDATED matchID: $doc.fromID')
+                                                  }
+                                                else
+                                                  {
+                                                    print(
+                                                        'getting match the usual way'),
+                                                    Firestore.instance
+                                                        .collection('users')
+                                                        .document(user.uid)
+                                                        .updateData({
+                                                      'matchID': doc['toID'],
+                                                      'chatID': doc.documentID,
+                                                      'matches': matches,
+                                                    }),
+                                                  }
                                               }
                                           }));
                               //go to matched Profile page

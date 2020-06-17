@@ -22,9 +22,6 @@ class _MyProfileState extends State<MyProfile> {
     final AuthService _auth = AuthService();
     final userData = Provider.of<UserData>(context);
     if (userData != null) {
-      print(userData.lowAge);
-      print(userData.highAge);
-    print(userData.genderPreference);
       return Scaffold(
         body: Container(
           height: double.infinity,
