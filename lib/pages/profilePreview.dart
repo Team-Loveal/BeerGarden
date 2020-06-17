@@ -49,46 +49,82 @@ class _ProfilePreviewState extends State<ProfilePreview> {
 //                  var highAge = userData.highAge;
 //                  var intLowAge = lowAge.toInt();
 //                  var intHighAge = highAge.toInt();
+                  if(genderPreference == "Everyone"){
+                    Firestore.instance
+                        .collection("users")
+                        .getDocuments()
+                        .then((querySnapshot) {
+                      querySnapshot.documents.forEach((document) {
+                        if (document.documentID != user.uid) {
+                          //concat and make into a string and push into chatIds array
+                          String toID = document.documentID;
+                          String chatId1 = '${user.uid} - ${document.documentID}';
+                          String chatId2 = '${document.documentID} - ${user.uid}';
 
-                  print(genderPreference);
-                  Firestore.instance
-                      .collection("users")
-                  .where('gender', isEqualTo: genderPreference)
+                          //check messages documents, if it doesn't exist write to the db
+                          Firestore.instance
+                              .collection("messages")
+                              .getDocuments()
+                              .then((querySnapshot) {
+                            querySnapshot.documents.forEach((document) {
+                              if (chatId1 != document.documentID &&
+                                  chatId2 != document.documentID) {
+                                Firestore.instance
+                                    .collection("messages")
+                                    .document(chatId1)
+                                    .setData({
+                                  'fromID': user.uid,
+                                  'toID': toID,
+                                  'matched': false,
+                                  'matchedUsers': [user.uid, toID],
+                                  'blur': 50,
+                                });
+                              }
+                            });
+                          });
+                        }
+                      });
+                    });
+                  } else {
+                    Firestore.instance
+                        .collection("users")
+                        .where('gender', isEqualTo: genderPreference)
 //                  .where('age', isGreaterThanOrEqualTo: intLowAge, isLessThanOrEqualTo: intHighAge)
 //                  .where('age', isLessThanOrEqualTo: intHighAge)
-                      .getDocuments()
-                      .then((querySnapshot) {
-                    querySnapshot.documents.forEach((document) {
-                      if (document.documentID != user.uid) {
-                        //concat and make into a string and push into chatIds array
-                        String toID = document.documentID;
-                        String chatId1 = '${user.uid} - ${document.documentID}';
-                        String chatId2 = '${document.documentID} - ${user.uid}';
+                        .getDocuments()
+                        .then((querySnapshot) {
+                      querySnapshot.documents.forEach((document) {
+                        if (document.documentID != user.uid) {
+                          //concat and make into a string and push into chatIds array
+                          String toID = document.documentID;
+                          String chatId1 = '${user.uid} - ${document.documentID}';
+                          String chatId2 = '${document.documentID} - ${user.uid}';
 
-                        //check messages documents, if it doesn't exist write to the db
-                        Firestore.instance
-                            .collection("messages")
-                            .getDocuments()
-                            .then((querySnapshot) {
-                          querySnapshot.documents.forEach((document) {
-                            if (chatId1 != document.documentID &&
-                                chatId2 != document.documentID) {
-                              Firestore.instance
-                                  .collection("messages")
-                                  .document(chatId1)
-                                  .setData({
-                                'fromID': user.uid,
-                                'toID': toID,
-                                'matched': false,
-                                'matchedUsers': [user.uid, toID],
-                                'blur': 50,
-                              });
-                            }
+                          //check messages documents, if it doesn't exist write to the db
+                          Firestore.instance
+                              .collection("messages")
+                              .getDocuments()
+                              .then((querySnapshot) {
+                            querySnapshot.documents.forEach((document) {
+                              if (chatId1 != document.documentID &&
+                                  chatId2 != document.documentID) {
+                                Firestore.instance
+                                    .collection("messages")
+                                    .document(chatId1)
+                                    .setData({
+                                  'fromID': user.uid,
+                                  'toID': toID,
+                                  'matched': false,
+                                  'matchedUsers': [user.uid, toID],
+                                  'blur': 50,
+                                });
+                              }
+                            });
                           });
-                        });
-                      }
+                        }
+                      });
                     });
-                  });
+                  }
                   Navigator.of(context).popUntil((route) => route.isFirst);
                 },
                 isExtended: true,
