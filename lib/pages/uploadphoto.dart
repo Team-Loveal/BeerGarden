@@ -37,6 +37,9 @@ class _UploadPhotoState extends State<UploadPhoto> {
     });
   }
 
+  //use for switch button
+  bool isSwitched = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,12 +82,29 @@ class _UploadPhotoState extends State<UploadPhoto> {
                                 style: TextStyle(fontSize: 30),
                               ),
                       ),
+                      Center(
+                        child: Switch(
+                          value: isSwitched,
+                          onChanged: (value){
+                            setState(() {
+                              isSwitched = value;
+                            });
+                          },
+                          activeTrackColor: Colors.lightGreenAccent,
+                          activeColor: Colors.green,
+                        ),
+                      ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          // ignore: unrelated_type_equality_checks
-                          child: _image != null ? Image.file(_image) : null,
-                        ),
+
+                        child: _image != null ? Container(
+                          width: 350,
+                          height: 350,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(200.0),
+                            child: Image.file(_image, fit: BoxFit.cover),
+                          ),
+                        ) : null,
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
