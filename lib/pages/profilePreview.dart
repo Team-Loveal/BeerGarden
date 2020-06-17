@@ -24,6 +24,8 @@ class ProfilePreview extends StatefulWidget {
 class _ProfilePreviewState extends State<ProfilePreview> {
   final File profileImg;
 
+  bool loading = false;
+
   _ProfilePreviewState(this.profileImg);
 
   @override
@@ -35,8 +37,9 @@ class _ProfilePreviewState extends State<ProfilePreview> {
         stream: DatabaseService(uid: user.uid).userData,
         builder: (context, snapshot) {
           //snapshot is data coming down the stream
-          if (snapshot.hasData) {
-            UserData userData = snapshot.data;
+          UserData userData = snapshot.data;
+          if (userData.imgUrl != null) {
+//            UserData userData = snapshot.data;
 
             return Scaffold(
               floatingActionButton: FloatingActionButton.extended(
