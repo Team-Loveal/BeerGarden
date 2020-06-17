@@ -97,12 +97,18 @@ class _EditProfileState extends State<EditProfile> {
                             children: <Widget>[
                               Column(
                                 children: <Widget>[
-                                  Padding(
-                                    padding: EdgeInsets.all(10),
-                                    child: CircleAvatar(
-                                      radius: 60,
-                                      backgroundImage:
-                                          NetworkImage(userData.imgUrl),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.of(context)
+                                          .pushNamed('/editphoto');
+                                    },
+                                    child: Padding(
+                                      padding: EdgeInsets.all(10),
+                                      child: CircleAvatar(
+                                        radius: 60,
+                                        backgroundImage:
+                                            NetworkImage(userData.imgUrl),
+                                      ),
                                     ),
                                   ),
                                   Padding(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lovealapp/pages/editPhoto.dart';
 import 'package:lovealapp/pages/getMatch.dart';
 import 'package:lovealapp/pages/myProfile.dart';
 import 'package:lovealapp/pages/navigationHome.dart';
@@ -47,6 +48,7 @@ class MyApp extends StatelessWidget {
             '/forgotpassword': (_) => ForgotPassword(),
             '/createProfile': (_) => CreateProfile(),
             '/uploadphoto': (_) => UploadPhoto(),
+            '/editphoto': (_) => EditPhoto(),
             '/editProfile': (_) => EditProfile(),
             '/getMatch': (_) => GetMatch(),
             '/navigationHome': (_) => NavigationHome(),

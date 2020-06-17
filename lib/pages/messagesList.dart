@@ -16,7 +16,7 @@ class Messages extends StatefulWidget {
 }
 
 class _MessagesState extends State<Messages> {
-  //for blur
+  // for blur
   double sigmaX;
   double sigmaY;
 
