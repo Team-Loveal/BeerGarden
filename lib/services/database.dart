@@ -19,6 +19,7 @@ class DatabaseService {
       'gender': "",
       'occupation': "",
       'about': "",
+      'isProfileCreated': false,
     });
   }
 

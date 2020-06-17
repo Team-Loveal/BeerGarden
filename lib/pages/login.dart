@@ -3,6 +3,8 @@ import 'package:lovealapp/shared/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:provider/provider.dart';
+import 'package:lovealapp/models/user.dart';
 // import 'package:provider/provider.dart';
 // import 'package:beergarden/models/user.dart';
 
@@ -14,6 +16,10 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   @override
   final AuthService _auth = AuthService();
+
+/*  Widget build(BuildContext context) {
+    final userData = Provider.of<UserData>(context);
+  }*/
 
   //text field state
   String email = "";
@@ -43,12 +49,13 @@ class _LoginState extends State<Login> {
 
   void googleLogin() async {
     dynamic result = await AuthService().loginWithGoogle();
+    print('AAAAAAAAAAAAAAAAAAAA ${result.isProfileCreated}');
     if (result == null) {
       setState(() {
         error = 'Could not sign in with those credentials';
         loading = false;
       });
-    } else {
+    } else { //if (userData.){
       //result.uid is the uid we will need for the db
       Navigator.of(context).popUntil((route) => route.isFirst);
     }
@@ -206,8 +213,8 @@ class _LoginState extends State<Login> {
         children: <Widget>[
           _buildSocialBtn(() => facebookLogin(), MdiIcons.facebook,
               Color.fromARGB(255, 66, 103, 178)),
-          _buildSocialBtn(() => googleLogin(), MdiIcons.google,
-              Color.fromARGB(255, 234, 67, 53)),
+          _buildSocialBtn(() =>  googleLogin(), MdiIcons.google,
+              Color.fromARGB(255, 234, 67, 53),),
         ],
       ),
     );
