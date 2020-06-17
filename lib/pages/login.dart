@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:lovealapp/services/auth.dart';
 import 'package:lovealapp/shared/loading.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +50,8 @@ class _LoginState extends State<Login> {
 
   void googleLogin() async {
     dynamic result = await AuthService().loginWithGoogle();
-    print('AAAAAAAAAAAAAAAAAAAA ${result.isProfileCreated}');
+    FirebaseUser user = result.user;
+    print('AAAAAAAAAAAAAAAAAAAA ${user}');
     if (result == null) {
       setState(() {
         error = 'Could not sign in with those credentials';
