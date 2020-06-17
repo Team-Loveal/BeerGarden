@@ -26,20 +26,6 @@ class _MatchState extends State<Match> {
   final AuthService _auth = AuthService();
 
   @override
-  void initState() {
-    super.initState();
-    final user = Provider.of<User>(context, listen: false);
-    //get matchID and chatID from db
-    Firestore.instance.collection('users').document(user.uid).get().then((doc) {
-      setState(() {
-        matchID = doc['matchID'];
-        chatID = doc['chatID'];
-        matches = doc['matches'];
-      });
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     final myUserData = Provider.of<UserData>(context);
     return StreamBuilder<UserData>(
