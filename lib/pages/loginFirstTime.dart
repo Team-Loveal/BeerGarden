@@ -32,7 +32,7 @@ class _LoginFirstTimeState extends State<LoginFirstTime> {
 
 
     dynamic result =
-    await _auth.signIWithEmailAndPassword(trimmedEmail, trimmedPassword);
+    await _auth.signInWithEmailAndPassword(trimmedEmail, trimmedPassword);
 
     if (result == null) {
       setState(() {

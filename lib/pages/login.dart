@@ -36,7 +36,7 @@ class _LoginState extends State<Login> {
     String trimmedPassword = password.trim();
 
     dynamic result =
-        await _auth.signIWithEmailAndPassword(trimmedEmail, trimmedPassword);
+        await _auth.signInWithEmailAndPassword(trimmedEmail, trimmedPassword);
     if (result == null) {
       setState(() {
         error = 'Could not sign in with those credentials';

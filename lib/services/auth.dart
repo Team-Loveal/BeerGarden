@@ -45,7 +45,7 @@ class AuthService {
   }
 
   //sign in with email and password
-  Future signIWithEmailAndPassword(String email, String password) async {
+  Future signInWithEmailAndPassword(String email, String password) async {
     try {
       AuthResult result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
@@ -94,6 +94,7 @@ class AuthService {
     try {
       GoogleSignIn googleSignIn = GoogleSignIn();
       GoogleSignInAccount account = await googleSignIn.signIn();
+      print("GOOOGLLGLGLGLGLG ${account}");
       if (account == null) return false;
       AuthResult result =
           await _auth.signInWithCredential(GoogleAuthProvider.getCredential(
