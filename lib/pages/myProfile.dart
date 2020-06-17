@@ -429,7 +429,97 @@ class _MyProfileState extends State<MyProfile> {
                       Text(userData.aliens ?? "fill it out!", style: TextStyle(fontSize: 16))
                     ]),
               ),
-              //START A CONVERSATION BUTTON
+              Container(
+                margin: const EdgeInsets.fromLTRB(20, 10, 20, 30),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text('🚽If you were a piece of furniture, what piece of furniture would you be?',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          )),
+                      SizedBox(height: 5),
+                      Text(userData.furniture ?? "fill it out!", style: TextStyle(fontSize: 16))
+                    ]),
+              ),
+              Container(
+                margin: const EdgeInsets.fromLTRB(20, 10, 20, 30),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text('Would you rather have a home in the beach or the mountains?',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          )),
+                      SizedBox(height: 5),
+                      Text(userData.beachOrMountain ?? "fill it out!", style: TextStyle(fontSize: 16))
+                    ]),
+              ),
+              Container(
+                margin: const EdgeInsets.fromLTRB(20, 10, 20, 30),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text('🍱When you get take-out food do you eat out of the container or transfer the food to dishes?',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          )),
+                      SizedBox(height: 5),
+                      Text(userData.takeOutFood ?? "fill it out!", style: TextStyle(fontSize: 16))
+                    ]),
+              ),
+              Container(
+                margin: const EdgeInsets.fromLTRB(20, 10, 20, 30),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text('🏝If you were deserted on an island what items would you bring with you?',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          )),
+                      SizedBox(height: 5),
+                      Text(userData.desertedIsland ?? "fill it out!", style: TextStyle(fontSize: 16))
+                    ]),
+              ),
+              Container(
+                margin: const EdgeInsets.fromLTRB(20, 10, 20, 30),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text('💒If you were to choose between a glamorous wedding or a small ceremony at the city hall, which would you choose?',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          )),
+                      SizedBox(height: 5),
+                      Text(userData.wedding ?? "fill it out!", style: TextStyle(fontSize: 16))
+                    ]),
+              ),
+              Container(
+                margin: const EdgeInsets.fromLTRB(20, 10, 20, 30),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text('🏡Your place or mine?',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          )),
+                      SizedBox(height: 5),
+                      Text(userData.yourPlaceOrMine ?? "fill it out!", style: TextStyle(fontSize: 16))
+                    ]),
+              ),
+              //ANSWER MORE QUESTIONS BTN
               Container(
                 margin: const EdgeInsets.fromLTRB(60, 5, 60, 30),
                 child: ButtonTheme(
@@ -439,7 +529,7 @@ class _MyProfileState extends State<MyProfile> {
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
-                            fontSize: 20,
+                            fontSize: 18,
                           )),
                       color: Colors.lightGreen,
                       shape: RoundedRectangleBorder(

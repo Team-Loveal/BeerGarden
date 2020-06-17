@@ -125,6 +125,12 @@ class DatabaseService {
         foreverEat: snapshot.data['foreverEat'],
         bestForLast: snapshot.data['bestForLast'],
         aliens: snapshot.data['aliens'],
+      furniture: snapshot.data['furniture'],
+      beachOrMountain: snapshot.data['beachOrMountain'],
+      takeOutFood: snapshot.data['takeOutFood'],
+      desertedIsland: snapshot.data['desertedIsland'],
+      wedding: snapshot.data['wedding'],
+      yourPlaceOrMine: snapshot.data['yourPlaceOrMine'],
     );
   }
 
