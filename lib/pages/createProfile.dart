@@ -82,7 +82,10 @@ class _CreateProfileState extends State<CreateProfile> {
                               children: <Widget>[
                                 Padding(
                                   padding: const EdgeInsets.all(10.0),
-                                  child: Text('Your Profile', style:TextStyle(fontSize: 30.0),),
+                                  child: Text(
+                                    'Your Profile',
+                                    style: TextStyle(fontSize: 30.0),
+                                  ),
                                 ),
                                 TextFormField(
                                   cursorWidth: 3,
@@ -94,13 +97,13 @@ class _CreateProfileState extends State<CreateProfile> {
                                     //this block is used to run code when a user save the form
                                   },
                                   decoration: InputDecoration(
-                                      hintText:
-                                          'Choose a nickname to display to users',
-                                      labelStyle: TextStyle(
-                                        color: Colors.black,
-                                      ),
-                                      labelText: 'Nickname *',
-                                      ),
+                                    hintText:
+                                        'Choose a nickname to display to users',
+                                    labelStyle: TextStyle(
+                                      color: Colors.black,
+                                    ),
+                                    labelText: 'Nickname *',
+                                  ),
                                   keyboardType: TextInputType.text,
                                   validator: (value) {
                                     if (value.isEmpty) {
@@ -115,12 +118,12 @@ class _CreateProfileState extends State<CreateProfile> {
                                     setState(() => location = val);
                                   },
                                   decoration: InputDecoration(
-                                      hintText: 'Where do you live now?',
-                                      labelStyle: TextStyle(
-                                        color: Colors.black,
-                                      ),
-                                      labelText: 'Enter your Location *',
+                                    hintText: 'Where do you live now?',
+                                    labelStyle: TextStyle(
+                                      color: Colors.black,
                                     ),
+                                    labelText: 'Enter your Location *',
+                                  ),
                                   keyboardType: TextInputType.text,
                                   validator: (value) {
                                     if (value.isEmpty) {
@@ -130,7 +133,8 @@ class _CreateProfileState extends State<CreateProfile> {
                                   },
                                 ),
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
                                     Text('Age'),
                                     DropdownButton<int>(
@@ -142,9 +146,70 @@ class _CreateProfileState extends State<CreateProfile> {
                                         });
                                       },
                                       items: <int>[
-                                        18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80
-                                      ].map<DropdownMenuItem<int>>(
-                                          (int value) {
+                                        18,
+                                        19,
+                                        20,
+                                        21,
+                                        22,
+                                        23,
+                                        24,
+                                        25,
+                                        26,
+                                        27,
+                                        28,
+                                        29,
+                                        30,
+                                        31,
+                                        32,
+                                        33,
+                                        34,
+                                        35,
+                                        36,
+                                        37,
+                                        38,
+                                        39,
+                                        40,
+                                        41,
+                                        42,
+                                        43,
+                                        44,
+                                        45,
+                                        46,
+                                        47,
+                                        48,
+                                        49,
+                                        50,
+                                        51,
+                                        52,
+                                        53,
+                                        54,
+                                        55,
+                                        56,
+                                        57,
+                                        58,
+                                        59,
+                                        60,
+                                        61,
+                                        62,
+                                        63,
+                                        64,
+                                        65,
+                                        66,
+                                        67,
+                                        68,
+                                        69,
+                                        70,
+                                        71,
+                                        72,
+                                        73,
+                                        74,
+                                        75,
+                                        76,
+                                        77,
+                                        78,
+                                        79,
+                                        80
+                                      ].map<DropdownMenuItem<int>>((int value) {
                                         return DropdownMenuItem<int>(
                                           value: value,
                                           child: Text(value.toString()),
@@ -162,9 +227,12 @@ class _CreateProfileState extends State<CreateProfile> {
                                           gender = newValue;
                                         });
                                       },
-                                      items: <String>['Female', 'Male', 'Rather not say']
-                                          .map<DropdownMenuItem<String>>(
-                                              (String value) {
+                                      items: <String>[
+                                        'Female',
+                                        'Male',
+                                        'Rather not say'
+                                      ].map<DropdownMenuItem<String>>(
+                                          (String value) {
                                         return DropdownMenuItem<String>(
                                           value: value,
                                           child: Text(value),
@@ -211,7 +279,8 @@ class _CreateProfileState extends State<CreateProfile> {
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(30.0),
-                                  child: Text('What are your interests?', style:TextStyle(fontSize: 20.0)),
+                                  child: Text('What are your interests?',
+                                      style: TextStyle(fontSize: 20.0)),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(left: 8),
@@ -326,13 +395,15 @@ class _CreateProfileState extends State<CreateProfile> {
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(30.0),
-                                  child: Text('Your Preferences', style:TextStyle(fontSize: 30.0),),
+                                  child: Text(
+                                    'Your Preferences',
+                                    style: TextStyle(fontSize: 30.0),
+                                  ),
                                 ),
-
                                 Text(
-                                  "Show Me", style:TextStyle(fontSize: 20.0),
+                                  "Show Me",
+                                  style: TextStyle(fontSize: 20.0),
                                 ),
-
                                 Center(
                                   child: DropdownButton<String>(
                                     isExpanded: true,
@@ -343,46 +414,60 @@ class _CreateProfileState extends State<CreateProfile> {
                                         genderPreference = newValue;
                                       });
                                     },
-                                    items: <String>['Female', 'Male', 'Everyone']
-                                        .map<DropdownMenuItem<String>>((String value) {
+                                    items: <String>[
+                                      'Female',
+                                      'Male',
+                                      'Everyone'
+                                    ].map<DropdownMenuItem<String>>(
+                                        (String value) {
                                       return DropdownMenuItem<String>(
                                         value: value,
-                                        child: Text(value, style:TextStyle(fontSize: 20.0)),
+                                        child: Text(value,
+                                            style: TextStyle(fontSize: 20.0)),
                                       );
                                     }).toList(),
                                   ),
                                 ),
                                 Container(
                                     child: Column(
+                                  children: <Widget>[
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: <Widget>[
-                                        Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          children: <Widget>[
-                                            Padding(
-                                              padding: const EdgeInsets.all(30.0),
-                                              child: Text('Age Range',style:TextStyle(fontSize: 20.0),),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.all(30.0),
-                                              child: Text('${_lowValue.toInt().toString()} - ${_highValue.toInt().toString()}', style:TextStyle(fontSize: 20.0),),
-                                            )
-                                          ],
+                                        Padding(
+                                          padding: const EdgeInsets.all(30.0),
+                                          child: Text(
+                                            'Age Range',
+                                            style: TextStyle(fontSize: 20.0),
+                                          ),
                                         ),
-                                        RangeSlider(
-                                          min: 18,
-                                          max: 100,
-                                          divisions: 82,
-                                          inactiveColor: Colors.black,
-                                          activeColor: Colors.black,
-                                          values: RangeValues(_lowValue, _highValue),
-                                          onChanged: (_range) {
-                                            setState(() =>
-                                            {_lowValue = _range.start, _highValue = _range.end});
-                                          },
-                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(30.0),
+                                          child: Text(
+                                            '${_lowValue.toInt().toString()} - ${_highValue.toInt().toString()}',
+                                            style: TextStyle(fontSize: 20.0),
+                                          ),
+                                        )
                                       ],
-                                    )
-                                ),
+                                    ),
+                                    RangeSlider(
+                                      min: 18,
+                                      max: 100,
+                                      divisions: 82,
+                                      inactiveColor: Colors.black,
+                                      activeColor: Colors.black,
+                                      values:
+                                          RangeValues(_lowValue, _highValue),
+                                      onChanged: (_range) {
+                                        setState(() => {
+                                              _lowValue = _range.start,
+                                              _highValue = _range.end
+                                            });
+                                      },
+                                    ),
+                                  ],
+                                )),
                                 Container(
                                   padding: EdgeInsets.fromLTRB(30, 10, 20, 0),
                                   child: RaisedButton(
@@ -419,12 +504,12 @@ class _CreateProfileState extends State<CreateProfile> {
                                         Navigator.of(context)
                                             .pushNamed('/questions');
                                       }
-
                                     },
                                     textColor: Colors.white,
                                     color: Hexcolor("#215a00"),
                                     shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(50)),
+                                        borderRadius:
+                                            BorderRadius.circular(50)),
                                     child: Row(
                                       children: <Widget>[
                                         Text('QUESTION TIME  ',
@@ -433,7 +518,8 @@ class _CreateProfileState extends State<CreateProfile> {
                                                 fontWeight: FontWeight.bold)),
                                         Icon(MdiIcons.arrowRight, size: 18)
                                       ],
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                     ),
                                   ),
                                 )
