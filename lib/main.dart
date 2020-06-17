@@ -58,8 +58,7 @@ class MyApp extends StatelessWidget {
             '/setPreferences': (_) => SetPreferences(),
             '/loginFirstTime': (_) => LoginFirstTime(),
             '/questions': (_) => Questions(),
-          }
-          ),
+          }),
     );
   }
 }

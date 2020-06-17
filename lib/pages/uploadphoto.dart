@@ -84,25 +84,22 @@ class _UploadPhotoState extends State<UploadPhoto> {
                           textAlign: TextAlign.center,
                               ),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          Center(
-                            child: Transform.scale(
-                              scale: 1.5,
-                              child: Switch(
-                                value: isSwitched,
-                                onChanged: (value) {
-                                  setState(() {
-                                    isSwitched = value;
-                                  });
-                                },
-                                activeTrackColor: Hexcolor("#8CC63E"),
-                                activeColor: Colors.green,
-                              ),
+                      Container(
+                        child: _image != null ? Center(
+                          child: Transform.scale(
+                            scale: 1.5,
+                            child: Switch(
+                              value: isSwitched,
+                              onChanged: (value) {
+                                setState(() {
+                                  isSwitched = value;
+                                });
+                              },
+                              activeTrackColor: Hexcolor("#8CC63E"),
+                              activeColor: Colors.green,
                             ),
                           ),
-                        ],
+                        ): null,
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -111,7 +108,7 @@ class _UploadPhotoState extends State<UploadPhoto> {
                           width: 350,
                           height: 350,
                           child: ClipRRect(
-                            borderRadius: BorderRadius.circular(200.0),
+                            borderRadius: BorderRadius.circular(10.0),
                             child: Image.file(_image, fit: BoxFit.cover),
                           ),
                         ) : Stack(
@@ -120,7 +117,7 @@ class _UploadPhotoState extends State<UploadPhoto> {
                               width: 350,
                               height: 350,
                               child: ClipRRect(
-                                borderRadius: BorderRadius.circular(200.0),
+                                borderRadius: BorderRadius.circular(10.0),
                                 child: Image.file(_image, fit: BoxFit.cover),
                               ),
                             ),
@@ -128,7 +125,7 @@ class _UploadPhotoState extends State<UploadPhoto> {
                               width: 350,
                               height: 350,
                                 child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(200.0),
+                                  borderRadius: BorderRadius.circular(10.0),
                                   child: BackdropFilter(
                                       filter: ImageFilter.blur(
                                           sigmaX: 50, sigmaY: 50),
