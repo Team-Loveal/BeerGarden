@@ -94,7 +94,6 @@ class AuthService {
     try {
       GoogleSignIn googleSignIn = GoogleSignIn();
       GoogleSignInAccount account = await googleSignIn.signIn();
-      print("GOOOGLLGLGLGLGLG ${account}");
       if (account == null) return false;
       AuthResult result =
           await _auth.signInWithCredential(GoogleAuthProvider.getCredential(
