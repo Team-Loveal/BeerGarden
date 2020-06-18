@@ -36,15 +36,15 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 ## Authors
 
-👻 [Jeff Bentley](https://github.com/jbentleyjp)
+👻  [Jeff Bentley](https://github.com/jbentleyjp)
 
-😸 [Garrett Chun](https://github.com/Kapakahi)
+😸  [Garrett Chun](https://github.com/Kapakahi)
 
-🌝 [Yuya Harada](https://github.com/yuya-h-29)
+🌝  [Yuya Harada](https://github.com/yuya-h-29)
 
-🐸 [Riku Kawano](https://github.com/rikukawano)
+🐸  [Riku Kawano](https://github.com/rikukawano)
 
-🦄 [Yurika Namba](https://github.com/yurikanamba)
+🦄  [Yurika Namba](https://github.com/yurikanamba)
 
 ## License
 
