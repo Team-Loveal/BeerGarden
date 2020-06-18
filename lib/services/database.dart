@@ -96,6 +96,14 @@ class DatabaseService {
     });
   }
 
+  Future profileComplete(
+      bool isProfileCompleted
+      ) async {
+    return await usersCollection.document(uid).updateData({
+      'isProfileCreated': true,
+    });
+  }
+
   //userData from snapshot
   UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
     return UserData(

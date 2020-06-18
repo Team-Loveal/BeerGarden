@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:path/path.dart' as Path;
 import 'dart:ui';
+import 'package:lovealapp/services/database.dart';
 
 class UploadPhoto extends StatefulWidget {
   @override
@@ -229,8 +230,17 @@ class _UploadPhotoState extends State<UploadPhoto> {
     );
   }
 
+  void verifyCompletedProfile() async {
+    await DatabaseService(uid: user.uid)
+        .profileComplete(
+      isProfileCompleted,
+    );
+  }
+
+
   Future uploadFile() async {
     final user = Provider.of<User>(context, listen: false);
+    verifyCompletedProfile();
     StorageReference storageReference = FirebaseStorage.instance
         .ref()
         .child('users/${Path.basename(_image.path)}}');
