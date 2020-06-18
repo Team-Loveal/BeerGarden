@@ -48,8 +48,8 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                   //TODO read preferences and filter out matches
                   //get potential matches for the user
                   var genderPreference = userData.genderPreference;
-//                  var lowAge = userData.lowAge;
-//                  var highAge = userData.highAge;
+                  var lowAge = userData.lowAge;
+                  var highAge = userData.highAge;
 //                  var intLowAge = lowAge.toInt();
 //                  var intHighAge = highAge.toInt();
                   if(genderPreference == "Everyone"){
