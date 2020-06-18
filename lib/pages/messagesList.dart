@@ -20,7 +20,7 @@ class _MessagesState extends State<Messages> {
         backgroundColor: Hexcolor("#F4AA33"),
         appBar: PreferredSize(
           preferredSize:
-              Size.fromHeight(MediaQuery.of(context).size.height * 0.15),
+          Size.fromHeight(MediaQuery.of(context).size.height * 0.15),
           child: AppBar(
             backgroundColor: Hexcolor("#F4AA33"),
             flexibleSpace: Container(

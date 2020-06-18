@@ -21,8 +21,8 @@ Widget buildChatroom(DocumentSnapshot document, BuildContext context) {
   String imgUrl;
 
   // for blur
-  double sigmaX;
-  double sigmaY;
+ var sigmaX = document['blur'].toDouble();
+ var sigmaY = document['blur'].toDouble();
 
   return Slidable(
     actionPane: SlidableDrawerActionPane(),
