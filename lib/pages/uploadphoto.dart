@@ -41,6 +41,7 @@ class _UploadPhotoState extends State<UploadPhoto> {
 
   //use for switch button
   bool isSwitched = false;
+  bool isProfileCompleted;
 
   @override
   Widget build(BuildContext context) {
@@ -231,6 +232,7 @@ class _UploadPhotoState extends State<UploadPhoto> {
   }
 
   void verifyCompletedProfile() async {
+    final user = Provider.of<User>(context);
     await DatabaseService(uid: user.uid)
         .profileComplete(
       isProfileCompleted,
