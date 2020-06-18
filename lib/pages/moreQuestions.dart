@@ -20,6 +20,8 @@ class _MoreQuestionsState extends State<MoreQuestions> {
   String wedding;
   String yourPlaceOrMine;
 
+  multipleChoice1 _multipleChoice1 = multipleChoice1.beach;
+
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
@@ -98,6 +100,7 @@ class _MoreQuestionsState extends State<MoreQuestions> {
                                 ),
                                 ListTile(
                                   title: const Text('🏖Beach'),
+                                  selected: _multipleChoice1 == multipleChoice1.beach,
                                   leading: Radio(
                                     value: '🏖Beach',
                                     groupValue: beachOrMountain,
@@ -110,6 +113,7 @@ class _MoreQuestionsState extends State<MoreQuestions> {
                                 ),
                                 ListTile(
                                   title: const Text('🏔Mountains'),
+                                  selected: _multipleChoice1 == multipleChoice1.mountain,
                                   leading: Radio(
                                     value: '🏔Mountains',
                                     groupValue: beachOrMountain,
@@ -158,8 +162,13 @@ class _MoreQuestionsState extends State<MoreQuestions> {
                                 TextFormField(
                                   cursorWidth: 3,
                                   onChanged: (val) {
-                                    setState(() => desertedIsland = val);
+                                    if (val != userData.desertedIsland) {
+                                      setState(() => desertedIsland = val);
+                                    } else {
+                                      desertedIsland = userData.desertedIsland;
+                                    }
                                   },
+                                  initialValue: userData.desertedIsland,
                                   keyboardType: TextInputType.text,
                                 ),
                                 SizedBox(height: 20.0),
@@ -197,8 +206,13 @@ class _MoreQuestionsState extends State<MoreQuestions> {
                                 TextFormField(
                                   cursorWidth: 3,
                                   onChanged: (val) {
-                                    setState(() => yourPlaceOrMine = val);
+                                    if (val != userData.yourPlaceOrMine) {
+                                      setState(() => yourPlaceOrMine = val);
+                                    } else {
+                                      yourPlaceOrMine = userData.yourPlaceOrMine;
+                                    }
                                   },
+                                  initialValue: userData.yourPlaceOrMine,
                                   keyboardType: TextInputType.text,
                                 ),
                                 //BUTTON
@@ -209,12 +223,12 @@ class _MoreQuestionsState extends State<MoreQuestions> {
                                       //write answers into db
                                       await DatabaseService(uid: user.uid)
                                           .updateMoreAnswers(
-                                          furniture ?? "",
+                                          furniture ?? userData.furniture,
                                           beachOrMountain ?? "",
                                           takeOutFood ?? "",
-                                          desertedIsland ?? "",
+                                          desertedIsland ?? userData.desertedIsland,
                                           wedding ?? "",
-                                          yourPlaceOrMine ?? ""
+                                          yourPlaceOrMine ?? userData.yourPlaceOrMine
                                       );
 
                                       Navigator.of(context)
@@ -255,4 +269,8 @@ class _MoreQuestionsState extends State<MoreQuestions> {
     }
       });
   }
+}
+
+enum multipleChoice1 {
+  beach, mountain
 }
