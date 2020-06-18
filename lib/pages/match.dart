@@ -492,8 +492,8 @@ class _MatchState extends State<Match> {
                               //find a user where matched is false
                               await Firestore.instance
                                   .collection("messages")
-                                  .where('matchedUsers', arrayContains: user.uid)
-                                  //.where('fromID', isEqualTo: user.uid)
+                                  .where('matchedUsers',
+                                      arrayContains: user.uid)
                                   .getDocuments()
                                   .then((data) =>
                                       data.documents.forEach((doc) => {
@@ -512,8 +512,6 @@ class _MatchState extends State<Match> {
                                                       'fromID': user.uid,
                                                       'toID': doc['fromID']
                                                     }),
-
-                                                    print('RESETTING fromID to $user.uid and toID to $doc.fromID'),
                                                     Firestore.instance
                                                         .collection('users')
                                                         .document(user.uid)
@@ -522,13 +520,9 @@ class _MatchState extends State<Match> {
                                                       'chatID': doc.documentID,
                                                       'matches': matches,
                                                     }),
-                                                    print(
-                                                        'updated user collection with UPDATED matchID: $doc.fromID')
                                                   }
                                                 else
                                                   {
-                                                    print(
-                                                        'getting match the usual way'),
                                                     Firestore.instance
                                                         .collection('users')
                                                         .document(user.uid)

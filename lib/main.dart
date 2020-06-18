@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lovealapp/pages/editPhoto.dart';
-import 'package:lovealapp/pages/getMatch.dart';
 import 'package:lovealapp/pages/myProfile.dart';
 import 'package:lovealapp/pages/navigationHome.dart';
 import 'package:lovealapp/pages/preferences.dart';
@@ -50,7 +49,6 @@ class MyApp extends StatelessWidget {
             '/uploadphoto': (_) => UploadPhoto(),
             '/editphoto': (_) => EditPhoto(),
             '/editProfile': (_) => EditProfile(),
-            '/getMatch': (_) => GetMatch(),
             '/navigationHome': (_) => NavigationHome(),
             '/myProfile': (_) => MyProfile(),
             '/setPreferences': (_) => SetPreferences(),

@@ -596,8 +596,7 @@ class _EditProfileState extends State<EditProfile> {
                                           );
 
                                           Navigator.of(context)
-                                              .pushNamed('/navigationHome');
-                                          //  Navigator.pop(context);
+                                              .pushNamed('/myProfile');
                                         },
                                       ),
                                     )

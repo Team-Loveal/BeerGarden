@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
@@ -72,24 +71,25 @@ class _MyProfileState extends State<MyProfile> {
                         color: Colors.orange,
                       ),
                       onPressed: () async {
-                       // Navigator.of(context).pushNamed('/editProfile');
-                        Navigator.pushReplacementNamed(context, '/editProfile', arguments: {
-                          'nicknameEdit': userData.nickname,
-                          'locationEdit': userData.location,
-                          'occupationEdit': userData.occupation,
-                          'aboutEdit': userData.about,
-                          'ageEdit': userData.age,
-                          'genderEdit': userData.gender,
-                          'yodelingEdit': userData.yodeling,
-                          'shoppingEdit': userData.shopping,
-                          'makingBalloonAnimalsEdit': userData.makingBalloonAnimals,
-                          'cookingEdit': userData.cooking,
-                          'paintingEdit': userData.painting,
-                          'moviesEdit': userData.movies,
-                          'sportsEdit': userData.sports,
-                          'writingEdit': userData.writing,
-                          'drinkingEdit': userData.drinking,
-                        });
+                        Navigator.pushReplacementNamed(context, '/editProfile',
+                            arguments: {
+                              'nicknameEdit': userData.nickname,
+                              'locationEdit': userData.location,
+                              'occupationEdit': userData.occupation,
+                              'aboutEdit': userData.about,
+                              'ageEdit': userData.age,
+                              'genderEdit': userData.gender,
+                              'yodelingEdit': userData.yodeling,
+                              'shoppingEdit': userData.shopping,
+                              'makingBalloonAnimalsEdit':
+                                  userData.makingBalloonAnimals,
+                              'cookingEdit': userData.cooking,
+                              'paintingEdit': userData.painting,
+                              'moviesEdit': userData.movies,
+                              'sportsEdit': userData.sports,
+                              'writingEdit': userData.writing,
+                              'drinkingEdit': userData.drinking,
+                            });
                       },
                     ),
                   )
@@ -160,47 +160,6 @@ class _MyProfileState extends State<MyProfile> {
                             )),
                       ],
                     ),
-//CAN THIS BE DELETED?
-//                          Positioned(
-//                            bottom: 0,
-//                            child: Container(
-//                                height: 80,
-//                                width: double.infinity,
-//                                padding: const EdgeInsets.fromLTRB(35, 5, 0, 5),
-//                                decoration: BoxDecoration(
-//                                  color: Colors.white.withOpacity(0.7),
-//                                  borderRadius: BorderRadius.circular(10.0),
-//                                ),
-//                                child: Column(
-//                                  mainAxisAlignment: MainAxisAlignment.center,
-//                                  children: <Widget>[
-//                                    Align(
-//                                      alignment: Alignment.topLeft,
-//                                      child: Container(
-//                                        child: Text("John Smith, 28",
-//                                            style: TextStyle(
-//                                              fontSize: 23,
-//                                              fontWeight: FontWeight.bold,
-//                                            )),
-//                                      ),
-//                                    ),
-//                                    Align(
-//                                      alignment: Alignment.topLeft,
-//                                      child: Row(
-//                                        children: <Widget>[
-//                                          Icon(MdiIcons.mapMarker,
-//                                              size: 18, color: Colors.pink),
-//                                          Text('Tokyo, Japan',
-//                                              style: TextStyle(
-//                                                  fontWeight: FontWeight.bold,
-//                                                  fontSize: 18,
-//                                                  color: Colors.pink))
-//                                        ],
-//                                      ),
-//                                    ),
-//                                  ],
-//                                )),
-//                          ),
                   ],
                 ),
               ),
@@ -349,71 +308,57 @@ class _MyProfileState extends State<MyProfile> {
               //ANSWERS
               Container(
                 margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                child: Wrap(
-                    children: <Widget>[
-                      Text('Do you make your bed in the morning?',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          )),
-                      SizedBox(height: 5),
-
-                      Text(userData.bed ?? "fill it out!",
-                          style: TextStyle(fontSize: 16)),
-
-                    ]),
-              ),
-              Container(
-
-                margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                child: Wrap(
-
-                    children: <Widget>[
-                      Text('Do you read reviews, or just go with your gut?',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          )),
-                      SizedBox(height: 5),
-
-                      Text(userData.reviews ?? "fill it out!",
-                          style: TextStyle(fontSize: 16)),
-
-                    ]),
+                child: Wrap(children: <Widget>[
+                  Text('Do you make your bed in the morning?',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      )),
+                  SizedBox(height: 5),
+                  Text(userData.bed ?? "fill it out!",
+                      style: TextStyle(fontSize: 16)),
+                ]),
               ),
               Container(
                 margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                child: Wrap(
-                    children: <Widget>[
-
-                      Text('If you could only eat one thing for the rest of your life, what would it be?',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          )),
-
-                      SizedBox(height: 5),
-
-                      Text(userData.foreverEat ?? "fill it out!",
-                          style: TextStyle(fontSize: 16)),
-
-                    ]),
+                child: Wrap(children: <Widget>[
+                  Text('Do you read reviews, or just go with your gut?',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      )),
+                  SizedBox(height: 5),
+                  Text(userData.reviews ?? "fill it out!",
+                      style: TextStyle(fontSize: 16)),
+                ]),
               ),
               Container(
                 margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                child: Wrap(
-                    children: <Widget>[
-                      Text("If you're eating a meal do you save the best thing for last or eat it first?",
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          )),
-                      SizedBox(height: 5),
-
-                      Text(userData.bestForLast ?? "fill it out!",
-                          style: TextStyle(fontSize: 16)),
-
-                    ]),
+                child: Wrap(children: <Widget>[
+                  Text(
+                      'If you could only eat one thing for the rest of your life, what would it be?',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      )),
+                  SizedBox(height: 5),
+                  Text(userData.foreverEat ?? "fill it out!",
+                      style: TextStyle(fontSize: 16)),
+                ]),
+              ),
+              Container(
+                margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                child: Wrap(children: <Widget>[
+                  Text(
+                      "If you're eating a meal do you save the best thing for last or eat it first?",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      )),
+                  SizedBox(height: 5),
+                  Text(userData.bestForLast ?? "fill it out!",
+                      style: TextStyle(fontSize: 16)),
+                ]),
               ),
               Container(
                 margin: const EdgeInsets.fromLTRB(20, 10, 20, 30),
@@ -427,7 +372,8 @@ class _MyProfileState extends State<MyProfile> {
                             fontWeight: FontWeight.bold,
                           )),
                       SizedBox(height: 5),
-                      Text(userData.aliens ?? "fill it out!", style: TextStyle(fontSize: 16))
+                      Text(userData.aliens ?? "fill it out!",
+                          style: TextStyle(fontSize: 16))
                     ]),
               ),
             ],
