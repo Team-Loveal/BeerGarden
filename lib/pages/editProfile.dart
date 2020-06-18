@@ -37,7 +37,6 @@ class _EditProfileState extends State<EditProfile> {
   double _highValue = 100.00;
   String genderPreference;
 
-
   @override
   Widget build(BuildContext context) {
     data = ModalRoute.of(context).settings.arguments;
@@ -489,7 +488,9 @@ class _EditProfileState extends State<EditProfile> {
                                     Center(
                                       child: DropdownButton<String>(
                                         isExpanded: true,
-                                        value: genderPreference != null ? genderPreference : userData.genderPreference,
+                                        value: genderPreference != null
+                                            ? genderPreference
+                                            : userData.genderPreference,
                                         iconSize: 24,
                                         onChanged: (String newValue) {
                                           setState(() {
@@ -546,8 +547,9 @@ class _EditProfileState extends State<EditProfile> {
                                           inactiveColor: Colors.black,
                                           activeColor: Colors.black,
                                           values: RangeValues(
-                                            //10.0, 100.0),
-                                            userData.lowAge.toDouble(), userData.highAge.toDouble()),
+                                              //10.0, 100.0),
+                                              userData.lowAge.toDouble(),
+                                              userData.highAge.toDouble()),
                                           onChanged: (_range) {
                                             setState(() => {
                                                   _lowValue = _range.start,
@@ -595,12 +597,15 @@ class _EditProfileState extends State<EditProfile> {
                                           //write preference into db
                                           await DatabaseService(uid: user.uid)
                                               .updatePreference(
-                                            _lowValue ?? userData.lowAge,
-                                            _highValue ?? userData.highAge,
-                                            genderPreference ?? userData.genderPreference
-                                          );
+                                                  _lowValue ?? userData.lowAge,
+                                                  _highValue ??
+                                                      userData.highAge,
+                                                  genderPreference ??
+                                                      userData
+                                                          .genderPreference);
 
-                                          Navigator.of(context).pushNamed('/navigationHome');
+                                          Navigator.of(context)
+                                              .pushNamed('/navigationHome');
                                         },
                                       ),
                                     )
