@@ -56,7 +56,7 @@ class _QuestionsState extends State<Questions> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Text('Do you make your bed in the morning?', style: TextStyle(fontSize:15.0),),
+                              Text('🛌Do you make your bed in the morning?', style: TextStyle(fontSize:15.0),),
                               TextFormField(
                                 cursorWidth: 3,
                                 onChanged: (val) {
@@ -65,7 +65,7 @@ class _QuestionsState extends State<Questions> {
                                 keyboardType: TextInputType.text,
                               ),
                               SizedBox(height: 20.0),
-                              Text('Do you read reviews, or just go with your gut?'),
+                              Text('🤓Do you read reviews, or just go with your gut?'),
                               TextFormField(
                                 cursorWidth: 3,
                                 onChanged: (val) {
@@ -74,7 +74,7 @@ class _QuestionsState extends State<Questions> {
                                 keyboardType: TextInputType.text,
                               ),
                               SizedBox(height: 20.0),
-                              Text('If you could only eat one thing for the rest of your life, what would it be?'),
+                              Text('🌮If you could only eat one thing for the rest of your life, what would it be?'),
                               TextFormField(
                                 cursorWidth: 3,
                                 onChanged: (val) {
@@ -83,7 +83,7 @@ class _QuestionsState extends State<Questions> {
                                 keyboardType: TextInputType.text,
                               ),
                               SizedBox(height: 20.0),
-                              Text("If you're eating a meal do you save the best thing for last or eat it first?"),
+                              Text("🌭If you're eating a meal do you save the best thing for last or eat it first?"),
                               TextFormField(
                                 cursorWidth: 3,
                                 onChanged: (val) {
@@ -95,7 +95,7 @@ class _QuestionsState extends State<Questions> {
                                 keyboardType: TextInputType.text,
                               ),
                               SizedBox(height: 20.0),
-                              Text("Do you believe in aliens?"),
+                              Text("👽Do you believe in aliens?"),
                               TextFormField(
                                 cursorWidth: 3,
                                 onChanged: (val) {
