@@ -302,9 +302,9 @@ class _MessageState extends State<Message> {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 8.0),
       color: Colors.white,
-      height: 80.0,
+      height: 70.0,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           IconButton(
               color: Hexcolor('#F4AA33'),
@@ -328,7 +328,7 @@ class _MessageState extends State<Message> {
               ),
             ),
           ),
-          SizedBox(width: 10),
+          SizedBox(width: 5),
           Container(
             child: IconButton(
                 color: Hexcolor('#F4AA33'),
