@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-
 class Welcome extends StatefulWidget {
   @override
   _WelcomeState createState() => _WelcomeState();
@@ -16,28 +15,25 @@ class _WelcomeState extends State<Welcome> {
         width: double.infinity,
         decoration: BoxDecoration(
             gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [Hexcolor("#FFF1BA"), Hexcolor("#F4AA33")],
-              stops: [0.2, 0.7],
-            )),
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [Hexcolor("#FFF1BA"), Hexcolor("#F4AA33")],
+          stops: [0.2, 0.7],
+        )),
         child: Scaffold(
           backgroundColor: Colors.transparent,
           body: SafeArea(
             child: Center(
                 child: Column(
-              // crossAxisAlignment: CrossAxisAlignment.center,
-              // mainAxisAlignment: MainAxisAlignment.center,
-              //mainAxisSize: MainAxisSize.max,
-              // mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
-                Spacer(flex: 3),
+                Spacer(flex: 2),
                 Image(
-                    image: AssetImage('images/logo.png'),
-                  ),
+                  image: AssetImage('images/logo.png'),
+                ),
 //                Spacer(flex: 2),
-                Text('Grow your relationships over a beer', style: TextStyle(fontSize: 20)),
-                Spacer(flex: 4),
+                Text('Grow your relationships over a beer',
+                    style: TextStyle(fontSize: 18)),
+                Spacer(flex: 2),
                 MaterialButton(
                     child: Text('Login',
                         style: TextStyle(
@@ -64,7 +60,7 @@ class _WelcomeState extends State<Welcome> {
                     onPressed: () =>
                         {Navigator.of(context).pushNamed('/signup')},
                     minWidth: 250),
-                Spacer(flex: 1)
+                Spacer(flex: 2)
               ],
             )),
           ),
