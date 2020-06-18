@@ -43,7 +43,7 @@ class _UploadPhotoState extends State<UploadPhoto> {
 
   bool hasNudity(String imgURL) {
     var response = postImg(imgURL);
-    print(response);
+    print('API Response: $response');
     return false;
   }
 
@@ -233,11 +233,11 @@ class _UploadPhotoState extends State<UploadPhoto> {
             ),
             onPressed: () async {
               await uploadFile();
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          ProfilePreview(profileImg: _image)));
+              // Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //         builder: (context) =>
+              //             ProfilePreview(profileImg: _image)));
             },
           ),
         ],
@@ -256,15 +256,16 @@ class _UploadPhotoState extends State<UploadPhoto> {
     StorageUploadTask uploadTask = storageReference.putFile(_image);
     await uploadTask.onComplete;
 
+    // get storage location (URL)
     storageReference.getDownloadURL().then((url) {
       fileURL = url;
+      print(fileURL);
     });
-
     isValid = hasNudity(fileURL);
     // if not nudity, set imgUrl for user
-    Firestore.instance
-        .collection("users")
-        .document(user.uid)
-        .updateData({"imgUrl": fileURL});
+    // Firestore.instance
+    //     .collection("users")
+    //     .document(user.uid)
+    //     .updateData({"imgUrl": fileURL});
   }
 }
