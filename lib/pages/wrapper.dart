@@ -12,9 +12,18 @@ class Wrapper extends StatefulWidget {
 }
 
 class _WrapperState extends State<Wrapper> {
-  int matches;
+  String isProfileCreated;
 
   @override
+  void initState() {
+    super.initState();
+    Firestore.instance.collection('users').document(user.uid).get().then((doc) {
+      setState(() {
+        isProfileCreated = doc['isProfileCreated'];
+      });
+    });
+
+  }
   Widget build(BuildContext context) {
     //receive user from provider stream
     final user = Provider.of<User>(context);

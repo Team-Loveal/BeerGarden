@@ -51,7 +51,7 @@ class _LoginState extends State<Login> {
 
     void googleLogin() async {
       dynamic result = await AuthService().loginWithGoogle();
-
+      //print('GGGGGGGGGGGGG ${user.uid}');
      /* final userData = Provider.of<UserData>(context, listen: false);
       print("VVVBBBBBBBBBB ${userData.isProfileCreated}");*/
       if (result == null) {
@@ -59,11 +59,13 @@ class _LoginState extends State<Login> {
           error = 'Could not sign in with those credentials';
           loading = false;
         });
-      } else { //if (userData.){
+      } else { //if (userData.isProfileCreated = false){
         //result.uid is the uid we will need for the db
 
-        Navigator.of(context).pushNamed('/editphoto');
-       // Navigator.of(context).popUntil((route) => route.isFirst);
+       // Navigator.of(context).pushNamed('/editphoto');
+
+        //else if
+       Navigator.of(context).popUntil((route) => route.isFirst);
       }
     }
 
