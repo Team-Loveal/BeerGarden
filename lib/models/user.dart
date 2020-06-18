@@ -43,6 +43,12 @@ class UserData {
   final String foreverEat;
   final String bestForLast;
   final String aliens;
+  final String furniture;
+  final String beachOrMountain;
+  final String takeOutFood;
+  final String desertedIsland;
+  final String wedding;
+  final String yourPlaceOrMine;
   final String genderPreference;
   final double highAge;
   final double lowAge;
@@ -75,6 +81,12 @@ class UserData {
       this.foreverEat,
       this.bestForLast,
       this.aliens,
+        this.furniture,
+        this.beachOrMountain,
+        this.takeOutFood,
+        this.desertedIsland,
+        this.wedding,
+        this.yourPlaceOrMine,
         this.genderPreference,
         this.highAge,
         this.lowAge,
@@ -115,4 +127,23 @@ class Answers {
     this.bestForLast,
     this.aliens
 });
+}
+
+//update this when you add more questions
+class MoreAnswers {
+  String furniture;
+  String beachOrMountain;
+  String takeOutFood;
+  String desertedIsland;
+  String wedding;
+  String yourPlaceOrMine;
+
+  MoreAnswers({
+    this.furniture,
+    this.beachOrMountain,
+    this.takeOutFood,
+    this.desertedIsland,
+    this.wedding,
+    this.yourPlaceOrMine,
+  });
 }
