@@ -159,47 +159,6 @@ class _MyProfileState extends State<MyProfile> {
                             )),
                       ],
                     ),
-//CAN THIS BE DELETED?
-//                          Positioned(
-//                            bottom: 0,
-//                            child: Container(
-//                                height: 80,
-//                                width: double.infinity,
-//                                padding: const EdgeInsets.fromLTRB(35, 5, 0, 5),
-//                                decoration: BoxDecoration(
-//                                  color: Colors.white.withOpacity(0.7),
-//                                  borderRadius: BorderRadius.circular(10.0),
-//                                ),
-//                                child: Column(
-//                                  mainAxisAlignment: MainAxisAlignment.center,
-//                                  children: <Widget>[
-//                                    Align(
-//                                      alignment: Alignment.topLeft,
-//                                      child: Container(
-//                                        child: Text("John Smith, 28",
-//                                            style: TextStyle(
-//                                              fontSize: 23,
-//                                              fontWeight: FontWeight.bold,
-//                                            )),
-//                                      ),
-//                                    ),
-//                                    Align(
-//                                      alignment: Alignment.topLeft,
-//                                      child: Row(
-//                                        children: <Widget>[
-//                                          Icon(MdiIcons.mapMarker,
-//                                              size: 18, color: Colors.pink),
-//                                          Text('Tokyo, Japan',
-//                                              style: TextStyle(
-//                                                  fontWeight: FontWeight.bold,
-//                                                  fontSize: 18,
-//                                                  color: Colors.pink))
-//                                        ],
-//                                      ),
-//                                    ),
-//                                  ],
-//                                )),
-//                          ),
                   ],
                 ),
               ),
@@ -350,13 +309,12 @@ class _MyProfileState extends State<MyProfile> {
                 margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                 child: Wrap(
                     children: <Widget>[
-                      Text('Do you make your bed in the morning?',
+                      Text('🛌Do you make your bed in the morning?',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           )),
                       SizedBox(height: 5),
-
                       Text(userData.bed ?? "fill it out!",
                           style: TextStyle(fontSize: 16)),
 
@@ -367,7 +325,7 @@ class _MyProfileState extends State<MyProfile> {
                 child: Wrap(
 
                     children: <Widget>[
-                      Text('Do you read reviews, or just go with your gut?',
+                      Text('🤓Do you read reviews, or just go with your gut?',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -384,7 +342,7 @@ class _MyProfileState extends State<MyProfile> {
                 child: Wrap(
                     children: <Widget>[
 
-                      Text('If you could only eat one thing for the rest of your life, what would it be?',
+                      Text('🌮If you could only eat one thing for the rest of your life, what would it be?',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -401,7 +359,7 @@ class _MyProfileState extends State<MyProfile> {
                 margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                 child: Wrap(
                     children: <Widget>[
-                      Text("If you're eating a meal do you save the best thing for last or eat it first?",
+                      Text("🌭If you're eating a meal do you save the best thing for last or eat it first?",
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -410,16 +368,15 @@ class _MyProfileState extends State<MyProfile> {
 
                       Text(userData.bestForLast ?? "fill it out!",
                           style: TextStyle(fontSize: 16)),
-
                     ]),
               ),
               Container(
-                margin: const EdgeInsets.fromLTRB(20, 10, 20, 30),
+                margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text('Do you believe in aliens?',
+                      Text('👽Do you believe in aliens?',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -429,7 +386,7 @@ class _MyProfileState extends State<MyProfile> {
                     ]),
               ),
               Container(
-                margin: const EdgeInsets.fromLTRB(20, 10, 20, 30),
+                margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -444,7 +401,7 @@ class _MyProfileState extends State<MyProfile> {
                     ]),
               ),
               Container(
-                margin: const EdgeInsets.fromLTRB(20, 10, 20, 30),
+                margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -459,7 +416,7 @@ class _MyProfileState extends State<MyProfile> {
                     ]),
               ),
               Container(
-                margin: const EdgeInsets.fromLTRB(20, 10, 20, 30),
+                margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -474,7 +431,7 @@ class _MyProfileState extends State<MyProfile> {
                     ]),
               ),
               Container(
-                margin: const EdgeInsets.fromLTRB(20, 10, 20, 30),
+                margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -489,7 +446,7 @@ class _MyProfileState extends State<MyProfile> {
                     ]),
               ),
               Container(
-                margin: const EdgeInsets.fromLTRB(20, 10, 20, 30),
+                margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -504,7 +461,7 @@ class _MyProfileState extends State<MyProfile> {
                     ]),
               ),
               Container(
-                margin: const EdgeInsets.fromLTRB(20, 10, 20, 30),
+                margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -520,7 +477,7 @@ class _MyProfileState extends State<MyProfile> {
               ),
               //ANSWER MORE QUESTIONS BTN
               Container(
-                margin: const EdgeInsets.fromLTRB(60, 5, 60, 30),
+                margin: const EdgeInsets.fromLTRB(60, 10, 60, 40),
                 child: ButtonTheme(
                   height: 40.0,
                   child: RaisedButton(
@@ -542,6 +499,11 @@ class _MyProfileState extends State<MyProfile> {
                         'desertedIsland': userData.desertedIsland,
                         'wedding': userData.wedding,
                         'yourPlaceOrMine': userData.yourPlaceOrMine,
+                        'bed': userData.bed,
+                        'reviews': userData.reviews,
+                        'foreverEat': userData.foreverEat,
+                        'bestForLast': userData.bestForLast,
+                        'aliens': userData.aliens
                       }),
                       //Navigator.of(context).pushNamed('/moreQuestions')
                       }),

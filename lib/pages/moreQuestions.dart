@@ -15,32 +15,17 @@ class MoreQuestions extends StatefulWidget {
 
 class _MoreQuestionsState extends State<MoreQuestions> {
   Map doc = {};
-
   String furniture;
   String beachOrMountain;
   String takeOutFood;
   String desertedIsland;
   String wedding;
   String yourPlaceOrMine;
-
-//  @override
-//  void initState() {
-//    super.initState();
-//    final user = Provider.of<User>(context);
-//
-//    Firestore.instance.collection('users').document(user.uid).get().then((doc) {
-//      //get values for the widget build
-//      setState(() {
-//        //furniture = doc['furniture'];
-//        beachOrMountain = doc['beachOrMountain'];
-//        takeOutFood = doc['takeOutFood'];
-//        //desertedIsland = doc['desertedIsland'];
-//        wedding = doc['wedding'];
-//        yourPlaceOrMine = doc['yourPlaceOrMine'];
-//      });
-//    });
-//  }
-
+  String bed;
+  String reviews;
+  String foreverEat;
+  String bestForLast;
+  String aliens;
 
   @override
   Widget build(BuildContext context) {
@@ -54,13 +39,12 @@ class _MoreQuestionsState extends State<MoreQuestions> {
         desertedIsland = doc['desertedIsland'];
         wedding = doc['wedding'];
         yourPlaceOrMine = doc['yourPlaceOrMine'];
+    bed = doc['bed'];
+    reviews = doc['reviews'];
+    foreverEat = doc['foreverEat'];
+    bestForLast = doc['bestForLast'];
+    aliens = doc['aliens'];
 
-    //Set the default values
-    return StreamBuilder<UserData>(
-        stream: DatabaseService(uid: user.uid).userData,
-      builder: (context, snapshot) {
-    if (snapshot.hasData) {
-      UserData userData = snapshot.data;
       return Scaffold(
         appBar: AppBar(
           backgroundColor: Hexcolor("#8CC63E"),
@@ -101,7 +85,7 @@ class _MoreQuestionsState extends State<MoreQuestions> {
                           Padding(
                             padding: const EdgeInsets.only(bottom: 20),
                             child: Text(
-                                "Answer some more questions about yourself. The more information you provide, the more likely someone will chat you up!"),
+                                "Answer some more questions about yourself or edit your answers. The more information you provide, the more likely someone will chat you up!"),
                           ),
                           FormBuilder(
                             child: Column(
@@ -149,7 +133,6 @@ class _MoreQuestionsState extends State<MoreQuestions> {
                                     });
                                   },
                                 ),
-                                SizedBox(height: 20.0),
                                 SizedBox(height: 20.0),
                                 Text(
                                     '🍱When you get take-out food do you eat out of the container or transfer the food to dishes?'),
@@ -227,6 +210,96 @@ class _MoreQuestionsState extends State<MoreQuestions> {
                                   initialValue: doc['yourPlaceOrMine'],
                                   keyboardType: TextInputType.text,
                                 ),
+                                SizedBox(height: 20.0),
+                                Text(
+                                  '🛌Do you make your bed in the morning?',
+                                  style: TextStyle(fontSize: 15.0),
+                                ),
+                                TextFormField(
+                                  cursorWidth: 3,
+                                  onChanged: (val) {
+                                    if (val != doc['bed']) {
+                                      setState(() => doc['bed'] = val);
+                                    } else {
+                                      doc['bed'] = doc['bed'];
+                                    }
+                                  },
+                                  initialValue: doc['bed'],
+                                  autofocus: true,
+                                  keyboardType: TextInputType.text,
+                                ),
+                                SizedBox(height: 20.0),
+                                Text(
+                                  '🤓Do you read reviews, or just go with your gut?',
+                                  style: TextStyle(fontSize: 15.0),
+                                ),
+                                TextFormField(
+                                  cursorWidth: 3,
+                                  onChanged: (val) {
+                                    if (val != doc['reviews']) {
+                                      setState(() => doc['reviews'] = val);
+                                    } else {
+                                      doc['reviews'] = doc['reviews'];
+                                    }
+                                  },
+                                  initialValue: doc['reviews'],
+                                  autofocus: true,
+                                  keyboardType: TextInputType.text,
+                                ),
+                                SizedBox(height: 20.0),
+                                Text(
+                                  '🌮If you could only eat one thing for the rest of your life, what would it be?',
+                                  style: TextStyle(fontSize: 15.0),
+                                ),
+                                TextFormField(
+                                  cursorWidth: 3,
+                                  onChanged: (val) {
+                                    if (val != doc['foreverEat']) {
+                                      setState(() => doc['foreverEat'] = val);
+                                    } else {
+                                      doc['foreverEat'] = doc['foreverEat'];
+                                    }
+                                  },
+                                  initialValue: doc['foreverEat'],
+                                  autofocus: true,
+                                  keyboardType: TextInputType.text,
+                                ),
+                                SizedBox(height: 20.0),
+                                Text(
+                                  "🌭If you're eating a meal do you save the best thing for last or eat it first?",
+                                  style: TextStyle(fontSize: 15.0),
+                                ),
+                                TextFormField(
+                                  cursorWidth: 3,
+                                  onChanged: (val) {
+                                    if (val != doc['bestForLast']) {
+                                      setState(() => doc['bestForLast'] = val);
+                                    } else {
+                                      doc['bestForLast'] = doc['bestForLast'];
+                                    }
+                                  },
+                                  initialValue: doc['bestForLast'],
+                                  autofocus: true,
+                                  keyboardType: TextInputType.text,
+                                ),
+                                SizedBox(height: 20.0),
+                                Text(
+                                  '👽Do you believe in aliens?',
+                                  style: TextStyle(fontSize: 15.0),
+                                ),
+                                TextFormField(
+                                  cursorWidth: 3,
+                                  onChanged: (val) {
+                                    if (val != doc['aliens']) {
+                                      setState(() => doc['aliens'] = val);
+                                    } else {
+                                      doc['aliens'] = doc['aliens'];
+                                    }
+                                  },
+                                  initialValue: doc['aliens'],
+                                  autofocus: true,
+                                  keyboardType: TextInputType.text,
+                                ),
                                 //BUTTON
                                 Container(
                                   padding: EdgeInsets.fromLTRB(30, 30, 20, 0),
@@ -243,6 +316,15 @@ class _MoreQuestionsState extends State<MoreQuestions> {
                                           doc['yourPlaceOrMine'] ?? ""
                                       );
 
+                                      await DatabaseService(uid: user.uid)
+                                          .updateAnswers(
+                                          doc['bed'] ?? "",
+                                          doc['reviews'] ?? "",
+                                          doc['foreverEat'] ?? "",
+                                          doc['bestForLast'] ?? "",
+                                          doc['aliens'] ?? ""
+                                      );
+
                                       Navigator.of(context)
                                           .pushNamed('/navigationHome');
                                     },
@@ -253,7 +335,6 @@ class _MoreQuestionsState extends State<MoreQuestions> {
                                             50)),
                                     child: Row(
                                       children: <Widget>[
-                                        //change to just upload photo?
                                         Text('Save your answers ',
                                             style: TextStyle(
                                                 fontSize: 18,
@@ -276,9 +357,5 @@ class _MoreQuestionsState extends State<MoreQuestions> {
           ),
         ),
       );
-    } else {
-      return Loading();
-    }
-      });
   }
 }
