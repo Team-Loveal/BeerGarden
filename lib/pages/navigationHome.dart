@@ -35,21 +35,26 @@ class _NavigationHomeState extends State<NavigationHome> {
       child: Scaffold(
         body: _children[_currentIndex],
         bottomNavigationBar: BottomNavigationBar(
-          // new
+            // new
             backgroundColor: Hexcolor("#8CC63E"),
             onTap: onTabTapped,
             currentIndex: _currentIndex,
             items: [
               BottomNavigationBarItem(
-                icon: new Icon(Icons.favorite),
-                title: new Text('Match'),
+                icon: new Icon(Icons.favorite, color: Colors.white),
+                title: new Text('Match',
+                    style: TextStyle(fontFamily: 'Alata', color: Colors.white)),
               ),
               BottomNavigationBarItem(
-                icon: new Icon(Icons.message),
-                title: new Text('Messages'),
+                icon: new Icon(Icons.message, color: Colors.white),
+                title: new Text('Messages',
+                    style: TextStyle(fontFamily: 'Alata', color: Colors.white)),
               ),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.person), title: Text('Profile'))
+                  icon: Icon(Icons.person, color: Colors.white),
+                  title: Text('Profile',
+                      style:
+                          TextStyle(fontFamily: 'Alata', color: Colors.white)))
             ]),
       ),
     );

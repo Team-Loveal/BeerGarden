@@ -5,8 +5,6 @@ import 'package:lovealapp/services/database.dart';
 import 'package:lovealapp/shared/loading.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:lovealapp/pages/profilePreview.dart';
-
 
 class EditProfile extends StatefulWidget {
   @override
@@ -14,7 +12,6 @@ class EditProfile extends StatefulWidget {
 }
 
 class _EditProfileState extends State<EditProfile> {
-
   Map data = {};
 
   String nickname;
@@ -40,14 +37,9 @@ class _EditProfileState extends State<EditProfile> {
   double _highValue = 100;
   String genderPreference;
 
-
-
   @override
   Widget build(BuildContext context) {
-
     data = ModalRoute.of(context).settings.arguments;
-    print('DATAAAAAAAAAA ${data}');
-
     final user = Provider.of<User>(context);
 
     //Setting the default values
@@ -62,7 +54,6 @@ class _EditProfileState extends State<EditProfile> {
     drinking = data['drinkingEdit'];
 
     return StreamBuilder<UserData>(
-
         stream: DatabaseService(uid: user.uid).userData,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
@@ -107,7 +98,7 @@ class _EditProfileState extends State<EditProfile> {
                               Column(
                                 children: <Widget>[
                                   GestureDetector(
-                                    onTap: (){
+                                    onTap: () {
                                       Navigator.of(context)
                                           .pushNamed('/editphoto');
                                     },
@@ -115,7 +106,8 @@ class _EditProfileState extends State<EditProfile> {
                                       padding: EdgeInsets.all(10),
                                       child: CircleAvatar(
                                         radius: 60,
-                                        backgroundImage: NetworkImage(userData.imgUrl),
+                                        backgroundImage:
+                                            NetworkImage(userData.imgUrl),
                                       ),
                                     ),
                                   ),
@@ -133,10 +125,12 @@ class _EditProfileState extends State<EditProfile> {
                               ),
                               Container(
                                 child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
                                     Column(
-                                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.stretch,
                                       textDirection: TextDirection.ltr,
                                       children: <Widget>[
                                         TextFormField(
@@ -145,7 +139,7 @@ class _EditProfileState extends State<EditProfile> {
                                               setState(() => nickname = val);
                                             } else {
                                               nickname = data['nicknameEdit'];
-                                            };
+                                            }
                                           },
                                           style: TextStyle(
                                               color: Colors.black,
@@ -163,7 +157,7 @@ class _EditProfileState extends State<EditProfile> {
                                               setState(() => location = val);
                                             } else {
                                               location = userData.location;
-                                            };
+                                            }
                                           },
                                           style: TextStyle(
                                               color: Colors.black,
@@ -183,11 +177,13 @@ class _EditProfileState extends State<EditProfile> {
                                         child: Row(
                                           children: <Widget>[
                                             Padding(
-                                                padding: EdgeInsets.only(right: 70),
+                                                padding:
+                                                    EdgeInsets.only(right: 70),
                                                 child: Container(
                                                   child: Column(
                                                     crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     children: <Widget>[
                                                       Text(
                                                         'Age',
@@ -197,22 +193,91 @@ class _EditProfileState extends State<EditProfile> {
                                                         ),
                                                       ),
                                                       DropdownButton<int>(
-                                                        value: age != null  ? age : data['ageEdit'],
+                                                        value: age != null
+                                                            ? age
+                                                            : data['ageEdit'],
                                                         iconSize: 24,
-                                                        onChanged: (int newValue) {
+                                                        onChanged:
+                                                            (int newValue) {
                                                           setState(() {
                                                             age = newValue;
                                                           });
                                                         },
                                                         items: <int>[
-                                                          18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80
-                                                        ].map<DropdownMenuItem<int>>(
-                                                                (int value) {
-                                                              return DropdownMenuItem<int>(
-                                                                value: value,
-                                                                child: Text(value.toString()),
-                                                              );
-                                                            }).toList(),
+                                                          18,
+                                                          19,
+                                                          20,
+                                                          21,
+                                                          22,
+                                                          23,
+                                                          24,
+                                                          25,
+                                                          26,
+                                                          27,
+                                                          28,
+                                                          29,
+                                                          30,
+                                                          31,
+                                                          32,
+                                                          33,
+                                                          34,
+                                                          35,
+                                                          36,
+                                                          37,
+                                                          38,
+                                                          39,
+                                                          40,
+                                                          41,
+                                                          42,
+                                                          43,
+                                                          44,
+                                                          45,
+                                                          46,
+                                                          47,
+                                                          48,
+                                                          49,
+                                                          50,
+                                                          51,
+                                                          52,
+                                                          53,
+                                                          54,
+                                                          55,
+                                                          56,
+                                                          57,
+                                                          58,
+                                                          59,
+                                                          60,
+                                                          61,
+                                                          62,
+                                                          63,
+                                                          64,
+                                                          65,
+                                                          66,
+                                                          67,
+                                                          68,
+                                                          69,
+                                                          70,
+                                                          71,
+                                                          72,
+                                                          73,
+                                                          74,
+                                                          75,
+                                                          76,
+                                                          77,
+                                                          78,
+                                                          79,
+                                                          80
+                                                        ].map<
+                                                            DropdownMenuItem<
+                                                                int>>((int
+                                                            value) {
+                                                          return DropdownMenuItem<
+                                                              int>(
+                                                            value: value,
+                                                            child: Text(value
+                                                                .toString()),
+                                                          );
+                                                        }).toList(),
                                                       ),
                                                     ],
                                                   ),
@@ -220,7 +285,7 @@ class _EditProfileState extends State<EditProfile> {
                                             Container(
                                               child: Column(
                                                 crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                                    CrossAxisAlignment.start,
                                                 children: <Widget>[
                                                   Text(
                                                     'Gender',
@@ -230,22 +295,30 @@ class _EditProfileState extends State<EditProfile> {
                                                     ),
                                                   ),
                                                   DropdownButton<String>(
-                                                    value: gender != null  ? gender :data['genderEdit'],
+                                                    value: gender != null
+                                                        ? gender
+                                                        : data['genderEdit'],
                                                     iconSize: 24,
-                                                    onChanged: (String newValue) {
+                                                    onChanged:
+                                                        (String newValue) {
                                                       setState(() {
                                                         gender = newValue;
                                                       });
                                                     },
                                                     items: <String>[
-                                                      'Female', 'Male', 'Rather not say'
-                                                    ].map<DropdownMenuItem<String>>(
-                                                            (String value) {
-                                                          return DropdownMenuItem<String>(
-                                                            value: value,
-                                                            child: Text(value),
-                                                          );
-                                                        }).toList(),
+                                                      'Female',
+                                                      'Male',
+                                                      'Rather not say'
+                                                    ].map<
+                                                            DropdownMenuItem<
+                                                                String>>(
+                                                        (String value) {
+                                                      return DropdownMenuItem<
+                                                          String>(
+                                                        value: value,
+                                                        child: Text(value),
+                                                      );
+                                                    }).toList(),
                                                   ),
                                                 ],
                                               ),
@@ -278,7 +351,7 @@ class _EditProfileState extends State<EditProfile> {
                                       initialValue: data['aboutEdit'],
                                       decoration: InputDecoration(
                                           labelText:
-                                          'Share something about yourself'),
+                                              'Share something about yourself'),
                                       keyboardType: TextInputType.text,
                                     ),
                                     Padding(
@@ -297,7 +370,8 @@ class _EditProfileState extends State<EditProfile> {
                                               label: Text('yodeling'),
                                               selected: data['yodelingEdit'],
                                               onSelected: (isSelected) => {
-                                                data['yodelingEdit'] = !data['yodelingEdit'],
+                                                data['yodelingEdit'] =
+                                                    !data['yodelingEdit'],
                                                 setState(() => {})
                                               },
                                               selectedColor: Colors.pink[400],
@@ -307,17 +381,22 @@ class _EditProfileState extends State<EditProfile> {
                                               label: Text('shopping'),
                                               selected: data['shoppingEdit'],
                                               onSelected: (isSelected) => {
-                                                data['shoppingEdit'] = !data['shoppingEdit'],
+                                                data['shoppingEdit'] =
+                                                    !data['shoppingEdit'],
                                                 setState(() {})
                                               },
                                               selectedColor: Colors.pink[400],
                                               checkmarkColor: Colors.white,
                                             ),
                                             FilterChip(
-                                              label: Text('making balloon animals'),
-                                              selected: data['makingBalloonAnimalsEdit'],
+                                              label: Text(
+                                                  'making balloon animals'),
+                                              selected: data[
+                                                  'makingBalloonAnimalsEdit'],
                                               onSelected: (isSelected) => {
-                                                data['makingBalloonAnimalsEdit'] = !data['makingBalloonAnimalsEdit'],
+                                                data['makingBalloonAnimalsEdit'] =
+                                                    !data[
+                                                        'makingBalloonAnimalsEdit'],
                                                 setState(() {})
                                               },
                                               selectedColor: Colors.pink[400],
@@ -327,7 +406,8 @@ class _EditProfileState extends State<EditProfile> {
                                               label: Text('cooking'),
                                               selected: data['cookingEdit'],
                                               onSelected: (isSelected) => {
-                                                data['cookingEdit'] = !data['cookingEdit'],
+                                                data['cookingEdit'] =
+                                                    !data['cookingEdit'],
                                                 setState(() {})
                                               },
                                               selectedColor: Colors.pink[400],
@@ -337,7 +417,8 @@ class _EditProfileState extends State<EditProfile> {
                                               label: Text('painting'),
                                               selected: data['paintingEdit'],
                                               onSelected: (isSelected) => {
-                                                data['paintingEdit'] = !data['paintingEdit'],
+                                                data['paintingEdit'] =
+                                                    !data['paintingEdit'],
                                                 setState(() {})
                                               },
                                               selectedColor: Colors.pink[400],
@@ -347,7 +428,8 @@ class _EditProfileState extends State<EditProfile> {
                                               label: Text('writing'),
                                               selected: data['writingEdit'],
                                               onSelected: (isSelected) => {
-                                                data['writingEdit'] = !data['writingEdit'],
+                                                data['writingEdit'] =
+                                                    !data['writingEdit'],
                                                 setState(() {})
                                               },
                                               selectedColor: Colors.pink[400],
@@ -357,7 +439,8 @@ class _EditProfileState extends State<EditProfile> {
                                               label: Text('sports'),
                                               selected: data['sportsEdit'],
                                               onSelected: (isSelected) => {
-                                                data['sportsEdit'] = !data['sportsEdit'],
+                                                data['sportsEdit'] =
+                                                    !data['sportsEdit'],
                                                 setState(() {})
                                               },
                                               selectedColor: Colors.pink[400],
@@ -367,7 +450,8 @@ class _EditProfileState extends State<EditProfile> {
                                               label: Text('movies'),
                                               selected: data['moviesEdit'],
                                               onSelected: (isSelected) => {
-                                                data['moviesEdit'] = !data['moviesEdit'],
+                                                data['moviesEdit'] =
+                                                    !data['moviesEdit'],
                                                 setState(() {})
                                               },
                                               selectedColor: Colors.pink[400],
@@ -377,7 +461,8 @@ class _EditProfileState extends State<EditProfile> {
                                               label: Text('drinking'),
                                               selected: data['drinkingEdit'],
                                               onSelected: (isSelected) => {
-                                                data['drinkingEdit'] = !data['drinkingEdit'],
+                                                data['drinkingEdit'] =
+                                                    !data['drinkingEdit'],
                                                 setState(() {})
                                               },
                                               selectedColor: Colors.pink[400],
@@ -389,13 +474,15 @@ class _EditProfileState extends State<EditProfile> {
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.all(30.0),
-                                      child: Text('Set Preferences', style:TextStyle(fontSize: 30.0),),
+                                      child: Text(
+                                        'Set Preferences',
+                                        style: TextStyle(fontSize: 30.0),
+                                      ),
                                     ),
-
                                     Text(
-                                      "Show Me", style:TextStyle(fontSize: 20.0),
+                                      "Show Me",
+                                      style: TextStyle(fontSize: 20.0),
                                     ),
-
                                     Center(
                                       child: DropdownButton<String>(
                                         isExpanded: true,
@@ -406,46 +493,65 @@ class _EditProfileState extends State<EditProfile> {
                                             genderPreference = newValue;
                                           });
                                         },
-                                        items: <String>['Female', 'Male', 'Everyone']
-                                            .map<DropdownMenuItem<String>>((String value) {
+                                        items: <String>[
+                                          'Female',
+                                          'Male',
+                                          'Everyone'
+                                        ].map<DropdownMenuItem<String>>(
+                                            (String value) {
                                           return DropdownMenuItem<String>(
                                             value: value,
-                                            child: Text(value, style:TextStyle(fontSize: 20.0)),
+                                            child: Text(value,
+                                                style:
+                                                    TextStyle(fontSize: 20.0)),
                                           );
                                         }).toList(),
                                       ),
                                     ),
                                     Container(
                                         child: Column(
+                                      children: <Widget>[
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: <Widget>[
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: <Widget>[
-                                                Padding(
-                                                  padding: const EdgeInsets.all(30.0),
-                                                  child: Text('Age Range',style:TextStyle(fontSize: 20.0),),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.all(30.0),
-                                                  child: Text('${_lowValue.toInt().toString()} - ${_highValue.toInt().toString()}', style:TextStyle(fontSize: 20.0),),
-                                                )
-                                              ],
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(30.0),
+                                              child: Text(
+                                                'Age Range',
+                                                style:
+                                                    TextStyle(fontSize: 20.0),
+                                              ),
                                             ),
-                                            RangeSlider(
-                                              min: 20,
-                                              max: 100,
-                                              divisions: 80,
-                                              inactiveColor: Colors.black,
-                                              activeColor: Colors.black,
-                                              values: RangeValues(_lowValue, _highValue),
-                                              onChanged: (_range) {
-                                                setState(() =>
-                                                {_lowValue = _range.start, _highValue = _range.end});
-                                              },
-                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(30.0),
+                                              child: Text(
+                                                '${_lowValue.toInt().toString()} - ${_highValue.toInt().toString()}',
+                                                style:
+                                                    TextStyle(fontSize: 20.0),
+                                              ),
+                                            )
                                           ],
-                                        )
-                                    ),
+                                        ),
+                                        RangeSlider(
+                                          min: 20,
+                                          max: 100,
+                                          divisions: 80,
+                                          inactiveColor: Colors.black,
+                                          activeColor: Colors.black,
+                                          values: RangeValues(
+                                              _lowValue, _highValue),
+                                          onChanged: (_range) {
+                                            setState(() => {
+                                                  _lowValue = _range.start,
+                                                  _highValue = _range.end
+                                                });
+                                          },
+                                        ),
+                                      ],
+                                    )),
                                     Padding(
                                       padding: EdgeInsets.only(top: 20),
                                       child: RaisedButton(
@@ -458,9 +564,9 @@ class _EditProfileState extends State<EditProfile> {
                                         ),
                                         color: Colors.pinkAccent,
                                         shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(20)),
+                                            borderRadius:
+                                                BorderRadius.circular(20)),
                                         onPressed: () async {
-
                                           await DatabaseService(uid: user.uid)
                                               .editUserData(
                                             nickname ?? userData.nickname,
@@ -492,7 +598,6 @@ class _EditProfileState extends State<EditProfile> {
                                           Navigator.of(context)
                                               .pushNamed('/navigationHome');
                                           //  Navigator.pop(context);
-
                                         },
                                       ),
                                     )
@@ -506,7 +611,6 @@ class _EditProfileState extends State<EditProfile> {
                     ),
                   ],
                 ),
-
               ),
             );
           } else {

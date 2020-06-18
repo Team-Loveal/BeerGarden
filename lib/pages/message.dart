@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -11,10 +10,6 @@ import 'package:intl/intl.dart';
 import 'profile.dart';
 
 class Message extends StatefulWidget {
-  final String chatRoomID;
-  final String matchID;
-  final String nickname;
-  final String imgUrl;
   Message(
       {Key key,
       @required this.chatRoomID,
@@ -22,24 +17,49 @@ class Message extends StatefulWidget {
       this.nickname,
       this.imgUrl})
       : super(key: key);
+
+  final String chatRoomID;
+  final String matchID;
+  final String nickname;
+  final String imgUrl;
+
   @override
   _MessageState createState() =>
       _MessageState(chatRoomID, matchID, nickname, imgUrl);
 }
 
 class _MessageState extends State<Message> {
+  _MessageState(this.chatRoomID, this.matchID, this.nickname, this.imgUrl);
+
+  final String chatRoomID;
+  final String matchID;
+  final String nickname;
+  final String imgUrl;
+  final dbRef = Firestore.instance;
+  // user context from provider
+  var user;
+  var toID;
 
   //for blur
   double sigmaX;
   double sigmaY;
+  bool activeChat;
+
+  //for reading the contents of the input field and for clearing the field after the text message is sent
+  final _textController = TextEditingController();
+  final FocusNode _focusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
-    getChatted();
+    _getChatted();
 
     //get matchID and chatID from db
-    Firestore.instance.collection('messages').document(chatRoomID).get().then((doc) {
+    Firestore.instance
+        .collection('messages')
+        .document(chatRoomID)
+        .get()
+        .then((doc) {
       setState(() {
         sigmaX = doc['blur'].toDouble();
         sigmaY = doc['blur'].toDouble();
@@ -47,29 +67,18 @@ class _MessageState extends State<Message> {
     });
   }
 
-  final String chatRoomID;
-  final String matchID;
-  final String nickname;
-  final String imgUrl;
-  _MessageState(this.chatRoomID, this.matchID, this.nickname, this.imgUrl);
-  // user context from provider
-  var user;
-  var toID;
-  final dbRef = Firestore.instance;
-  bool activeChat;
-
   // check if chatroom is active
-  void getChatted() {
+  void _getChatted() {
     dbRef.collection('messages').document(chatRoomID).get().then((snapshot) => {
           if (snapshot['active'] != null)
             {activeChat = snapshot['active']}
           else
-            {activateChat(false), activeChat = false}
+            {_activateChat(false), activeChat = false}
         });
   }
 
   // activate chatroom (a chatroom that has at least one message)
-  void activateChat(bool) {
+  void _activateChat(bool) {
     try {
       dbRef
           .collection('messages')
@@ -80,7 +89,7 @@ class _MessageState extends State<Message> {
     }
   }
 
-  void toggleUnread(DocumentSnapshot document) {
+  void _toggleUnread(DocumentSnapshot document) {
     dbRef
         .collection('messages')
         .document(chatRoomID)
@@ -89,14 +98,12 @@ class _MessageState extends State<Message> {
         .updateData({'unread': false});
   }
 
-  //for reading the contents of the input field and for clearing the field after the text message is sent
-  final _textController = TextEditingController();
-  final FocusNode _focusNode = FocusNode();
   void _onSendMessage(String text) {
     // toggle chatted if first message
     if (!activeChat) {
-      activateChat(true);
+      _activateChat(true);
     }
+
     if (text.trim() != "") {
       _textController.clear();
       var documentReference = dbRef
@@ -104,6 +111,7 @@ class _MessageState extends State<Message> {
           .document(chatRoomID)
           .collection('chatroom')
           .document(DateTime.now().millisecondsSinceEpoch.toString());
+
       Firestore.instance.runTransaction((transaction) async {
         await transaction.set(
           documentReference,
@@ -120,6 +128,32 @@ class _MessageState extends State<Message> {
       // Show error message to user
       Fluttertoast.showToast(msg: 'Nothing to send');
     }
+  }
+
+  void _onSendBeer() {
+    // toggle chatted if first message
+    if (!activeChat) {
+      _activateChat(true);
+    }
+
+    var documentReference = dbRef
+        .collection('messages')
+        .document(chatRoomID)
+        .collection('chatroom')
+        .document(DateTime.now().millisecondsSinceEpoch.toString());
+
+    Firestore.instance.runTransaction((transaction) async {
+      await transaction.set(
+        documentReference,
+        {
+          'fromID': user.uid,
+          'toID': matchID,
+          'timestamp': DateTime.now().millisecondsSinceEpoch.toString(),
+          'text': 'sendBeer',
+          'unread': true,
+        },
+      );
+    });
   }
 
   // BODY
@@ -155,7 +189,6 @@ class _MessageState extends State<Message> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Stack(
-
                         children: <Widget>[
                           CircleAvatar(
                             radius: 29,
@@ -167,14 +200,13 @@ class _MessageState extends State<Message> {
                               child: ClipOval(
                                 child: BackdropFilter(
                                     filter: ImageFilter.blur(
-                                        sigmaX: sigmaX  ?? 50, sigmaY: sigmaY  ?? 50),
+                                        sigmaX: sigmaX ?? 50,
+                                        sigmaY: sigmaY ?? 50),
                                     child: Container(
-                                        color:
-                                        Colors.black.withOpacity(0))),
+                                        color: Colors.black.withOpacity(0))),
                               )),
                         ],
                       ),
-
                       SizedBox(width: 10.0),
                       Text(
                         nickname,
@@ -240,7 +272,7 @@ class _MessageState extends State<Message> {
                                         reverse: true,
                                         // builds widget for each message in the database
                                         itemBuilder: (context, index) =>
-                                            buildMessage(
+                                            _chatBubble(
                                                 snapshot.data.documents[index],
                                                 context),
                                         itemCount:
@@ -268,11 +300,17 @@ class _MessageState extends State<Message> {
   // MESSAGE INPUT AND SEND
   Widget _buildTextInput() {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 15.0),
+      padding: EdgeInsets.symmetric(horizontal: 8.0),
       color: Colors.white,
-      height: 80.0,
+      height: 70.0,
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          IconButton(
+              color: Hexcolor('#F4AA33'),
+              icon: Icon(MdiIcons.glassMugVariant, size: 38.0),
+              onPressed: () => _onSendBeer()),
+          SizedBox(width: 8),
           Expanded(
             child: Container(
               decoration: BoxDecoration(
@@ -290,28 +328,40 @@ class _MessageState extends State<Message> {
               ),
             ),
           ),
-          SizedBox(width: 12),
-          IconButton(
-              color: Hexcolor('#F4AA33'),
-              icon: Icon(Icons.send, size: 38.0),
-              onPressed: () => _onSendMessage(_textController.text)),
+          SizedBox(width: 5),
+          Container(
+            child: IconButton(
+                color: Hexcolor('#F4AA33'),
+                icon: Icon(Icons.send, size: 38.0),
+                onPressed: () => {
+                      _onSendMessage(_textController.text),
+                      FocusScope.of(context).unfocus()
+                    }),
+          ),
         ],
       ),
     );
   }
 
   // For each message bubble
-  Widget buildMessage(DocumentSnapshot document, BuildContext context) {
-    if (document['fromID'] != user.uid) {
-      toggleUnread(document);
-    }
-    bool isUser = document['fromID'] == user.uid;
+  Widget _chatBubble(DocumentSnapshot document, BuildContext context) {
+    bool isUser;
+    DateTime date;
+    Widget time;
+    var formatter;
+
+    isUser = document['fromID'] == user.uid;
     // Format time to readable HH:MM
-    var formatter = new DateFormat('Hm');
-    DateTime date = new DateTime.fromMillisecondsSinceEpoch(
+    date = new DateTime.fromMillisecondsSinceEpoch(
         int.parse(document['timestamp']));
-    Widget time = Text(formatter.format(date),
+    formatter = new DateFormat('Hm');
+    time = Text(formatter.format(date),
         style: TextStyle(fontSize: 12.0, color: Colors.grey));
+
+    if (document['fromID'] != user.uid) {
+      _toggleUnread(document);
+    }
+
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
       child: Flex(
@@ -326,30 +376,34 @@ class _MessageState extends State<Message> {
                       children: <Widget>[time, SizedBox(width: 10.0)],
                     )
                   : Container(),
-              Container(
-                padding: const EdgeInsets.all(15.0),
-                constraints: BoxConstraints(
-                  maxWidth: MediaQuery.of(context).size.width * 0.6,
-                ),
-                decoration: BoxDecoration(
-                  color: isUser ? Colors.white : Hexcolor("#F4AA33"),
-                  borderRadius: isUser
-                      ? BorderRadius.only(
-                          topLeft: Radius.circular(25),
-                          topRight: Radius.circular(25),
-                          bottomLeft: Radius.circular(25),
-                        )
-                      : BorderRadius.only(
-                          topLeft: Radius.circular(25),
-                          topRight: Radius.circular(25),
-                          bottomRight: Radius.circular(25),
-                        ),
-                ),
-                child: Text(document['text'],
-                    style: TextStyle(
-                        color: isUser ? Colors.black : Colors.white,
-                        fontSize: 14)),
-              ),
+              document['text'] == 'sendBeer'
+                  ? Container(
+                      child: Image.asset('images/cheers.gif',
+                          width: 100.0, height: 100.0, fit: BoxFit.fitWidth))
+                  : Container(
+                      padding: const EdgeInsets.all(15.0),
+                      constraints: BoxConstraints(
+                        maxWidth: MediaQuery.of(context).size.width * 0.6,
+                      ),
+                      decoration: BoxDecoration(
+                        color: isUser ? Colors.white : Hexcolor("#8CC63E"),
+                        borderRadius: isUser
+                            ? BorderRadius.only(
+                                topLeft: Radius.circular(25),
+                                topRight: Radius.circular(25),
+                                bottomLeft: Radius.circular(25),
+                              )
+                            : BorderRadius.only(
+                                topLeft: Radius.circular(25),
+                                topRight: Radius.circular(25),
+                                bottomRight: Radius.circular(25),
+                              ),
+                      ),
+                      child: Text(document['text'],
+                          style: TextStyle(
+                              color: isUser ? Colors.black : Colors.white,
+                              fontSize: 14)),
+                    ),
               !isUser
                   ? Row(
                       children: <Widget>[SizedBox(width: 10.0), time],
