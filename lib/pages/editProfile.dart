@@ -33,8 +33,8 @@ class _EditProfileState extends State<EditProfile> {
   bool drinking = false;
 
   //preferences
-  double _lowValue;
-  double _highValue;
+  double _lowValue = 18.00;
+  double _highValue = 100.00;
   String genderPreference;
 
   @override
@@ -57,6 +57,8 @@ class _EditProfileState extends State<EditProfile> {
         stream: DatabaseService(uid: user.uid).userData,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
+            print('I AM LOW VALUE $_lowValue');
+            print('I AM HIGH VALUE $_highValue');
             UserData userData = snapshot.data;
             return Scaffold(
               appBar: AppBar(
@@ -530,7 +532,8 @@ class _EditProfileState extends State<EditProfile> {
                                               padding:
                                                   const EdgeInsets.all(30.0),
                                               child: Text(
-                                                '${userData.lowAge.toInt().toString()} - ${userData.highAge.toInt().toString()}',
+                                                //'18 - 100',
+                                                '${_lowValue.toInt().toString()} - ${_highValue.toInt().toString()}',
                                                 style:
                                                     TextStyle(fontSize: 20.0),
                                               ),
@@ -540,10 +543,11 @@ class _EditProfileState extends State<EditProfile> {
                                         RangeSlider(
                                           min: 0,
                                           max: 100,
-                                          divisions: 99,
+                                          divisions: 82,
                                           inactiveColor: Colors.black,
                                           activeColor: Colors.black,
                                           values: RangeValues(
+                                              //10.0, 100.0),
                                               userData.lowAge.toDouble(),
                                               userData.highAge.toDouble()),
                                           onChanged: (_range) {
@@ -593,10 +597,20 @@ class _EditProfileState extends State<EditProfile> {
                                           //write preference into db
                                           await DatabaseService(uid: user.uid)
                                               .updatePreference(
-                                            _lowValue,
-                                            _highValue,
-                                            genderPreference,
-                                          );
+                                                  _lowValue ?? userData.lowAge,
+                                                  _highValue ??
+                                                      userData.highAge,
+                                                  genderPreference ??
+                                                      userData
+                                                          .genderPreference);
+
+                                          await DatabaseService()
+                                              .deleteMatches();
+                                          await DatabaseService().createMatches(
+                                              genderPreference ??
+                                                  userData.genderPreference,
+                                              _lowValue ?? userData.lowAge,
+                                              _highValue ?? userData.highAge);
 
                                           Navigator.of(context)
                                               .pushNamed('/navigationHome');

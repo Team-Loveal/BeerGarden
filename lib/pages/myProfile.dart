@@ -382,13 +382,15 @@ class _MyProfileState extends State<MyProfile> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text('🚽If you were a piece of furniture, what piece of furniture would you be?',
+                      Text(
+                          '🚽If you were a piece of furniture, what piece of furniture would you be?',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           )),
                       SizedBox(height: 5),
-                      Text(userData.furniture ?? "fill it out!", style: TextStyle(fontSize: 16))
+                      Text(userData.furniture ?? "fill it out!",
+                          style: TextStyle(fontSize: 16))
                     ]),
               ),
               Container(
@@ -397,13 +399,15 @@ class _MyProfileState extends State<MyProfile> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text('Would you rather have a home in the beach or the mountains?',
+                      Text(
+                          'Would you rather have a home in the beach or the mountains?',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           )),
                       SizedBox(height: 5),
-                      Text(userData.beachOrMountain ?? "fill it out!", style: TextStyle(fontSize: 16))
+                      Text(userData.beachOrMountain ?? "fill it out!",
+                          style: TextStyle(fontSize: 16))
                     ]),
               ),
               Container(
@@ -412,13 +416,15 @@ class _MyProfileState extends State<MyProfile> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text('🍱When you get take-out food do you eat out of the container or transfer the food to dishes?',
+                      Text(
+                          '🍱When you get take-out food do you eat out of the container or transfer the food to dishes?',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           )),
                       SizedBox(height: 5),
-                      Text(userData.takeOutFood ?? "fill it out!", style: TextStyle(fontSize: 16))
+                      Text(userData.takeOutFood ?? "fill it out!",
+                          style: TextStyle(fontSize: 16))
                     ]),
               ),
               Container(
@@ -427,13 +433,15 @@ class _MyProfileState extends State<MyProfile> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text('🏝If you were deserted on an island what items would you bring with you?',
+                      Text(
+                          '🏝If you were deserted on an island what items would you bring with you?',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           )),
                       SizedBox(height: 5),
-                      Text(userData.desertedIsland ?? "fill it out!", style: TextStyle(fontSize: 16))
+                      Text(userData.desertedIsland ?? "fill it out!",
+                          style: TextStyle(fontSize: 16))
                     ]),
               ),
               Container(
@@ -442,13 +450,15 @@ class _MyProfileState extends State<MyProfile> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text('💒If you were to choose between a glamorous wedding or a small ceremony at the city hall, which would you choose?',
+                      Text(
+                          '💒If you were to choose between a glamorous wedding or a small ceremony at the city hall, which would you choose?',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           )),
                       SizedBox(height: 5),
-                      Text(userData.wedding ?? "fill it out!", style: TextStyle(fontSize: 16))
+                      Text(userData.wedding ?? "fill it out!",
+                          style: TextStyle(fontSize: 16))
                     ]),
               ),
               Container(
@@ -463,7 +473,8 @@ class _MyProfileState extends State<MyProfile> {
                             fontWeight: FontWeight.bold,
                           )),
                       SizedBox(height: 5),
-                      Text(userData.yourPlaceOrMine ?? "fill it out!", style: TextStyle(fontSize: 16))
+                      Text(userData.yourPlaceOrMine ?? "fill it out!",
+                          style: TextStyle(fontSize: 16))
                     ]),
               ),
               //ANSWER MORE QUESTIONS BTN
@@ -482,10 +493,8 @@ class _MyProfileState extends State<MyProfile> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      onPressed: () => {
-                      Navigator.of(context)
-                          .pushNamed('/moreQuestions')
-                      }),
+                      onPressed: () =>
+                          {Navigator.of(context).pushNamed('/moreQuestions')}),
                 ),
               ),
             ],
