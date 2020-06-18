@@ -535,8 +535,15 @@ class _MyProfileState extends State<MyProfile> {
                         borderRadius: BorderRadius.circular(20),
                       ),
                       onPressed: () => {
-                      Navigator.of(context)
-                          .pushNamed('/moreQuestions')
+                      Navigator.of(context).pushNamed('/moreQuestions', arguments: {
+                        'furniture': userData.furniture,
+                        'beachOrMountain': userData.beachOrMountain,
+                        'takeOutFood': userData.takeOutFood,
+                        'desertedIsland': userData.desertedIsland,
+                        'wedding': userData.wedding,
+                        'yourPlaceOrMine': userData.yourPlaceOrMine,
+                      }),
+                      //Navigator.of(context).pushNamed('/moreQuestions')
                       }),
                 ),
               ),
