@@ -16,14 +16,12 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   final AuthService _auth = AuthService();
-/* *//* Widget build(BuildContext context) {
-   // final AuthService _auth = AuthService();
+/*  Widget build(BuildContext context) {
+    // final AuthService _auth = AuthService();
 
 
-    final userData = Provider.of<UserData>(context);
-    *//*return null;
-    //return null;
- // }*/
+    final userData = Provider.of<UserData>(context);*/
+
 
     //text field state
     String email = "";
@@ -259,7 +257,7 @@ class _LoginState extends State<Login> {
 
     @override
     Widget build(BuildContext context) {
-      //final userData = Provider.of<UserData>(context);
+      final userData = Provider.of<UserData>(context);
       return loading
           ? Loading()
           : Scaffold(
@@ -321,5 +319,6 @@ class _LoginState extends State<Login> {
         ),
       );
     }
+
   //return null;
 }
