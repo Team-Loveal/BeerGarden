@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lovealapp/models/user.dart';
+import 'package:lovealapp/pages/myProfile.dart';
 import 'package:provider/provider.dart';
 import 'package:lovealapp/services/database.dart';
 import 'package:lovealapp/shared/loading.dart';
@@ -595,8 +596,8 @@ class _EditProfileState extends State<EditProfile> {
                                             genderPreference,
                                           );
 
-                                          Navigator.of(context)
-                                              .pushNamed('/navigationHome');
+                                          Navigator.push(context, MaterialPageRoute(builder: (context) => MyProfile()));
+//                                          Navigator.of(context).pushNamed('/myProfile');
                                           //  Navigator.pop(context);
                                         },
                                       ),
