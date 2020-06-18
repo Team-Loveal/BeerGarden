@@ -8,12 +8,21 @@ import 'package:lovealapp/services/database.dart';
 import 'package:provider/provider.dart';
 
 class NavigationHome extends StatefulWidget {
+  final int newIdx;
+
+  NavigationHome({Key key, @required this.newIdx}) : super(key: key);
+
   @override
-  _NavigationHomeState createState() => _NavigationHomeState();
+  _NavigationHomeState createState() => _NavigationHomeState(newIdx);
 }
 
 class _NavigationHomeState extends State<NavigationHome> {
+  final int newIdx;
+
+  _NavigationHomeState(this.newIdx);
+
   int _currentIndex = 0;
+
   final List<Widget> _children = [
     Match(),
     Messages(),
@@ -33,9 +42,9 @@ class _NavigationHomeState extends State<NavigationHome> {
     return StreamProvider<UserData>.value(
       value: DatabaseService(uid: user.uid).userData,
       child: Scaffold(
-        body: _children[_currentIndex],
+        body: (newIdx == null) ? _children[_currentIndex] : _children[newIdx],
         bottomNavigationBar: BottomNavigationBar(
-            // new
+          // new
             backgroundColor: Hexcolor("#8CC63E"),
             onTap: onTabTapped,
             currentIndex: _currentIndex,
@@ -54,7 +63,7 @@ class _NavigationHomeState extends State<NavigationHome> {
                   icon: Icon(Icons.person, color: Colors.white),
                   title: Text('Profile',
                       style:
-                          TextStyle(fontFamily: 'Alata', color: Colors.white)))
+                      TextStyle(fontFamily: 'Alata', color: Colors.white)))
             ]),
       ),
     );
