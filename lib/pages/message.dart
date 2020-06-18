@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:lovealapp/shared/loading.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:lovealapp/models/user.dart';
@@ -53,7 +54,10 @@ class _MessageState extends State<Message> {
   void initState() {
     super.initState();
     _getChatted();
+    _setBlur();
+  }
 
+  void _setBlur() {
     //get matchID and chatID from db
     Firestore.instance
         .collection('messages')
@@ -161,6 +165,7 @@ class _MessageState extends State<Message> {
   @override
   Widget build(BuildContext context) {
     user = Provider.of<User>(context);
+
     return Scaffold(
         backgroundColor: Hexcolor("#F4AA33"),
         appBar: PreferredSize(
@@ -260,7 +265,7 @@ class _MessageState extends State<Message> {
                                 builder: (context, snapshot) {
                                   if (!snapshot.hasData) {
                                     return Center(
-                                      child: Text('No messages...'),
+                                      child: Loading(),
                                     );
                                   } else {
                                     return ClipRRect(
