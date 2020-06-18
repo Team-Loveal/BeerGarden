@@ -28,6 +28,7 @@ class _MatchState extends State<Match> {
   void initState() {
     super.initState();
     final user = Provider.of<User>(context, listen: false);
+    print('I AM user $user.uid');
 
     //get matches, matchID and chatID from db
     Firestore.instance.collection('users').document(user.uid).get().then((doc) {
@@ -63,6 +64,9 @@ class _MatchState extends State<Match> {
 
   @override
   Widget build(BuildContext context) {
+    print('I AM MATCHID $matchID');
+    print('I AM MATCHID $chatID');
+    print('I AM MATCHID $matches');
     final AuthService _auth = AuthService();
     final myUserData = Provider.of<UserData>(context);
     return StreamBuilder<UserData>(
@@ -576,6 +580,7 @@ class _MatchState extends State<Match> {
                                 )),
                             onPressed: () async {
                               controller.forward(from: 0.0);
+
                               //add matches by one
                               int matches = myUserData.matches + 1;
 

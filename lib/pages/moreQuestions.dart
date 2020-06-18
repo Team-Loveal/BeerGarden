@@ -21,6 +21,7 @@ class _MoreQuestionsState extends State<MoreQuestions> {
 
   @override
   Widget build(BuildContext context) {
+    print(takeOutFood);
     final user = Provider.of<User>(context);
     return Scaffold(
       appBar: AppBar(
