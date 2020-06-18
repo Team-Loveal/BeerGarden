@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lovealapp/models/user.dart';
+import 'package:lovealapp/pages/navigationHome.dart';
 import 'package:provider/provider.dart';
 import 'package:lovealapp/services/database.dart';
 import 'package:lovealapp/shared/loading.dart';
@@ -36,6 +37,9 @@ class _EditProfileState extends State<EditProfile> {
   double _lowValue = 18.00;
   double _highValue = 100.00;
   String genderPreference;
+
+  //for back to MyProfile()
+  int profileIndex = 2;
 
 
   @override
@@ -108,7 +112,7 @@ class _EditProfileState extends State<EditProfile> {
                                       child: CircleAvatar(
                                         radius: 60,
                                         backgroundImage:
-                                            NetworkImage(userData.imgUrl),
+                                        NetworkImage(userData.imgUrl),
                                       ),
                                     ),
                                   ),
@@ -127,11 +131,11 @@ class _EditProfileState extends State<EditProfile> {
                               Container(
                                 child: Column(
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
                                     Column(
                                       crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
+                                      CrossAxisAlignment.stretch,
                                       textDirection: TextDirection.ltr,
                                       children: <Widget>[
                                         TextFormField(
@@ -179,12 +183,12 @@ class _EditProfileState extends State<EditProfile> {
                                           children: <Widget>[
                                             Padding(
                                                 padding:
-                                                    EdgeInsets.only(right: 70),
+                                                EdgeInsets.only(right: 70),
                                                 child: Container(
                                                   child: Column(
                                                     crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
+                                                    CrossAxisAlignment
+                                                        .start,
                                                     children: <Widget>[
                                                       Text(
                                                         'Age',
@@ -598,7 +602,12 @@ class _EditProfileState extends State<EditProfile> {
                                             genderPreference ?? userData.genderPreference
                                           );
 
-                                          Navigator.of(context).pushNamed('/navigationHome');
+                                          //try new routing
+                                          Navigator.push(context, MaterialPageRoute(
+                                            builder: (context) => NavigationHome(newIdx: profileIndex)
+                                          ));
+
+//                                          Navigator.of(context).pushNamed('/navigationHome');
                                         },
                                       ),
                                     )
