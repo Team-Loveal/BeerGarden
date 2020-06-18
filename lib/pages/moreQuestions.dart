@@ -8,6 +8,8 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:provider/provider.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
+import 'navigationHome.dart';
+
 class MoreQuestions extends StatefulWidget {
   @override
   _MoreQuestionsState createState() => _MoreQuestionsState();
@@ -26,6 +28,9 @@ class _MoreQuestionsState extends State<MoreQuestions> {
   String foreverEat;
   String bestForLast;
   String aliens;
+
+  //for back to MyProfile()
+  int profileIndex = 2;
 
   @override
   Widget build(BuildContext context) {
@@ -325,8 +330,9 @@ class _MoreQuestionsState extends State<MoreQuestions> {
                                           doc['aliens'] ?? ""
                                       );
 
-                                      Navigator.of(context)
-                                          .pushNamed('/navigationHome');
+                                      Navigator.push(context, MaterialPageRoute(
+                                          builder: (context) => NavigationHome(newIdx: profileIndex)
+                                      ));
                                     },
                                     textColor: Colors.white,
                                     color: Hexcolor("#8CC63E"),
