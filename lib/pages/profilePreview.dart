@@ -49,11 +49,11 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                   var genderPreference = userData.genderPreference;
                   var lowAge = userData.lowAge;
                   var highAge = userData.highAge;
-//                  var intLowAge = lowAge.toInt();
-//                  var intHighAge = highAge.toInt();
                   if (genderPreference == "Everyone") {
                     Firestore.instance
                         .collection("users")
+                        .where('age', isGreaterThanOrEqualTo: lowAge)
+                        .where('age', isLessThanOrEqualTo: highAge)
                         .getDocuments()
                         .then((querySnapshot) {
                       querySnapshot.documents.forEach((document) {
@@ -92,9 +92,9 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                   } else {
                     Firestore.instance
                         .collection("users")
+                        .where('age', isGreaterThanOrEqualTo: lowAge)
+                        .where('age', isLessThanOrEqualTo: highAge)
                         .where('gender', isEqualTo: genderPreference)
-//                  .where('age', isGreaterThanOrEqualTo: intLowAge, isLessThanOrEqualTo: intHighAge)
-//                  .where('age', isLessThanOrEqualTo: intHighAge)
                         .getDocuments()
                         .then((querySnapshot) {
                       querySnapshot.documents.forEach((document) {
