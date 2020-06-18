@@ -33,9 +33,10 @@ class _EditProfileState extends State<EditProfile> {
   bool drinking = false;
 
   //preferences
-  double _lowValue = 20;
-  double _highValue = 100;
+  double _lowValue;
+  double _highValue;
   String genderPreference;
+
 
   @override
   Widget build(BuildContext context) {
@@ -486,7 +487,7 @@ class _EditProfileState extends State<EditProfile> {
                                     Center(
                                       child: DropdownButton<String>(
                                         isExpanded: true,
-                                        value: genderPreference,
+                                        value: genderPreference != null ? genderPreference : userData.genderPreference,
                                         iconSize: 24,
                                         onChanged: (String newValue) {
                                           setState(() {
@@ -528,7 +529,7 @@ class _EditProfileState extends State<EditProfile> {
                                               padding:
                                                   const EdgeInsets.all(30.0),
                                               child: Text(
-                                                '${_lowValue.toInt().toString()} - ${_highValue.toInt().toString()}',
+                                                '${userData.lowAge.toInt().toString()} - ${userData.highAge.toInt().toString()}',
                                                 style:
                                                     TextStyle(fontSize: 20.0),
                                               ),
@@ -536,13 +537,13 @@ class _EditProfileState extends State<EditProfile> {
                                           ],
                                         ),
                                         RangeSlider(
-                                          min: 20,
+                                          min: 0,
                                           max: 100,
-                                          divisions: 80,
+                                          divisions: 99,
                                           inactiveColor: Colors.black,
                                           activeColor: Colors.black,
                                           values: RangeValues(
-                                              _lowValue, _highValue),
+                                              userData.lowAge.toDouble(), userData.highAge.toDouble()),
                                           onChanged: (_range) {
                                             setState(() => {
                                                   _lowValue = _range.start,
@@ -595,9 +596,7 @@ class _EditProfileState extends State<EditProfile> {
                                             genderPreference,
                                           );
 
-                                          Navigator.of(context)
-                                              .pushNamed('/navigationHome');
-                                          //  Navigator.pop(context);
+                                          Navigator.of(context).pushNamed('/navigationHome');
                                         },
                                       ),
                                     )
