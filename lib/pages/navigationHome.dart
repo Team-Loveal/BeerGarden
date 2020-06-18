@@ -17,7 +17,7 @@ class NavigationHome extends StatefulWidget {
 }
 
 class _NavigationHomeState extends State<NavigationHome> {
-  final int newIdx;
+  int newIdx;
 
   _NavigationHomeState(this.newIdx);
 
@@ -31,6 +31,9 @@ class _NavigationHomeState extends State<NavigationHome> {
 
   void onTabTapped(int index) {
     setState(() {
+      if (newIdx is int){
+        newIdx = null;
+      }
       _currentIndex = index;
     });
   }
