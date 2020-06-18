@@ -51,10 +51,9 @@ class _LoginState extends State<Login> {
 
     void googleLogin() async {
       dynamic result = await AuthService().loginWithGoogle();
-      // FirebaseUser user = result.user;
-      // print('AAAAAAAAAAAAAAAAAAAA ${userData.}');
-      final userData = Provider.of<UserData>(context, listen: false);
-      print("VVVBBBBBBBBBB ${userData.isProfileCreated}");
+
+     /* final userData = Provider.of<UserData>(context, listen: false);
+      print("VVVBBBBBBBBBB ${userData.isProfileCreated}");*/
       if (result == null) {
         setState(() {
           error = 'Could not sign in with those credentials';
@@ -62,7 +61,9 @@ class _LoginState extends State<Login> {
         });
       } else { //if (userData.){
         //result.uid is the uid we will need for the db
-        Navigator.of(context).popUntil((route) => route.isFirst);
+
+        Navigator.of(context).pushNamed('/editphoto');
+       // Navigator.of(context).popUntil((route) => route.isFirst);
       }
     }
 
@@ -257,7 +258,7 @@ class _LoginState extends State<Login> {
 
     @override
     Widget build(BuildContext context) {
-      final userData = Provider.of<UserData>(context);
+     // final userData = Provider.of<UserData>(context);
       return loading
           ? Loading()
           : Scaffold(
