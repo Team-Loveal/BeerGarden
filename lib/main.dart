@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
           ),
           initialRoute: '/',
           routes: {
-            '/': (_) => Wrapper(),
+            '/': (_) => UploadPhoto(),
             '/signup': (_) => SignUp(),
             '/login': (_) => Login(),
             '/forgotpassword': (_) => ForgotPassword(),

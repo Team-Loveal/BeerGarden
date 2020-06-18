@@ -37,9 +37,11 @@ class _ProfilePreviewState extends State<ProfilePreview> {
           if (userData.imgUrl != null) {
             return Scaffold(
               floatingActionButton: FloatingActionButton.extended(
-                onPressed: () {
-                  DatabaseService().createMatches(userData.genderPreference,
-                      userData.lowAge, userData.highAge);
+                onPressed: () async {
+                  await DatabaseService(uid: user.uid).createMatches(
+                      userData.genderPreference,
+                      userData.lowAge,
+                      userData.highAge);
                   Navigator.of(context).popUntil((route) => route.isFirst);
                 },
                 isExtended: true,

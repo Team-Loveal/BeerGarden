@@ -279,7 +279,7 @@ class DatabaseService {
   }
 
   Future deleteMatches() async {
-    messagesCollection
+    await messagesCollection
         .where('matchedUsers', arrayContains: uid)
         .where('matched', isEqualTo: false)
         .where('active', isEqualTo: false)

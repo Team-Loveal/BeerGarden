@@ -544,9 +544,9 @@ class _EditProfileState extends State<EditProfile> {
                                               _highValue != 100 ||
                                               userData.genderPreference !=
                                                   genderPreference) {
-                                            await DatabaseService()
+                                            await DatabaseService(uid: user.uid)
                                                 .deleteMatches();
-                                            await DatabaseService()
+                                            await DatabaseService(uid: user.uid)
                                                 .createMatches(
                                                     genderPreference ??
                                                         userData
