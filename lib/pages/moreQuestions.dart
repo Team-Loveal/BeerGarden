@@ -100,7 +100,8 @@ class _MoreQuestionsState extends State<MoreQuestions> {
                                 ),
                                 ListTile(
                                   title: const Text('🏖Beach'),
-                                  selected: _multipleChoice1 == multipleChoice1.beach,
+                                  selected: true,
+                                  //selected: _multipleChoice1 == multipleChoice1.beach,
                                   leading: Radio(
                                     value: '🏖Beach',
                                     groupValue: beachOrMountain,
@@ -113,7 +114,7 @@ class _MoreQuestionsState extends State<MoreQuestions> {
                                 ),
                                 ListTile(
                                   title: const Text('🏔Mountains'),
-                                  selected: _multipleChoice1 == multipleChoice1.mountain,
+                                  selected: false,
                                   leading: Radio(
                                     value: '🏔Mountains',
                                     groupValue: beachOrMountain,
