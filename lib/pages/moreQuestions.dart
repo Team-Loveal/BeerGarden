@@ -5,7 +5,6 @@ import 'package:lovealapp/services/database.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:flutter_radio_button_group/flutter_radio_button_group.dart';
 
 class MoreQuestions extends StatefulWidget {
   @override
@@ -85,29 +84,62 @@ class _MoreQuestionsState extends State<MoreQuestions> {
                                 'Would you rather have a home in the beach or the mountains?',
                                 style: TextStyle(fontSize: 15.0),
                               ),
-                              SizedBox(height: 20.0),
-                              FlutterRadioButtonGroup(
-                                items: [
-                                  "🏖Beach",
-                                  "🏔Mountains",
-                                ],
-                                onSelected: (val) {
-                                  print(val);
-                                  beachOrMountain = val ?? "🏖Beach";
-                                },
+                              ListTile(
+                                  title: const Text('🏖Beach'),
+                                leading: Radio(
+                                  value: '🏖Beach',
+                                  groupValue: beachOrMountain,
+                                  onChanged: (val) {
+                                    setState(() {
+                                      print(val);
+                                      beachOrMountain = val;
+                                    });
+                                  },
+                                ),
                               ),
+                              ListTile(
+                                title: const Text('🏔Mountains'),
+                                leading: Radio(
+                                  value: '🏔Mountains',
+                                  groupValue: beachOrMountain,
+                                  onChanged: (val) {
+                                    setState(() {
+                                      print(val);
+                                      beachOrMountain = val;
+                                    });
+                                  },
+                                ),
+                              ),
+                              SizedBox(height: 20.0),
                               SizedBox(height: 20.0),
                               Text(
                                   '🍱When you get take-out food do you eat out of the container or transfer the food to dishes?'),
                               SizedBox(height: 20.0),
-                              FlutterRadioButtonGroup(
-                                items: [
-                                  "Eat out of the container",
-                                  "Transfer the food",
-                                ],
-                                onSelected: (val) {
-                                  takeOutFood = val;
-                                },
+                              ListTile(
+                                title: const Text('Eat out of the container'),
+                                leading: Radio(
+                                  value: 'Eat out of the container',
+                                  groupValue: takeOutFood,
+                                  onChanged: (val) {
+                                    setState(() {
+                                      print(val);
+                                      takeOutFood = val;
+                                    });
+                                  },
+                                ),
+                              ),
+                              ListTile(
+                                title: const Text("Transfer the food"),
+                                leading: Radio(
+                                  value: "Transfer the food",
+                                  groupValue: takeOutFood,
+                                  onChanged: (val) {
+                                    setState(() {
+                                      print(val);
+                                      takeOutFood = val;
+                                    });
+                                  },
+                                ),
                               ),
                               SizedBox(height: 20.0),
                               Text(
@@ -123,14 +155,31 @@ class _MoreQuestionsState extends State<MoreQuestions> {
                               Text(
                                   "💒If you were to choose between a glamorous wedding or a small ceremony at the city hall, which would you choose?"),
                               SizedBox(height: 20.0),
-                              FlutterRadioButtonGroup(
-                                items: [
-                                  "Glamorous wedding",
-                                  "Small ceremony",
-                                ],
-                                onSelected: (val) {
-                                  wedding = val;
-                                },
+                              ListTile(
+                                title: const Text('Glamorous wedding'),
+                                leading: Radio(
+                                  value: 'Glamorous wedding',
+                                  groupValue: wedding,
+                                  onChanged: (val) {
+                                    setState(() {
+                                      print(val);
+                                      wedding = val;
+                                    });
+                                  },
+                                ),
+                              ),
+                              ListTile(
+                                title: const Text("Small ceremony"),
+                                leading: Radio(
+                                  value: "Small ceremony",
+                                  groupValue: wedding,
+                                  onChanged: (val) {
+                                    setState(() {
+                                      print(val);
+                                      wedding = val;
+                                    });
+                                  },
+                                ),
                               ),
                               SizedBox(height: 20.0),
                               Text("🏡Your place or mine?"),
