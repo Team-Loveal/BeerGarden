@@ -68,29 +68,30 @@ class _MessageState extends State<Message> {
   }
 
   // check if chatroom is active
-  void _getChatted() {
-    dbRef.collection('messages').document(chatRoomID).get().then((snapshot) => {
-          if (snapshot['active'] != null)
-            {activeChat = snapshot['active']}
-          else
-            {_activateChat(false), activeChat = false}
-        });
+  void _getChatted() async {
+    await dbRef
+        .collection('messages')
+        .document(chatRoomID)
+        .get()
+        .then((snapshot) => {
+              if (snapshot['active'] != null)
+                {activeChat = snapshot['active']}
+              else
+                {_activateChat(false), activeChat = false}
+            });
   }
 
   // activate chatroom (a chatroom that has at least one message)
-  void _activateChat(bool) {
-    try {
-      dbRef
-          .collection('messages')
-          .document(chatRoomID)
-          .updateData({'active': bool});
-    } catch (err) {
-      print(err.toString());
-    }
+  void _activateChat(bool) async {
+    await dbRef
+        .collection('messages')
+        .document(chatRoomID)
+        .updateData({'active': bool}).catchError(
+            (err) => {print('Error activating chat: ${err.toString()}')});
   }
 
-  void _toggleUnread(DocumentSnapshot document) {
-    dbRef
+  void _toggleUnread(DocumentSnapshot document) async {
+    await dbRef
         .collection('messages')
         .document(chatRoomID)
         .collection('chatroom')
@@ -130,7 +131,7 @@ class _MessageState extends State<Message> {
     }
   }
 
-  void _onSendBeer() {
+  void _onSendBeer() async {
     // toggle chatted if first message
     if (!activeChat) {
       _activateChat(true);

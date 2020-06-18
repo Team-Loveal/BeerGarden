@@ -1,23 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:lovealapp/pages/editPhoto.dart';
-import 'package:lovealapp/pages/myProfile.dart';
-import 'package:lovealapp/pages/navigationHome.dart';
-import 'package:lovealapp/pages/preferences.dart';
-import 'package:lovealapp/pages/uploadphoto.dart';
-import 'package:lovealapp/pages/login.dart';
-import 'package:lovealapp/pages/signup.dart';
-import 'package:lovealapp/pages/wrapper.dart';
-import 'package:lovealapp/pages/forgotpassword.dart';
-import 'package:lovealapp/services/auth.dart';
-import 'package:lovealapp/pages/createProfile.dart';
-import 'package:lovealapp/pages/editProfile.dart';
-import 'package:lovealapp/pages/loginFirstTime.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:lovealapp/pages/questions.dart';
 
 //provide user data to Wrapper file
 import 'package:provider/provider.dart';
 import "package:lovealapp/models/user.dart";
+import 'package:lovealapp/services/auth.dart';
+
+//routes
+import 'pages/editPhoto.dart';
+import 'pages/moreQuestions.dart';
+import 'pages/myProfile.dart';
+import 'pages/navigationHome.dart';
+import 'pages/preferences.dart';
+import 'pages/uploadphoto.dart';
+import 'pages/login.dart';
+import 'pages/signup.dart';
+import 'pages/wrapper.dart';
+import 'pages/forgotpassword.dart';
+import 'pages/createProfile.dart';
+import 'pages/editProfile.dart';
+import 'pages/loginFirstTime.dart';
+import 'pages/questions.dart';
 
 //main function is the first function that fires when dart file starts
 void main() {
@@ -54,6 +57,7 @@ class MyApp extends StatelessWidget {
             '/setPreferences': (_) => SetPreferences(),
             '/loginFirstTime': (_) => LoginFirstTime(),
             '/questions': (_) => Questions(),
+            '/moreQuestions': (_) => MoreQuestions(),
           }),
     );
   }

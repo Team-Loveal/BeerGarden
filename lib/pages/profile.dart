@@ -415,6 +415,96 @@ class _ProfileState extends State<Profile> {
                                 style: TextStyle(fontSize: 16))
                           ]),
                     ),
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 30),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text('🚽If you were a piece of furniture, what piece of furniture would you be?',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            SizedBox(height: 5),
+                            Text(snapshot.data['furniture'] ?? "Ask me!", style: TextStyle(fontSize: 16))
+                          ]),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 30),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text('Would you rather have a home in the beach or the mountains?',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            SizedBox(height: 5),
+                            Text(snapshot.data['beachOrMountain'] ?? "Ask me!", style: TextStyle(fontSize: 16))
+                          ]),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 30),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text('🍱When you get take-out food do you eat out of the container or transfer the food to dishes?',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            SizedBox(height: 5),
+                            Text(snapshot.data['takeOutFood'] ?? "Ask me!", style: TextStyle(fontSize: 16))
+                          ]),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 30),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text('🏝If you were deserted on an island what items would you bring with you?',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            SizedBox(height: 5),
+                            Text(snapshot.data['desertedIsland'] ?? "Ask me!", style: TextStyle(fontSize: 16))
+                          ]),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 30),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text('💒If you were to choose between a glamorous wedding or a small ceremony at the city hall, which would you choose?',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            SizedBox(height: 5),
+                            Text(snapshot.data['wedding'] ?? "Ask me!", style: TextStyle(fontSize: 16))
+                          ]),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 30),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text('🏡Your place or mine?',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            SizedBox(height: 5),
+                            Text(snapshot.data['yourPlaceOrMine'] ?? "Ask me!", style: TextStyle(fontSize: 16))
+                          ]),
+                    ),
                   ],
                 ),
               ),
