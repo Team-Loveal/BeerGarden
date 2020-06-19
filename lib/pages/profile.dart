@@ -333,7 +333,7 @@ class _ProfileState extends State<Profile> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text('Do you make your bed in the morning?',
+                            Text('🛌Do you make your bed in the morning?',
                                 style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
@@ -349,7 +349,7 @@ class _ProfileState extends State<Profile> {
                     Container(
                       margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                       child: Wrap(children: <Widget>[
-                        Text('Do you read reviews, or just go with your gut?',
+                        Text('🤓Do you read reviews, or just go with your gut?',
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -366,7 +366,7 @@ class _ProfileState extends State<Profile> {
                       margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                       child: Wrap(children: <Widget>[
                         Text(
-                            'If you could only eat one thing for the rest of your life, what would it be?',
+                            '🌮If you could only eat one thing for the rest of your life, what would it be?',
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -383,7 +383,7 @@ class _ProfileState extends State<Profile> {
                       margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                       child: Wrap(children: <Widget>[
                         Text(
-                            "If you're eating a meal do you save the best thing for last or eat it first?",
+                            "🌭If you're eating a meal do you save the best thing for last or eat it first?",
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -397,12 +397,12 @@ class _ProfileState extends State<Profile> {
                       ]),
                     ),
                     Container(
-                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 30),
+                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                       child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text('Do you believe in aliens?',
+                            Text('👽Do you believe in aliens?',
                                 style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
@@ -416,7 +416,7 @@ class _ProfileState extends State<Profile> {
                           ]),
                     ),
                     Container(
-                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 30),
+                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                       child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -431,7 +431,7 @@ class _ProfileState extends State<Profile> {
                           ]),
                     ),
                     Container(
-                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 30),
+                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                       child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -446,7 +446,7 @@ class _ProfileState extends State<Profile> {
                           ]),
                     ),
                     Container(
-                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 30),
+                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                       child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -461,7 +461,7 @@ class _ProfileState extends State<Profile> {
                           ]),
                     ),
                     Container(
-                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 30),
+                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                       child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -476,7 +476,7 @@ class _ProfileState extends State<Profile> {
                           ]),
                     ),
                     Container(
-                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 30),
+                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                       child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.start,

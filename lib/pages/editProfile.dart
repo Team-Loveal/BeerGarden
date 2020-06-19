@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lovealapp/models/user.dart';
+import 'package:lovealapp/pages/navigationHome.dart';
 import 'package:provider/provider.dart';
 import 'package:lovealapp/services/database.dart';
 import 'package:lovealapp/shared/loading.dart';
@@ -37,6 +38,9 @@ class _EditProfileState extends State<EditProfile> {
   double _lowValue = 18.00;
   double _highValue = 100.00;
   String genderPreference;
+
+  //for back to MyProfile()
+  int profileIndex = 2;
 
   @override
   Widget build(BuildContext context) {
@@ -495,73 +499,80 @@ class _EditProfileState extends State<EditProfile> {
                                       ],
                                     )),
                                     Padding(
-                                      padding: EdgeInsets.only(top: 20),
-                                      child: RaisedButton(
-                                        child: Text(
-                                          'Save',
-                                          style: TextStyle(
-                                            color: Colors.grey[900],
-                                            fontWeight: FontWeight.bold,
+                                        padding: EdgeInsets.only(top: 20),
+                                        child: RaisedButton(
+                                          child: Text(
+                                            'Save',
+                                            style: TextStyle(
+                                              color: Colors.grey[900],
+                                              fontWeight: FontWeight.bold,
+                                            ),
                                           ),
-                                        ),
-                                        color: Colors.pinkAccent,
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(20)),
-                                        onPressed: () async {
-                                          await DatabaseService(uid: user.uid)
-                                              .editUserData(
-                                            nickname ?? userData.nickname,
-                                            location ?? userData.location,
-                                            age ?? userData.age,
-                                            gender ?? userData.gender,
-                                            occupation ?? userData.occupation,
-                                            about ?? userData.about,
-                                            yodeling ?? userData.yodeling,
-                                            shopping ?? userData.shopping,
-                                            makingBalloonAnimals ??
-                                                userData.makingBalloonAnimals,
-                                            cooking ?? userData.cooking,
-                                            painting ?? userData.painting,
-                                            movies ?? userData.movies,
-                                            sports ?? userData.sports,
-                                            writing ?? userData.writing,
-                                            drinking ?? userData.drinking,
-                                          );
-
-                                          //write preference into db
-                                          await DatabaseService(uid: user.uid)
-                                              .updatePreference(
-                                                  _lowValue ?? userData.lowAge,
-                                                  _highValue ??
-                                                      userData.highAge,
-                                                  genderPreference ??
-                                                      userData
-                                                          .genderPreference);
-
-                                          // recreate matches with new preference
-                                          if (_lowValue != 18 ||
-                                              _highValue != 100 ||
-                                              userData.genderPreference !=
-                                                  genderPreference) {
+                                          color: Colors.pinkAccent,
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(20)),
+                                          onPressed: () async {
                                             await DatabaseService(uid: user.uid)
-                                                .deleteMatches();
+                                                .editUserData(
+                                              nickname ?? userData.nickname,
+                                              location ?? userData.location,
+                                              age ?? userData.age,
+                                              gender ?? userData.gender,
+                                              occupation ?? userData.occupation,
+                                              about ?? userData.about,
+                                              yodeling ?? userData.yodeling,
+                                              shopping ?? userData.shopping,
+                                              makingBalloonAnimals ??
+                                                  userData.makingBalloonAnimals,
+                                              cooking ?? userData.cooking,
+                                              painting ?? userData.painting,
+                                              movies ?? userData.movies,
+                                              sports ?? userData.sports,
+                                              writing ?? userData.writing,
+                                              drinking ?? userData.drinking,
+                                            );
+
+                                            //write preference into db
                                             await DatabaseService(uid: user.uid)
-                                                .createMatches(
-                                                    genderPreference ??
-                                                        userData
-                                                            .genderPreference,
+                                                .updatePreference(
                                                     _lowValue ??
                                                         userData.lowAge,
                                                     _highValue ??
-                                                        userData.highAge);
+                                                        userData.highAge,
+                                                    genderPreference ??
+                                                        userData
+                                                            .genderPreference);
 
-                                            Navigator.of(context)
-                                                .pushNamed('/navigationHome');
-                                          }
-                                        },
-                                      ),
-                                    )
+                                            // recreate matches with new preference
+                                            if (_lowValue != 18 ||
+                                                _highValue != 100 ||
+                                                userData.genderPreference !=
+                                                    genderPreference) {
+                                              await DatabaseService(
+                                                      uid: user.uid)
+                                                  .deleteMatches();
+                                              await DatabaseService(
+                                                      uid: user.uid)
+                                                  .createMatches(
+                                                      genderPreference ??
+                                                          userData
+                                                              .genderPreference,
+                                                      _lowValue ??
+                                                          userData.lowAge,
+                                                      _highValue ??
+                                                          userData.highAge);
+                                              //try new routing
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          NavigationHome(
+                                                              newIdx:
+                                                                  profileIndex)));
+                                            }
+                                          },
+                                        ))
                                   ],
                                 ),
                               ),

@@ -4,14 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:async';
 import 'dart:io';
-import 'package:lovealapp/pages/profilePreview.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:lovealapp/models/user.dart';
 import 'package:provider/provider.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:path/path.dart' as Path;
 import 'dart:ui';
-import 'package:http/http.dart' as http;
+import 'profilePreview.dart';
 
 class UploadPhoto extends StatefulWidget {
   @override
@@ -38,23 +37,6 @@ class _UploadPhotoState extends State<UploadPhoto> {
 
     setState(() {
       _image = File(image.path);
-    });
-  }
-
-  bool hasNudity(String imgURL) {
-    var response = postImg(imgURL);
-    print('API Response: $response');
-    return false;
-  }
-
-  Future<http.Response> postImg(String imgURL) async {
-    return http.post('nuditysearch.p.rapidapi.com', headers: <String, String>{
-      'x-rapidapi-host': 'nuditysearch.p.rapidapi.com',
-      'x-rapidapi-key': '2d02deba4emshe159caf99dd9f50p189ad6jsn82eeddbe07f1',
-      'content-type': 'application/x-www-form-urlencoded',
-    }, body: <String, String>{
-      'setting': '3',
-      'objecturl': imgURL,
     });
   }
 
@@ -233,11 +215,11 @@ class _UploadPhotoState extends State<UploadPhoto> {
             ),
             onPressed: () async {
               await uploadFile();
-              // Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //         builder: (context) =>
-              //             ProfilePreview(profileImg: _image)));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          ProfilePreview(profileImg: _image)));
             },
           ),
         ],
@@ -247,25 +229,17 @@ class _UploadPhotoState extends State<UploadPhoto> {
 
   Future uploadFile() async {
     final user = Provider.of<User>(context, listen: false);
-    var fileURL;
-    bool isValid;
-
     StorageReference storageReference = FirebaseStorage.instance
         .ref()
-        .child('users/${Path.basename(_image.path)}');
+        .child('users/${Path.basename(_image.path)}}');
     StorageUploadTask uploadTask = storageReference.putFile(_image);
     await uploadTask.onComplete;
-
-    // get storage location (URL)
-    storageReference.getDownloadURL().then((url) {
-      fileURL = url;
-      print(fileURL);
+    print('File Uploaded');
+    storageReference.getDownloadURL().then((fileURL) {
+      Firestore.instance
+          .collection("users")
+          .document(user.uid)
+          .updateData({"imgUrl": fileURL});
     });
-    isValid = hasNudity(fileURL);
-    // if not nudity, set imgUrl for user
-    // Firestore.instance
-    //     .collection("users")
-    //     .document(user.uid)
-    //     .updateData({"imgUrl": fileURL});
   }
 }

@@ -7,7 +7,7 @@ Beer Garden is a dating app with a twist ✨ It's an online beer garden where yo
 
 Meet a new person everyday with both your photos blurred. As you build your new relationship through conversations, the photos will gradually reveal itself! 🎉
 
-**Find true love ♥️ It all starts with a hearty *cheers!*🍻**
+**Find true love ♥️ It all starts with a hearty** ***cheers!***🍻 
 
 Available NOW at Google Play store 👉 [BeerGarden](https://play.google.com/store/)
 
@@ -36,15 +36,15 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 ## Authors
 
-👻 [Jeff Bentley](https://github.com/jbentleyjp)
+👻  [Jeff Bentley](https://github.com/jbentleyjp)
 
-😸 [Garrett Chun](https://github.com/Kapakahi)
+😸  [Garrett Chun](https://github.com/Kapakahi)
 
-🌝 [Yuya Harada](https://github.com/yuya-h-29)
+🌝  [Yuya Harada](https://github.com/yuya-h-29)
 
-🐸 [Riku Kawano](https://github.com/rikukawano)
+🐸  [Riku Kawano](https://github.com/rikukawano)
 
-🦄 [Yurika Namba](https://github.com/yurikanamba)
+🦄  [Yurika Namba](https://github.com/yurikanamba)
 
 ## License
 

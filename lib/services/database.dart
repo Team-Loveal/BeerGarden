@@ -234,6 +234,7 @@ class DatabaseService {
                     'fromID': uid,
                     'toID': toID,
                     'matched': false,
+                    'active': false,
                     'matchedUsers': [uid, toID],
                     'blur': 50,
                   });
@@ -266,6 +267,7 @@ class DatabaseService {
                     'fromID': uid,
                     'toID': toID,
                     'matched': false,
+                    'active': false,
                     'matchedUsers': [uid, toID],
                     'blur': 50,
                   });
@@ -284,7 +286,16 @@ class DatabaseService {
         .where('matched', isEqualTo: false)
         .where('active', isEqualTo: false)
         .getDocuments()
-        .then((querySnapshot) => querySnapshot.documents.forEach((document) {
+        .then((querySnapshot) =>
+            querySnapshot.documents.forEach((document) async {
+              // delete all documents in subcollection first
+              await messagesCollection
+                  .document(document.documentID)
+                  .collection('chatroom')
+                  .getDocuments()
+                  .then((querySnapshot) => querySnapshot.documents
+                      .forEach((document) => {document.reference.delete()}));
+              // then remove all documents in collection
               document.reference.delete();
             }))
         .catchError((error) => {print('Could not delete matches: $error')});
