@@ -5,6 +5,7 @@ import 'package:lovealapp/models/user.dart';
 import 'package:provider/provider.dart';
 import 'package:lovealapp/widgets/chatroom.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:lovealapp/shared/loading.dart';
 
 class Messages extends StatefulWidget {
   @override
@@ -14,13 +15,13 @@ class Messages extends StatefulWidget {
 class _MessagesState extends State<Messages> {
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<User>(context);
+    final user = Provider.of<UserData>(context);
 
     return Scaffold(
         backgroundColor: Hexcolor("#F4AA33"),
         appBar: PreferredSize(
           preferredSize:
-          Size.fromHeight(MediaQuery.of(context).size.height * 0.15),
+              Size.fromHeight(MediaQuery.of(context).size.height * 0.15),
           child: AppBar(
             backgroundColor: Hexcolor("#F4AA33"),
             flexibleSpace: Container(
@@ -45,6 +46,14 @@ class _MessagesState extends State<Messages> {
                     topLeft: Radius.circular(30.0),
                     topRight: Radius.circular(30.0),
                   ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: Offset(0, 3), // changes position of shadow
+                    ),
+                  ],
                 ),
                 child: Column(
                   children: <Widget>[
@@ -67,7 +76,7 @@ class _MessagesState extends State<Messages> {
                             builder: (context, snapshot) {
                               if (!snapshot.hasData) {
                                 return Center(
-                                  child: Text("No messages..."),
+                                  child: Loading(),
                                 );
                               } else {
                                 return ClipRRect(

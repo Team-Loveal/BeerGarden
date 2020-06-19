@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:lovealapp/models/user.dart';
-import 'package:lovealapp/pages/navigationHome.dart';
 import 'package:provider/provider.dart';
 import 'package:lovealapp/services/database.dart';
 import 'package:lovealapp/shared/loading.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:lovealapp/pages/navigationHome.dart';
 
 class EditProfile extends StatefulWidget {
   @override
@@ -34,6 +34,7 @@ class _EditProfileState extends State<EditProfile> {
   bool drinking = false;
 
   //preferences
+  var ageList = new List<int>.generate(80, (i) => i + 1);
   double _lowValue = 18.00;
   double _highValue = 100.00;
   String genderPreference;
@@ -62,6 +63,8 @@ class _EditProfileState extends State<EditProfile> {
         stream: DatabaseService(uid: user.uid).userData,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
+//            print('I AM LOW VALUE $_lowValue');
+//            print('I AM HIGH VALUE $_highValue');
             UserData userData = snapshot.data;
             return Scaffold(
               appBar: AppBar(
@@ -112,7 +115,7 @@ class _EditProfileState extends State<EditProfile> {
                                       child: CircleAvatar(
                                         radius: 60,
                                         backgroundImage:
-                                        NetworkImage(userData.imgUrl),
+                                            NetworkImage(userData.imgUrl),
                                       ),
                                     ),
                                   ),
@@ -131,11 +134,11 @@ class _EditProfileState extends State<EditProfile> {
                               Container(
                                 child: Column(
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
                                     Column(
                                       crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
+                                          CrossAxisAlignment.stretch,
                                       textDirection: TextDirection.ltr,
                                       children: <Widget>[
                                         TextFormField(
@@ -183,12 +186,12 @@ class _EditProfileState extends State<EditProfile> {
                                           children: <Widget>[
                                             Padding(
                                                 padding:
-                                                EdgeInsets.only(right: 70),
+                                                    EdgeInsets.only(right: 70),
                                                 child: Container(
                                                   child: Column(
                                                     crossAxisAlignment:
-                                                    CrossAxisAlignment
-                                                        .start,
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     children: <Widget>[
                                                       Text(
                                                         'Age',
@@ -602,6 +605,26 @@ class _EditProfileState extends State<EditProfile> {
                                             genderPreference ?? userData.genderPreference
                                           );
 
+                                          // recreate matches with new preference
+                                          if (_lowValue != 18 ||
+                                              _highValue != 100 ||
+                                              userData.genderPreference !=
+                                                  genderPreference) {
+                                            await DatabaseService(uid: user.uid)
+                                                .deleteMatches();
+                                            await DatabaseService(uid: user.uid)
+                                                .createMatches(
+                                                    genderPreference ??
+                                                        userData
+                                                            .genderPreference,
+                                                    _lowValue ??
+                                                        userData.lowAge,
+                                                    _highValue ??
+                                                        userData.highAge);
+
+//                                            Navigator.of(context)
+//                                                .pushNamed('/navigationHome');
+                                          }
                                           //try new routing
                                           Navigator.push(context, MaterialPageRoute(
                                             builder: (context) => NavigationHome(newIdx: profileIndex)

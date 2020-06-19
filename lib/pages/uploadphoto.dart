@@ -41,7 +41,7 @@ class _UploadPhotoState extends State<UploadPhoto> {
 
   //use for switch button
   bool isSwitched = false;
- // bool isProfileCompleted;
+
 
   @override
   Widget build(BuildContext context) {

@@ -27,11 +27,11 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  _ProfileState(this.userID, this.nickname, this.imgUrl, this.chatRoomID);
   final String userID;
   final String nickname;
   final String imgUrl;
   final String chatRoomID;
-  _ProfileState(this.userID, this.nickname, this.imgUrl, this.chatRoomID);
 
   //to set blur
   double sigmaX;
@@ -60,6 +60,7 @@ class _ProfileState extends State<Profile> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return Scaffold(
+              appBar: AppBar(title: Text('Profile')),
               body: Container(
                 height: double.infinity,
                 width: double.infinity,

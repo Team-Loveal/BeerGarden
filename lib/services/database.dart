@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:lovealapp/models/user.dart';
 
 class DatabaseService {
@@ -8,6 +9,9 @@ class DatabaseService {
 
   final CollectionReference usersCollection =
       Firestore.instance.collection("users");
+
+  final CollectionReference messagesCollection =
+  Firestore.instance.collection("messages");
 
   //set user data when signing up
   Future setUserData(String email) async {
@@ -218,5 +222,94 @@ class DatabaseService {
       'wedding' : wedding,
       'yourPlaceOrMine' : yourPlaceOrMine,
     });
+  }
+  Future createMatches(genderPreference, lowAge, highAge) async {
+    print(genderPreference);
+    print(lowAge);
+    print(highAge);
+    if (genderPreference == "Everyone") {
+      usersCollection
+          .where('age', isGreaterThanOrEqualTo: lowAge)
+          .where('age', isLessThanOrEqualTo: highAge)
+          .getDocuments()
+          .then((querySnapshot) {
+        querySnapshot.documents.forEach((document) {
+          if (document.documentID != uid) {
+            //concat and make into a string and push into chatIds array
+            String toID = document.documentID;
+            String chatId1 = '$uid - ${document.documentID}';
+            String chatId2 = '${document.documentID} - $uid';
+            //check messages documents, if it doesn't exist write to the db
+            messagesCollection.getDocuments().then((querySnapshot) {
+              querySnapshot.documents.forEach((document) {
+                if (chatId1 != document.documentID &&
+                    chatId2 != document.documentID) {
+                  messagesCollection.document(chatId1).setData({
+                    'fromID': uid,
+                    'toID': toID,
+                    'matched': false,
+                    'active': false,
+                    'matchedUsers': [uid, toID],
+                    'blur': 50,
+                  });
+                }
+              });
+            });
+          }
+        });
+      });
+    } else {
+      usersCollection
+          .where('age', isGreaterThanOrEqualTo: lowAge)
+          .where('age', isLessThanOrEqualTo: highAge)
+          .where('gender', isEqualTo: genderPreference)
+          .getDocuments()
+          .then((querySnapshot) {
+        querySnapshot.documents.forEach((document) {
+          if (document.documentID != uid) {
+            //concat and make into a string and push into chatIds array
+            String toID = document.documentID;
+            String chatId1 = '$uid - ${document.documentID}';
+            String chatId2 = '${document.documentID} - $uid';
+            //check messages documents, if it doesn't exist write to the db
+            messagesCollection.where('matched', isEqualTo: false).getDocuments().then((querySnapshot) {
+              querySnapshot.documents.forEach((document) {
+                if (chatId1 != document.documentID &&
+                    chatId2 != document.documentID) {
+                  messagesCollection.document(chatId1).setData({
+                    'fromID': uid,
+                    'toID': toID,
+                    'matched': false,
+                    'active': false,
+                    'matchedUsers': [uid, toID],
+                    'blur': 50,
+                  });
+                }
+              });
+            });
+          }
+        });
+      });
+    }
+  }
+  Future deleteMatches() async {
+    await messagesCollection
+        .where('matchedUsers', arrayContains: uid)
+        .where('matched', isEqualTo: false)
+        .where('active', isEqualTo: false)
+        .getDocuments()
+        .then((querySnapshot) =>
+        querySnapshot.documents.forEach((document) async {
+          // delete all documents in subcollection first
+          await messagesCollection
+              .document(document.documentID)
+              .collection('chatroom')
+              .getDocuments()
+              .then((querySnapshot) => querySnapshot.documents
+              .forEach((document) => {document.reference.delete()}));
+          // then remove all documents in collection
+          document.reference.delete();
+        }))
+        .catchError((error) => {print('Could not delete matches: $error')});
   }
 }

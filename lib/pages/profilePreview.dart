@@ -1,5 +1,4 @@
 import 'dart:ui';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lovealapp/models/user.dart';
@@ -11,27 +10,26 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
 
 class ProfilePreview extends StatefulWidget {
+  ProfilePreview({Key key, @required this.profileImg}) : super(key: key);
   //instead of reading from db, could try and pass values from previous widgets
   final File profileImg;
-
-  ProfilePreview({Key key, @required this.profileImg}) : super(key: key);
 
   @override
   _ProfilePreviewState createState() => _ProfilePreviewState(profileImg);
 }
 
 class _ProfilePreviewState extends State<ProfilePreview> {
+  _ProfilePreviewState(this.profileImg);
+
   final File profileImg;
-
   bool loading = false;
-
-  void verifyCompletedProfile() async {
+/*
+  void verifyCompletedProfile()async {
     final user = Provider.of<User>(context, listen: false);
     await DatabaseService(uid: user.uid)
-        .profileComplete(true);
-  }
+      .profileComplete(true);
 
-  _ProfilePreviewState(this.profileImg);
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -44,102 +42,14 @@ class _ProfilePreviewState extends State<ProfilePreview> {
           //snapshot is data coming down the stream
           UserData userData = snapshot.data;
           if (userData.imgUrl != null) {
-//            UserData userData = snapshot.data;
-
             return Scaffold(
               floatingActionButton: FloatingActionButton.extended(
                 onPressed: () async {
-                  //Todo move this function to database.dart
-                  //Todo read preferences and filter out matches
-
-                  //Calling function to set that profile is completed
-                  await verifyCompletedProfile();
-                  //get potential matches for the user
-                  var genderPreference = userData.genderPreference;
-                  var lowAge = userData.lowAge;
-                  var highAge = userData.highAge;
-                  if (genderPreference == "Everyone") {
-                    Firestore.instance
-                        .collection("users")
-                        .where('age', isGreaterThanOrEqualTo: lowAge)
-                        .where('age', isLessThanOrEqualTo: highAge)
-                        .getDocuments()
-                        .then((querySnapshot) {
-                      querySnapshot.documents.forEach((document) {
-                        if (document.documentID != user.uid) {
-                          //concat and make into a string and push into chatIds array
-                          String toID = document.documentID;
-                          String chatId1 =
-                              '${user.uid} - ${document.documentID}';
-                          String chatId2 =
-                              '${document.documentID} - ${user.uid}';
-
-                          //check messages documents, if it doesn't exist write to the db
-                          Firestore.instance
-                              .collection("messages")
-                              .getDocuments()
-                              .then((querySnapshot) {
-                            querySnapshot.documents.forEach((document) {
-                              if (chatId1 != document.documentID &&
-                                  chatId2 != document.documentID) {
-                                Firestore.instance
-                                    .collection("messages")
-                                    .document(chatId1)
-                                    .setData({
-                                  'fromID': user.uid,
-                                  'toID': toID,
-                                  'matched': false,
-                                  'matchedUsers': [user.uid, toID],
-                                  'blur': 50,
-                                });
-                              }
-                            });
-                          });
-                        }
-                      });
-                    });
-                  } else {
-                    Firestore.instance
-                        .collection("users")
-                        .where('age', isGreaterThanOrEqualTo: lowAge)
-                        .where('age', isLessThanOrEqualTo: highAge)
-                        .where('gender', isEqualTo: genderPreference)
-                        .getDocuments()
-                        .then((querySnapshot) {
-                      querySnapshot.documents.forEach((document) {
-                        if (document.documentID != user.uid) {
-                          //concat and make into a string and push into chatIds array
-                          String toID = document.documentID;
-                          String chatId1 =
-                              '${user.uid} - ${document.documentID}';
-                          String chatId2 =
-                              '${document.documentID} - ${user.uid}';
-
-                          //check messages documents, if it doesn't exist write to the db
-                          Firestore.instance
-                              .collection("messages")
-                              .getDocuments()
-                              .then((querySnapshot) {
-                            querySnapshot.documents.forEach((document) {
-                              if (chatId1 != document.documentID &&
-                                  chatId2 != document.documentID) {
-                                Firestore.instance
-                                    .collection("messages")
-                                    .document(chatId1)
-                                    .setData({
-                                  'fromID': user.uid,
-                                  'toID': toID,
-                                  'matched': false,
-                                  'matchedUsers': [user.uid, toID],
-                                  'blur': 50,
-                                });
-                              }
-                            });
-                          });
-                        }
-                      });
-                    });
-                  }
+                   await DatabaseService(uid: user.uid)
+                        .profileComplete(true);
+                //  await verifyCompletedProfile();
+                  DatabaseService(uid: user.uid).createMatches(userData.genderPreference,
+                      userData.lowAge, userData.highAge);
                   Navigator.of(context).popUntil((route) => route.isFirst);
                 },
                 isExtended: true,
