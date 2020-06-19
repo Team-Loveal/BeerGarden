@@ -25,6 +25,12 @@ class _ProfilePreviewState extends State<ProfilePreview> {
 
   bool loading = false;
 
+  void verifyCompletedProfile() async {
+    final user = Provider.of<User>(context, listen: false);
+    await DatabaseService(uid: user.uid)
+        .profileComplete(true);
+  }
+
   _ProfilePreviewState(this.profileImg);
 
   @override
@@ -42,9 +48,12 @@ class _ProfilePreviewState extends State<ProfilePreview> {
 
             return Scaffold(
               floatingActionButton: FloatingActionButton.extended(
-                onPressed: () {
+                onPressed: () async {
                   //Todo move this function to database.dart
                   //Todo read preferences and filter out matches
+
+                  //Calling function to set that profile is completed
+                  await verifyCompletedProfile();
                   //get potential matches for the user
                   var genderPreference = userData.genderPreference;
                   var lowAge = userData.lowAge;

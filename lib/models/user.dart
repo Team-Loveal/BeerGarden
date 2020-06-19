@@ -1,16 +1,11 @@
 class User {
   final String uid;
   bool isEmailVerified = false;
-  bool isProfileCreated = false;
-  final String creationTimeStamp;
-  final String lastSignInTimeStamp;
+
 
   User({
     this.uid,
     this.isEmailVerified,
-    this.isProfileCreated,
-    this.creationTimeStamp,
-    this.lastSignInTimeStamp
   });
 }
 
