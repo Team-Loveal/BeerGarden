@@ -1,17 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:lovealapp/models/user.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class DatabaseService {
   final String uid;
   bool isEmailVerified = false;
-
   DatabaseService({this.uid, this.isEmailVerified});
 
   final CollectionReference usersCollection =
       Firestore.instance.collection("users");
-  final CollectionReference messagesCollection =
-      Firestore.instance.collection('messages');
 
   //set user data when signing up
   Future setUserData(String email) async {
@@ -78,7 +74,8 @@ class DatabaseService {
       bool movies,
       bool sports,
       bool writing,
-      bool drinking) async {
+      bool drinking
+      ) async {
     return await usersCollection.document(uid).updateData({
       'nickname': nickname,
       'location': location,
@@ -124,10 +121,10 @@ class DatabaseService {
       highAge: snapshot.data['highAge'],
       lowAge: snapshot.data['lowAge'],
       bed: snapshot.data['bed'],
-      reviews: snapshot.data['reviews'],
-      foreverEat: snapshot.data['foreverEat'],
-      bestForLast: snapshot.data['bestForLast'],
-      aliens: snapshot.data['aliens'],
+        reviews: snapshot.data['reviews'],
+        foreverEat: snapshot.data['foreverEat'],
+        bestForLast: snapshot.data['bestForLast'],
+        aliens: snapshot.data['aliens'],
       furniture: snapshot.data['furniture'],
       beachOrMountain: snapshot.data['beachOrMountain'],
       takeOutFood: snapshot.data['takeOutFood'],
@@ -165,10 +162,10 @@ class DatabaseService {
 
   //set and update preferences to filter out matches
   Future updatePreference(
-    double lowValue,
-    double highValue,
-    String genderPreference,
-  ) async {
+      double lowValue,
+      double highValue,
+      String genderPreference,
+      ) async {
     return await usersCollection.document(uid).updateData({
       'lowAge': lowValue,
       'highAge': highValue,
@@ -178,12 +175,12 @@ class DatabaseService {
 
   //write answers to questions
   Future updateAnswers(
-    String bed,
-    String reviews,
-    String foreverEat,
-    String bestForLast,
-    String aliens,
-  ) async {
+      String bed,
+      String reviews,
+      String foreverEat,
+      String bestForLast,
+      String aliens,
+      ) async {
     return await usersCollection.document(uid).updateData({
       'bed': bed,
       'reviews': reviews,
@@ -196,106 +193,20 @@ class DatabaseService {
   //write answers to more questions
   //update this when you add more questions
   Future updateMoreAnswers(
-    String furniture,
-    String beachOrMountain,
-    String takeOutFood,
-    String desertedIsland,
-    String wedding,
-    String yourPlaceOrMine,
-  ) async {
+  String furniture,
+  String beachOrMountain,
+  String takeOutFood,
+  String desertedIsland,
+  String wedding,
+  String yourPlaceOrMine,
+      ) async {
     return await usersCollection.document(uid).updateData({
-      'furniture': furniture,
-      'beachOrMountain': beachOrMountain,
-      'takeoutFood': takeOutFood,
-      'desertedIsland': desertedIsland,
-      'wedding': wedding,
-      'yourPlaceOrMine': yourPlaceOrMine,
+      'furniture' : furniture,
+      'beachOrMountain' : beachOrMountain,
+      'takeOutFood' : takeOutFood,
+      'desertedIsland' : desertedIsland,
+      'wedding' : wedding,
+      'yourPlaceOrMine' : yourPlaceOrMine,
     });
-  }
-
-  Future createMatches(genderPreference, lowAge, highAge) async {
-    if (genderPreference == "Everyone") {
-      usersCollection
-          .where('age', isGreaterThanOrEqualTo: lowAge)
-          .where('age', isLessThanOrEqualTo: highAge)
-          .getDocuments()
-          .then((querySnapshot) {
-        querySnapshot.documents.forEach((document) {
-          if (document.documentID != uid) {
-            //concat and make into a string and push into chatIds array
-            String toID = document.documentID;
-            String chatId1 = '$uid - ${document.documentID}';
-            String chatId2 = '${document.documentID} - $uid';
-
-            //check messages documents, if it doesn't exist write to the db
-            messagesCollection.getDocuments().then((querySnapshot) {
-              querySnapshot.documents.forEach((document) {
-                if (chatId1 != document.documentID &&
-                    chatId2 != document.documentID) {
-                  messagesCollection.document(chatId1).setData({
-                    'fromID': uid,
-                    'toID': toID,
-                    'matched': false,
-                    'active': false,
-                    'matchedUsers': [uid, toID],
-                    'blur': 50,
-                  });
-                }
-              });
-            });
-          }
-        });
-      });
-    } else {
-      usersCollection
-          .where('age', isGreaterThanOrEqualTo: lowAge)
-          .where('age', isLessThanOrEqualTo: highAge)
-          .where('gender', isEqualTo: genderPreference)
-          .getDocuments()
-          .then((querySnapshot) {
-        querySnapshot.documents.forEach((document) {
-          if (document.documentID != uid) {
-            //concat and make into a string and push into chatIds array
-            String toID = document.documentID;
-            String chatId1 = '$uid - ${document.documentID}';
-            String chatId2 = '${document.documentID} - $uid';
-
-            //check messages documents, if it doesn't exist write to the db
-            messagesCollection
-                .where('matched', isEqualTo: false)
-//                .where('active', isEqualTo: false)
-                .getDocuments()
-                .then((querySnapshot) {
-              querySnapshot.documents.forEach((document) {
-                if (chatId1 != document.documentID &&
-                    chatId2 != document.documentID) {
-                  messagesCollection.document(chatId1).setData({
-                    'fromID': uid,
-                    'toID': toID,
-                    'matched': false,
-                    'active': false,
-                    'matchedUsers': [uid, toID],
-                    'blur': 50,
-                  });
-                }
-              });
-            });
-          }
-        });
-      });
-    }
-  }
-
-  Future deleteMatches() async {
-    messagesCollection
-        .where('matchedUsers', arrayContains: uid)
-        .where('matched', isEqualTo: false)
-        .where('active', isEqualTo: false)
-        .getDocuments()
-        .then((querySnapshot) => querySnapshot.documents.forEach((document) {
-              print(document.documentID);
-              document.reference.delete();
-            }))
-        .catchError((error) => {print('Could not delete matches: $error')});
   }
 }

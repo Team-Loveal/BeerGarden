@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:lovealapp/models/user.dart';
@@ -7,27 +8,48 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:provider/provider.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
+import 'navigationHome.dart';
+
 class MoreQuestions extends StatefulWidget {
   @override
   _MoreQuestionsState createState() => _MoreQuestionsState();
 }
 
 class _MoreQuestionsState extends State<MoreQuestions> {
+  Map doc = {};
   String furniture;
   String beachOrMountain;
   String takeOutFood;
   String desertedIsland;
   String wedding;
   String yourPlaceOrMine;
+  String bed;
+  String reviews;
+  String foreverEat;
+  String bestForLast;
+  String aliens;
+
+  //for back to MyProfile()
+  int profileIndex = 2;
 
   @override
   Widget build(BuildContext context) {
+    doc = ModalRoute.of(context).settings.arguments;
     final user = Provider.of<User>(context);
-    return StreamBuilder<UserData>(
-        stream: DatabaseService(uid: user.uid).userData,
-      builder: (context, snapshot) {
-    if (snapshot.hasData) {
-      UserData userData = snapshot.data;
+
+    //Setting the default values
+        furniture = doc['furniture'];
+        beachOrMountain = doc['beachOrMountain'];
+        takeOutFood = doc['takeOutFood'];
+        desertedIsland = doc['desertedIsland'];
+        wedding = doc['wedding'];
+        yourPlaceOrMine = doc['yourPlaceOrMine'];
+    bed = doc['bed'];
+    reviews = doc['reviews'];
+    foreverEat = doc['foreverEat'];
+    bestForLast = doc['bestForLast'];
+    aliens = doc['aliens'];
+
       return Scaffold(
         appBar: AppBar(
           backgroundColor: Hexcolor("#8CC63E"),
@@ -68,7 +90,7 @@ class _MoreQuestionsState extends State<MoreQuestions> {
                           Padding(
                             padding: const EdgeInsets.only(bottom: 20),
                             child: Text(
-                                "Answer some more questions about yourself. The more information you provide, the more likely someone will chat you up!"),
+                                "Answer some more questions about yourself or edit your answers. The more information you provide, the more likely someone will chat you up!"),
                           ),
                           FormBuilder(
                             child: Column(
@@ -81,13 +103,13 @@ class _MoreQuestionsState extends State<MoreQuestions> {
                                 TextFormField(
                                   cursorWidth: 3,
                                   onChanged: (val) {
-                                    if (val != userData.furniture) {
-                                      setState(() => furniture = val);
+                                    if (val != doc['furniture']) {
+                                      setState(() => doc['furniture'] = val);
                                     } else {
-                                      furniture = userData.furniture;
+                                      doc['furniture'] = doc['furniture'];
                                     }
                                   },
-                                  initialValue: userData.furniture,
+                                  initialValue: doc['furniture'],
                                   autofocus: true,
                                   keyboardType: TextInputType.text,
                                 ),
@@ -96,61 +118,49 @@ class _MoreQuestionsState extends State<MoreQuestions> {
                                   'Would you rather have a home in the beach or the mountains?',
                                   style: TextStyle(fontSize: 15.0),
                                 ),
-                                ListTile(
+                            RadioListTile(
                                   title: const Text('🏖Beach'),
-                                  leading: Radio(
-                                    value: '🏖Beach',
+                                    value:'🏖Beach',
                                     groupValue: beachOrMountain,
                                     onChanged: (val) {
+                                      doc['beachOrMountain'] = val;
                                       setState(() {
-                                        beachOrMountain = val;
                                       });
                                     },
                                   ),
-                                ),
-                                ListTile(
+                                RadioListTile(
                                   title: const Text('🏔Mountains'),
-                                  leading: Radio(
-                                    value: '🏔Mountains',
-                                    groupValue: beachOrMountain,
-                                    onChanged: (val) {
-                                      setState(() {
-                                        print(val);
-                                        beachOrMountain = val;
-                                      });
-                                    },
-                                  ),
+                                  value: '🏔Mountains',
+                                  groupValue: beachOrMountain,
+                                  onChanged: (val) {
+                                    doc['beachOrMountain'] = val;
+                                    setState(() {
+                                    });
+                                  },
                                 ),
-                                SizedBox(height: 20.0),
                                 SizedBox(height: 20.0),
                                 Text(
                                     '🍱When you get take-out food do you eat out of the container or transfer the food to dishes?'),
                                 SizedBox(height: 20.0),
-                                ListTile(
+                                RadioListTile(
                                   title: const Text('Eat out of the container'),
-                                  leading: Radio(
-                                    value: 'Eat out of the container',
-                                    groupValue: takeOutFood,
-                                    onChanged: (val) {
-                                      setState(() {
-                                        print(val);
-                                        takeOutFood = val;
-                                      });
-                                    },
-                                  ),
+                                  value:'Eat out of the container',
+                                  groupValue: takeOutFood,
+                                  onChanged: (val) {
+                                    doc['takeOutFood'] = val;
+                                    setState(() {
+                                    });
+                                  },
                                 ),
-                                ListTile(
-                                  title: const Text("Transfer the food"),
-                                  leading: Radio(
-                                    value: "Transfer the food",
-                                    groupValue: takeOutFood,
-                                    onChanged: (val) {
-                                      setState(() {
-                                        print(val);
-                                        takeOutFood = val;
-                                      });
-                                    },
-                                  ),
+                                RadioListTile(
+                                  title: const Text('Transfer the food'),
+                                  value: 'Transfer the food',
+                                  groupValue: takeOutFood,
+                                  onChanged: (val) {
+                                    doc['takeOutFood'] = val;
+                                    setState(() {
+                                    });
+                                  },
                                 ),
                                 SizedBox(height: 20.0),
                                 Text(
@@ -158,47 +168,141 @@ class _MoreQuestionsState extends State<MoreQuestions> {
                                 TextFormField(
                                   cursorWidth: 3,
                                   onChanged: (val) {
-                                    setState(() => desertedIsland = val);
+                                    if (val != doc['desertedIsland']) {
+                                      setState(() => doc['desertedIsland'] = val);
+                                    } else {
+                                      doc['desertedIsland'] = doc['desertedIsland'];
+                                    }
                                   },
+                                  initialValue: doc['desertedIsland'],
                                   keyboardType: TextInputType.text,
                                 ),
                                 SizedBox(height: 20.0),
                                 Text(
                                     "💒If you were to choose between a glamorous wedding or a small ceremony at the city hall, which would you choose?"),
                                 SizedBox(height: 20.0),
-                                ListTile(
+                                RadioListTile(
                                   title: const Text('Glamorous wedding'),
-                                  leading: Radio(
-                                    value: 'Glamorous wedding',
-                                    groupValue: wedding,
-                                    onChanged: (val) {
-                                      setState(() {
-                                        print(val);
-                                        wedding = val;
-                                      });
-                                    },
-                                  ),
+                                  value:'Glamorous wedding',
+                                  groupValue: wedding,
+                                  onChanged: (val) {
+                                    doc['wedding'] = val;
+                                    setState(() {
+                                    });
+                                  },
                                 ),
-                                ListTile(
-                                  title: const Text("Small ceremony"),
-                                  leading: Radio(
-                                    value: "Small ceremony",
-                                    groupValue: wedding,
-                                    onChanged: (val) {
-                                      setState(() {
-                                        print(val);
-                                        wedding = val;
-                                      });
-                                    },
-                                  ),
+                                RadioListTile(
+                                  title: const Text('Small ceremony'),
+                                  value: 'Small ceremony',
+                                  groupValue: wedding,
+                                  onChanged: (val) {
+                                    doc['wedding'] = val;
+                                    setState(() {
+                                    });
+                                  },
                                 ),
                                 SizedBox(height: 20.0),
                                 Text("🏡Your place or mine?"),
                                 TextFormField(
                                   cursorWidth: 3,
                                   onChanged: (val) {
-                                    setState(() => yourPlaceOrMine = val);
+                                    if (val != doc['yourPlaceOrMine']) {
+                                      setState(() => doc['yourPlaceOrMine'] = val);
+                                    } else {
+                                      doc['yourPlaceOrMine'] = doc['yourPlaceOrMine'];
+                                    }
                                   },
+                                  initialValue: doc['yourPlaceOrMine'],
+                                  keyboardType: TextInputType.text,
+                                ),
+                                SizedBox(height: 20.0),
+                                Text(
+                                  '🛌Do you make your bed in the morning?',
+                                  style: TextStyle(fontSize: 15.0),
+                                ),
+                                TextFormField(
+                                  cursorWidth: 3,
+                                  onChanged: (val) {
+                                    if (val != doc['bed']) {
+                                      setState(() => doc['bed'] = val);
+                                    } else {
+                                      doc['bed'] = doc['bed'];
+                                    }
+                                  },
+                                  initialValue: doc['bed'],
+                                  autofocus: true,
+                                  keyboardType: TextInputType.text,
+                                ),
+                                SizedBox(height: 20.0),
+                                Text(
+                                  '🤓Do you read reviews, or just go with your gut?',
+                                  style: TextStyle(fontSize: 15.0),
+                                ),
+                                TextFormField(
+                                  cursorWidth: 3,
+                                  onChanged: (val) {
+                                    if (val != doc['reviews']) {
+                                      setState(() => doc['reviews'] = val);
+                                    } else {
+                                      doc['reviews'] = doc['reviews'];
+                                    }
+                                  },
+                                  initialValue: doc['reviews'],
+                                  autofocus: true,
+                                  keyboardType: TextInputType.text,
+                                ),
+                                SizedBox(height: 20.0),
+                                Text(
+                                  '🌮If you could only eat one thing for the rest of your life, what would it be?',
+                                  style: TextStyle(fontSize: 15.0),
+                                ),
+                                TextFormField(
+                                  cursorWidth: 3,
+                                  onChanged: (val) {
+                                    if (val != doc['foreverEat']) {
+                                      setState(() => doc['foreverEat'] = val);
+                                    } else {
+                                      doc['foreverEat'] = doc['foreverEat'];
+                                    }
+                                  },
+                                  initialValue: doc['foreverEat'],
+                                  autofocus: true,
+                                  keyboardType: TextInputType.text,
+                                ),
+                                SizedBox(height: 20.0),
+                                Text(
+                                  "🌭If you're eating a meal do you save the best thing for last or eat it first?",
+                                  style: TextStyle(fontSize: 15.0),
+                                ),
+                                TextFormField(
+                                  cursorWidth: 3,
+                                  onChanged: (val) {
+                                    if (val != doc['bestForLast']) {
+                                      setState(() => doc['bestForLast'] = val);
+                                    } else {
+                                      doc['bestForLast'] = doc['bestForLast'];
+                                    }
+                                  },
+                                  initialValue: doc['bestForLast'],
+                                  autofocus: true,
+                                  keyboardType: TextInputType.text,
+                                ),
+                                SizedBox(height: 20.0),
+                                Text(
+                                  '👽Do you believe in aliens?',
+                                  style: TextStyle(fontSize: 15.0),
+                                ),
+                                TextFormField(
+                                  cursorWidth: 3,
+                                  onChanged: (val) {
+                                    if (val != doc['aliens']) {
+                                      setState(() => doc['aliens'] = val);
+                                    } else {
+                                      doc['aliens'] = doc['aliens'];
+                                    }
+                                  },
+                                  initialValue: doc['aliens'],
+                                  autofocus: true,
                                   keyboardType: TextInputType.text,
                                 ),
                                 //BUTTON
@@ -209,16 +313,26 @@ class _MoreQuestionsState extends State<MoreQuestions> {
                                       //write answers into db
                                       await DatabaseService(uid: user.uid)
                                           .updateMoreAnswers(
-                                          furniture ?? "",
-                                          beachOrMountain ?? "",
-                                          takeOutFood ?? "",
-                                          desertedIsland ?? "",
-                                          wedding ?? "",
-                                          yourPlaceOrMine ?? ""
+                                          doc['furniture'] ?? "",
+                                          doc['beachOrMountain'] ?? "",
+                                          doc['takeOutFood'] ?? "",
+                                          doc['desertedIsland'] ?? "",
+                                          doc['wedding'] ?? "",
+                                          doc['yourPlaceOrMine'] ?? ""
                                       );
 
-                                      Navigator.of(context)
-                                          .pushNamed('/navigationHome');
+                                      await DatabaseService(uid: user.uid)
+                                          .updateAnswers(
+                                          doc['bed'] ?? "",
+                                          doc['reviews'] ?? "",
+                                          doc['foreverEat'] ?? "",
+                                          doc['bestForLast'] ?? "",
+                                          doc['aliens'] ?? ""
+                                      );
+
+                                      Navigator.push(context, MaterialPageRoute(
+                                          builder: (context) => NavigationHome(newIdx: profileIndex)
+                                      ));
                                     },
                                     textColor: Colors.white,
                                     color: Hexcolor("#8CC63E"),
@@ -227,7 +341,6 @@ class _MoreQuestionsState extends State<MoreQuestions> {
                                             50)),
                                     child: Row(
                                       children: <Widget>[
-                                        //change to just upload photo?
                                         Text('Save your answers ',
                                             style: TextStyle(
                                                 fontSize: 18,
@@ -250,9 +363,5 @@ class _MoreQuestionsState extends State<MoreQuestions> {
           ),
         ),
       );
-    } else {
-      return Loading();
-    }
-      });
   }
 }

@@ -38,6 +38,10 @@ class _EditProfileState extends State<EditProfile> {
   double _highValue = 100.00;
   String genderPreference;
 
+  //for back to MyProfile()
+  int profileIndex = 2;
+
+
   @override
   Widget build(BuildContext context) {
     data = ModalRoute.of(context).settings.arguments;
@@ -58,6 +62,8 @@ class _EditProfileState extends State<EditProfile> {
         stream: DatabaseService(uid: user.uid).userData,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
+            print('I AM LOW VALUE $_lowValue');
+            print('I AM HIGH VALUE $_highValue');
             UserData userData = snapshot.data;
             return Scaffold(
               appBar: AppBar(
@@ -204,7 +210,71 @@ class _EditProfileState extends State<EditProfile> {
                                                             age = newValue;
                                                           });
                                                         },
-                                                        items: ageList.map<
+                                                        items: <int>[
+                                                          18,
+                                                          19,
+                                                          20,
+                                                          21,
+                                                          22,
+                                                          23,
+                                                          24,
+                                                          25,
+                                                          26,
+                                                          27,
+                                                          28,
+                                                          29,
+                                                          30,
+                                                          31,
+                                                          32,
+                                                          33,
+                                                          34,
+                                                          35,
+                                                          36,
+                                                          37,
+                                                          38,
+                                                          39,
+                                                          40,
+                                                          41,
+                                                          42,
+                                                          43,
+                                                          44,
+                                                          45,
+                                                          46,
+                                                          47,
+                                                          48,
+                                                          49,
+                                                          50,
+                                                          51,
+                                                          52,
+                                                          53,
+                                                          54,
+                                                          55,
+                                                          56,
+                                                          57,
+                                                          58,
+                                                          59,
+                                                          60,
+                                                          61,
+                                                          62,
+                                                          63,
+                                                          64,
+                                                          65,
+                                                          66,
+                                                          67,
+                                                          68,
+                                                          69,
+                                                          70,
+                                                          71,
+                                                          72,
+                                                          73,
+                                                          74,
+                                                          75,
+                                                          76,
+                                                          77,
+                                                          78,
+                                                          79,
+                                                          80
+                                                        ].map<
                                                             DropdownMenuItem<
                                                                 int>>((int
                                                             value) {
@@ -423,9 +493,7 @@ class _EditProfileState extends State<EditProfile> {
                                     Center(
                                       child: DropdownButton<String>(
                                         isExpanded: true,
-                                        value: genderPreference != null
-                                            ? genderPreference
-                                            : userData.genderPreference,
+                                        value: genderPreference != null ? genderPreference : userData.genderPreference,
                                         iconSize: 24,
                                         onChanged: (String newValue) {
                                           setState(() {
@@ -482,9 +550,8 @@ class _EditProfileState extends State<EditProfile> {
                                           inactiveColor: Colors.black,
                                           activeColor: Colors.black,
                                           values: RangeValues(
-                                              //10.0, 100.0),
-                                              userData.lowAge.toDouble(),
-                                              userData.highAge.toDouble()),
+                                            //10.0, 100.0),
+                                            userData.lowAge.toDouble(), userData.highAge.toDouble()),
                                           onChanged: (_range) {
                                             setState(() => {
                                                   _lowValue = _range.start,
@@ -532,12 +599,10 @@ class _EditProfileState extends State<EditProfile> {
                                           //write preference into db
                                           await DatabaseService(uid: user.uid)
                                               .updatePreference(
-                                                  _lowValue ?? userData.lowAge,
-                                                  _highValue ??
-                                                      userData.highAge,
-                                                  genderPreference ??
-                                                      userData
-                                                          .genderPreference);
+                                            _lowValue ?? userData.lowAge,
+                                            _highValue ?? userData.highAge,
+                                            genderPreference ?? userData.genderPreference
+                                          );
 
                                           // recreate matches with new preference
                                           if (_lowValue != 18 ||
@@ -556,9 +621,15 @@ class _EditProfileState extends State<EditProfile> {
                                                     _highValue ??
                                                         userData.highAge);
 
-                                            Navigator.of(context)
-                                                .pushNamed('/navigationHome');
+//                                            Navigator.of(context)
+//                                                .pushNamed('/navigationHome');
                                           }
+                                          //try new routing
+                                          Navigator.push(context, MaterialPageRoute(
+                                            builder: (context) => NavigationHome(newIdx: profileIndex)
+                                          ));
+
+//                                          Navigator.of(context).pushNamed('/navigationHome');
                                         },
                                       ),
                                     )
