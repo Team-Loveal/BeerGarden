@@ -12,6 +12,9 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:path/path.dart' as Path;
 import 'dart:ui';
 
+//adding for transition animation
+import 'package:page_transition/page_transition.dart';
+
 class UploadPhoto extends StatefulWidget {
   @override
   _UploadPhotoState createState() => _UploadPhotoState();
@@ -202,8 +205,11 @@ class _UploadPhotoState extends State<UploadPhoto> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => UploadPhoto()),
+                    PageTransition(type: PageTransitionType.rotate, duration: Duration(seconds: 1), child: UploadPhoto()),
+//                  just keeping the original version
+//                  MaterialPageRoute(builder: (context) => UploadPhoto()),
                 );
+
               }),
           RaisedButton(
             color: Hexcolor("#8CC63E"),
@@ -216,7 +222,6 @@ class _UploadPhotoState extends State<UploadPhoto> {
             ),
             onPressed: () async {
               uploadFile();
-//              Navigator.of(context).pushNamed('/profilePreview');
               Navigator.push(
                   context,
                   MaterialPageRoute(

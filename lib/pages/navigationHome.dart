@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 class NavigationHome extends StatefulWidget {
   final int newIdx;
 
-  NavigationHome({Key key, @required this.newIdx}) : super(key: key);
+  NavigationHome({Key key, this.newIdx}) : super(key: key);
 
   @override
   _NavigationHomeState createState() => _NavigationHomeState(newIdx);
