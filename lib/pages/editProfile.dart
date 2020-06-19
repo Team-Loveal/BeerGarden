@@ -33,6 +33,7 @@ class _EditProfileState extends State<EditProfile> {
   bool drinking = false;
 
   //preferences
+  var ageList = new List<int>.generate(80, (i) => i + 1);
   double _lowValue = 18.00;
   double _highValue = 100.00;
   String genderPreference;
@@ -57,8 +58,6 @@ class _EditProfileState extends State<EditProfile> {
         stream: DatabaseService(uid: user.uid).userData,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            print('I AM LOW VALUE $_lowValue');
-            print('I AM HIGH VALUE $_highValue');
             UserData userData = snapshot.data;
             return Scaffold(
               appBar: AppBar(
@@ -205,71 +204,7 @@ class _EditProfileState extends State<EditProfile> {
                                                             age = newValue;
                                                           });
                                                         },
-                                                        items: <int>[
-                                                          18,
-                                                          19,
-                                                          20,
-                                                          21,
-                                                          22,
-                                                          23,
-                                                          24,
-                                                          25,
-                                                          26,
-                                                          27,
-                                                          28,
-                                                          29,
-                                                          30,
-                                                          31,
-                                                          32,
-                                                          33,
-                                                          34,
-                                                          35,
-                                                          36,
-                                                          37,
-                                                          38,
-                                                          39,
-                                                          40,
-                                                          41,
-                                                          42,
-                                                          43,
-                                                          44,
-                                                          45,
-                                                          46,
-                                                          47,
-                                                          48,
-                                                          49,
-                                                          50,
-                                                          51,
-                                                          52,
-                                                          53,
-                                                          54,
-                                                          55,
-                                                          56,
-                                                          57,
-                                                          58,
-                                                          59,
-                                                          60,
-                                                          61,
-                                                          62,
-                                                          63,
-                                                          64,
-                                                          65,
-                                                          66,
-                                                          67,
-                                                          68,
-                                                          69,
-                                                          70,
-                                                          71,
-                                                          72,
-                                                          73,
-                                                          74,
-                                                          75,
-                                                          76,
-                                                          77,
-                                                          78,
-                                                          79,
-                                                          80
-                                                        ].map<
+                                                        items: ageList.map<
                                                             DropdownMenuItem<
                                                                 int>>((int
                                                             value) {
@@ -604,8 +539,26 @@ class _EditProfileState extends State<EditProfile> {
                                                       userData
                                                           .genderPreference);
 
-                                          Navigator.of(context)
-                                              .pushNamed('/navigationHome');
+                                          // recreate matches with new preference
+                                          if (_lowValue != 18 ||
+                                              _highValue != 100 ||
+                                              userData.genderPreference !=
+                                                  genderPreference) {
+                                            await DatabaseService(uid: user.uid)
+                                                .deleteMatches();
+                                            await DatabaseService(uid: user.uid)
+                                                .createMatches(
+                                                    genderPreference ??
+                                                        userData
+                                                            .genderPreference,
+                                                    _lowValue ??
+                                                        userData.lowAge,
+                                                    _highValue ??
+                                                        userData.highAge);
+
+                                            Navigator.of(context)
+                                                .pushNamed('/navigationHome');
+                                          }
                                         },
                                       ),
                                     )
