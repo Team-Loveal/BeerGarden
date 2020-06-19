@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:lovealapp/models/user.dart';
-import 'package:lovealapp/pages/navigationHome.dart';
 import 'package:provider/provider.dart';
 import 'package:lovealapp/services/database.dart';
 import 'package:lovealapp/shared/loading.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:lovealapp/pages/navigationHome.dart';
 
 class EditProfile extends StatefulWidget {
   @override
@@ -62,6 +62,8 @@ class _EditProfileState extends State<EditProfile> {
         stream: DatabaseService(uid: user.uid).userData,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
+//            print('I AM LOW VALUE $_lowValue');
+//            print('I AM HIGH VALUE $_highValue');
             UserData userData = snapshot.data;
             return Scaffold(
               appBar: AppBar(
@@ -208,7 +210,71 @@ class _EditProfileState extends State<EditProfile> {
                                                             age = newValue;
                                                           });
                                                         },
-                                                        items: ageList.map<
+                                                        items: <int>[
+                                                          18,
+                                                          19,
+                                                          20,
+                                                          21,
+                                                          22,
+                                                          23,
+                                                          24,
+                                                          25,
+                                                          26,
+                                                          27,
+                                                          28,
+                                                          29,
+                                                          30,
+                                                          31,
+                                                          32,
+                                                          33,
+                                                          34,
+                                                          35,
+                                                          36,
+                                                          37,
+                                                          38,
+                                                          39,
+                                                          40,
+                                                          41,
+                                                          42,
+                                                          43,
+                                                          44,
+                                                          45,
+                                                          46,
+                                                          47,
+                                                          48,
+                                                          49,
+                                                          50,
+                                                          51,
+                                                          52,
+                                                          53,
+                                                          54,
+                                                          55,
+                                                          56,
+                                                          57,
+                                                          58,
+                                                          59,
+                                                          60,
+                                                          61,
+                                                          62,
+                                                          63,
+                                                          64,
+                                                          65,
+                                                          66,
+                                                          67,
+                                                          68,
+                                                          69,
+                                                          70,
+                                                          71,
+                                                          72,
+                                                          73,
+                                                          74,
+                                                          75,
+                                                          76,
+                                                          77,
+                                                          78,
+                                                          79,
+                                                          80
+                                                        ].map<
                                                             DropdownMenuItem<
                                                                 int>>((int
                                                             value) {

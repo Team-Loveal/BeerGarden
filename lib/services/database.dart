@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:lovealapp/models/user.dart';
 
 class DatabaseService {
@@ -8,8 +9,9 @@ class DatabaseService {
 
   final CollectionReference usersCollection =
       Firestore.instance.collection("users");
+
   final CollectionReference messagesCollection =
-      Firestore.instance.collection('messages');
+      Firestore.instance.collection("messages");
 
   //set user data when signing up
   Future setUserData(String email) async {
@@ -204,7 +206,7 @@ class DatabaseService {
     return await usersCollection.document(uid).updateData({
       'furniture': furniture,
       'beachOrMountain': beachOrMountain,
-      'takeoutFood': takeOutFood,
+      'takeOutFood': takeOutFood,
       'desertedIsland': desertedIsland,
       'wedding': wedding,
       'yourPlaceOrMine': yourPlaceOrMine,
@@ -212,6 +214,9 @@ class DatabaseService {
   }
 
   Future createMatches(genderPreference, lowAge, highAge) async {
+    print(genderPreference);
+    print(lowAge);
+    print(highAge);
     if (genderPreference == "Everyone") {
       usersCollection
           .where('age', isGreaterThanOrEqualTo: lowAge)
@@ -224,7 +229,6 @@ class DatabaseService {
             String toID = document.documentID;
             String chatId1 = '$uid - ${document.documentID}';
             String chatId2 = '${document.documentID} - $uid';
-
             //check messages documents, if it doesn't exist write to the db
             messagesCollection.getDocuments().then((querySnapshot) {
               querySnapshot.documents.forEach((document) {
@@ -257,12 +261,15 @@ class DatabaseService {
             String toID = document.documentID;
             String chatId1 = '$uid - ${document.documentID}';
             String chatId2 = '${document.documentID} - $uid';
-
             //check messages documents, if it doesn't exist write to the db
-            messagesCollection.getDocuments().then((querySnapshot) {
+            messagesCollection
+                .where('matched', isEqualTo: false)
+                .getDocuments()
+                .then((querySnapshot) {
               querySnapshot.documents.forEach((document) {
                 if (chatId1 != document.documentID &&
                     chatId2 != document.documentID) {
+                  print(document.documentID);
                   messagesCollection.document(chatId1).setData({
                     'fromID': uid,
                     'toID': toID,

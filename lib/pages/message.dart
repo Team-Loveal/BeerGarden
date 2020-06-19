@@ -78,10 +78,11 @@ class _MessageState extends State<Message> {
         .document(chatRoomID)
         .get()
         .then((snapshot) => {
-              if (snapshot['active'] != null)
-                {activeChat = snapshot['active']}
-              else
-                {_activateChat(false), activeChat = false}
+          activeChat= snapshot['active']
+//              if (snapshot['active'] != null)
+//                {activeChat = snapshot['active']}
+//              else
+//                {_activateChat(false), activeChat = false}
             });
   }
 
