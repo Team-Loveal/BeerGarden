@@ -13,31 +13,14 @@ class Wrapper extends StatefulWidget {
 }
 
 class _WrapperState extends State<Wrapper> {
-  String isProfileCreated;
-
-  @override
-/*  void initState() {
-    super.initState();
-   final user = Provider.of<User>(context);
-
-    Firestore.instance.collection('users').document(user.uid).get().then((doc) {
-      setState(() {
-        isProfileCreated = doc['isProfileCreated'];
-      });
-    });
-  }*/
 
   Widget build(BuildContext context) {
     //receive user from provider stream
     final user = Provider.of<User>(context);
 
-    //final user = Provider.of<User>(context);
-   // print('5555555555555555555555555${isProfileCreated}');
     if (user == null) {
       return Welcome();
-    } else {
-
+    }
       return NavigationHome();
     }
-  }
 }

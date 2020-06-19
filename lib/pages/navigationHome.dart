@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:lovealapp/models/user.dart';
 import 'package:lovealapp/pages/match.dart';
@@ -18,6 +19,7 @@ class NavigationHome extends StatefulWidget {
 
 class _NavigationHomeState extends State<NavigationHome> {
   int newIdx;
+  bool isProfileCreated;
 
   _NavigationHomeState(this.newIdx);
 

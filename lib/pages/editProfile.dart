@@ -112,7 +112,7 @@ class _EditProfileState extends State<EditProfile> {
                                       child: CircleAvatar(
                                         radius: 60,
                                         backgroundImage:
-                                        NetworkImage(userData.imgUrl),
+                                        NetworkImage(data['imgUrl']),
                                       ),
                                     ),
                                   ),
@@ -559,6 +559,7 @@ class _EditProfileState extends State<EditProfile> {
                                         ),
                                       ],
                                     )),
+                                    //SAVE BUTTON
                                     Padding(
                                       padding: EdgeInsets.only(top: 20),
                                       child: RaisedButton(

@@ -72,7 +72,8 @@ class _MyProfileState extends State<MyProfile> {
                         color: Colors.orange,
                       ),
                       onPressed: () async {
-                        Navigator.pushReplacementNamed(context, '/editProfile', arguments: {
+                        Navigator.of(context).pushNamed('/editProfile', arguments: {
+                          'imgUrl': userData.imgUrl,
                           'nicknameEdit': userData.nickname,
                           'locationEdit': userData.location,
                           'occupationEdit': userData.occupation,
@@ -505,7 +506,6 @@ class _MyProfileState extends State<MyProfile> {
                         'bestForLast': userData.bestForLast,
                         'aliens': userData.aliens
                       }),
-                      //Navigator.of(context).pushNamed('/moreQuestions')
                       }),
                 ),
               ),
