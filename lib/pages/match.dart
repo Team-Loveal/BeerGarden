@@ -7,6 +7,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
+import 'createProfile.dart';
 import 'message.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:pimp_my_button/pimp_my_button.dart';
@@ -336,18 +337,18 @@ class _MatchState extends State<Match> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                        Text('🛌Do you make your bed in the morning?',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            )),
-                        SizedBox(height: 5),
-                        Text(
-                            userData.bed == ""
-                                ? "start a conversation and ask!"
-                                : userData.bed,
-                            style: TextStyle(fontSize: 16)),
-                      ]),
+                            Text('🛌Do you make your bed in the morning?',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            SizedBox(height: 5),
+                            Text(
+                                userData.bed == ""
+                                    ? "start a conversation and ask!"
+                                    : userData.bed,
+                                style: TextStyle(fontSize: 16)),
+                          ]),
                     ),
                     Container(
                       margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),

@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lovealapp/models/user.dart';
@@ -37,9 +38,97 @@ class _ProfilePreviewState extends State<ProfilePreview> {
           if (userData.imgUrl != null) {
             return Scaffold(
               floatingActionButton: FloatingActionButton.extended(
-                onPressed: () {
-                  DatabaseService(uid: user.uid).createMatches(userData.genderPreference,
-                      userData.lowAge, userData.highAge);
+                onPressed: () async {
+                  //Todo move this function to database.dart
+                  //Todo read preferences and filter out matches
+                  //Calling function to set that profile is completed
+                  //get potential matches for the user
+                  var genderPreference = userData.genderPreference;
+                  var lowAge = userData.lowAge;
+                  var highAge = userData.highAge;
+                  if (genderPreference == "Everyone") {
+                    Firestore.instance
+                        .collection("users")
+                        .where('age', isGreaterThanOrEqualTo: lowAge)
+                        .where('age', isLessThanOrEqualTo: highAge)
+                        .getDocuments()
+                        .then((querySnapshot) {
+                      querySnapshot.documents.forEach((document) {
+                        if (document.documentID != user.uid) {
+                          //concat and make into a string and push into chatIds array
+                          String toID = document.documentID;
+                          String chatId1 =
+                              '${user.uid} - ${document.documentID}';
+                          String chatId2 =
+                              '${document.documentID} - ${user.uid}';
+
+                          //check messages documents, if it doesn't exist write to the db
+                          Firestore.instance
+                              .collection("messages")
+                              .getDocuments()
+                              .then((querySnapshot) {
+                            querySnapshot.documents.forEach((document) {
+                              if (chatId1 != document.documentID &&
+                                  chatId2 != document.documentID) {
+                                Firestore.instance
+                                    .collection("messages")
+                                    .document(chatId1)
+                                    .setData({
+                                  'fromID': user.uid,
+                                  'toID': toID,
+                                  'matched': false,
+                                  'matchedUsers': [user.uid, toID],
+                                  'blur': 50,
+                                });
+                              }
+                            });
+                          });
+                        }
+                      });
+                    });
+                  } else {
+                    Firestore.instance
+                        .collection("users")
+                        .where('age', isGreaterThanOrEqualTo: lowAge)
+                        .where('age', isLessThanOrEqualTo: highAge)
+                        .where('gender', isEqualTo: genderPreference)
+                        .getDocuments()
+                        .then((querySnapshot) {
+                      querySnapshot.documents.forEach((document) {
+                        if (document.documentID != user.uid) {
+                          //concat and make into a string and push into chatIds array
+                          String toID = document.documentID;
+                          String chatId1 =
+                              '${user.uid} - ${document.documentID}';
+                          String chatId2 =
+                              '${document.documentID} - ${user.uid}';
+
+                          //check messages documents, if it doesn't exist write to the db
+                          Firestore.instance
+                              .collection("messages")
+                              .getDocuments()
+                              .then((querySnapshot) {
+                            querySnapshot.documents.forEach((document) {
+                              if (chatId1 != document.documentID &&
+                                  chatId2 != document.documentID) {
+                                Firestore.instance
+                                    .collection("messages")
+                                    .document(chatId1)
+                                    .setData({
+                                  'fromID': user.uid,
+                                  'toID': toID,
+                                  'matched': false,
+                                  'matchedUsers': [user.uid, toID],
+                                  'blur': 50,
+                                });
+                              }
+                            });
+                          });
+                        }
+                      });
+                    });
+                  }
+                  await DatabaseService(uid: user.uid).profileComplete(true);
                   Navigator.of(context).popUntil((route) => route.isFirst);
                 },
                 isExtended: true,

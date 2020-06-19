@@ -5,19 +5,15 @@ import 'package:provider/provider.dart';
 import 'package:lovealapp/pages/navigationHome.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-//listen for auth changes provided by stream declared in auth.dart
-
 class Wrapper extends StatefulWidget {
   @override
   _WrapperState createState() => _WrapperState();
 }
 
 class _WrapperState extends State<Wrapper> {
-
   Widget build(BuildContext context) {
     //receive user from provider stream
     final user = Provider.of<User>(context);
-
     if (user == null) {
       return Welcome();
     }

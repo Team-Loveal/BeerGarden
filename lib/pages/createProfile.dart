@@ -137,7 +137,8 @@ class _CreateProfileState extends State<CreateProfile> {
                                       MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
                                     Text('Age'),
-                                    DropdownButton<int>(
+                                    DropdownButtonFormField<int>(
+                                      validator: (value) => value == null ? 'Please enter your age' : null,
                                       value: age,
                                       iconSize: 24,
                                       onChanged: (int newValue) {
@@ -219,7 +220,8 @@ class _CreateProfileState extends State<CreateProfile> {
                                     Text(
                                       "Gender",
                                     ),
-                                    DropdownButton<String>(
+                                    DropdownButtonFormField<String>(
+                                      validator: (value) => value == null ? 'Please enter your gender' : null,
                                       value: gender,
                                       iconSize: 24,
                                       onChanged: (String newValue) {
@@ -405,7 +407,8 @@ class _CreateProfileState extends State<CreateProfile> {
                                   style: TextStyle(fontSize: 20.0),
                                 ),
                                 Center(
-                                  child: DropdownButton<String>(
+                                  child: DropdownButtonFormField<String>(
+                                    validator: (value) => value == null ? 'Please select your gender preference' : null,
                                     isExpanded: true,
                                     value: genderPreference,
                                     iconSize: 24,

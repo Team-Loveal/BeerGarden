@@ -144,6 +144,7 @@ class DatabaseService {
       desertedIsland: snapshot.data['desertedIsland'],
       wedding: snapshot.data['wedding'],
       yourPlaceOrMine: snapshot.data['yourPlaceOrMine'],
+      isProfileCreated: snapshot.data['isProfileCreated'],
     );
   }
 
