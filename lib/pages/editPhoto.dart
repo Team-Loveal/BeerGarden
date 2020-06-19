@@ -9,6 +9,7 @@ import 'package:lovealapp/models/user.dart';
 import 'package:provider/provider.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:path/path.dart' as Path;
+import 'package:lovealapp/pages/navigationHome.dart';
 
 class EditPhoto extends StatefulWidget {
   @override
@@ -35,6 +36,9 @@ class _EditPhotoState extends State<EditPhoto> {
       _image = File(image.path);
     });
   }
+
+  //route to MyProfile()
+  int profileIndex = 2;
 
   @override
   Widget build(BuildContext context) {
@@ -156,8 +160,9 @@ class _EditPhotoState extends State<EditPhoto> {
             ),
             onPressed: () async {
               uploadFile();
-              //somehow change this to route to editProfile page
-              Navigator.of(context).pushNamed('/navigationHome');
+              Navigator.push(context, MaterialPageRoute(
+                  builder: (context) => NavigationHome(newIdx: profileIndex)
+              ));
             },
           ),
         ],

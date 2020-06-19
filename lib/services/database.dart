@@ -213,7 +213,7 @@ class DatabaseService {
     return await usersCollection.document(uid).updateData({
       'furniture' : furniture,
       'beachOrMountain' : beachOrMountain,
-      'takeoutFood' : takeOutFood,
+      'takeOutFood' : takeOutFood,
       'desertedIsland' : desertedIsland,
       'wedding' : wedding,
       'yourPlaceOrMine' : yourPlaceOrMine,
