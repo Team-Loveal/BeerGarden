@@ -235,7 +235,7 @@ class _UploadPhotoState extends State<UploadPhoto> {
     final user = Provider.of<User>(context);
     await DatabaseService(uid: user.uid)
         .profileComplete(
-      isProfileCompleted,
+      isProfileCompleted ?? true,
     );
   }
 

@@ -100,7 +100,7 @@ class DatabaseService {
       bool isProfileCompleted
       ) async {
     return await usersCollection.document(uid).updateData({
-      'isProfileCreated': true,
+      'isProfileCreated': isProfileCompleted,
     });
   }
 
