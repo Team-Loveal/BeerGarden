@@ -5,6 +5,7 @@ import 'package:lovealapp/services/database.dart';
 import 'package:lovealapp/shared/loading.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:lovealapp/pages/navigationHome.dart';
 
 class EditProfile extends StatefulWidget {
   @override
@@ -62,8 +63,8 @@ class _EditProfileState extends State<EditProfile> {
         stream: DatabaseService(uid: user.uid).userData,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            print('I AM LOW VALUE $_lowValue');
-            print('I AM HIGH VALUE $_highValue');
+//            print('I AM LOW VALUE $_lowValue');
+//            print('I AM HIGH VALUE $_highValue');
             UserData userData = snapshot.data;
             return Scaffold(
               appBar: AppBar(
