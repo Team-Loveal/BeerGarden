@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:lovealapp/shared/loading.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:lovealapp/models/user.dart';
@@ -53,7 +54,10 @@ class _MessageState extends State<Message> {
   void initState() {
     super.initState();
     _getChatted();
+    _setBlur();
+  }
 
+  void _setBlur() {
     //get matchID and chatID from db
     Firestore.instance
         .collection('messages')
@@ -68,29 +72,31 @@ class _MessageState extends State<Message> {
   }
 
   // check if chatroom is active
-  void _getChatted() {
-    dbRef.collection('messages').document(chatRoomID).get().then((snapshot) => {
-          if (snapshot['active'] != null)
-            {activeChat = snapshot['active']}
-          else
-            {_activateChat(false), activeChat = false}
-        });
+  void _getChatted() async {
+    await dbRef
+        .collection('messages')
+        .document(chatRoomID)
+        .get()
+        .then((snapshot) => {
+          activeChat= snapshot['active']
+//              if (snapshot['active'] != null)
+//                {activeChat = snapshot['active']}
+//              else
+//                {_activateChat(false), activeChat = false}
+            });
   }
 
   // activate chatroom (a chatroom that has at least one message)
-  void _activateChat(bool) {
-    try {
-      dbRef
-          .collection('messages')
-          .document(chatRoomID)
-          .updateData({'active': bool});
-    } catch (err) {
-      print(err.toString());
-    }
+  void _activateChat(bool) async {
+    await dbRef
+        .collection('messages')
+        .document(chatRoomID)
+        .updateData({'active': bool}).catchError(
+            (err) => {print('Error activating chat: ${err.toString()}')});
   }
 
-  void _toggleUnread(DocumentSnapshot document) {
-    dbRef
+  void _toggleUnread(DocumentSnapshot document) async {
+    await dbRef
         .collection('messages')
         .document(chatRoomID)
         .collection('chatroom')
@@ -130,7 +136,7 @@ class _MessageState extends State<Message> {
     }
   }
 
-  void _onSendBeer() {
+  void _onSendBeer() async {
     // toggle chatted if first message
     if (!activeChat) {
       _activateChat(true);
@@ -160,6 +166,7 @@ class _MessageState extends State<Message> {
   @override
   Widget build(BuildContext context) {
     user = Provider.of<User>(context);
+
     return Scaffold(
         backgroundColor: Hexcolor("#F4AA33"),
         appBar: PreferredSize(
@@ -259,7 +266,7 @@ class _MessageState extends State<Message> {
                                 builder: (context, snapshot) {
                                   if (!snapshot.hasData) {
                                     return Center(
-                                      child: Text('No messages...'),
+                                      child: Loading(),
                                     );
                                   } else {
                                     return ClipRRect(
