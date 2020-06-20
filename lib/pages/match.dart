@@ -71,9 +71,9 @@ class _MatchState extends State<Match> {
   @override
   Widget build(BuildContext context) {
     print('helllllllp${isProfileCreated}');
-    if (isProfileCreated == false) {
-      return CreateProfile();
-    } else {
+   // if (isProfileCreated == false) {
+  //    return CreateProfile();
+   // } else {
       {
         final AuthService _auth = AuthService();
         final myUserData = Provider.of<UserData>(context);
@@ -710,6 +710,6 @@ class _MatchState extends State<Match> {
               }
             });
       }
-    }
+   // }
   }
 }
