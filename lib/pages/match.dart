@@ -570,8 +570,8 @@ class _MatchState extends State<Match> {
                                   Navigator.push(
                                     context,
                                     PageTransition(
-                                        type: PageTransitionType.rotate,
-                                        duration: Duration(seconds: 1),
+                                        type: PageTransitionType.rightToLeft,
+//                                        duration: Duration(seconds: 1),
                                         child: Message(
                                           chatRoomID: chatID,
                                           matchID: matchID,
