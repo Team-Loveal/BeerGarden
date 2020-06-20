@@ -1,7 +1,9 @@
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:lovealapp/models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'database.dart';
+import 'package:http/http.dart' as http;
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -106,6 +108,16 @@ class AuthService {
       print("Error logging with Google");
       return false;
     }
+  }
+
+  Future signInWithFacebook() async {
+    FacebookLogin facebookLogin = FacebookLogin();
+
+    final result = await facebookLogin.logIn(['email']);
+    final token = result.accessToken.token;
+    final graphResponse = await http.get(
+        'https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name,email&access_token=${token}');
+   // final profile = JSON.decode(graphResponse.body);
   }
 
   // reset password (NOT NEEDED?!?)
