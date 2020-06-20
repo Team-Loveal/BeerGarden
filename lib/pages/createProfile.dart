@@ -299,7 +299,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                             });
                                           },
                                           selectedColor: Colors.pink[400],
-//                                  checkmarkColor: Colors.white,
+//                                        checkmarkColor: Colors.white,
                                         ),
                                         FilterChip(
                                           label: Text('shopping'),
