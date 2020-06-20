@@ -1,14 +1,12 @@
 class User {
   final String uid;
   bool isEmailVerified = false;
-  final String creationTimeStamp;
-  final String lastSignInTimeStamp;
+
 
   User(
       {this.uid,
       this.isEmailVerified,
-      this.creationTimeStamp,
-      this.lastSignInTimeStamp});
+      });
 }
 
 class UserData {
@@ -29,6 +27,7 @@ class UserData {
   final bool sports;
   final bool writing;
   final bool drinking;
+  final bool isProfileCreated;
   final int matches;
   final String imgUrl;
   final String matchID;
@@ -66,6 +65,7 @@ class UserData {
     this.sports,
     this.writing,
     this.drinking,
+    this.isProfileCreated,
     this.matches,
     this.imgUrl,
     this.matchID,
