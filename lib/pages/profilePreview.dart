@@ -23,6 +23,13 @@ class _ProfilePreviewState extends State<ProfilePreview> {
 
   final File profileImg;
   bool loading = false;
+/*
+  void verifyCompletedProfile()async {
+    final user = Provider.of<User>(context, listen: false);
+    await DatabaseService(uid: user.uid)
+      .profileComplete(true);
+
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +44,10 @@ class _ProfilePreviewState extends State<ProfilePreview> {
           if (userData.imgUrl != null) {
             return Scaffold(
               floatingActionButton: FloatingActionButton.extended(
-                onPressed: () {
+                onPressed: () async {
+                   await DatabaseService(uid: user.uid)
+                        .profileComplete(true);
+                //  await verifyCompletedProfile();
                   DatabaseService(uid: user.uid).createMatches(userData.genderPreference,
                       userData.lowAge, userData.highAge);
                   Navigator.of(context).popUntil((route) => route.isFirst);

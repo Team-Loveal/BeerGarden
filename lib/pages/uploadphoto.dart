@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:path/path.dart' as Path;
 import 'dart:ui';
+import 'package:lovealapp/services/database.dart';
 
 //adding for transition animation
 import 'package:page_transition/page_transition.dart';
@@ -43,6 +44,7 @@ class _UploadPhotoState extends State<UploadPhoto> {
 
   //use for switch button
   bool isSwitched = false;
+
 
   @override
   Widget build(BuildContext context) {
@@ -233,6 +235,9 @@ class _UploadPhotoState extends State<UploadPhoto> {
       ),
     );
   }
+
+
+
 
   Future uploadFile() async {
     final user = Provider.of<User>(context, listen: false);
