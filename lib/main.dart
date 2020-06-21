@@ -20,6 +20,7 @@ import 'pages/forgotpassword.dart';
 import 'pages/createProfile.dart';
 import 'pages/editProfile.dart';
 import 'pages/loginFirstTime.dart';
+import 'pages/about.dart';
 import 'pages/questions.dart';
 
 //main function is the first function that fires when dart file starts
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
           initialRoute: '/',
           routes: {
             '/': (_) => Wrapper(),
+            '/about': (_) => About(),
             '/signup': (_) => SignUp(),
             '/login': (_) => Login(),
             '/forgotpassword': (_) => ForgotPassword(),

@@ -606,8 +606,8 @@ class _EditProfileState extends State<EditProfile> {
                                           );
 
                                           // recreate matches with new preference
-                                          if (_lowValue != 18 ||
-                                              _highValue != 100 ||
+                                          if (_lowValue != userData.lowAge ||
+                                              _highValue != userData.highAge ||
                                               userData.genderPreference !=
                                                   genderPreference) {
                                             await DatabaseService(uid: user.uid)

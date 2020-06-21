@@ -26,6 +26,17 @@ class _WelcomeState extends State<Welcome> {
             child: Center(
                 child: Column(
               children: <Widget>[
+                MaterialButton(
+                    child: Text('About',
+                        style: TextStyle(
+                            color: Colors.grey[900],
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15)),
+                    color: Colors.white,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                    onPressed: () =>
+                        {Navigator.of(context).pushNamed('/about')}),
                 Spacer(flex: 2),
                 Image(
                   image: AssetImage('images/logo.png'),
