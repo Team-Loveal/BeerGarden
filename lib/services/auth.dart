@@ -85,6 +85,7 @@ class AuthService {
       ));
       FirebaseUser user = result.user;
       print('google login userID: ${user.uid}');
+      print('google login user: ${user}');
       await DatabaseService(uid: user.uid).setUserData(account.email);
       return _userFromFirebaseUser(user);
     } catch (e) {
@@ -128,6 +129,8 @@ class AuthService {
             FacebookAuthProvider.getCredential(accessToken: token);
         AuthResult result = await _auth.signInWithCredential(credential);
         FirebaseUser user = result.user;
+        print('facebook login userID: ${user.uid}');
+        print('facebook login user: ${user}');
         await DatabaseService(uid: user.uid).setUserData(profile['email']);
         return _userFromFirebaseUser(user);
       }

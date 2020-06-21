@@ -11,6 +11,14 @@ Meet a new person everyday with both your photos blurred. As you build your new 
 
 Available NOW at Google Play store 👉 [BeerGarden](https://play.google.com/store/)
 
+### Here's a preview of the intro screen:
+
+![BeerGarden1](./images/30178.jpg)
+
+### This is a preview of the result screen:
+
+![BeerGarden2](./images/30179.jpg)
+
 
 ## Installation
 
