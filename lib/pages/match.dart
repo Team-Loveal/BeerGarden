@@ -23,6 +23,7 @@ class _MatchState extends State<Match> {
   String matchID;
   String chatID;
   int matches;
+  bool isProfileCreated;
 
   double sigmaX = 50;
   double sigmaY = 50;
@@ -36,6 +37,8 @@ class _MatchState extends State<Match> {
     Firestore.instance.collection('users').document(user.uid).get().then((doc) {
       //get values for the widget build
       setState(() {
+        /* isProfileCreated = doc['isProfileCreated'];
+        print("AAAAAAAAAAAA${isProfileCreated}");*/
         matchID = doc['matchID'];
         chatID = doc['chatID'];
         matches = doc['matches'];
@@ -557,7 +560,7 @@ class _MatchState extends State<Match> {
                                       .document(chatID)
                                       .updateData({'matched': true}),
 
-                              // just keep the original navigator
+                                  // just keep the original navigator
 //                                  Navigator.push(
 //                                      context,
 //                                      MaterialPageRoute(
@@ -570,8 +573,8 @@ class _MatchState extends State<Match> {
                                   Navigator.push(
                                     context,
                                     PageTransition(
-                                        type: PageTransitionType.rotate,
-                                        duration: Duration(seconds: 1),
+                                        type: PageTransitionType.rightToLeft,
+//                                        duration: Duration(seconds: 1),
                                         child: Message(
                                           chatRoomID: chatID,
                                           matchID: matchID,

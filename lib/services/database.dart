@@ -22,6 +22,7 @@ class DatabaseService {
       'gender': "",
       'occupation': "",
       'about': "",
+      'isProfileCreated': false,
     });
   }
 
@@ -97,6 +98,14 @@ class DatabaseService {
     });
   }
 
+  Future profileComplete(
+      bool isProfileCompleted
+      ) async {
+    return await usersCollection.document(uid).updateData({
+      'isProfileCreated': isProfileCompleted,
+    });
+  }
+
   //userData from snapshot
   UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
     return UserData(
@@ -107,6 +116,7 @@ class DatabaseService {
       age: snapshot.data['age'],
       gender: snapshot.data['gender'],
       occupation: snapshot.data['occupation'],
+      isProfileCreated: snapshot.data['isProfileCreated'],
       about: snapshot.data['about'],
       yodeling: snapshot.data['yodeling'],
       shopping: snapshot.data['shopping'],
@@ -268,7 +278,6 @@ class DatabaseService {
               querySnapshot.documents.forEach((document) {
                 if (chatId1 != document.documentID &&
                     chatId2 != document.documentID) {
-                  print(document.documentID);
                   messagesCollection.document(chatId1).setData({
                     'fromID': uid,
                     'toID': toID,

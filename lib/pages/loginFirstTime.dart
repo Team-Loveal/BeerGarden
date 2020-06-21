@@ -28,7 +28,7 @@ class _LoginFirstTimeState extends State<LoginFirstTime> {
     String trimmedPassword = password.trim();
 
     dynamic result =
-        await _auth.signIWithEmailAndPassword(trimmedEmail, trimmedPassword);
+        await _auth.signInWithEmailAndPassword(trimmedEmail, trimmedPassword);
 
     if (result == null) {
       setState(() {

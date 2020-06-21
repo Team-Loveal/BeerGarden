@@ -204,11 +204,13 @@ class _UploadPhotoState extends State<UploadPhoto> {
               onPressed: () {
                 Navigator.push(
                   context,
-                    PageTransition(type: PageTransitionType.rotate, duration: Duration(seconds: 1), child: UploadPhoto()),
+                  PageTransition(
+                      type: PageTransitionType.rotate,
+                      duration: Duration(seconds: 1),
+                      child: UploadPhoto()),
 //                  just keeping the original version
 //                  MaterialPageRoute(builder: (context) => UploadPhoto()),
                 );
-
               }),
           RaisedButton(
             color: Hexcolor("#8CC63E"),
@@ -220,11 +222,7 @@ class _UploadPhotoState extends State<UploadPhoto> {
               borderRadius: BorderRadius.circular(20),
             ),
             onPressed: () async {
-<<<<<<< HEAD
-              await uploadFile();
-=======
               uploadFile();
->>>>>>> c7c1553c2707650bf9c03a859f7f184512058be8
               Navigator.push(
                   context,
                   MaterialPageRoute(

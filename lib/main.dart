@@ -49,20 +49,20 @@ class MyApp extends StatelessWidget {
 
         // just keep the original code in case I break the code
         routes: {
-          '/': (_) => Wrapper(),
-//          '/signup': (_) => SignUp(),
-//          '/login': (_) => Login(),
-//          '/forgotpassword': (_) => ForgotPassword(),
-//          '/createProfile': (_) => CreateProfile(),
-//          '/uploadphoto': (_) => UploadPhoto(),
-//          '/editphoto': (_) => EditPhoto(),
-//          '/editProfile': (_) => EditProfile(),
+          '/': (_) => EditProfile(),
+          '/signup': (_) => SignUp(),
+          '/login': (_) => Login(),
+          '/forgotpassword': (_) => ForgotPassword(),
+          '/createProfile': (_) => CreateProfile(),
+          '/uploadphoto': (_) => UploadPhoto(),
+          '/editphoto': (_) => EditPhoto(),
+          '/editProfile': (_) => EditProfile(),
           '/navigationHome': (_) => NavigationHome(),
           '/myProfile': (_) => MyProfile(),
           '/setPreferences': (_) => SetPreferences(),
-//          '/loginFirstTime': (_) => LoginFirstTime(),
-//          '/questions': (_) => Questions(),
-//          '/moreQuestions': (_) => MoreQuestions(),
+          '/loginFirstTime': (_) => LoginFirstTime(),
+          '/questions': (_) => Questions(),
+          '/moreQuestions': (_) => MoreQuestions(),
         },
         // this is for animation. Feel free to change the animation.
         onGenerateRoute: (settings) {
