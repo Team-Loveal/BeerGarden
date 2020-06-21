@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:lovealapp/pages/navigationHome.dart';
 import 'package:lovealapp/shared/loading.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
@@ -9,6 +10,10 @@ import 'package:lovealapp/models/user.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:intl/intl.dart';
 import 'profile.dart';
+import 'messagesList.dart';
+
+//adding for transition animation
+import 'package:page_transition/page_transition.dart';
 
 class Message extends StatefulWidget {
   Message(
@@ -49,6 +54,9 @@ class _MessageState extends State<Message> {
   //for reading the contents of the input field and for clearing the field after the text message is sent
   final _textController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
+
+  // inorder to back to message list from message
+  int profileIndex = 1;
 
   @override
   void initState() {
@@ -176,7 +184,13 @@ class _MessageState extends State<Message> {
             backgroundColor: Hexcolor("#F4AA33"),
             leading: IconButton(
                 onPressed: () {
-                  Navigator.pop(context);
+                  // this is the original code
+//                  Navigator.pop(context); // takes back to the original page
+                  Navigator.push(
+                    context,
+                    PageTransition(
+                        child: NavigationHome(newIdx: profileIndex)),
+                  );
                 },
                 icon: Icon(MdiIcons.arrowLeft)),
             flexibleSpace: GestureDetector(

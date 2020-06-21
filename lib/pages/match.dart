@@ -11,6 +11,7 @@ import 'createProfile.dart';
 import 'message.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:pimp_my_button/pimp_my_button.dart';
+import 'package:lovealapp/pages/createProfile.dart';
 
 //adding for transition animation
 import 'package:page_transition/page_transition.dart';
@@ -24,6 +25,7 @@ class _MatchState extends State<Match> {
   String matchID;
   String chatID;
   int matches;
+  bool isProfileCreated;
 
   double sigmaX = 50;
   double sigmaY = 50;
@@ -37,6 +39,8 @@ class _MatchState extends State<Match> {
     Firestore.instance.collection('users').document(user.uid).get().then((doc) {
       //get values for the widget build
       setState(() {
+       /* isProfileCreated = doc['isProfileCreated'];
+        print("AAAAAAAAAAAA${isProfileCreated}");*/
         matchID = doc['matchID'];
         chatID = doc['chatID'];
         matches = doc['matches'];
@@ -82,11 +86,11 @@ class _MatchState extends State<Match> {
                 width: double.infinity,
                 decoration: BoxDecoration(
                     gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [Hexcolor("#FFF1BA"), Hexcolor("#F4AA33")],
-                  stops: [0.2, 0.7],
-                )),
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [Hexcolor("#FFF1BA"), Hexcolor("#F4AA33")],
+                      stops: [0.2, 0.7],
+                    )),
                 child: ListView(
                   children: <Widget>[
                     //TODAY'S MATCH
@@ -163,7 +167,7 @@ class _MatchState extends State<Match> {
                                             sigmaX: sigmaX, sigmaY: sigmaY),
                                         child: Container(
                                             color:
-                                                Colors.black.withOpacity(0))),
+                                            Colors.black.withOpacity(0))),
                                   )),
                             ],
                           ),
@@ -216,8 +220,8 @@ class _MatchState extends State<Match> {
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
-                                                  BorderRadius.circular(
-                                                      10.0)))),
+                                              BorderRadius.circular(
+                                                  10.0)))),
                                 if (userData.shopping)
                                   Container(
                                       margin: EdgeInsets.only(right: 10),
@@ -228,8 +232,8 @@ class _MatchState extends State<Match> {
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
-                                                  BorderRadius.circular(
-                                                      10.0)))),
+                                              BorderRadius.circular(
+                                                  10.0)))),
                                 if (userData.makingBalloonAnimals)
                                   Container(
                                       margin: EdgeInsets.only(right: 10),
@@ -240,8 +244,8 @@ class _MatchState extends State<Match> {
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
-                                                  BorderRadius.circular(
-                                                      10.0)))),
+                                              BorderRadius.circular(
+                                                  10.0)))),
                                 if (userData.cooking)
                                   Container(
                                       margin: EdgeInsets.only(right: 10),
@@ -252,8 +256,8 @@ class _MatchState extends State<Match> {
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
-                                                  BorderRadius.circular(
-                                                      10.0)))),
+                                              BorderRadius.circular(
+                                                  10.0)))),
                                 if (userData.painting)
                                   Container(
                                       margin: EdgeInsets.only(right: 10),
@@ -264,8 +268,8 @@ class _MatchState extends State<Match> {
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
-                                                  BorderRadius.circular(
-                                                      10.0)))),
+                                              BorderRadius.circular(
+                                                  10.0)))),
                                 if (userData.movies)
                                   Container(
                                       margin: EdgeInsets.only(right: 10),
@@ -276,8 +280,8 @@ class _MatchState extends State<Match> {
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
-                                                  BorderRadius.circular(
-                                                      10.0)))),
+                                              BorderRadius.circular(
+                                                  10.0)))),
                                 if (userData.sports)
                                   Container(
                                       margin: EdgeInsets.only(right: 10),
@@ -288,8 +292,8 @@ class _MatchState extends State<Match> {
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
-                                                  BorderRadius.circular(
-                                                      10.0)))),
+                                              BorderRadius.circular(
+                                                  10.0)))),
                                 if (userData.writing)
                                   Container(
                                       margin: EdgeInsets.only(right: 10),
@@ -300,8 +304,8 @@ class _MatchState extends State<Match> {
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
-                                                  BorderRadius.circular(
-                                                      10.0)))),
+                                              BorderRadius.circular(
+                                                  10.0)))),
                                 if (userData.drinking)
                                   Container(
                                       margin: EdgeInsets.only(right: 10),
@@ -312,8 +316,8 @@ class _MatchState extends State<Match> {
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
-                                                  BorderRadius.circular(
-                                                      10.0)))),
+                                              BorderRadius.circular(
+                                                  10.0)))),
                               ],
                             )
                           ]),
@@ -553,11 +557,11 @@ class _MatchState extends State<Match> {
                               borderRadius: BorderRadius.circular(20),
                             ),
                             onPressed: () => {
-                                  //set chatted to true in db
-                                  Firestore.instance
-                                      .collection("messages")
-                                      .document(chatID)
-                                      .updateData({'matched': true}),
+                              //set chatted to true in db
+                              Firestore.instance
+                                  .collection("messages")
+                                  .document(chatID)
+                                  .updateData({'matched': true}),
 
                               // just keep the original navigator
 //                                  Navigator.push(
@@ -572,8 +576,8 @@ class _MatchState extends State<Match> {
                                   Navigator.push(
                                     context,
                                     PageTransition(
-                                        type: PageTransitionType.rotate,
-                                        duration: Duration(seconds: 1),
+                                        type: PageTransitionType.rightToLeft,
+//                                        duration: Duration(seconds: 1),
                                         child: Message(
                                           chatRoomID: chatID,
                                           matchID: matchID,
@@ -596,11 +600,11 @@ class _MatchState extends State<Match> {
                 width: double.infinity,
                 decoration: BoxDecoration(
                     gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [Hexcolor("#FFF1BA"), Hexcolor("#F4AA33")],
-                  stops: [0.2, 0.7],
-                )),
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [Hexcolor("#FFF1BA"), Hexcolor("#F4AA33")],
+                      stops: [0.2, 0.7],
+                    )),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
@@ -613,7 +617,7 @@ class _MatchState extends State<Match> {
                           child: FloatingActionButton.extended(
                             shape: RoundedRectangleBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(16.0))),
+                                BorderRadius.all(Radius.circular(16.0))),
                             label: Text("Meet someone new today! 🍺",
                                 style: TextStyle(
                                   color: Colors.white,
@@ -630,47 +634,47 @@ class _MatchState extends State<Match> {
                               await Firestore.instance
                                   .collection("messages")
                                   .where('matchedUsers',
-                                      arrayContains: user.uid)
+                                  arrayContains: user.uid)
                                   .getDocuments()
                                   .then((data) =>
-                                      data.documents.forEach((doc) => {
-                                            if (!doc['matched'])
-                                              {
-                                                //if fromID is not yours
-                                                //set fromID to user.uid and toID to original fromID value
-                                                if (doc['fromID'] != user.uid)
-                                                  {
-                                                    //check doc['fromID'] gender is equal to my gender pref
-                                                    Firestore.instance
-                                                        .collection("messages")
-                                                        .document(
-                                                            doc.documentID)
-                                                        .updateData({
-                                                      'fromID': user.uid,
-                                                      'toID': doc['fromID']
-                                                    }),
-                                                    Firestore.instance
-                                                        .collection('users')
-                                                        .document(user.uid)
-                                                        .updateData({
-                                                      'matchID': doc['fromID'],
-                                                      'chatID': doc.documentID,
-                                                      'matches': matches,
-                                                    }),
-                                                  }
-                                                else
-                                                  {
-                                                    Firestore.instance
-                                                        .collection('users')
-                                                        .document(user.uid)
-                                                        .updateData({
-                                                      'matchID': doc['toID'],
-                                                      'chatID': doc.documentID,
-                                                      'matches': matches,
-                                                    }),
-                                                  }
-                                              }
-                                          }));
+                                  data.documents.forEach((doc) => {
+                                    if (!doc['matched'])
+                                      {
+                                        //if fromID is not yours
+                                        //set fromID to user.uid and toID to original fromID value
+                                        if (doc['fromID'] != user.uid)
+                                          {
+                                            //check doc['fromID'] gender is equal to my gender pref
+                                            Firestore.instance
+                                                .collection("messages")
+                                                .document(
+                                                doc.documentID)
+                                                .updateData({
+                                              'fromID': user.uid,
+                                              'toID': doc['fromID']
+                                            }),
+                                            Firestore.instance
+                                                .collection('users')
+                                                .document(user.uid)
+                                                .updateData({
+                                              'matchID': doc['fromID'],
+                                              'chatID': doc.documentID,
+                                              'matches': matches,
+                                            }),
+                                          }
+                                        else
+                                          {
+                                            Firestore.instance
+                                                .collection('users')
+                                                .document(user.uid)
+                                                .updateData({
+                                              'matchID': doc['toID'],
+                                              'chatID': doc.documentID,
+                                              'matches': matches,
+                                            }),
+                                          }
+                                      }
+                                  }));
                               //go to matched Profile page
                               Navigator.of(context)
                                   .pushNamed('/navigationHome');

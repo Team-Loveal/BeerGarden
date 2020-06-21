@@ -276,7 +276,6 @@ class DatabaseService {
               querySnapshot.documents.forEach((document) {
                 if (chatId1 != document.documentID &&
                     chatId2 != document.documentID) {
-                  print(document.documentID);
                   messagesCollection.document(chatId1).setData({
                     'fromID': uid,
                     'toID': toID,
