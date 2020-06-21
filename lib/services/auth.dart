@@ -84,6 +84,7 @@ class AuthService {
         accessToken: (await account.authentication).accessToken,
       ));
       FirebaseUser user = result.user;
+      print('google login userID: ${user.uid}');
       await DatabaseService(uid: user.uid).setUserData(account.email);
       return _userFromFirebaseUser(user);
     } catch (e) {
