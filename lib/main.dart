@@ -22,6 +22,7 @@ import 'pages/createProfile.dart';
 import 'pages/editProfile.dart';
 import 'pages/loginFirstTime.dart';
 import 'pages/questions.dart';
+import 'pages/about.dart';
 
 // for the page transtion
 import 'package:page_transition/page_transition.dart';
@@ -50,6 +51,7 @@ class MyApp extends StatelessWidget {
         // just keep the original code in case I break the code
         routes: {
           '/': (_) => Wrapper(),
+          '/about': (_) => About(),
           '/signup': (_) => SignUp(),
           '/login': (_) => Login(),
           '/forgotpassword': (_) => ForgotPassword(),
