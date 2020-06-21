@@ -55,7 +55,7 @@ class _QuestionsState extends State<Questions> {
                           padding: EdgeInsets.symmetric(vertical: 20.0),
                           child: Text("The more questions you answer about yourself, the more likely someone will buy you a drink🍺 You'll have a chance to answer more questions later too!"),
                         ),
-                        FormBuilder(
+                        Form(
                           key: _formKey,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -153,9 +153,6 @@ class _QuestionsState extends State<Questions> {
                                         bestForLast ?? "",
                                         aliens ?? "",
                                       );
-
-                                      await DatabaseService(uid: user.uid)
-                                          .questionsCompleted(true);
 
                                       //route to upload photo page
                                       Navigator.of(context)

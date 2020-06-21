@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:lovealapp/models/user.dart';
 
 class DatabaseService {
@@ -11,7 +10,7 @@ class DatabaseService {
       Firestore.instance.collection("users");
 
   final CollectionReference messagesCollection =
-  Firestore.instance.collection("messages");
+      Firestore.instance.collection("messages");
 
   //set user data when signing up
   Future setUserData(String email) async {
@@ -24,8 +23,6 @@ class DatabaseService {
       'occupation': "",
       'about': "",
       'isProfileCreated': false,
-      'questionsCompleted': false,
-      'photoUploaded': false,
     });
   }
 
@@ -81,8 +78,7 @@ class DatabaseService {
       bool movies,
       bool sports,
       bool writing,
-      bool drinking
-      ) async {
+      bool drinking) async {
     return await usersCollection.document(uid).updateData({
       'nickname': nickname,
       'location': location,
@@ -107,22 +103,6 @@ class DatabaseService {
       ) async {
     return await usersCollection.document(uid).updateData({
       'isProfileCreated': isProfileCompleted,
-    });
-  }
-
-  Future questionsCompleted(
-      bool questionsCompleted
-      ) async {
-    return await usersCollection.document(uid).updateData({
-      'questionsCompleted': questionsCompleted,
-    });
-  }
-
-  Future photoUploaded(
-      bool photoUploaded
-      ) async {
-    return await usersCollection.document(uid).updateData({
-      'photoUploaded': photoUploaded,
     });
   }
 
@@ -152,10 +132,10 @@ class DatabaseService {
       highAge: snapshot.data['highAge'],
       lowAge: snapshot.data['lowAge'],
       bed: snapshot.data['bed'],
-        reviews: snapshot.data['reviews'],
-        foreverEat: snapshot.data['foreverEat'],
-        bestForLast: snapshot.data['bestForLast'],
-        aliens: snapshot.data['aliens'],
+      reviews: snapshot.data['reviews'],
+      foreverEat: snapshot.data['foreverEat'],
+      bestForLast: snapshot.data['bestForLast'],
+      aliens: snapshot.data['aliens'],
       furniture: snapshot.data['furniture'],
       beachOrMountain: snapshot.data['beachOrMountain'],
       takeOutFood: snapshot.data['takeOutFood'],
@@ -163,8 +143,6 @@ class DatabaseService {
       wedding: snapshot.data['wedding'],
       yourPlaceOrMine: snapshot.data['yourPlaceOrMine'],
       isProfileCreated: snapshot.data['isProfileCreated'],
-      questionsCompleted: snapshot.data['questionsCompleted'],
-        photoUploaded: snapshot.data['photoUploaded'],
     );
   }
 
@@ -196,10 +174,10 @@ class DatabaseService {
 
   //set and update preferences to filter out matches
   Future updatePreference(
-      double lowValue,
-      double highValue,
-      String genderPreference,
-      ) async {
+    double lowValue,
+    double highValue,
+    String genderPreference,
+  ) async {
     return await usersCollection.document(uid).updateData({
       'lowAge': lowValue,
       'highAge': highValue,
@@ -209,12 +187,12 @@ class DatabaseService {
 
   //write answers to questions
   Future updateAnswers(
-      String bed,
-      String reviews,
-      String foreverEat,
-      String bestForLast,
-      String aliens,
-      ) async {
+    String bed,
+    String reviews,
+    String foreverEat,
+    String bestForLast,
+    String aliens,
+  ) async {
     return await usersCollection.document(uid).updateData({
       'bed': bed,
       'reviews': reviews,
@@ -227,22 +205,23 @@ class DatabaseService {
   //write answers to more questions
   //update this when you add more questions
   Future updateMoreAnswers(
-  String furniture,
-  String beachOrMountain,
-  String takeOutFood,
-  String desertedIsland,
-  String wedding,
-  String yourPlaceOrMine,
-      ) async {
+    String furniture,
+    String beachOrMountain,
+    String takeOutFood,
+    String desertedIsland,
+    String wedding,
+    String yourPlaceOrMine,
+  ) async {
     return await usersCollection.document(uid).updateData({
-      'furniture' : furniture,
-      'beachOrMountain' : beachOrMountain,
-      'takeOutFood' : takeOutFood,
-      'desertedIsland' : desertedIsland,
-      'wedding' : wedding,
-      'yourPlaceOrMine' : yourPlaceOrMine,
+      'furniture': furniture,
+      'beachOrMountain': beachOrMountain,
+      'takeOutFood': takeOutFood,
+      'desertedIsland': desertedIsland,
+      'wedding': wedding,
+      'yourPlaceOrMine': yourPlaceOrMine,
     });
   }
+
   Future createMatches(genderPreference, lowAge, highAge) async {
     print(genderPreference);
     print(lowAge);
@@ -292,7 +271,10 @@ class DatabaseService {
             String chatId1 = '$uid - ${document.documentID}';
             String chatId2 = '${document.documentID} - $uid';
             //check messages documents, if it doesn't exist write to the db
-            messagesCollection.where('matched', isEqualTo: false).getDocuments().then((querySnapshot) {
+            messagesCollection
+                .where('matched', isEqualTo: false)
+                .getDocuments()
+                .then((querySnapshot) {
               querySnapshot.documents.forEach((document) {
                 if (chatId1 != document.documentID &&
                     chatId2 != document.documentID) {
@@ -312,6 +294,7 @@ class DatabaseService {
       });
     }
   }
+
   Future deleteMatches() async {
     await messagesCollection
         .where('matchedUsers', arrayContains: uid)
@@ -319,17 +302,17 @@ class DatabaseService {
         .where('active', isEqualTo: false)
         .getDocuments()
         .then((querySnapshot) =>
-        querySnapshot.documents.forEach((document) async {
-          // delete all documents in subcollection first
-          await messagesCollection
-              .document(document.documentID)
-              .collection('chatroom')
-              .getDocuments()
-              .then((querySnapshot) => querySnapshot.documents
-              .forEach((document) => {document.reference.delete()}));
-          // then remove all documents in collection
-          document.reference.delete();
-        }))
+            querySnapshot.documents.forEach((document) async {
+              // delete all documents in subcollection first
+              await messagesCollection
+                  .document(document.documentID)
+                  .collection('chatroom')
+                  .getDocuments()
+                  .then((querySnapshot) => querySnapshot.documents
+                      .forEach((document) => {document.reference.delete()}));
+              // then remove all documents in collection
+              document.reference.delete();
+            }))
         .catchError((error) => {print('Could not delete matches: $error')});
   }
 }

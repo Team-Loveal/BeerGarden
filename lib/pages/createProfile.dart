@@ -507,9 +507,6 @@ class _CreateProfileState extends State<CreateProfile> {
                                           genderPreference,
                                         );
 
-                                        await DatabaseService(uid: user.uid)
-                                            .profileComplete(true);
-
                                         Navigator.of(context)
                                             .pushNamed('/questions');
                                       }

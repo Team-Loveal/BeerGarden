@@ -46,8 +46,6 @@ class UserData {
   final String genderPreference;
   final double highAge;
   final double lowAge;
-  final bool questionsCompleted;
-  final bool photoUploaded;
 
   UserData({
     this.uid,
@@ -86,8 +84,6 @@ class UserData {
     this.genderPreference,
     this.highAge,
     this.lowAge,
-    this.questionsCompleted,
-    this.photoUploaded,
   });
 }
 

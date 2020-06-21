@@ -308,68 +308,57 @@ class _MyProfileState extends State<MyProfile> {
               //ANSWERS
               Container(
                 margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                child: Wrap(
-                    children: <Widget>[
-                      Text('🛌Do you make your bed in the morning?',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          )),
-                      SizedBox(height: 5),
-                      Text(userData.bed ?? "fill it out!",
-                          style: TextStyle(fontSize: 16)),
-
-                    ]),
+                child: Wrap(children: <Widget>[
+                  Text('🛌Do you make your bed in the morning?',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      )),
+                  SizedBox(height: 5),
+                  Text(userData.bed ?? "fill it out!",
+                      style: TextStyle(fontSize: 16)),
+                ]),
               ),
               Container(
                 margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                child: Wrap(
-
-                    children: <Widget>[
-                      Text('🤓Do you read reviews, or just go with your gut?',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          )),
-                      SizedBox(height: 5),
-
-                      Text(userData.reviews ?? "fill it out!",
-                          style: TextStyle(fontSize: 16)),
-
-                    ]),
+                child: Wrap(children: <Widget>[
+                  Text('🤓Do you read reviews, or just go with your gut?',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      )),
+                  SizedBox(height: 5),
+                  Text(userData.reviews ?? "fill it out!",
+                      style: TextStyle(fontSize: 16)),
+                ]),
               ),
               Container(
                 margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                child: Wrap(
-                    children: <Widget>[
-
-                      Text('🌮If you could only eat one thing for the rest of your life, what would it be?',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          )),
-
-                      SizedBox(height: 5),
-
-                      Text(userData.foreverEat ?? "fill it out!",
-                          style: TextStyle(fontSize: 16)),
-
-                    ]),
+                child: Wrap(children: <Widget>[
+                  Text(
+                      '🌮If you could only eat one thing for the rest of your life, what would it be?',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      )),
+                  SizedBox(height: 5),
+                  Text(userData.foreverEat ?? "fill it out!",
+                      style: TextStyle(fontSize: 16)),
+                ]),
               ),
               Container(
                 margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                child: Wrap(
-                    children: <Widget>[
-                      Text("🌭If you're eating a meal do you save the best thing for last or eat it first?",
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          )),
-                      SizedBox(height: 5),
-
-                      Text(userData.bestForLast ?? "fill it out!",
-                          style: TextStyle(fontSize: 16)),
-                    ]),
+                child: Wrap(children: <Widget>[
+                  Text(
+                      "🌭If you're eating a meal do you save the best thing for last or eat it first?",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      )),
+                  SizedBox(height: 5),
+                  Text(userData.bestForLast ?? "fill it out!",
+                      style: TextStyle(fontSize: 16)),
+                ]),
               ),
               Container(
                 margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
@@ -383,7 +372,8 @@ class _MyProfileState extends State<MyProfile> {
                             fontWeight: FontWeight.bold,
                           )),
                       SizedBox(height: 5),
-                      Text(userData.aliens ?? "fill it out!", style: TextStyle(fontSize: 16))
+                      Text(userData.aliens ?? "fill it out!",
+                          style: TextStyle(fontSize: 16))
                     ]),
               ),
               Container(
@@ -392,13 +382,15 @@ class _MyProfileState extends State<MyProfile> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text('🚽If you were a piece of furniture, what piece of furniture would you be?',
+                      Text(
+                          '🚽If you were a piece of furniture, what piece of furniture would you be?',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           )),
                       SizedBox(height: 5),
-                      Text(userData.furniture ?? "fill it out!", style: TextStyle(fontSize: 16))
+                      Text(userData.furniture ?? "fill it out!",
+                          style: TextStyle(fontSize: 16))
                     ]),
               ),
               Container(
@@ -407,13 +399,15 @@ class _MyProfileState extends State<MyProfile> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text('Would you rather have a home in the beach or the mountains?',
+                      Text(
+                          'Would you rather have a home in the beach or the mountains?',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           )),
                       SizedBox(height: 5),
-                      Text(userData.beachOrMountain ?? "fill it out!", style: TextStyle(fontSize: 16))
+                      Text(userData.beachOrMountain ?? "fill it out!",
+                          style: TextStyle(fontSize: 16))
                     ]),
               ),
               Container(
@@ -422,13 +416,15 @@ class _MyProfileState extends State<MyProfile> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text('🍱When you get take-out food do you eat out of the container or transfer the food to dishes?',
+                      Text(
+                          '🍱When you get take-out food do you eat out of the container or transfer the food to dishes?',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           )),
                       SizedBox(height: 5),
-                      Text(userData.takeOutFood ?? "fill it out!", style: TextStyle(fontSize: 16))
+                      Text(userData.takeOutFood ?? "fill it out!",
+                          style: TextStyle(fontSize: 16))
                     ]),
               ),
               Container(
@@ -437,13 +433,15 @@ class _MyProfileState extends State<MyProfile> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text('🏝If you were deserted on an island what items would you bring with you?',
+                      Text(
+                          '🏝If you were deserted on an island what items would you bring with you?',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           )),
                       SizedBox(height: 5),
-                      Text(userData.desertedIsland ?? "fill it out!", style: TextStyle(fontSize: 16))
+                      Text(userData.desertedIsland ?? "fill it out!",
+                          style: TextStyle(fontSize: 16))
                     ]),
               ),
               Container(
@@ -452,13 +450,15 @@ class _MyProfileState extends State<MyProfile> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text('💒If you were to choose between a glamorous wedding or a small ceremony at the city hall, which would you choose?',
+                      Text(
+                          '💒If you were to choose between a glamorous wedding or a small ceremony at the city hall, which would you choose?',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           )),
                       SizedBox(height: 5),
-                      Text(userData.wedding ?? "fill it out!", style: TextStyle(fontSize: 16))
+                      Text(userData.wedding ?? "fill it out!",
+                          style: TextStyle(fontSize: 16))
                     ]),
               ),
               Container(
@@ -473,7 +473,8 @@ class _MyProfileState extends State<MyProfile> {
                             fontWeight: FontWeight.bold,
                           )),
                       SizedBox(height: 5),
-                      Text(userData.yourPlaceOrMine ?? "fill it out!", style: TextStyle(fontSize: 16))
+                      Text(userData.yourPlaceOrMine ?? "fill it out!",
+                          style: TextStyle(fontSize: 16))
                     ]),
               ),
               //ANSWER MORE QUESTIONS BTN

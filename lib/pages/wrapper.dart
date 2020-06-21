@@ -7,12 +7,13 @@ import 'package:lovealapp/services/database.dart';
 import 'package:lovealapp/shared/loading.dart';
 import 'package:provider/provider.dart';
 import 'package:lovealapp/pages/navigationHome.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'createProfile.dart';
+
 class Wrapper extends StatefulWidget {
   @override
   _WrapperState createState() => _WrapperState();
 }
+
 class _WrapperState extends State<Wrapper> {
   Widget build(BuildContext context) {
     //receive user from provider stream
@@ -25,21 +26,14 @@ class _WrapperState extends State<Wrapper> {
         builder: (context, snapshot) {
           UserData userData = snapshot.data;
           if (snapshot.hasData) {
-            print('HAS DATA');
-            if(userData.isProfileCreated == false) {
-              print('HAS DATA');
-              return CreateProfile();
-            } else if (!userData.questionsCompleted) {
-              return Questions();
-            } else if (!userData.photoUploaded) {
-              return UploadPhoto();
-            } else {
+            if (userData.isProfileCreated) {
               return NavigationHome();
+            } else {
+              return CreateProfile();
             }
           } else {
             return Loading();
           }
-        }
-    );
+        });
   }
 }
