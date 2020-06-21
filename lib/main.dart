@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:lovealapp/services/database.dart';
 
 //provide user data to Wrapper file
 import 'package:provider/provider.dart';

@@ -2,11 +2,10 @@ class User {
   final String uid;
   bool isEmailVerified = false;
 
-
-  User(
-      {this.uid,
-      this.isEmailVerified,
-      });
+  User({
+    this.uid,
+    this.isEmailVerified,
+  });
 }
 
 class UserData {
@@ -46,45 +45,46 @@ class UserData {
   final String genderPreference;
   final double highAge;
   final double lowAge;
+  final bool limitBlur;
 
-  UserData({
-    this.uid,
-    this.email,
-    this.nickname,
-    this.location,
-    this.age,
-    this.gender,
-    this.occupation,
-    this.about,
-    this.yodeling,
-    this.shopping,
-    this.makingBalloonAnimals,
-    this.cooking,
-    this.painting,
-    this.movies,
-    this.sports,
-    this.writing,
-    this.drinking,
-    this.isProfileCreated,
-    this.matches,
-    this.imgUrl,
-    this.matchID,
-    this.chatID,
-    this.bed,
-    this.reviews,
-    this.foreverEat,
-    this.bestForLast,
-    this.aliens,
-    this.furniture,
-    this.beachOrMountain,
-    this.takeOutFood,
-    this.desertedIsland,
-    this.wedding,
-    this.yourPlaceOrMine,
-    this.genderPreference,
-    this.highAge,
-    this.lowAge,
-  });
+  UserData(
+      {this.uid,
+      this.email,
+      this.nickname,
+      this.location,
+      this.age,
+      this.gender,
+      this.occupation,
+      this.about,
+      this.yodeling,
+      this.shopping,
+      this.makingBalloonAnimals,
+      this.cooking,
+      this.painting,
+      this.movies,
+      this.sports,
+      this.writing,
+      this.drinking,
+      this.isProfileCreated,
+      this.matches,
+      this.imgUrl,
+      this.matchID,
+      this.chatID,
+      this.bed,
+      this.reviews,
+      this.foreverEat,
+      this.bestForLast,
+      this.aliens,
+      this.furniture,
+      this.beachOrMountain,
+      this.takeOutFood,
+      this.desertedIsland,
+      this.wedding,
+      this.yourPlaceOrMine,
+      this.genderPreference,
+      this.highAge,
+      this.lowAge,
+      this.limitBlur});
 }
 
 class UserImg {

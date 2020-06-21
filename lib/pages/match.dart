@@ -7,7 +7,6 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
-import 'createProfile.dart';
 import 'message.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:pimp_my_button/pimp_my_button.dart';
@@ -25,6 +24,7 @@ class _MatchState extends State<Match> {
   String chatID;
   int matches;
   bool isProfileCreated;
+  bool limitBlur;
 
   double sigmaX = 50;
   double sigmaY = 50;
@@ -41,10 +41,13 @@ class _MatchState extends State<Match> {
         matchID = doc['matchID'];
         chatID = doc['chatID'];
         matches = doc['matches'];
+        limitBlur = doc['limitBlur'] ?? false;
       });
 
       //decrease blur of active messages if matches have been reset to zero and you are not a new user
-      if (doc['matches'] == 0 && doc['matchID'] != null) {
+      if (doc['matches'] == 0 && doc['matchID'] != null && !limitBlur) {
+        print(
+            'Should run once as true and then this should not print again $limitBlur');
         Firestore.instance
             .collection("messages")
             .where('fromID', isEqualTo: user.uid)
@@ -59,7 +62,8 @@ class _MatchState extends State<Match> {
             Firestore.instance
                 .collection("messages")
                 .document(documentID)
-                .updateData({'blur': blur});
+                .updateData({'blur': blur, 'limitBlur': true});
+            //TODO limitBlur to false again every day along with matches
           });
         });
       }
@@ -70,7 +74,7 @@ class _MatchState extends State<Match> {
   Widget build(BuildContext context) {
     final AuthService _auth = AuthService();
     final myUserData = Provider.of<UserData>(context);
-
+    print('Should be false once and then true $limitBlur');
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: matchID).userData,
         builder: (context, snapshot) {
