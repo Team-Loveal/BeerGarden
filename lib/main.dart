@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:lovealapp/services/database.dart';
 
 //provide user data to Wrapper file
 import 'package:provider/provider.dart';
@@ -34,7 +35,6 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    //Material App is a widget that has properties like title, theme etc.
     return StreamProvider<User>.value(
       value: AuthService().user,
       child: MaterialApp(
