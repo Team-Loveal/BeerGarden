@@ -70,7 +70,17 @@ class _LoginState extends State<Login> {
     }
 
     void facebookLogin() async {
-      // Todo
+      dynamic result = await AuthService().loginWithFacebook();
+
+      if (result == null) {
+        setState(() {
+          error = 'Could not sign in with those credentials';
+          loading = false;
+        });
+      } else {
+
+        Navigator.of(context).popUntil((route) => route.isFirst);
+      }
     }
 
     Widget _buildEmail() {
