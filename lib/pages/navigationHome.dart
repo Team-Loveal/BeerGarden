@@ -12,7 +12,7 @@ import 'package:lovealapp/pages/createProfile.dart';
 class NavigationHome extends StatefulWidget {
   final int newIdx;
 
-  NavigationHome({Key key,  this.newIdx}) : super(key: key);
+  NavigationHome({Key key, this.newIdx}) : super(key: key);
 
   @override
   _NavigationHomeState createState() => _NavigationHomeState(newIdx);

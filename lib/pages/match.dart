@@ -12,6 +12,9 @@ import 'message.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:pimp_my_button/pimp_my_button.dart';
 
+//adding for transition animation
+import 'package:page_transition/page_transition.dart';
+
 class Match extends StatefulWidget {
   @override
   _MatchState createState() => _MatchState();
@@ -70,6 +73,7 @@ class _MatchState extends State<Match> {
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: matchID).userData,
         builder: (context, snapshot) {
+          print('I AM MATCH ID $matchID');
           UserData userData = snapshot.data;
           if (snapshot.hasData && matches > 0) {
             return Scaffold(
@@ -554,15 +558,29 @@ class _MatchState extends State<Match> {
                                       .collection("messages")
                                       .document(chatID)
                                       .updateData({'matched': true}),
+
+                              // just keep the original navigator
+//                                  Navigator.push(
+//                                      context,
+//                                      MaterialPageRoute(
+//                                          builder: (context) => Message(
+//                                                chatRoomID: chatID,
+//                                                matchID: matchID,
+//                                                nickname: userData.nickname,
+//                                                imgUrl: userData.imgUrl,
+//                                              )))
                                   Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Message(
-                                                chatRoomID: chatID,
-                                                matchID: matchID,
-                                                nickname: userData.nickname,
-                                                imgUrl: userData.imgUrl,
-                                              )))
+                                    context,
+                                    PageTransition(
+                                        type: PageTransitionType.rotate,
+                                        duration: Duration(seconds: 1),
+                                        child: Message(
+                                          chatRoomID: chatID,
+                                          matchID: matchID,
+                                          nickname: userData.nickname,
+                                          imgUrl: userData.imgUrl,
+                                        )),
+                                  )
                                 }),
                       ),
                     ),

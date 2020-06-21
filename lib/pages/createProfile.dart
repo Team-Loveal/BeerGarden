@@ -52,489 +52,486 @@ class _CreateProfileState extends State<CreateProfile> {
     return loading
         ? Loading()
         : Scaffold(
-            backgroundColor: Hexcolor("#FFF6C2"),
-            body: SafeArea(
-              child: Stack(
-                children: <Widget>[
-                  //background gradient
-                  Container(
-                    height: double.infinity,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          Hexcolor('#FFF1BA'),
-                          Hexcolor('#F4AA33'),
-                        ],
-                        stops: [0.2, 0.7],
-                      ),
-                    ),
-                  ),
-                  Container(
-                    child: SingleChildScrollView(
-                      child: Padding(
-                          padding: const EdgeInsets.all(30),
-                          child: Form(
-                            key: _formKey,
-                            child: Column(
-                              children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: Text(
-                                    'Your Profile',
-                                    style: TextStyle(fontSize: 30.0),
-                                  ),
-                                ),
-                                TextFormField(
-                                  cursorWidth: 3,
-                                  maxLength: 20,
-                                  onChanged: (val) {
-                                    setState(() => nickname = val);
-                                  },
-                                  onSaved: (String value) {
-                                    //this block is used to run code when a user save the form
-                                  },
-                                  decoration: InputDecoration(
-                                    hintText:
-                                        'Choose a nickname to display to users',
-                                    labelStyle: TextStyle(
-                                      color: Colors.black,
-                                    ),
-                                    labelText: 'Nickname *',
-                                  ),
-                                  keyboardType: TextInputType.text,
-                                  validator: (value) {
-                                    if (value.isEmpty) {
-                                      return 'Please enter a nickname';
-                                    }
-                                    return null;
-                                  },
-                                ),
-                                TextFormField(
-                                  cursorWidth: 3,
-                                  onChanged: (val) {
-                                    setState(() => location = val);
-                                  },
-                                  decoration: InputDecoration(
-                                    hintText: 'Where do you live now?',
-                                    labelStyle: TextStyle(
-                                      color: Colors.black,
-                                    ),
-                                    labelText: 'Enter your Location *',
-                                  ),
-                                  keyboardType: TextInputType.text,
-                                  validator: (value) {
-                                    if (value.isEmpty) {
-                                      return 'Please enter your location';
-                                    }
-                                    return null;
-                                  },
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-                                    Text('Age'),
-                                    DropdownButtonFormField<int>(
-                                      validator: (value) => value == null ? 'Please enter your age' : null,
-                                      value: age,
-                                      iconSize: 24,
-                                      onChanged: (int newValue) {
-                                        setState(() {
-                                          age = newValue;
-                                        });
-                                      },
-                                      items: <int>[
-                                        18,
-                                        19,
-                                        20,
-                                        21,
-                                        22,
-                                        23,
-                                        24,
-                                        25,
-                                        26,
-                                        27,
-                                        28,
-                                        29,
-                                        30,
-                                        31,
-                                        32,
-                                        33,
-                                        34,
-                                        35,
-                                        36,
-                                        37,
-                                        38,
-                                        39,
-                                        40,
-                                        41,
-                                        42,
-                                        43,
-                                        44,
-                                        45,
-                                        46,
-                                        47,
-                                        48,
-                                        49,
-                                        50,
-                                        51,
-                                        52,
-                                        53,
-                                        54,
-                                        55,
-                                        56,
-                                        57,
-                                        58,
-                                        59,
-                                        60,
-                                        61,
-                                        62,
-                                        63,
-                                        64,
-                                        65,
-                                        66,
-                                        67,
-                                        68,
-                                        69,
-                                        70,
-                                        71,
-                                        72,
-                                        73,
-                                        74,
-                                        75,
-                                        76,
-                                        77,
-                                        78,
-                                        79,
-                                        80
-                                      ].map<DropdownMenuItem<int>>((int value) {
-                                        return DropdownMenuItem<int>(
-                                          value: value,
-                                          child: Text(value.toString()),
-                                        );
-                                      }).toList(),
-                                    ),
-                                    Text(
-                                      "Gender",
-                                    ),
-                                    DropdownButtonFormField<String>(
-                                      validator: (value) => value == null ? 'Please enter your gender' : null,
-                                      value: gender,
-                                      iconSize: 24,
-                                      onChanged: (String newValue) {
-                                        setState(() {
-                                          gender = newValue;
-                                        });
-                                      },
-                                      items: <String>[
-                                        'Female',
-                                        'Male',
-                                        'Rather not say'
-                                      ].map<DropdownMenuItem<String>>(
-                                          (String value) {
-                                        return DropdownMenuItem<String>(
-                                          value: value,
-                                          child: Text(value),
-                                        );
-                                      }).toList(),
-                                    ),
-                                  ],
-                                ),
-                                TextFormField(
-                                  onChanged: (val) {
-                                    setState(() => occupation = val);
-                                  },
-                                  decoration: InputDecoration(
-                                      hintText: 'Tell me your occupation',
-                                      labelStyle: TextStyle(
-                                        color: Colors.black,
-                                      ),
-                                      labelText: 'Occupation *'),
-                                  keyboardType: TextInputType.text,
-                                  validator: (value) {
-                                    if (value.isEmpty) {
-                                      return 'Please enter your occupation';
-                                    }
-                                    return null;
-                                  },
-                                ),
-                                TextFormField(
-                                  onChanged: (val) {
-                                    setState(() => about = val);
-                                  },
-                                  decoration: InputDecoration(
-                                      labelStyle: TextStyle(
-                                        color: Colors.black,
-                                      ),
-                                      labelText:
-                                          'Share something about yourself *'),
-                                  keyboardType: TextInputType.text,
-                                  validator: (value) {
-                                    if (value.isEmpty) {
-                                      return 'Please enter something about yourself';
-                                    }
-                                    return null;
-                                  },
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(30.0),
-                                  child: Text('What are your interests?',
-                                      style: TextStyle(fontSize: 20.0)),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 8),
-                                  child: Container(
-                                    child: Wrap(
-                                      alignment: WrapAlignment.center,
-                                      spacing: 5,
-                                      runSpacing: 3,
-                                      children: <Widget>[
-                                        FilterChip(
-                                          label: Text('yodeling'),
-                                          selected: yodeling,
-                                          onSelected: (isSelected) {
-                                            setState(() {
-                                              yodeling = isSelected;
-                                            });
-                                          },
-                                          selectedColor: Colors.pink[400],
-//                                  checkmarkColor: Colors.white,
-                                        ),
-                                        FilterChip(
-                                          label: Text('shopping'),
-                                          selected: shopping,
-                                          onSelected: (isSelected) {
-                                            setState(() {
-                                              shopping = isSelected;
-                                            });
-                                          },
-                                          selectedColor: Colors.pink[400],
-//                                  checkmarkColor: Colors.white,
-                                        ),
-                                        FilterChip(
-                                          label: Text('making balloon animals'),
-                                          selected: makingBalloonAnimals,
-                                          onSelected: (isSelected) {
-                                            setState(() {
-                                              makingBalloonAnimals = isSelected;
-                                            });
-                                          },
-                                          selectedColor: Colors.pink[400],
-                                          checkmarkColor: Colors.white,
-                                        ),
-                                        FilterChip(
-                                          label: Text('cooking'),
-                                          selected: cooking,
-                                          onSelected: (isSelected) {
-                                            setState(() {
-                                              cooking = isSelected;
-                                            });
-                                          },
-                                          selectedColor: Colors.pink[400],
-                                          checkmarkColor: Colors.white,
-                                        ),
-                                        FilterChip(
-                                          label: Text('painting'),
-                                          selected: painting,
-                                          onSelected: (isSelected) {
-                                            setState(() {
-                                              painting = isSelected;
-                                            });
-                                          },
-                                          selectedColor: Colors.pink[400],
-                                          checkmarkColor: Colors.white,
-                                        ),
-                                        FilterChip(
-                                          label: Text('writing'),
-                                          selected: writing,
-                                          onSelected: (isSelected) {
-                                            setState(() {
-                                              writing = isSelected;
-                                            });
-                                          },
-                                          selectedColor: Colors.pink[400],
-                                          checkmarkColor: Colors.white,
-                                        ),
-                                        FilterChip(
-                                          label: Text('sports'),
-                                          selected: sports,
-                                          onSelected: (isSelected) {
-                                            setState(() {
-                                              sports = isSelected;
-                                            });
-                                          },
-                                          selectedColor: Colors.pink[400],
-                                          checkmarkColor: Colors.white,
-                                        ),
-                                        FilterChip(
-                                          label: Text('movies'),
-                                          selected: movies,
-                                          onSelected: (isSelected) {
-                                            setState(() {
-                                              movies = isSelected;
-                                            });
-                                          },
-                                          selectedColor: Colors.pink[400],
-                                          checkmarkColor: Colors.white,
-                                        ),
-                                        FilterChip(
-                                          label: Text('drinking'),
-                                          selected: drinking,
-                                          onSelected: (isSelected) {
-                                            setState(() {
-                                              drinking = isSelected;
-                                            });
-                                          },
-                                          selectedColor: Colors.pink[400],
-                                          checkmarkColor: Colors.white,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(30.0),
-                                  child: Text(
-                                    'Your Preferences',
-                                    style: TextStyle(fontSize: 30.0),
-                                  ),
-                                ),
-                                Text(
-                                  "Show Me",
-                                  style: TextStyle(fontSize: 20.0),
-                                ),
-                                Center(
-                                  child: DropdownButtonFormField<String>(
-                                    validator: (value) => value == null ? 'Please select your gender preference' : null,
-                                    isExpanded: true,
-                                    value: genderPreference,
-                                    iconSize: 24,
-                                    onChanged: (String newValue) {
-                                      setState(() {
-                                        genderPreference = newValue;
-                                      });
-                                    },
-                                    items: <String>[
-                                      'Female',
-                                      'Male',
-                                      'Everyone'
-                                    ].map<DropdownMenuItem<String>>(
+      backgroundColor: Hexcolor("#FFF6C2"),
+      body: SafeArea(
+        child: Stack(
+          children: <Widget>[
+            //background gradient
+            Container(
+              height: double.infinity,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Hexcolor('#FFF1BA'),
+                    Hexcolor('#F4AA33'),
+                  ],
+                  stops: [0.2, 0.7],
+                ),
+              ),
+            ),
+            Container(
+              child: SingleChildScrollView(
+                child: Padding(
+                    padding: const EdgeInsets.all(30),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text(
+                              'Your Profile',
+                              style: TextStyle(fontSize: 30.0),
+                            ),
+                          ),
+                          TextFormField(
+                            cursorWidth: 3,
+                            maxLength: 20,
+                            onChanged: (val) {
+                              setState(() => nickname = val);
+                            },
+                            onSaved: (String value) {
+                              //this block is used to run code when a user save the form
+                            },
+                            decoration: InputDecoration(
+                              hintText:
+                              'Choose a nickname to display to users',
+                              labelStyle: TextStyle(
+                                color: Colors.black,
+                              ),
+                              labelText: 'Nickname *',
+                            ),
+                            keyboardType: TextInputType.text,
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return 'Please enter a nickname';
+                              }
+                              return null;
+                            },
+                          ),
+                          TextFormField(
+                            cursorWidth: 3,
+                            onChanged: (val) {
+                              setState(() => location = val);
+                            },
+                            decoration: InputDecoration(
+                              hintText: 'Where do you live now?',
+                              labelStyle: TextStyle(
+                                color: Colors.black,
+                              ),
+                              labelText: 'Enter your Location *',
+                            ),
+                            keyboardType: TextInputType.text,
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return 'Please enter your location';
+                              }
+                              return null;
+                            },
+                          ),
+                          Row(
+                            mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Text('Age'),
+                              DropdownButton<int>(
+                                value: age,
+                                iconSize: 24,
+                                onChanged: (int newValue) {
+                                  setState(() {
+                                    age = newValue;
+                                  });
+                                },
+                                items: <int>[
+                                  18,
+                                  19,
+                                  20,
+                                  21,
+                                  22,
+                                  23,
+                                  24,
+                                  25,
+                                  26,
+                                  27,
+                                  28,
+                                  29,
+                                  30,
+                                  31,
+                                  32,
+                                  33,
+                                  34,
+                                  35,
+                                  36,
+                                  37,
+                                  38,
+                                  39,
+                                  40,
+                                  41,
+                                  42,
+                                  43,
+                                  44,
+                                  45,
+                                  46,
+                                  47,
+                                  48,
+                                  49,
+                                  50,
+                                  51,
+                                  52,
+                                  53,
+                                  54,
+                                  55,
+                                  56,
+                                  57,
+                                  58,
+                                  59,
+                                  60,
+                                  61,
+                                  62,
+                                  63,
+                                  64,
+                                  65,
+                                  66,
+                                  67,
+                                  68,
+                                  69,
+                                  70,
+                                  71,
+                                  72,
+                                  73,
+                                  74,
+                                  75,
+                                  76,
+                                  77,
+                                  78,
+                                  79,
+                                  80
+                                ].map<DropdownMenuItem<int>>((int value) {
+                                  return DropdownMenuItem<int>(
+                                    value: value,
+                                    child: Text(value.toString()),
+                                  );
+                                }).toList(),
+                              ),
+                              Text(
+                                "Gender",
+                              ),
+                              DropdownButton<String>(
+                                value: gender,
+                                iconSize: 24,
+                                onChanged: (String newValue) {
+                                  setState(() {
+                                    gender = newValue;
+                                  });
+                                },
+                                items: <String>[
+                                  'Female',
+                                  'Male',
+                                  'Rather not say'
+                                ].map<DropdownMenuItem<String>>(
                                         (String value) {
                                       return DropdownMenuItem<String>(
                                         value: value,
-                                        child: Text(value,
-                                            style: TextStyle(fontSize: 20.0)),
+                                        child: Text(value),
                                       );
                                     }).toList(),
-                                  ),
+                              ),
+                            ],
+                          ),
+                          TextFormField(
+                            onChanged: (val) {
+                              setState(() => occupation = val);
+                            },
+                            decoration: InputDecoration(
+                                hintText: 'Tell me your occupation',
+                                labelStyle: TextStyle(
+                                  color: Colors.black,
                                 ),
-                                Container(
-                                    child: Column(
-                                  children: <Widget>[
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: <Widget>[
-                                        Padding(
-                                          padding: const EdgeInsets.all(30.0),
-                                          child: Text(
-                                            'Age Range',
-                                            style: TextStyle(fontSize: 20.0),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(30.0),
-                                          child: Text(
-                                            '${_lowValue.toInt().toString()} - ${_highValue.toInt().toString()}',
-                                            style: TextStyle(fontSize: 20.0),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    RangeSlider(
-                                      min: 18,
-                                      max: 100,
-                                      divisions: 82,
-                                      inactiveColor: Colors.black,
-                                      activeColor: Colors.black,
-                                      values:
-                                          RangeValues(_lowValue, _highValue),
-                                      onChanged: (_range) {
-                                        setState(() => {
-                                              _lowValue = _range.start,
-                                              _highValue = _range.end
-                                            });
-                                      },
-                                    ),
-                                  ],
-                                )),
-                                Container(
-                                  padding: EdgeInsets.fromLTRB(30, 10, 20, 0),
-                                  child: RaisedButton(
-                                    onPressed: () async {
-                                      // If the form is valid you can move on
-                                      if (_formKey.currentState.validate()) {
-                                        //write profile info into the db
-                                        await DatabaseService(uid: user.uid)
-                                            .updateUserData(
-                                          nickname,
-                                          location,
-                                          age,
-                                          gender,
-                                          occupation,
-                                          about,
-                                          yodeling,
-                                          shopping,
-                                          makingBalloonAnimals,
-                                          cooking,
-                                          painting,
-                                          movies,
-                                          sports,
-                                          writing,
-                                          drinking,
-                                        );
-                                        //write preference into db
-                                        await DatabaseService(uid: user.uid)
-                                            .updatePreference(
-                                          _lowValue,
-                                          _highValue,
-                                          genderPreference,
-                                        );
-
-                                        Navigator.of(context)
-                                            .pushNamed('/questions');
-                                      }
+                                labelText: 'Occupation *'),
+                            keyboardType: TextInputType.text,
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return 'Please enter your occupation';
+                              }
+                              return null;
+                            },
+                          ),
+                          TextFormField(
+                            onChanged: (val) {
+                              setState(() => about = val);
+                            },
+                            decoration: InputDecoration(
+                                labelStyle: TextStyle(
+                                  color: Colors.black,
+                                ),
+                                labelText:
+                                'Share something about yourself *'),
+                            keyboardType: TextInputType.text,
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return 'Please enter something about yourself';
+                              }
+                              return null;
+                            },
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(30.0),
+                            child: Text('What are your interests?',
+                                style: TextStyle(fontSize: 20.0)),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8),
+                            child: Container(
+                              child: Wrap(
+                                alignment: WrapAlignment.center,
+                                spacing: 5,
+                                runSpacing: 3,
+                                children: <Widget>[
+                                  FilterChip(
+                                    label: Text('yodeling'),
+                                    selected: yodeling,
+                                    onSelected: (isSelected) {
+                                      setState(() {
+                                        yodeling = isSelected;
+                                      });
                                     },
-                                    textColor: Colors.white,
-                                    color: Hexcolor("#215a00"),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(50)),
-                                    child: Row(
-                                      children: <Widget>[
-                                        Text('QUESTION TIME  ',
-                                            style: TextStyle(
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.bold)),
-                                        Icon(MdiIcons.arrowRight, size: 18)
-                                      ],
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                    ),
+                                    selectedColor: Colors.pink[400],
+//                                  checkmarkColor: Colors.white,
                                   ),
-                                )
-                              ],
+                                  FilterChip(
+                                    label: Text('shopping'),
+                                    selected: shopping,
+                                    onSelected: (isSelected) {
+                                      setState(() {
+                                        shopping = isSelected;
+                                      });
+                                    },
+                                    selectedColor: Colors.pink[400],
+//                                  checkmarkColor: Colors.white,
+                                  ),
+                                  FilterChip(
+                                    label: Text('making balloon animals'),
+                                    selected: makingBalloonAnimals,
+                                    onSelected: (isSelected) {
+                                      setState(() {
+                                        makingBalloonAnimals = isSelected;
+                                      });
+                                    },
+                                    selectedColor: Colors.pink[400],
+                                    checkmarkColor: Colors.white,
+                                  ),
+                                  FilterChip(
+                                    label: Text('cooking'),
+                                    selected: cooking,
+                                    onSelected: (isSelected) {
+                                      setState(() {
+                                        cooking = isSelected;
+                                      });
+                                    },
+                                    selectedColor: Colors.pink[400],
+                                    checkmarkColor: Colors.white,
+                                  ),
+                                  FilterChip(
+                                    label: Text('painting'),
+                                    selected: painting,
+                                    onSelected: (isSelected) {
+                                      setState(() {
+                                        painting = isSelected;
+                                      });
+                                    },
+                                    selectedColor: Colors.pink[400],
+                                    checkmarkColor: Colors.white,
+                                  ),
+                                  FilterChip(
+                                    label: Text('writing'),
+                                    selected: writing,
+                                    onSelected: (isSelected) {
+                                      setState(() {
+                                        writing = isSelected;
+                                      });
+                                    },
+                                    selectedColor: Colors.pink[400],
+                                    checkmarkColor: Colors.white,
+                                  ),
+                                  FilterChip(
+                                    label: Text('sports'),
+                                    selected: sports,
+                                    onSelected: (isSelected) {
+                                      setState(() {
+                                        sports = isSelected;
+                                      });
+                                    },
+                                    selectedColor: Colors.pink[400],
+                                    checkmarkColor: Colors.white,
+                                  ),
+                                  FilterChip(
+                                    label: Text('movies'),
+                                    selected: movies,
+                                    onSelected: (isSelected) {
+                                      setState(() {
+                                        movies = isSelected;
+                                      });
+                                    },
+                                    selectedColor: Colors.pink[400],
+                                    checkmarkColor: Colors.white,
+                                  ),
+                                  FilterChip(
+                                    label: Text('drinking'),
+                                    selected: drinking,
+                                    onSelected: (isSelected) {
+                                      setState(() {
+                                        drinking = isSelected;
+                                      });
+                                    },
+                                    selectedColor: Colors.pink[400],
+                                    checkmarkColor: Colors.white,
+                                  ),
+                                ],
+                              ),
                             ),
-                          )),
-                    ),
-                  ),
-                ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(30.0),
+                            child: Text(
+                              'Your Preferences',
+                              style: TextStyle(fontSize: 30.0),
+                            ),
+                          ),
+                          Text(
+                            "Show Me",
+                            style: TextStyle(fontSize: 20.0),
+                          ),
+                          Center(
+                            child: DropdownButton<String>(
+                              isExpanded: true,
+                              value: genderPreference,
+                              iconSize: 24,
+                              onChanged: (String newValue) {
+                                setState(() {
+                                  genderPreference = newValue;
+                                });
+                              },
+                              items: <String>[
+                                'Female',
+                                'Male',
+                                'Everyone'
+                              ].map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(value,
+                                          style: TextStyle(fontSize: 20.0)),
+                                    );
+                                  }).toList(),
+                            ),
+                          ),
+                          Container(
+                              child: Column(
+                                children: <Widget>[
+                                  Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: const EdgeInsets.all(30.0),
+                                        child: Text(
+                                          'Age Range',
+                                          style: TextStyle(fontSize: 20.0),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(30.0),
+                                        child: Text(
+                                          '${_lowValue.toInt().toString()} - ${_highValue.toInt().toString()}',
+                                          style: TextStyle(fontSize: 20.0),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  RangeSlider(
+                                    min: 18,
+                                    max: 100,
+                                    divisions: 82,
+                                    inactiveColor: Colors.black,
+                                    activeColor: Colors.black,
+                                    values:
+                                    RangeValues(_lowValue, _highValue),
+                                    onChanged: (_range) {
+                                      setState(() => {
+                                        _lowValue = _range.start,
+                                        _highValue = _range.end
+                                      });
+                                    },
+                                  ),
+                                ],
+                              )),
+                          Container(
+                            padding: EdgeInsets.fromLTRB(30, 10, 20, 0),
+                            child: RaisedButton(
+                              onPressed: () async {
+                                // If the form is valid you can move on
+                                if (_formKey.currentState.validate()) {
+                                  //write profile info into the db
+                                  await DatabaseService(uid: user.uid)
+                                      .updateUserData(
+                                    nickname,
+                                    location,
+                                    age,
+                                    gender,
+                                    occupation,
+                                    about,
+                                    yodeling,
+                                    shopping,
+                                    makingBalloonAnimals,
+                                    cooking,
+                                    painting,
+                                    movies,
+                                    sports,
+                                    writing,
+                                    drinking,
+                                  );
+                                  //write preference into db
+                                  await DatabaseService(uid: user.uid)
+                                      .updatePreference(
+                                    _lowValue,
+                                    _highValue,
+                                    genderPreference,
+                                  );
+
+                                  Navigator.of(context)
+                                      .pushNamed('/questions');
+                                }
+                              },
+                              textColor: Colors.white,
+                              color: Hexcolor("#215a00"),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                  BorderRadius.circular(50)),
+                              child: Row(
+                                children: <Widget>[
+                                  Text('QUESTION TIME  ',
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold)),
+                                  Icon(MdiIcons.arrowRight, size: 18)
+                                ],
+                                mainAxisAlignment:
+                                MainAxisAlignment.center,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    )),
               ),
             ),
-          );
+          ],
+        ),
+      ),
+    );
   }
 }
 
