@@ -4,7 +4,6 @@ import 'package:lovealapp/models/user.dart';
 import 'package:lovealapp/services/database.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class Questions extends StatefulWidget {
   @override
@@ -50,17 +49,24 @@ class _QuestionsState extends State<Questions> {
                     padding: const EdgeInsets.all(30),
                     child: Column(
                       children: <Widget>[
-                          Text('Questions', style:TextStyle(fontSize: 30.0),),
+                        Text(
+                          'Questions',
+                          style: TextStyle(fontSize: 30.0),
+                        ),
                         Padding(
                           padding: EdgeInsets.symmetric(vertical: 20.0),
-                          child: Text("The more questions you answer about yourself, the more likely someone will buy you a drink🍺 You'll have a chance to answer more questions later too!"),
+                          child: Text(
+                              "The more questions you answer about yourself, the more likely someone will buy you a drink🍺 You'll have a chance to answer more questions later too!"),
                         ),
                         Form(
                           key: _formKey,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Text('🛌Do you make your bed in the morning?', style: TextStyle(fontSize:15.0),),
+                              Text(
+                                '🛌Do you make your bed in the morning?',
+                                style: TextStyle(fontSize: 15.0),
+                              ),
                               TextFormField(
                                 cursorWidth: 3,
                                 onChanged: (val) {
@@ -75,7 +81,8 @@ class _QuestionsState extends State<Questions> {
                                 },
                               ),
                               SizedBox(height: 20.0),
-                              Text('🤓Do you read reviews, or just go with your gut?'),
+                              Text(
+                                  '🤓Do you read reviews, or just go with your gut?'),
                               TextFormField(
                                 cursorWidth: 3,
                                 onChanged: (val) {
@@ -90,7 +97,8 @@ class _QuestionsState extends State<Questions> {
                                 },
                               ),
                               SizedBox(height: 20.0),
-                              Text('🌮If you could only eat one thing for the rest of your life, what would it be?'),
+                              Text(
+                                  '🌮If you could only eat one thing for the rest of your life, what would it be?'),
                               TextFormField(
                                 cursorWidth: 3,
                                 onChanged: (val) {
@@ -105,7 +113,8 @@ class _QuestionsState extends State<Questions> {
                                 },
                               ),
                               SizedBox(height: 20.0),
-                              Text("🌭If you're eating a meal do you save the best thing for last or eat it first?"),
+                              Text(
+                                  "🌭If you're eating a meal do you save the best thing for last or eat it first?"),
                               TextFormField(
                                 cursorWidth: 3,
                                 onChanged: (val) {
@@ -149,7 +158,7 @@ class _QuestionsState extends State<Questions> {
                                           .updateAnswers(
                                         bed ?? "",
                                         reviews ?? "",
-                                        foreverEat ?? "" ,
+                                        foreverEat ?? "",
                                         bestForLast ?? "",
                                         aliens ?? "",
                                       );
