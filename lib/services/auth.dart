@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:lovealapp/models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -119,15 +118,14 @@ class AuthService {
       final signupResult = await facebookLogin.logIn(['email']);
       final token = signupResult.accessToken.token;
       final graphResponse = await http.get(
-          'https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name,email&access_token=${token}');
+          'https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name,email&access_token=$token');
       var profile = jsonDecode(graphResponse.body);
       var stringProfile = profile.toString();
-      print("This is the object: ${stringProfile}");
+      print("This is the object: $stringProfile");
       if (signupResult.status == FacebookLoginStatus.loggedIn) {
-        final credential = FacebookAuthProvider.getCredential(
-            accessToken: token);
-        AuthResult result =
-          await _auth.signInWithCredential(credential);
+        final credential =
+            FacebookAuthProvider.getCredential(accessToken: token);
+        AuthResult result = await _auth.signInWithCredential(credential);
         FirebaseUser user = result.user;
         await DatabaseService(uid: user.uid).setUserData(profile['email']);
         return _userFromFirebaseUser(user);
@@ -144,18 +142,12 @@ class AuthService {
 
       final signupResult = await facebookLogin.logIn(['email']);
       final token = signupResult.accessToken.token;
-     // final graphResponse = await http.get(
-     //     'https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name,email&access_token=${token}');
-     // var profile = jsonDecode(graphResponse.body);
-     // var stringProfile = profile.toString();
-     // print("This is the object: ${stringProfile}");
       if (signupResult.status == FacebookLoginStatus.loggedIn) {
-        final credential = FacebookAuthProvider.getCredential(
-            accessToken: token);
-        AuthResult result =
-        await _auth.signInWithCredential(credential);
+        final credential =
+            FacebookAuthProvider.getCredential(accessToken: token);
+        AuthResult result = await _auth.signInWithCredential(credential);
         FirebaseUser user = result.user;
-      //  await DatabaseService(uid: user.uid).setUserData(profile['email']);
+        //  await DatabaseService(uid: user.uid).setUserData(profile['email']);
         return _userFromFirebaseUser(user);
       }
     } catch (e) {
@@ -163,7 +155,6 @@ class AuthService {
       return false;
     }
   }
-
 
   // reset password (NOT NEEDED?!?)
   Future sendPasswordResetEmail(String email) async {

@@ -30,7 +30,7 @@ class _MessagesState extends State<Messages> {
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
-                        fontSize: 48.0)),
+                        fontSize: 38.0)),
               ),
             ),
             elevation: 0.0,
