@@ -54,9 +54,11 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 👻  [Jeff Bentley](https://github.com/jbentleyjp)
 
 
-<img src = "http://i.imgur.com/tXSoThF.png">
+// <img src = "http://i.imgur.com/tXSoThF.png">
 
 😸  [Garrett Chun](https://github.com/Kapakahi)
+
+[![alt text][1.1]][1]       [![alt text][1.2]][2]
 
 🌝  [Yuya Harada](https://github.com/yuya-h-29)
 
@@ -64,6 +66,10 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 🦄  [Yurika Namba](https://github.com/yurikanamba)
 
+[1.1]: http://i.imgur.com/wWzX9uB.png
+[1.2]: http://i.imgur.com/9I6NRUm.png
+[1]: http://www.twitter.com/KapakahiCoder
+[2]: http://www.github.com/Kapakahi
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
