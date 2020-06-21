@@ -472,6 +472,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                   padding: EdgeInsets.fromLTRB(30, 10, 20, 0),
                                   child: RaisedButton(
                                     onPressed: () async {
+                                      print('WHATTTTTTTTTT${user.uid}');
                                       // If the form is valid you can move on
                                       if (_formKey.currentState.validate()) {
                                         //write profile info into the db

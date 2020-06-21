@@ -133,7 +133,7 @@ class AuthService {
         return _userFromFirebaseUser(user);
       }
     } catch (e) {
-      print("Error logging with Facebook");
+      print("Error signing up  with Facebook");
       return false;
     }
   }
@@ -159,7 +159,7 @@ class AuthService {
         return _userFromFirebaseUser(user);
       }
     } catch (e) {
-      print("Error logging with Facebook");
+      print("Error logging in with Facebook");
       return false;
     }
   }
