@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:flutter/cupertino.dart';
-import 'dart:io';
 import 'dart:ui';
 
 class About extends StatefulWidget {
@@ -33,10 +32,10 @@ class _AboutState extends State<About> {
                     padding: const EdgeInsets.all(1.0),
                     child: Text("About BeerGarden",
                         style: TextStyle(
-                            fontSize: 40,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                            decoration: TextDecoration.none,
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                          decoration: TextDecoration.none,
                           fontFamily: 'NTR',
                         )),
                   ),
@@ -45,16 +44,14 @@ class _AboutState extends State<About> {
                     child: Text(
                       "BeerGarden is a new way to meet people and develop relationships in fun, beer themed environment. Users will be able to get one match a day, and decide based on the matches profile whether they wish to start a conversation or not.",
                       style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.black,
-                          decoration: TextDecoration.none,
+                        fontSize: 20,
+                        color: Colors.black,
+                        decoration: TextDecoration.none,
                         fontFamily: 'Alata',
                       ),
                     ),
                   ),
-                  Image(
-                      image: AssetImage('images/hedgedog.jpg')
-                  ),
+                  Image(image: AssetImage('images/hedgedog.jpg')),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
@@ -67,9 +64,7 @@ class _AboutState extends State<About> {
                       ),
                     ),
                   ),
-                  Image(
-                    image: AssetImage('images/bird.jpg')
-                  ),
+                  Image(image: AssetImage('images/bird.jpg')),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
@@ -79,13 +74,10 @@ class _AboutState extends State<About> {
                         decoration: TextDecoration.none,
                         color: Colors.black,
                         fontFamily: 'Alata',
-
                       ),
                     ),
                   ),
-                  Image(
-                      image: AssetImage('images/dinojeff.jpg')
-                  ),
+                  Image(image: AssetImage('images/dinojeff.jpg')),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
@@ -95,13 +87,10 @@ class _AboutState extends State<About> {
                         decoration: TextDecoration.none,
                         color: Colors.black,
                         fontFamily: 'Alata',
-
                       ),
                     ),
                   ),
-                  Image(
-                      image: AssetImage('images/listen.jpg')
-                  ),
+                  Image(image: AssetImage('images/listen.jpg')),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
@@ -111,7 +100,6 @@ class _AboutState extends State<About> {
                         decoration: TextDecoration.none,
                         color: Colors.black,
                         fontFamily: 'Alata',
-
                       ),
                     ),
                   ),

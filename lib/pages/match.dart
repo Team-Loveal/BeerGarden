@@ -7,7 +7,6 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
-import 'createProfile.dart';
 import 'message.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:pimp_my_button/pimp_my_button.dart';
@@ -559,17 +558,6 @@ class _MatchState extends State<Match> {
                                       .collection("messages")
                                       .document(chatID)
                                       .updateData({'matched': true}),
-
-                                  // just keep the original navigator
-//                                  Navigator.push(
-//                                      context,
-//                                      MaterialPageRoute(
-//                                          builder: (context) => Message(
-//                                                chatRoomID: chatID,
-//                                                matchID: matchID,
-//                                                nickname: userData.nickname,
-//                                                imgUrl: userData.imgUrl,
-//                                              )))
                                   Navigator.push(
                                     context,
                                     PageTransition(

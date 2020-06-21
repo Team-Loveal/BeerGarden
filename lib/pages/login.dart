@@ -11,11 +11,6 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   final AuthService _auth = AuthService();
-/*  Widget build(BuildContext context) {
-    // final AuthService _auth = AuthService();
-
-
-    final userData = Provider.of<UserData>(context);*/
 
   //text field state
   String email = "";
@@ -45,21 +40,12 @@ class _LoginState extends State<Login> {
 
   void googleLogin() async {
     dynamic result = await AuthService().loginWithGoogle();
-    //print('GGGGGGGGGGGGG ${user.uid}');
-    /* final userData = Provider.of<UserData>(context, listen: false);
-      print("VVVBBBBBBBBBB ${userData.isProfileCreated}");*/
     if (result == null) {
       setState(() {
         error = 'Could not sign in with those credentials';
         loading = false;
       });
     } else {
-      //if (userData.isProfileCreated = false){
-      //result.uid is the uid we will need for the db
-
-      // Navigator.of(context).pushNamed('/editphoto');
-
-      //else if
       Navigator.of(context).popUntil((route) => route.isFirst);
     }
   }
@@ -267,7 +253,6 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    // final userData = Provider.of<UserData>(context);
     return loading
         ? Loading()
         : Scaffold(
