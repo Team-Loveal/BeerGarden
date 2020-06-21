@@ -6,6 +6,7 @@ import 'package:lovealapp/pages/myProfile.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:lovealapp/services/database.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/services.dart';
 
 class NavigationHome extends StatefulWidget {
   final int newIdx;
@@ -30,6 +31,7 @@ class _NavigationHomeState extends State<NavigationHome> {
   ];
 
   void onTabTapped(int index) {
+    HapticFeedback.mediumImpact();
     setState(() {
       if (newIdx is int) {
         newIdx = null;
@@ -49,7 +51,8 @@ class _NavigationHomeState extends State<NavigationHome> {
         bottomNavigationBar: BottomNavigationBar(
             // new
             backgroundColor: Hexcolor("#8CC63E"),
-            onTap: onTabTapped,
+            onTap:
+              onTabTapped,
             currentIndex: _currentIndex,
             items: [
               BottomNavigationBarItem(
