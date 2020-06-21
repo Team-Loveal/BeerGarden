@@ -33,8 +33,9 @@ class _WelcomeState extends State<Welcome> {
 //                Spacer(flex: 2),
                 Text('Grow your relationships over a beer',
                     style: TextStyle(fontSize: 18)),
-                Spacer(flex: 2),
+                Spacer(flex: 1),
                 MaterialButton(
+                    height: 50.0,
                     child: Text('Login',
                         style: TextStyle(
                             color: Colors.grey[900],
@@ -42,20 +43,22 @@ class _WelcomeState extends State<Welcome> {
                             fontSize: 20)),
                     color: Colors.white,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(30),
                     ),
                     onPressed: () =>
                         {Navigator.of(context).pushNamed('/login')},
                     minWidth: 250),
+                SizedBox(height: 20.0),
                 MaterialButton(
-                    child: Text('Signup',
+                    height: 50.0,
+                    child: Text('Sign up',
                         style: TextStyle(
                             color: Colors.grey[900],
                             fontWeight: FontWeight.bold,
                             fontSize: 20)),
                     color: Colors.white,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(30),
                     ),
                     onPressed: () =>
                         {Navigator.of(context).pushNamed('/signup')},

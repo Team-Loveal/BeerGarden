@@ -179,7 +179,9 @@ class _MessageState extends State<Message> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    PageTransition(child: NavigationHome(newIdx: profileIndex)),
+                    PageTransition(
+                        type: PageTransitionType.scale,
+                        child: NavigationHome(newIdx: profileIndex)),
                   );
                 },
                 icon: Icon(MdiIcons.arrowLeft)),
