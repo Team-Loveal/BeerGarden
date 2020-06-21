@@ -4,13 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:async';
 import 'dart:io';
-import 'package:lovealapp/pages/profilePreview.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:lovealapp/models/user.dart';
 import 'package:provider/provider.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:path/path.dart' as Path;
 import 'dart:ui';
+import 'profilePreview.dart';
+
+//adding for transition animation
+import 'package:page_transition/page_transition.dart';
 
 class UploadPhoto extends StatefulWidget {
   @override
@@ -18,6 +21,8 @@ class UploadPhoto extends StatefulWidget {
 }
 
 class _UploadPhotoState extends State<UploadPhoto> {
+  //use for switch button
+  bool isSwitched = false;
   File _image;
 
   // select image via either folder of camera
@@ -37,9 +42,6 @@ class _UploadPhotoState extends State<UploadPhoto> {
       _image = File(image.path);
     });
   }
-
-  //use for switch button
-  bool isSwitched = false;
 
   @override
   Widget build(BuildContext context) {
@@ -202,7 +204,12 @@ class _UploadPhotoState extends State<UploadPhoto> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => UploadPhoto()),
+                  PageTransition(
+                      type: PageTransitionType.rotate,
+                      duration: Duration(seconds: 1),
+                      child: UploadPhoto()),
+//                  just keeping the original version
+//                  MaterialPageRoute(builder: (context) => UploadPhoto()),
                 );
               }),
           RaisedButton(
@@ -216,7 +223,6 @@ class _UploadPhotoState extends State<UploadPhoto> {
             ),
             onPressed: () async {
               uploadFile();
-//              Navigator.of(context).pushNamed('/profilePreview');
               Navigator.push(
                   context,
                   MaterialPageRoute(

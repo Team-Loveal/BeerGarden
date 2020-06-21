@@ -11,6 +11,9 @@ import 'message.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:pimp_my_button/pimp_my_button.dart';
 
+//adding for transition animation
+import 'package:page_transition/page_transition.dart';
+
 class Match extends StatefulWidget {
   @override
   _MatchState createState() => _MatchState();
@@ -20,6 +23,7 @@ class _MatchState extends State<Match> {
   String matchID;
   String chatID;
   int matches;
+  bool isProfileCreated;
 
   double sigmaX = 50;
   double sigmaY = 50;
@@ -336,18 +340,18 @@ class _MatchState extends State<Match> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                        Text('🛌Do you make your bed in the morning?',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            )),
-                        SizedBox(height: 5),
-                        Text(
-                            userData.bed == ""
-                                ? "start a conversation and ask!"
-                                : userData.bed,
-                            style: TextStyle(fontSize: 16)),
-                      ]),
+                            Text('🛌Do you make your bed in the morning?',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            SizedBox(height: 5),
+                            Text(
+                                userData.bed == ""
+                                    ? "start a conversation and ask!"
+                                    : userData.bed,
+                                style: TextStyle(fontSize: 16)),
+                          ]),
                     ),
                     Container(
                       margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
@@ -553,15 +557,29 @@ class _MatchState extends State<Match> {
                                       .collection("messages")
                                       .document(chatID)
                                       .updateData({'matched': true}),
+
+                                  // just keep the original navigator
+//                                  Navigator.push(
+//                                      context,
+//                                      MaterialPageRoute(
+//                                          builder: (context) => Message(
+//                                                chatRoomID: chatID,
+//                                                matchID: matchID,
+//                                                nickname: userData.nickname,
+//                                                imgUrl: userData.imgUrl,
+//                                              )))
                                   Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Message(
-                                                chatRoomID: chatID,
-                                                matchID: matchID,
-                                                nickname: userData.nickname,
-                                                imgUrl: userData.imgUrl,
-                                              )))
+                                    context,
+                                    PageTransition(
+                                        type: PageTransitionType.rightToLeft,
+//                                        duration: Duration(seconds: 1),
+                                        child: Message(
+                                          chatRoomID: chatID,
+                                          matchID: matchID,
+                                          nickname: userData.nickname,
+                                          imgUrl: userData.imgUrl,
+                                        )),
+                                  )
                                 }),
                       ),
                     ),

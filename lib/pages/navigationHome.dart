@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 class NavigationHome extends StatefulWidget {
   final int newIdx;
 
-  NavigationHome({Key key, @required this.newIdx}) : super(key: key);
+  NavigationHome({Key key, this.newIdx}) : super(key: key);
 
   @override
   _NavigationHomeState createState() => _NavigationHomeState(newIdx);
@@ -31,7 +31,7 @@ class _NavigationHomeState extends State<NavigationHome> {
 
   void onTabTapped(int index) {
     setState(() {
-      if (newIdx is int){
+      if (newIdx is int) {
         newIdx = null;
       }
       _currentIndex = index;
@@ -47,7 +47,7 @@ class _NavigationHomeState extends State<NavigationHome> {
       child: Scaffold(
         body: (newIdx == null) ? _children[_currentIndex] : _children[newIdx],
         bottomNavigationBar: BottomNavigationBar(
-          // new
+            // new
             backgroundColor: Hexcolor("#8CC63E"),
             onTap: onTabTapped,
             currentIndex: _currentIndex,
@@ -66,7 +66,7 @@ class _NavigationHomeState extends State<NavigationHome> {
                   icon: Icon(Icons.person, color: Colors.white),
                   title: Text('Profile',
                       style:
-                      TextStyle(fontFamily: 'Alata', color: Colors.white)))
+                          TextStyle(fontFamily: 'Alata', color: Colors.white)))
             ]),
       ),
     );

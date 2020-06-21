@@ -21,8 +21,8 @@ Widget buildChatroom(DocumentSnapshot document, BuildContext context) {
   String imgUrl;
 
   // for blur
- var sigmaX = document['blur'].toDouble();
- var sigmaY = document['blur'].toDouble();
+  var sigmaX = document['blur'].toDouble();
+  var sigmaY = document['blur'].toDouble();
 
   return Slidable(
     actionPane: SlidableDrawerActionPane(),
@@ -122,7 +122,11 @@ Widget buildChatroom(DocumentSnapshot document, BuildContext context) {
                                       width: MediaQuery.of(context).size.width *
                                           0.45,
                                       child: Text(
-                                        messages.data.documents[0]['text'],
+                                        messages.data.documents[0]['text'] ==
+                                                "sendBeer"
+                                            ? "🍻"
+                                            : messages.data.documents[0]
+                                                ['text'],
                                         style: TextStyle(
                                             fontWeight: FontWeight.w600,
                                             fontSize: 15.0,
