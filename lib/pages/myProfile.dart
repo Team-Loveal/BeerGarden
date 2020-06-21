@@ -113,7 +113,6 @@ class _MyProfileState extends State<MyProfile> {
             child: Container(
               height: double.infinity,
               width: double.infinity,
-              color: Colors.white,
               child: ListView(
                 children: <Widget>[
                   _buildQuestion("Occupation", userData.occupation),
