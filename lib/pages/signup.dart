@@ -62,7 +62,17 @@ class _SignUpState extends State<SignUp> {
   }
 
   void facebookSignUp() async {
-    // Todo
+    dynamic result = await AuthService().registerWithFacebook();
+    print('clicked fb button');
+    if (result == null) {
+      setState(() {
+        error = 'Could not sign in with those credentials';
+        loading = false;
+      });
+    } else {
+      //result.uid is the uid we will need for the db
+      Navigator.of(context).pushNamed('/createProfile');
+    }
   }
 
   Widget _buildEmail() {
