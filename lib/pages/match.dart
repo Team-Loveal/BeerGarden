@@ -38,8 +38,6 @@ class _MatchState extends State<Match> {
     Firestore.instance.collection('users').document(user.uid).get().then((doc) {
       //get values for the widget build
       setState(() {
-       /* isProfileCreated = doc['isProfileCreated'];
-        print("AAAAAAAAAAAA${isProfileCreated}");*/
         matchID = doc['matchID'];
         chatID = doc['chatID'];
         matches = doc['matches'];
