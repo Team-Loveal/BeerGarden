@@ -45,8 +45,8 @@ class _ProfilePreviewState extends State<ProfilePreview> {
             return Scaffold(
               floatingActionButton: FloatingActionButton.extended(
                 onPressed: () async {
-        /*           await DatabaseService(uid: user.uid)
-                        .profileComplete(true);*/
+                   await DatabaseService(uid: user.uid)
+                        .profileComplete(true);
                 //  await verifyCompletedProfile();
                   DatabaseService(uid: user.uid).createMatches(userData.genderPreference,
                       userData.lowAge, userData.highAge);
