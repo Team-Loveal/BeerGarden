@@ -26,7 +26,8 @@ class _SignUpState extends State<SignUp> {
     String trimmedPassword = password.trim();
     setState(() => {
           //loading= false,
-          _warning = 'A verification email has been sent to $trimmedEmail! Check your email and please login!'
+          _warning =
+              'A verification email has been sent to $trimmedEmail! Check your email and please login!'
         });
     ShowAlert();
     dynamic result =
@@ -250,9 +251,6 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
-    /*return loading
-        ? Loading()
-        : Scaffold(*/
     return Scaffold(
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
@@ -279,19 +277,21 @@ class _SignUpState extends State<SignUp> {
                 physics: AlwaysScrollableScrollPhysics(),
                 padding: EdgeInsets.symmetric(
                   horizontal: 40.0,
-                  vertical: 50.0,
+                  vertical: 120.0,
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    (_warning == null) ? Text(
-                          'Sign up',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 52.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ) : ShowAlert(),
+                    (_warning == null)
+                        ? Text(
+                            'Sign up',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 52.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
+                        : ShowAlert(),
                     SizedBox(height: 50.0),
                     _buildEmail(),
                     SizedBox(
