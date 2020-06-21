@@ -7,6 +7,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
+import 'createProfile.dart';
 import 'message.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:pimp_my_button/pimp_my_button.dart';
@@ -73,6 +74,7 @@ class _MatchState extends State<Match> {
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: matchID).userData,
         builder: (context, snapshot) {
+          print('I AM MATCH ID $matchID');
           UserData userData = snapshot.data;
           if (snapshot.hasData && matches > 0) {
             return Scaffold(

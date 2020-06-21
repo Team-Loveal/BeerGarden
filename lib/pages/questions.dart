@@ -18,6 +18,9 @@ class _QuestionsState extends State<Questions> {
   String bestForLast;
   String aliens;
 
+  //form global key
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
@@ -52,7 +55,8 @@ class _QuestionsState extends State<Questions> {
                           padding: EdgeInsets.symmetric(vertical: 20.0),
                           child: Text("The more questions you answer about yourself, the more likely someone will buy you a drink🍺 You'll have a chance to answer more questions later too!"),
                         ),
-                        FormBuilder(
+                        Form(
+                          key: _formKey,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
@@ -63,6 +67,12 @@ class _QuestionsState extends State<Questions> {
                                   setState(() => bed = val);
                                 },
                                 keyboardType: TextInputType.text,
+                                validator: (value) {
+                                  if (value.isEmpty) {
+                                    return 'Please fill out an answer';
+                                  }
+                                  return null;
+                                },
                               ),
                               SizedBox(height: 20.0),
                               Text('🤓Do you read reviews, or just go with your gut?'),
@@ -72,6 +82,12 @@ class _QuestionsState extends State<Questions> {
                                   setState(() => reviews = val);
                                 },
                                 keyboardType: TextInputType.text,
+                                validator: (value) {
+                                  if (value.isEmpty) {
+                                    return 'Please fill out an answer';
+                                  }
+                                  return null;
+                                },
                               ),
                               SizedBox(height: 20.0),
                               Text('🌮If you could only eat one thing for the rest of your life, what would it be?'),
@@ -81,6 +97,12 @@ class _QuestionsState extends State<Questions> {
                                   setState(() => foreverEat = val);
                                 },
                                 keyboardType: TextInputType.text,
+                                validator: (value) {
+                                  if (value.isEmpty) {
+                                    return 'Please fill out an answer';
+                                  }
+                                  return null;
+                                },
                               ),
                               SizedBox(height: 20.0),
                               Text("🌭If you're eating a meal do you save the best thing for last or eat it first?"),
@@ -93,6 +115,12 @@ class _QuestionsState extends State<Questions> {
                                   //this block is used to run code when a user save the form
                                 },
                                 keyboardType: TextInputType.text,
+                                validator: (value) {
+                                  if (value.isEmpty) {
+                                    return 'Please fill out an answer';
+                                  }
+                                  return null;
+                                },
                               ),
                               SizedBox(height: 20.0),
                               Text("👽Do you believe in aliens?"),
@@ -102,24 +130,34 @@ class _QuestionsState extends State<Questions> {
                                   setState(() => aliens = val);
                                 },
                                 keyboardType: TextInputType.text,
+                                validator: (value) {
+                                  if (value.isEmpty) {
+                                    return 'Please fill out an answer';
+                                  }
+                                  return null;
+                                },
                               ),
                               //BUTTON
                               Container(
                                 padding: EdgeInsets.fromLTRB(30, 30, 20, 0),
                                 child: RaisedButton(
                                   onPressed: () async {
-                                    //write answers into db
-                                    await DatabaseService(uid: user.uid)
-                                        .updateAnswers(
-                                      bed ?? "",
-                                      reviews ?? "",
-                                      foreverEat ?? "" ,
-                                      bestForLast ?? "",
-                                      aliens ?? "",
-                                    );
-                                    //route to upload photo page
-                                    Navigator.of(context)
-                                        .pushNamed('/uploadphoto');
+                                    // If the form is valid you can move on
+                                    if (_formKey.currentState.validate()) {
+                                      //write answers into db
+                                      await DatabaseService(uid: user.uid)
+                                          .updateAnswers(
+                                        bed ?? "",
+                                        reviews ?? "",
+                                        foreverEat ?? "" ,
+                                        bestForLast ?? "",
+                                        aliens ?? "",
+                                      );
+
+                                      //route to upload photo page
+                                      Navigator.of(context)
+                                          .pushNamed('/uploadphoto');
+                                    }
                                   },
                                   textColor: Colors.white,
                                   color: Hexcolor("#8CC63E"),
