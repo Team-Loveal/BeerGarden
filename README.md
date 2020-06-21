@@ -56,9 +56,9 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 // <img src = "http://i.imgur.com/tXSoThF.png">
 
-😸  [Garrett Chun](https://github.com/Kapakahi)
+😸  [Garrett Chun]  -    [![alt text][1.1]][1]       [![alt text][1.2]][2]
 
-[![alt text][1.1]][1]       [![alt text][1.2]][2]
+
 
 🌝  [Yuya Harada](https://github.com/yuya-h-29)
 
