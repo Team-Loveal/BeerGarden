@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lovealapp/models/user.dart';
+import 'package:lovealapp/pages/questions.dart';
+import 'package:lovealapp/pages/uploadphoto.dart';
 import 'package:lovealapp/pages/welcome.dart';
 import 'package:lovealapp/services/database.dart';
 import 'package:lovealapp/shared/loading.dart';
@@ -26,8 +28,9 @@ class _WrapperState extends State<Wrapper> {
           if (snapshot.hasData) {
             if (userData.isProfileCreated) {
               return NavigationHome();
+            } else {
+              return CreateProfile();
             }
-            return CreateProfile();
           } else {
             return Loading();
           }

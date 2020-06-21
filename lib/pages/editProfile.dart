@@ -72,7 +72,7 @@ class _EditProfileState extends State<EditProfile> {
               backgroundColor: Hexcolor("#F4AA33"),
               appBar: PreferredSize(
                 preferredSize:
-                    Size.fromHeight(MediaQuery.of(context).size.height * 0.08),
+                Size.fromHeight(MediaQuery.of(context).size.height * 0.08),
                 child: AppBar(
                   backgroundColor: Hexcolor("#F4AA33"),
                   leading: IconButton(
@@ -145,7 +145,7 @@ class _EditProfileState extends State<EditProfile> {
                                             padding: EdgeInsets.all(30),
                                             child: Column(
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.start,
+                                              MainAxisAlignment.start,
                                               children: <Widget>[
                                                 Column(
                                                   children: <Widget>[
@@ -153,16 +153,16 @@ class _EditProfileState extends State<EditProfile> {
                                                       onTap: () {
                                                         Navigator.of(context)
                                                             .pushNamed(
-                                                                '/editphoto');
+                                                            '/editphoto');
                                                       },
                                                       child: Stack(
                                                         children: <Widget>[
                                                           CircleAvatar(
                                                             radius: 70,
                                                             backgroundImage:
-                                                                NetworkImage(
-                                                                    userData
-                                                                        .imgUrl),
+                                                            NetworkImage(
+                                                                userData
+                                                                    .imgUrl),
                                                           ),
                                                           Positioned(
                                                             bottom: 0,
@@ -171,7 +171,7 @@ class _EditProfileState extends State<EditProfile> {
                                                               height: 30.0,
                                                               width: 30.0,
                                                               decoration:
-                                                                  BoxDecoration(
+                                                              BoxDecoration(
                                                                 shape: BoxShape
                                                                     .circle,
                                                                 color: Colors
@@ -181,11 +181,11 @@ class _EditProfileState extends State<EditProfile> {
                                                                     color: Colors
                                                                         .black26,
                                                                     offset:
-                                                                        Offset(
-                                                                            0,
-                                                                            2),
+                                                                    Offset(
+                                                                        0,
+                                                                        2),
                                                                     blurRadius:
-                                                                        6.0,
+                                                                    6.0,
                                                                   ),
                                                                 ],
                                                               ),
@@ -205,15 +205,15 @@ class _EditProfileState extends State<EditProfile> {
                                                 Container(
                                                   child: Column(
                                                     mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
                                                     children: <Widget>[
                                                       Column(
                                                         crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .stretch,
+                                                        CrossAxisAlignment
+                                                            .stretch,
                                                         textDirection:
-                                                            TextDirection.ltr,
+                                                        TextDirection.ltr,
                                                         children: <Widget>[
                                                           TextFormField(
                                                             onChanged: (val) {
@@ -221,29 +221,29 @@ class _EditProfileState extends State<EditProfile> {
                                                                   userData
                                                                       .nickname) {
                                                                 setState(() =>
-                                                                    nickname =
-                                                                        val);
+                                                                nickname =
+                                                                    val);
                                                               } else {
                                                                 nickname = data[
-                                                                    'nicknameEdit'];
+                                                                'nicknameEdit'];
                                                               }
                                                             },
                                                             style: TextStyle(
                                                                 color: Colors
                                                                     .black,
                                                                 fontWeight:
-                                                                    FontWeight
-                                                                        .w300),
+                                                                FontWeight
+                                                                    .w300),
                                                             initialValue: data[
-                                                                'nicknameEdit'],
+                                                            'nicknameEdit'],
                                                             decoration:
-                                                                InputDecoration(
+                                                            InputDecoration(
                                                               labelText:
-                                                                  'Nickname',
+                                                              'Nickname',
                                                             ),
                                                             keyboardType:
-                                                                TextInputType
-                                                                    .text,
+                                                            TextInputType
+                                                                .text,
                                                           ),
                                                           SizedBox(
                                                               height: 10.0),
@@ -253,8 +253,8 @@ class _EditProfileState extends State<EditProfile> {
                                                                   userData
                                                                       .location) {
                                                                 setState(() =>
-                                                                    location =
-                                                                        val);
+                                                                location =
+                                                                    val);
                                                               } else {
                                                                 location =
                                                                     userData
@@ -265,50 +265,50 @@ class _EditProfileState extends State<EditProfile> {
                                                                 color: Colors
                                                                     .black,
                                                                 fontWeight:
-                                                                    FontWeight
-                                                                        .w300),
+                                                                FontWeight
+                                                                    .w300),
                                                             initialValue: data[
-                                                                'locationEdit'],
+                                                            'locationEdit'],
                                                             decoration:
-                                                                InputDecoration(
+                                                            InputDecoration(
                                                               labelText:
-                                                                  'Location',
+                                                              'Location',
                                                             ),
                                                             keyboardType:
-                                                                TextInputType
-                                                                    .text,
+                                                            TextInputType
+                                                                .text,
                                                           ),
                                                         ],
                                                       ),
                                                       Padding(
                                                         padding:
-                                                            EdgeInsets.only(
-                                                                top: 20),
+                                                        EdgeInsets.only(
+                                                            top: 20),
                                                         child: Container(
                                                           child: Row(
                                                             children: <Widget>[
                                                               Padding(
                                                                   padding: EdgeInsets
                                                                       .only(
-                                                                          right:
-                                                                              70),
+                                                                      right:
+                                                                      70),
                                                                   child:
-                                                                      Container(
+                                                                  Container(
                                                                     child:
-                                                                        Column(
+                                                                    Column(
                                                                       crossAxisAlignment:
-                                                                          CrossAxisAlignment
-                                                                              .start,
+                                                                      CrossAxisAlignment
+                                                                          .start,
                                                                       children: <
                                                                           Widget>[
                                                                         Text(
                                                                           'Age',
                                                                           style:
-                                                                              TextStyle(
+                                                                          TextStyle(
                                                                             color:
-                                                                                Colors.black,
+                                                                            Colors.black,
                                                                             fontSize:
-                                                                                20,
+                                                                            20,
                                                                           ),
                                                                         ),
                                                                         DropdownButton<
@@ -317,7 +317,7 @@ class _EditProfileState extends State<EditProfile> {
                                                                               ? age
                                                                               : data['ageEdit'],
                                                                           iconSize:
-                                                                              24,
+                                                                          24,
                                                                           onChanged:
                                                                               (int newValue) {
                                                                             setState(() {
@@ -325,7 +325,7 @@ class _EditProfileState extends State<EditProfile> {
                                                                             });
                                                                           },
                                                                           items:
-                                                                              ageList.map<DropdownMenuItem<int>>((int value) {
+                                                                          ageList.map<DropdownMenuItem<int>>((int value) {
                                                                             return DropdownMenuItem<int>(
                                                                               value: value,
                                                                               child: Text(value.toString()),
@@ -338,37 +338,37 @@ class _EditProfileState extends State<EditProfile> {
                                                               Container(
                                                                 child: Column(
                                                                   crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
+                                                                  CrossAxisAlignment
+                                                                      .start,
                                                                   children: <
                                                                       Widget>[
                                                                     Text(
                                                                       'Gender',
                                                                       style:
-                                                                          TextStyle(
+                                                                      TextStyle(
                                                                         color: Colors
                                                                             .black,
                                                                         fontSize:
-                                                                            20,
+                                                                        20,
                                                                       ),
                                                                     ),
                                                                     DropdownButton<
                                                                         String>(
                                                                       value: gender !=
-                                                                              null
+                                                                          null
                                                                           ? gender
                                                                           : data[
-                                                                              'genderEdit'],
+                                                                      'genderEdit'],
                                                                       iconSize:
-                                                                          24,
+                                                                      24,
                                                                       onChanged:
                                                                           (String
-                                                                              newValue) {
+                                                                      newValue) {
                                                                         setState(
-                                                                            () {
-                                                                          gender =
-                                                                              newValue;
-                                                                        });
+                                                                                () {
+                                                                              gender =
+                                                                                  newValue;
+                                                                            });
                                                                       },
                                                                       items: <
                                                                           String>[
@@ -378,13 +378,13 @@ class _EditProfileState extends State<EditProfile> {
                                                                       ].map<
                                                                           DropdownMenuItem<
                                                                               String>>((String
-                                                                          value) {
+                                                                      value) {
                                                                         return DropdownMenuItem<
                                                                             String>(
                                                                           value:
-                                                                              value,
+                                                                          value,
                                                                           child:
-                                                                              Text(value),
+                                                                          Text(value),
                                                                         );
                                                                       }).toList(),
                                                                     ),
@@ -401,8 +401,8 @@ class _EditProfileState extends State<EditProfile> {
                                                               userData
                                                                   .occupation) {
                                                             setState(() =>
-                                                                occupation =
-                                                                    val);
+                                                            occupation =
+                                                                val);
                                                           } else {
                                                             occupation =
                                                                 userData
@@ -410,13 +410,13 @@ class _EditProfileState extends State<EditProfile> {
                                                           }
                                                         },
                                                         initialValue: data[
-                                                            'occupationEdit'],
+                                                        'occupationEdit'],
                                                         decoration:
-                                                            InputDecoration(
-                                                                labelText:
-                                                                    'Occupation'),
+                                                        InputDecoration(
+                                                            labelText:
+                                                            'Occupation'),
                                                         keyboardType:
-                                                            TextInputType.text,
+                                                        TextInputType.text,
                                                       ),
                                                       SizedBox(height: 10.0),
                                                       TextFormField(
@@ -424,38 +424,38 @@ class _EditProfileState extends State<EditProfile> {
                                                           if (val !=
                                                               userData.about) {
                                                             setState(() =>
-                                                                about = val);
+                                                            about = val);
                                                           } else {
                                                             about =
                                                                 userData.about;
                                                           }
                                                         },
                                                         initialValue:
-                                                            data['aboutEdit'],
+                                                        data['aboutEdit'],
                                                         decoration:
-                                                            InputDecoration(
-                                                                labelText:
-                                                                    'Bio'),
+                                                        InputDecoration(
+                                                            labelText:
+                                                            'Bio'),
                                                         keyboardType:
-                                                            TextInputType.text,
+                                                        TextInputType.text,
                                                       ),
                                                       SizedBox(height: 30.0),
                                                       Text('Interests',
                                                           style: TextStyle(
                                                               fontSize: 20.0,
                                                               fontWeight:
-                                                                  FontWeight
-                                                                      .w300)),
+                                                              FontWeight
+                                                                  .w300)),
                                                       SizedBox(height: 10.0),
                                                       Padding(
                                                         padding:
-                                                            const EdgeInsets
-                                                                .only(left: 8),
+                                                        const EdgeInsets
+                                                            .only(left: 8),
                                                         child: Container(
                                                           child: Wrap(
                                                             alignment:
-                                                                WrapAlignment
-                                                                    .center,
+                                                            WrapAlignment
+                                                                .center,
                                                             spacing: 5,
                                                             runSpacing: 3,
                                                             children: <Widget>[
@@ -463,190 +463,190 @@ class _EditProfileState extends State<EditProfile> {
                                                                 label: Text(
                                                                     'yodeling'),
                                                                 selected: data[
-                                                                    'yodelingEdit'],
+                                                                'yodelingEdit'],
                                                                 onSelected:
                                                                     (isSelected) =>
-                                                                        {
+                                                                {
                                                                   data['yodelingEdit'] =
-                                                                      !data[
-                                                                          'yodelingEdit'],
+                                                                  !data[
+                                                                  'yodelingEdit'],
                                                                   setState(
-                                                                      () => {})
+                                                                          () => {})
                                                                 },
                                                                 selectedColor:
-                                                                    Hexcolor(
-                                                                        "#8CC63E"),
+                                                                Hexcolor(
+                                                                    "#8CC63E"),
                                                                 checkmarkColor:
-                                                                    Colors
-                                                                        .white,
+                                                                Colors
+                                                                    .white,
                                                               ),
                                                               FilterChip(
                                                                 label: Text(
                                                                     'shopping'),
                                                                 selected: data[
-                                                                    'shoppingEdit'],
+                                                                'shoppingEdit'],
                                                                 onSelected:
                                                                     (isSelected) =>
-                                                                        {
+                                                                {
                                                                   data['shoppingEdit'] =
-                                                                      !data[
-                                                                          'shoppingEdit'],
+                                                                  !data[
+                                                                  'shoppingEdit'],
                                                                   setState(
-                                                                      () {})
+                                                                          () {})
                                                                 },
                                                                 selectedColor:
-                                                                    Hexcolor(
-                                                                        "#8CC63E"),
+                                                                Hexcolor(
+                                                                    "#8CC63E"),
                                                                 checkmarkColor:
-                                                                    Colors
-                                                                        .white,
+                                                                Colors
+                                                                    .white,
                                                               ),
                                                               FilterChip(
                                                                 label: Text(
                                                                     'making balloon animals'),
                                                                 selected: data[
-                                                                    'makingBalloonAnimalsEdit'],
+                                                                'makingBalloonAnimalsEdit'],
                                                                 onSelected:
                                                                     (isSelected) =>
-                                                                        {
+                                                                {
                                                                   data['makingBalloonAnimalsEdit'] =
-                                                                      !data[
-                                                                          'makingBalloonAnimalsEdit'],
+                                                                  !data[
+                                                                  'makingBalloonAnimalsEdit'],
                                                                   setState(
-                                                                      () {})
+                                                                          () {})
                                                                 },
                                                                 selectedColor:
-                                                                    Hexcolor(
-                                                                        "#8CC63E"),
+                                                                Hexcolor(
+                                                                    "#8CC63E"),
                                                                 checkmarkColor:
-                                                                    Colors
-                                                                        .white,
+                                                                Colors
+                                                                    .white,
                                                               ),
                                                               FilterChip(
                                                                 label: Text(
                                                                     'cooking'),
                                                                 selected: data[
-                                                                    'cookingEdit'],
+                                                                'cookingEdit'],
                                                                 onSelected:
                                                                     (isSelected) =>
-                                                                        {
+                                                                {
                                                                   data['cookingEdit'] =
-                                                                      !data[
-                                                                          'cookingEdit'],
+                                                                  !data[
+                                                                  'cookingEdit'],
                                                                   setState(
-                                                                      () {})
+                                                                          () {})
                                                                 },
                                                                 selectedColor:
-                                                                    Hexcolor(
-                                                                        "#8CC63E"),
+                                                                Hexcolor(
+                                                                    "#8CC63E"),
                                                                 checkmarkColor:
-                                                                    Colors
-                                                                        .white,
+                                                                Colors
+                                                                    .white,
                                                               ),
                                                               FilterChip(
                                                                 label: Text(
                                                                     'painting'),
                                                                 selected: data[
-                                                                    'paintingEdit'],
+                                                                'paintingEdit'],
                                                                 onSelected:
                                                                     (isSelected) =>
-                                                                        {
+                                                                {
                                                                   data['paintingEdit'] =
-                                                                      !data[
-                                                                          'paintingEdit'],
+                                                                  !data[
+                                                                  'paintingEdit'],
                                                                   setState(
-                                                                      () {})
+                                                                          () {})
                                                                 },
                                                                 selectedColor:
-                                                                    Hexcolor(
-                                                                        "#8CC63E"),
+                                                                Hexcolor(
+                                                                    "#8CC63E"),
                                                                 checkmarkColor:
-                                                                    Colors
-                                                                        .white,
+                                                                Colors
+                                                                    .white,
                                                               ),
                                                               FilterChip(
                                                                 label: Text(
                                                                     'writing'),
                                                                 selected: data[
-                                                                    'writingEdit'],
+                                                                'writingEdit'],
                                                                 onSelected:
                                                                     (isSelected) =>
-                                                                        {
+                                                                {
                                                                   data['writingEdit'] =
-                                                                      !data[
-                                                                          'writingEdit'],
+                                                                  !data[
+                                                                  'writingEdit'],
                                                                   setState(
-                                                                      () {})
+                                                                          () {})
                                                                 },
                                                                 selectedColor:
-                                                                    Hexcolor(
-                                                                        "#8CC63E"),
+                                                                Hexcolor(
+                                                                    "#8CC63E"),
                                                                 checkmarkColor:
-                                                                    Colors
-                                                                        .white,
+                                                                Colors
+                                                                    .white,
                                                               ),
                                                               FilterChip(
                                                                 label: Text(
                                                                     'sports'),
                                                                 selected: data[
-                                                                    'sportsEdit'],
+                                                                'sportsEdit'],
                                                                 onSelected:
                                                                     (isSelected) =>
-                                                                        {
+                                                                {
                                                                   data['sportsEdit'] =
-                                                                      !data[
-                                                                          'sportsEdit'],
+                                                                  !data[
+                                                                  'sportsEdit'],
                                                                   setState(
-                                                                      () {})
+                                                                          () {})
                                                                 },
                                                                 selectedColor:
-                                                                    Hexcolor(
-                                                                        "#8CC63E"),
+                                                                Hexcolor(
+                                                                    "#8CC63E"),
                                                                 checkmarkColor:
-                                                                    Colors
-                                                                        .white,
+                                                                Colors
+                                                                    .white,
                                                               ),
                                                               FilterChip(
                                                                 label: Text(
                                                                     'movies'),
                                                                 selected: data[
-                                                                    'moviesEdit'],
+                                                                'moviesEdit'],
                                                                 onSelected:
                                                                     (isSelected) =>
-                                                                        {
+                                                                {
                                                                   data['moviesEdit'] =
-                                                                      !data[
-                                                                          'moviesEdit'],
+                                                                  !data[
+                                                                  'moviesEdit'],
                                                                   setState(
-                                                                      () {})
+                                                                          () {})
                                                                 },
                                                                 selectedColor:
-                                                                    Hexcolor(
-                                                                        "#8CC63E"),
+                                                                Hexcolor(
+                                                                    "#8CC63E"),
                                                                 checkmarkColor:
-                                                                    Colors
-                                                                        .white,
+                                                                Colors
+                                                                    .white,
                                                               ),
                                                               FilterChip(
                                                                 label: Text(
                                                                     'drinking'),
                                                                 selected: data[
-                                                                    'drinkingEdit'],
+                                                                'drinkingEdit'],
                                                                 onSelected:
                                                                     (isSelected) =>
-                                                                        {
+                                                                {
                                                                   data['drinkingEdit'] =
-                                                                      !data[
-                                                                          'drinkingEdit'],
+                                                                  !data[
+                                                                  'drinkingEdit'],
                                                                   setState(
-                                                                      () {})
+                                                                          () {})
                                                                 },
                                                                 selectedColor:
-                                                                    Hexcolor(
-                                                                        "#8CC63E"),
+                                                                Hexcolor(
+                                                                    "#8CC63E"),
                                                                 checkmarkColor:
-                                                                    Colors
-                                                                        .white,
+                                                                Colors
+                                                                    .white,
                                                               ),
                                                             ],
                                                           ),
@@ -654,8 +654,8 @@ class _EditProfileState extends State<EditProfile> {
                                                       ),
                                                       Padding(
                                                         padding:
-                                                            const EdgeInsets
-                                                                .all(30.0),
+                                                        const EdgeInsets
+                                                            .all(30.0),
                                                         child: Text(
                                                           'Set Preferences',
                                                           style: TextStyle(
@@ -672,13 +672,13 @@ class _EditProfileState extends State<EditProfile> {
                                                             String>(
                                                           isExpanded: true,
                                                           value: genderPreference !=
-                                                                  null
+                                                              null
                                                               ? genderPreference
                                                               : userData
-                                                                  .genderPreference,
+                                                              .genderPreference,
                                                           iconSize: 24,
                                                           onChanged: (String
-                                                              newValue) {
+                                                          newValue) {
                                                             setState(() {
                                                               genderPreference =
                                                                   newValue;
@@ -691,110 +691,110 @@ class _EditProfileState extends State<EditProfile> {
                                                           ].map<
                                                               DropdownMenuItem<
                                                                   String>>((String
-                                                              value) {
+                                                          value) {
                                                             return DropdownMenuItem<
                                                                 String>(
                                                               value: value,
                                                               child: Text(value,
                                                                   style: TextStyle(
                                                                       fontSize:
-                                                                          20.0)),
+                                                                      20.0)),
                                                             );
                                                           }).toList(),
                                                         ),
                                                       ),
                                                       Container(
                                                           child: Column(
-                                                        children: <Widget>[
-                                                          Row(
-                                                            mainAxisAlignment:
+                                                            children: <Widget>[
+                                                              Row(
+                                                                mainAxisAlignment:
                                                                 MainAxisAlignment
                                                                     .spaceBetween,
-                                                            children: <Widget>[
-                                                              Padding(
-                                                                padding:
+                                                                children: <Widget>[
+                                                                  Padding(
+                                                                    padding:
                                                                     const EdgeInsets
-                                                                            .all(
+                                                                        .all(
                                                                         30.0),
-                                                                child: Text(
-                                                                  'Age',
-                                                                  style: TextStyle(
-                                                                      fontSize:
+                                                                    child: Text(
+                                                                      'Age',
+                                                                      style: TextStyle(
+                                                                          fontSize:
                                                                           20.0),
-                                                                ),
+                                                                    ),
+                                                                  ),
+                                                                  Padding(
+                                                                    padding:
+                                                                    const EdgeInsets
+                                                                        .all(
+                                                                        30.0),
+                                                                    child: Text(
+                                                                      //'18 - 100',
+                                                                      '${_lowValue.toInt().toString()} - ${_highValue.toInt().toString()}',
+                                                                      style: TextStyle(
+                                                                          fontSize:
+                                                                          20.0),
+                                                                    ),
+                                                                  )
+                                                                ],
                                                               ),
-                                                              Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                            .all(
-                                                                        30.0),
-                                                                child: Text(
-                                                                  //'18 - 100',
-                                                                  '${_lowValue.toInt().toString()} - ${_highValue.toInt().toString()}',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          20.0),
-                                                                ),
-                                                              )
-                                                            ],
-                                                          ),
-                                                          SliderTheme(
-                                                            data:
+                                                              SliderTheme(
+                                                                data:
                                                                 SliderTheme.of(
-                                                                        context)
+                                                                    context)
                                                                     .copyWith(
-                                                              overlayColor:
+                                                                  overlayColor:
                                                                   Colors.white,
-                                                              activeTrackColor:
+                                                                  activeTrackColor:
                                                                   Hexcolor(
                                                                       "#8CC63E"),
-                                                              inactiveTrackColor:
+                                                                  inactiveTrackColor:
                                                                   Hexcolor(
                                                                       '#F4AA33'),
-                                                              thumbColor:
+                                                                  thumbColor:
                                                                   Hexcolor(
                                                                       "#8CC63E"),
-                                                              valueIndicatorColor:
+                                                                  valueIndicatorColor:
                                                                   Hexcolor(
                                                                       "#8CC63E"),
-                                                            ),
-                                                            child:
+                                                                ),
+                                                                child:
                                                                 frs.RangeSlider(
-                                                              min: 18,
-                                                              max: 100,
-                                                              lowerValue:
+                                                                  min: 18,
+                                                                  max: 100,
+                                                                  lowerValue:
                                                                   _lowValue,
-                                                              upperValue:
+                                                                  upperValue:
                                                                   _highValue,
-                                                              divisions: 82,
-                                                              showValueIndicator:
+                                                                  divisions: 82,
+                                                                  showValueIndicator:
                                                                   true,
-                                                              valueIndicatorMaxDecimals:
+                                                                  valueIndicatorMaxDecimals:
                                                                   0,
-                                                              onChanged: (double
-                                                                      newLowerValue,
-                                                                  double
+                                                                  onChanged: (double
+                                                                  newLowerValue,
+                                                                      double
                                                                       newUpperValue) {
-                                                                setState(() {
-                                                                  _lowValue =
-                                                                      newLowerValue;
-                                                                  _highValue =
-                                                                      newUpperValue;
-                                                                });
-                                                              },
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      )),
+                                                                    setState(() {
+                                                                      _lowValue =
+                                                                          newLowerValue;
+                                                                      _highValue =
+                                                                          newUpperValue;
+                                                                    });
+                                                                  },
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          )),
                                                       Container(
                                                           margin: EdgeInsets
                                                               .symmetric(
-                                                                  vertical: 20),
+                                                              vertical: 20),
                                                           child: RaisedButton(
                                                             padding: EdgeInsets
                                                                 .symmetric(
-                                                                    horizontal:
-                                                                        10.0),
+                                                                horizontal:
+                                                                10.0),
                                                             child: Text(
                                                               'save',
                                                               style: TextStyle(
@@ -807,14 +807,14 @@ class _EditProfileState extends State<EditProfile> {
                                                                 "#8CC63E"),
                                                             shape: RoundedRectangleBorder(
                                                                 borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            30)),
+                                                                BorderRadius
+                                                                    .circular(
+                                                                    30)),
                                                             onPressed:
                                                                 () async {
                                                               await DatabaseService(
-                                                                      uid: user
-                                                                          .uid)
+                                                                  uid: user
+                                                                      .uid)
                                                                   .editUserData(
                                                                 nickname ??
                                                                     userData
@@ -865,29 +865,29 @@ class _EditProfileState extends State<EditProfile> {
 
                                                               //write preference into db
                                                               await DatabaseService(
-                                                                      uid: user
-                                                                          .uid)
+                                                                  uid: user
+                                                                      .uid)
                                                                   .updatePreference(
-                                                                      _lowValue ??
-                                                                          userData
-                                                                              .lowAge,
-                                                                      _highValue ??
-                                                                          userData
-                                                                              .highAge,
-                                                                      genderPreference ??
-                                                                          userData
-                                                                              .genderPreference);
+                                                                  _lowValue ??
+                                                                      userData
+                                                                          .lowAge,
+                                                                  _highValue ??
+                                                                      userData
+                                                                          .highAge,
+                                                                  genderPreference ??
+                                                                      userData
+                                                                          .genderPreference);
 
                                                               // recreate matches with new preference
                                                               if (_lowValue !=
-                                                                      18 ||
+                                                                  18 ||
                                                                   _highValue !=
                                                                       100 ||
                                                                   userData.genderPreference !=
                                                                       genderPreference) {
                                                                 await DatabaseService(
-                                                                        uid: user
-                                                                            .uid)
+                                                                    uid: user
+                                                                        .uid)
                                                                     .deleteMatches();
                                                                 await DatabaseService(uid: user.uid).createMatches(
                                                                     genderPreference ??
@@ -905,7 +905,7 @@ class _EditProfileState extends State<EditProfile> {
                                                                     MaterialPageRoute(
                                                                         builder:
                                                                             (context) =>
-                                                                                NavigationHome(newIdx: profileIndex)));
+                                                                            NavigationHome(newIdx: profileIndex)));
                                                               }
                                                             },
                                                           ))

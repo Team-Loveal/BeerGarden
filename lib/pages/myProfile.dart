@@ -72,25 +72,24 @@ class _MyProfileState extends State<MyProfile> {
                         color: Colors.orange,
                       ),
                       onPressed: () async {
-                        Navigator.pushReplacementNamed(context, '/editProfile',
-                            arguments: {
-                              'nicknameEdit': userData.nickname,
-                              'locationEdit': userData.location,
-                              'occupationEdit': userData.occupation,
-                              'aboutEdit': userData.about,
-                              'ageEdit': userData.age,
-                              'genderEdit': userData.gender,
-                              'yodelingEdit': userData.yodeling,
-                              'shoppingEdit': userData.shopping,
-                              'makingBalloonAnimalsEdit':
-                                  userData.makingBalloonAnimals,
-                              'cookingEdit': userData.cooking,
-                              'paintingEdit': userData.painting,
-                              'moviesEdit': userData.movies,
-                              'sportsEdit': userData.sports,
-                              'writingEdit': userData.writing,
-                              'drinkingEdit': userData.drinking,
-                            });
+                        Navigator.of(context).pushNamed('/editProfile', arguments: {
+                          'imgUrl': userData.imgUrl,
+                          'nicknameEdit': userData.nickname,
+                          'locationEdit': userData.location,
+                          'occupationEdit': userData.occupation,
+                          'aboutEdit': userData.about,
+                          'ageEdit': userData.age,
+                          'genderEdit': userData.gender,
+                          'yodelingEdit': userData.yodeling,
+                          'shoppingEdit': userData.shopping,
+                          'makingBalloonAnimalsEdit': userData.makingBalloonAnimals,
+                          'cookingEdit': userData.cooking,
+                          'paintingEdit': userData.painting,
+                          'moviesEdit': userData.movies,
+                          'sportsEdit': userData.sports,
+                          'writingEdit': userData.writing,
+                          'drinkingEdit': userData.drinking,
+                        });
                       },
                     ),
                   )
@@ -495,22 +494,20 @@ class _MyProfileState extends State<MyProfile> {
                         borderRadius: BorderRadius.circular(20),
                       ),
                       onPressed: () => {
-                            Navigator.of(context)
-                                .pushNamed('/moreQuestions', arguments: {
-                              'furniture': userData.furniture,
-                              'beachOrMountain': userData.beachOrMountain,
-                              'takeOutFood': userData.takeOutFood,
-                              'desertedIsland': userData.desertedIsland,
-                              'wedding': userData.wedding,
-                              'yourPlaceOrMine': userData.yourPlaceOrMine,
-                              'bed': userData.bed,
-                              'reviews': userData.reviews,
-                              'foreverEat': userData.foreverEat,
-                              'bestForLast': userData.bestForLast,
-                              'aliens': userData.aliens
-                            }),
-                            //Navigator.of(context).pushNamed('/moreQuestions')
-                          }),
+                      Navigator.of(context).pushNamed('/moreQuestions', arguments: {
+                        'furniture': userData.furniture,
+                        'beachOrMountain': userData.beachOrMountain,
+                        'takeOutFood': userData.takeOutFood,
+                        'desertedIsland': userData.desertedIsland,
+                        'wedding': userData.wedding,
+                        'yourPlaceOrMine': userData.yourPlaceOrMine,
+                        'bed': userData.bed,
+                        'reviews': userData.reviews,
+                        'foreverEat': userData.foreverEat,
+                        'bestForLast': userData.bestForLast,
+                        'aliens': userData.aliens
+                      }),
+                      }),
                 ),
               ),
             ],
