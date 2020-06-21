@@ -62,7 +62,7 @@ class _SignUpState extends State<SignUp> {
   }
 
   void facebookSignUp() async {
-    dynamic result = await AuthService().signInWithFacebook();
+    dynamic result = await AuthService().registerWithFacebook();
     print('clicked fb button');
     if (result == null) {
       setState(() {
