@@ -51,12 +51,9 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 ## Authors
 
-👻  [Jeff Bentley](https://github.com/jbentleyjp)
+👻  Jeff Bentley - [![alt text][1.1]][1]       [![alt text][1.2]][2]
 
-
-// <img src = "http://i.imgur.com/tXSoThF.png">
-
-😸  [Garrett Chun]  -    [![alt text][1.1]][1]       [![alt text][1.2]][2]
+😸  Garrett Chun  -  [![alt text][1.1]][3]       [![alt text][1.2]][4]
 
 
 
@@ -66,10 +63,23 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 🦄  [Yurika Namba](https://github.com/yurikanamba)
 
-[1.1]: http://i.imgur.com/wWzX9uB.png
-[1.2]: http://i.imgur.com/9I6NRUm.png
-[1]: http://www.twitter.com/KapakahiCoder
+[1.1]: http://i.imgur.com/9I6NRUm.png
+[1.2]: http://i.imgur.com/wWzX9uB.png
+
+[1]: https://github.com/jbentleyjp
+[2]: http://www.twitter.com/KapakahiCoder
+
+[3]: http://www.github.com/Kapakahi
+[4]: http://www.twitter.com/KapakahiCoder
+[3]: http://www.github.com/Kapakahi
 [2]: http://www.github.com/Kapakahi
+[2]: http://www.github.com/Kapakahi
+[2]: http://www.github.com/Kapakahi
+[2]: http://www.github.com/Kapakahi
+
+
+
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
