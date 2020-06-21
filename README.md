@@ -37,6 +37,13 @@ yarn start
 
 5.  Find true love
 
+## Built With
+
+- [Dart](https://dart.dev/)
+- [Flutter](https://flutter.dev/)
+- [Cloud Firestore](https://cloud.google.com/firestore)
+- [Firebase](https://firebase.google.com/)
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
@@ -45,6 +52,9 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 ## Authors
 
 👻  [Jeff Bentley](https://github.com/jbentleyjp)
+
+
+<img src = "http://i.imgur.com/tXSoThF.png">
 
 😸  [Garrett Chun](https://github.com/Kapakahi)
 
