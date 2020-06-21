@@ -84,13 +84,7 @@ class _MessageState extends State<Message> {
         .collection('messages')
         .document(chatRoomID)
         .get()
-        .then((snapshot) => {
-              activeChat = snapshot['active']
-//              if (snapshot['active'] != null)
-//                {activeChat = snapshot['active']}
-//              else
-//                {_activateChat(false), activeChat = false}
-            });
+        .then((snapshot) => {activeChat = snapshot['active']});
   }
 
   // activate chatroom (a chatroom that has at least one message)
@@ -183,8 +177,6 @@ class _MessageState extends State<Message> {
             backgroundColor: Hexcolor("#F4AA33"),
             leading: IconButton(
                 onPressed: () {
-                  // this is the original code
-//                  Navigator.pop(context); // takes back to the original page
                   Navigator.push(
                     context,
                     PageTransition(

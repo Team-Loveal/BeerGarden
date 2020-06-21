@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
 
         // just keep the original code in case I break the code
         routes: {
-          '/': (_) => EditProfile(),
+          '/': (_) => Wrapper(),
           '/signup': (_) => SignUp(),
           '/login': (_) => Login(),
           '/forgotpassword': (_) => ForgotPassword(),
