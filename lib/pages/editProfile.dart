@@ -132,8 +132,8 @@ class _EditProfileState extends State<EditProfile> {
                                             begin: Alignment.topCenter,
                                             end: Alignment.bottomCenter,
                                             colors: [
+                                              Colors.white,
                                               Hexcolor('#FFF1BA'),
-                                              Hexcolor('#F4AA33'),
                                             ],
                                             stops: [0.2, 0.7],
                                           ),
@@ -174,8 +174,8 @@ class _EditProfileState extends State<EditProfile> {
                                                               BoxDecoration(
                                                                 shape: BoxShape
                                                                     .circle,
-                                                                color: Colors
-                                                                    .white,
+                                                                color: Hexcolor(
+                                                                    "#8CC63E"),
                                                                 boxShadow: [
                                                                   BoxShadow(
                                                                     color: Colors
@@ -192,8 +192,8 @@ class _EditProfileState extends State<EditProfile> {
                                                               child: Icon(
                                                                 MdiIcons.pencil,
                                                                 size: 20.0,
-                                                                color: Hexcolor(
-                                                                    "#8CC63E"),
+                                                                color: Colors
+                                                                    .white,
                                                               ),
                                                             ),
                                                           ),

@@ -563,17 +563,6 @@ class _MatchState extends State<Match> {
                                       .collection("messages")
                                       .document(chatID)
                                       .updateData({'matched': true}),
-
-                                  // just keep the original navigator
-//                                  Navigator.push(
-//                                      context,
-//                                      MaterialPageRoute(
-//                                          builder: (context) => Message(
-//                                                chatRoomID: chatID,
-//                                                matchID: matchID,
-//                                                nickname: userData.nickname,
-//                                                imgUrl: userData.imgUrl,
-//                                              )))
                                   Navigator.push(
                                     context,
                                     PageTransition(
