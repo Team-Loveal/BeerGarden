@@ -65,7 +65,7 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 [1.2]: http://i.imgur.com/wWzX9uB.png
 
 [1]: https://github.com/jbentleyjp
-[2]: http://www.twitter.com/KapakahiCoder
+[2]: https://twitter.com/bentley449
 
 [3]: http://www.github.com/Kapakahi
 [4]: http://www.twitter.com/KapakahiCoder
