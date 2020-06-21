@@ -10,7 +10,6 @@ import 'package:lovealapp/models/user.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:intl/intl.dart';
 import 'profile.dart';
-import 'messagesList.dart';
 
 //adding for transition animation
 import 'package:page_transition/page_transition.dart';
@@ -85,13 +84,7 @@ class _MessageState extends State<Message> {
         .collection('messages')
         .document(chatRoomID)
         .get()
-        .then((snapshot) => {
-          activeChat= snapshot['active']
-//              if (snapshot['active'] != null)
-//                {activeChat = snapshot['active']}
-//              else
-//                {_activateChat(false), activeChat = false}
-            });
+        .then((snapshot) => {activeChat = snapshot['active']});
   }
 
   // activate chatroom (a chatroom that has at least one message)
@@ -184,12 +177,9 @@ class _MessageState extends State<Message> {
             backgroundColor: Hexcolor("#F4AA33"),
             leading: IconButton(
                 onPressed: () {
-                  // this is the original code
-//                  Navigator.pop(context); // takes back to the original page
                   Navigator.push(
                     context,
-                    PageTransition(
-                        child: NavigationHome(newIdx: profileIndex)),
+                    PageTransition(child: NavigationHome(newIdx: profileIndex)),
                   );
                 },
                 icon: Icon(MdiIcons.arrowLeft)),
