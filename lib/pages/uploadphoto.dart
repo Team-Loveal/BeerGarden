@@ -191,6 +191,7 @@ class _UploadPhotoState extends State<UploadPhoto> {
   }
 
   Widget enableUpload() {
+    final user = Provider.of<User>(context);
     return Container(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -224,6 +225,10 @@ class _UploadPhotoState extends State<UploadPhoto> {
             ),
             onPressed: () async {
               uploadFile();
+
+              await DatabaseService(uid: user.uid)
+                  .photoUploaded(true);
+
               Navigator.push(
                   context,
                   MaterialPageRoute(

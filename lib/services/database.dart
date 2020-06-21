@@ -24,6 +24,8 @@ class DatabaseService {
       'occupation': "",
       'about': "",
       'isProfileCreated': false,
+      'questionsCompleted': false,
+      'photoUploaded': false,
     });
   }
 
@@ -108,6 +110,22 @@ class DatabaseService {
     });
   }
 
+  Future questionsCompleted(
+      bool questionsCompleted
+      ) async {
+    return await usersCollection.document(uid).updateData({
+      'questionsCompleted': questionsCompleted,
+    });
+  }
+
+  Future photoUploaded(
+      bool photoUploaded
+      ) async {
+    return await usersCollection.document(uid).updateData({
+      'photoUploaded': photoUploaded,
+    });
+  }
+
   //userData from snapshot
   UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
     return UserData(
@@ -145,6 +163,8 @@ class DatabaseService {
       wedding: snapshot.data['wedding'],
       yourPlaceOrMine: snapshot.data['yourPlaceOrMine'],
       isProfileCreated: snapshot.data['isProfileCreated'],
+      questionsCompleted: snapshot.data['questionsCompleted'],
+        photoUploaded: snapshot.data['photoUploaded'],
     );
   }
 

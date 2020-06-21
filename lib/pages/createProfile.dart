@@ -41,7 +41,7 @@ class _CreateProfileState extends State<CreateProfile> {
   //preferences
   double _lowValue = 18;
   double _highValue = 100;
-  String genderPreference;
+  String genderPreference = 'Everyone';
 
   //form global key
   final _formKey = GlobalKey<FormState>();
@@ -137,107 +137,113 @@ class _CreateProfileState extends State<CreateProfile> {
                                       MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
                                     Text('Age'),
-                                    DropdownButton<int>(
-                                      value: age,
-                                      iconSize: 24,
-                                      onChanged: (int newValue) {
-                                        setState(() {
-                                          age = newValue;
-                                        });
-                                      },
-                                      items: <int>[
-                                        18,
-                                        19,
-                                        20,
-                                        21,
-                                        22,
-                                        23,
-                                        24,
-                                        25,
-                                        26,
-                                        27,
-                                        28,
-                                        29,
-                                        30,
-                                        31,
-                                        32,
-                                        33,
-                                        34,
-                                        35,
-                                        36,
-                                        37,
-                                        38,
-                                        39,
-                                        40,
-                                        41,
-                                        42,
-                                        43,
-                                        44,
-                                        45,
-                                        46,
-                                        47,
-                                        48,
-                                        49,
-                                        50,
-                                        51,
-                                        52,
-                                        53,
-                                        54,
-                                        55,
-                                        56,
-                                        57,
-                                        58,
-                                        59,
-                                        60,
-                                        61,
-                                        62,
-                                        63,
-                                        64,
-                                        65,
-                                        66,
-                                        67,
-                                        68,
-                                        69,
-                                        70,
-                                        71,
-                                        72,
-                                        73,
-                                        74,
-                                        75,
-                                        76,
-                                        77,
-                                        78,
-                                        79,
-                                        80
-                                      ].map<DropdownMenuItem<int>>((int value) {
-                                        return DropdownMenuItem<int>(
-                                          value: value,
-                                          child: Text(value.toString()),
-                                        );
-                                      }).toList(),
+                                    Expanded(
+                                      child: DropdownButtonFormField<int>(
+                                        validator: (value) => value == null ? 'Please tell us your age' : null,
+                                        value: age,
+                                        iconSize: 24,
+                                        onChanged: (int newValue) {
+                                          setState(() {
+                                            age = newValue;
+                                          });
+                                        },
+                                        items: <int>[
+                                          18,
+                                          19,
+                                          20,
+                                          21,
+                                          22,
+                                          23,
+                                          24,
+                                          25,
+                                          26,
+                                          27,
+                                          28,
+                                          29,
+                                          30,
+                                          31,
+                                          32,
+                                          33,
+                                          34,
+                                          35,
+                                          36,
+                                          37,
+                                          38,
+                                          39,
+                                          40,
+                                          41,
+                                          42,
+                                          43,
+                                          44,
+                                          45,
+                                          46,
+                                          47,
+                                          48,
+                                          49,
+                                          50,
+                                          51,
+                                          52,
+                                          53,
+                                          54,
+                                          55,
+                                          56,
+                                          57,
+                                          58,
+                                          59,
+                                          60,
+                                          61,
+                                          62,
+                                          63,
+                                          64,
+                                          65,
+                                          66,
+                                          67,
+                                          68,
+                                          69,
+                                          70,
+                                          71,
+                                          72,
+                                          73,
+                                          74,
+                                          75,
+                                          76,
+                                          77,
+                                          78,
+                                          79,
+                                          80
+                                        ].map<DropdownMenuItem<int>>((int value) {
+                                          return DropdownMenuItem<int>(
+                                            value: value,
+                                            child: Text(value.toString()),
+                                          );
+                                        }).toList(),
+                                      ),
                                     ),
                                     Text(
                                       "Gender",
                                     ),
-                                    DropdownButton<String>(
-                                      value: gender,
-                                      iconSize: 24,
-                                      onChanged: (String newValue) {
-                                        setState(() {
-                                          gender = newValue;
-                                        });
-                                      },
-                                      items: <String>[
-                                        'Female',
-                                        'Male',
-                                        'Rather not say'
-                                      ].map<DropdownMenuItem<String>>(
-                                          (String value) {
-                                        return DropdownMenuItem<String>(
-                                          value: value,
-                                          child: Text(value),
-                                        );
-                                      }).toList(),
+                                    Expanded(
+                                      child: DropdownButtonFormField<String>(
+                                        validator: (value) => value == null ? 'Please tell us your gender' : null,
+                                        value: gender,
+                                        iconSize: 24,
+                                        onChanged: (String newValue) {
+                                          setState(() {
+                                            gender = newValue;
+                                          });
+                                        },
+                                        items: <String>[
+                                          'Female',
+                                          'Male',
+                                          'Rather not say'
+                                        ].map<DropdownMenuItem<String>>(
+                                            (String value) {
+                                          return DropdownMenuItem<String>(
+                                            value: value,
+                                            child: Text(value),
+                                          );
+                                        }).toList(),
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -501,6 +507,9 @@ class _CreateProfileState extends State<CreateProfile> {
                                           genderPreference,
                                         );
 
+                                        await DatabaseService(uid: user.uid)
+                                            .profileComplete(true);
+
                                         Navigator.of(context)
                                             .pushNamed('/questions');
                                       }
@@ -534,37 +543,3 @@ class _CreateProfileState extends State<CreateProfile> {
           );
   }
 }
-
-// the code below was used for the chip thing. It worked fine but I wasn't able to get the boolean for each chip, so I commented out for now.
-// I just hard code every chip for now
-// probably we can use it later
-// Yuya 6/8/2020
-
-//class filterChipWidget extends StatefulWidget {
-//  final String chipName;
-//  final bool yodeling;
-//  final bool shopping;
-//
-//  filterChipWidget({Key key, this.chipName, this.yodeling, this.shopping}) : super(key: key);
-//
-//  @override
-//  _filterChipWidgetState createState() => _filterChipWidgetState();
-//}
-//
-//class _filterChipWidgetState extends State<filterChipWidget> {
-//  var _isSelected = false;
-//  @override
-//  Widget build(BuildContext context) {
-//    return FilterChip(
-//      label: Text(widget.chipName),
-//      selected: _isSelected,
-//      onSelected: (isSelected){
-//        setState(() {
-//          _isSelected = isSelected;
-//        });
-//      },
-//      selectedColor: Colors.pink[400],
-//    checkmarkColor: Colors.white,
-//    );
-//  }
-//}
