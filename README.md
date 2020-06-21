@@ -62,7 +62,8 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 🦄  Yurika Namba - [![alt text][1.1]][7]       [![alt text][1.2]][8]
 
 [1.1]: http://i.imgur.com/9I6NRUm.png
-[1.2]: http://i.imgur.com/wWzX9uB.png
+[1.2]: ./images/twitter.png
+[1.5]: http://i.imgur.com/wWzX9uB.png
 
 [1]: https://github.com/jbentleyjp
 [2]: https://twitter.com/bentley449
