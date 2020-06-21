@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:lovealapp/services/database.dart';
 
 //provide user data to Wrapper file
 import 'package:provider/provider.dart';
@@ -21,6 +22,7 @@ import 'pages/createProfile.dart';
 import 'pages/editProfile.dart';
 import 'pages/loginFirstTime.dart';
 import 'pages/questions.dart';
+import 'pages/about.dart';
 
 // for the page transtion
 import 'package:page_transition/page_transition.dart';
@@ -34,7 +36,6 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    //Material App is a widget that has properties like title, theme etc.
     return StreamProvider<User>.value(
       value: AuthService().user,
       child: MaterialApp(
@@ -50,6 +51,7 @@ class MyApp extends StatelessWidget {
         // just keep the original code in case I break the code
         routes: {
           '/': (_) => Wrapper(),
+          '/about': (_) => About(),
           '/signup': (_) => SignUp(),
           '/login': (_) => Login(),
           '/forgotpassword': (_) => ForgotPassword(),

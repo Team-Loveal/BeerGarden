@@ -116,7 +116,6 @@ class DatabaseService {
       age: snapshot.data['age'],
       gender: snapshot.data['gender'],
       occupation: snapshot.data['occupation'],
-      isProfileCreated: snapshot.data['isProfileCreated'],
       about: snapshot.data['about'],
       yodeling: snapshot.data['yodeling'],
       shopping: snapshot.data['shopping'],
@@ -143,6 +142,7 @@ class DatabaseService {
       desertedIsland: snapshot.data['desertedIsland'],
       wedding: snapshot.data['wedding'],
       yourPlaceOrMine: snapshot.data['yourPlaceOrMine'],
+      isProfileCreated: snapshot.data['isProfileCreated'],
     );
   }
 

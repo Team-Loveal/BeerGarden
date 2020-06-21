@@ -47,25 +47,26 @@ class _MyProfileState extends State<MyProfile> {
                           size: 28.0, color: Colors.white),
                       label: Text(""),
                       onPressed: () async {
-                        Navigator.pushReplacementNamed(context, '/editProfile',
-                            arguments: {
-                              'nicknameEdit': userData.nickname,
-                              'locationEdit': userData.location,
-                              'occupationEdit': userData.occupation,
-                              'aboutEdit': userData.about,
-                              'ageEdit': userData.age,
-                              'genderEdit': userData.gender,
-                              'yodelingEdit': userData.yodeling,
-                              'shoppingEdit': userData.shopping,
-                              'makingBalloonAnimalsEdit':
-                                  userData.makingBalloonAnimals,
-                              'cookingEdit': userData.cooking,
-                              'paintingEdit': userData.painting,
-                              'moviesEdit': userData.movies,
-                              'sportsEdit': userData.sports,
-                              'writingEdit': userData.writing,
-                              'drinkingEdit': userData.drinking,
-                            });
+                        Navigator.of(context)
+                            .pushNamed('/editProfile', arguments: {
+                          'imgUrl': userData.imgUrl,
+                          'nicknameEdit': userData.nickname,
+                          'locationEdit': userData.location,
+                          'occupationEdit': userData.occupation,
+                          'aboutEdit': userData.about,
+                          'ageEdit': userData.age,
+                          'genderEdit': userData.gender,
+                          'yodelingEdit': userData.yodeling,
+                          'shoppingEdit': userData.shopping,
+                          'makingBalloonAnimalsEdit':
+                              userData.makingBalloonAnimals,
+                          'cookingEdit': userData.cooking,
+                          'paintingEdit': userData.painting,
+                          'moviesEdit': userData.movies,
+                          'sportsEdit': userData.sports,
+                          'writingEdit': userData.writing,
+                          'drinkingEdit': userData.drinking,
+                        });
                       },
                     ),
                   ],

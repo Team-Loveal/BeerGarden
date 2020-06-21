@@ -26,6 +26,20 @@ class _WelcomeState extends State<Welcome> {
             child: Center(
                 child: Column(
               children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(260, 15, 15, 0),
+                  child: MaterialButton(
+                      child: Text('About',
+                          style: TextStyle(
+                              color: Colors.grey[900],
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15)),
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      onPressed: () =>
+                          {Navigator.of(context).pushNamed('/about')}),
+                ),
                 Spacer(flex: 2),
                 Image(
                   image: AssetImage('images/logo.png'),
@@ -63,10 +77,46 @@ class _WelcomeState extends State<Welcome> {
                     onPressed: () =>
                         {Navigator.of(context).pushNamed('/signup')},
                     minWidth: 250),
-                Spacer(flex: 2)
+                _aboutButton(),
+                Spacer(flex: 2),
               ],
+
             )),
           ),
         ));
   }
+//}
+
+Widget _aboutButton() {
+  return Padding(
+    padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+    child: GestureDetector(
+      onTap: () => {Navigator.of(context).pushNamed('/about')},
+      child: RichText(
+        text: TextSpan(
+          children: [
+            TextSpan(
+              text: 'Learn about the BeerGarden in ',
+              style: TextStyle(
+                color: Colors.white,
+                fontFamily: 'Alata',
+                fontSize: 17.0,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            TextSpan(
+              text: 'Info',
+              style: TextStyle(
+                color: Colors.white,
+                fontFamily: 'Alata',
+                fontSize: 17.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+}
 }
