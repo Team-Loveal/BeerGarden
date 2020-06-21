@@ -13,7 +13,7 @@ Available NOW at Google Play store 👉 [BeerGarden](https://play.google.com/sto
 
 ### Here's a preview of the intro screen:
 
-![BeerGarden1](./images/30178.jpg)
+![BeerGarden1](./images/30178.jpg = 250x400)
 
 ### This is a preview of the result screen:
 
