@@ -55,13 +55,11 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 😸  Garrett Chun  -  [![alt text][1.1]][3]       [![alt text][1.2]][4]
 
+🌝  Yuya Harada - [![alt text][1.1]][5]
 
+🐸  Riku Kawano - [![alt text][1.1]][6]
 
-🌝  [Yuya Harada](https://github.com/yuya-h-29)
-
-🐸  [Riku Kawano](https://github.com/rikukawano)
-
-🦄  [Yurika Namba](https://github.com/yurikanamba)
+🦄  Yurika Namba - [![alt text][1.1]][7]       [![alt text][1.2]][8]
 
 [1.1]: http://i.imgur.com/9I6NRUm.png
 [1.2]: http://i.imgur.com/wWzX9uB.png
@@ -71,14 +69,13 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 [3]: http://www.github.com/Kapakahi
 [4]: http://www.twitter.com/KapakahiCoder
-[3]: http://www.github.com/Kapakahi
-[2]: http://www.github.com/Kapakahi
-[2]: http://www.github.com/Kapakahi
-[2]: http://www.github.com/Kapakahi
-[2]: http://www.github.com/Kapakahi
 
+[5]: https://github.com/yuya-h-29
 
+[6]: https://github.com/rikukawano
 
+[7]: https://github.com/yurikanamba
+[8]: https://twitter.com/NambaYurika
 
 ## License
 
