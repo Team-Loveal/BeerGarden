@@ -17,7 +17,7 @@ Available NOW at Google Play store 👉 [BeerGarden](https://play.google.com/sto
 
 ### This is a preview of the result screen:
 
-![BeerGarden2](./images/30179.jpg)
+![BeerGarden2](./images/match.jpg)
 
 
 ## Installation
