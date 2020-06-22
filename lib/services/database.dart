@@ -24,7 +24,6 @@ class DatabaseService {
       'about': "",
       'isProfileCreated': false,
       'limitBlur': false,
-      'outOfMatches': false,
     });
   }
 
@@ -144,7 +143,6 @@ class DatabaseService {
       yourPlaceOrMine: snapshot.data['yourPlaceOrMine'],
       isProfileCreated: snapshot.data['isProfileCreated'],
       limitBlur: snapshot.data['limitBlur'],
-      outOfMatches: snapshot.data['outOfMatches'],
     );
   }
 
