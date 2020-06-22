@@ -104,7 +104,8 @@ class _MatchState extends State<Match> {
                     GestureDetector(
                       onTap: () {
                         Navigator.push(context, MaterialPageRoute(builder: (_) {
-                          return fullScreenImage(context, userData.imgUrl);
+                          return fullScreenImage(
+                              context, userData.imgUrl, sigmaX, sigmaY);
                         }));
                       },
                       child: CircleAvatar(
