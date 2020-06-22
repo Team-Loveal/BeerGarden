@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lovealapp/models/user.dart';
-import 'package:lovealapp/services/auth.dart';
 import 'package:lovealapp/services/database.dart';
 import 'package:lovealapp/shared/loading.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -10,6 +9,9 @@ import 'package:provider/provider.dart';
 import 'message.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:pimp_my_button/pimp_my_button.dart';
+import 'package:lovealapp/widgets/interests.dart';
+import 'package:lovealapp/widgets/questionAnswer.dart';
+import 'package:lovealapp/widgets/fullScreenImage.dart';
 
 //adding for transition animation
 import 'package:page_transition/page_transition.dart';
@@ -92,7 +94,7 @@ class _MatchState extends State<Match> {
                     GestureDetector(
                       onTap: () {
                         Navigator.push(context, MaterialPageRoute(builder: (_) {
-                          return _imageFullScreen(userData.imgUrl);
+                          return fullScreenImage(context, userData.imgUrl);
                         }));
                       },
                       child: CircleAvatar(
@@ -138,7 +140,7 @@ class _MatchState extends State<Match> {
                     width: double.infinity,
                     child: ListView(
                       children: <Widget>[
-                        _buildQuestion("Occupation", userData.occupation),
+                        questionAnswer("Occupation", userData.occupation),
                         Container(
                           margin: const EdgeInsets.symmetric(
                               horizontal: 20.0, vertical: 5.0),
@@ -156,59 +158,59 @@ class _MatchState extends State<Match> {
                                   children: <Widget>[
                                     //WHEN REFACTORING CREATE SEPARATE WIDGET AND MAP THROUGH INTERESTS
                                     if (userData.yodeling)
-                                      _buildInterests("Yodeling"),
+                                      interests("Yodeling"),
                                     if (userData.shopping)
-                                      _buildInterests("Shopping"),
+                                      interests("Shopping"),
                                     if (userData.makingBalloonAnimals)
-                                      _buildInterests("Making Balloon Animals"),
+                                      interests("Making Balloon Animals"),
                                     if (userData.cooking)
-                                      _buildInterests("Cooking"),
+                                      interests("Cooking"),
                                     if (userData.painting)
-                                      _buildInterests("Painting"),
+                                      interests("Painting"),
                                     if (userData.movies)
-                                      _buildInterests("Movies"),
+                                      interests("Movies"),
                                     if (userData.sports)
-                                      _buildInterests("Sports"),
+                                      interests("Sports"),
                                     if (userData.writing)
-                                      _buildInterests("Writing"),
+                                      interests("Writing"),
                                     if (userData.drinking)
-                                      _buildInterests("Drinking"),
+                                      interests("Drinking"),
                                   ],
                                 )
                               ]),
                         ),
-                        _buildQuestion("About me", userData.about),
+                        questionAnswer("About me", userData.about),
                         //ANSWERS
-                        _buildQuestion(
+                        questionAnswer(
                             "🛌 Do you make your bed in the morning?",
                             userData.bed ?? "Ask me!"),
-                        _buildQuestion(
+                        questionAnswer(
                             "🤓 Do you read reviews, or just go with your gut?",
                             userData.reviews ?? "Ask me!"),
-                        _buildQuestion(
+                        questionAnswer(
                             "🌮 If you could only eat one thing for the rest of your life, what would it be?",
                             userData.foreverEat),
-                        _buildQuestion(
+                        questionAnswer(
                             "🌭 If you're eating a meal do you save the best thing for last or eat it first?",
                             userData.bestForLast ?? "Ask me!"),
-                        _buildQuestion("👽 Do you believe in aliens?",
+                        questionAnswer("👽 Do you believe in aliens?",
                             userData.aliens ?? "Ask me!"),
-                        _buildQuestion(
+                        questionAnswer(
                             "🚽 If you were a piece of furniture, what piece of furniture would you be?",
                             userData.furniture ?? "Ask me!"),
-                        _buildQuestion(
+                        questionAnswer(
                             "🏠 Would you rather have a home in the beach or the mountains?",
                             userData.beachOrMountain ?? "Ask me!"),
-                        _buildQuestion(
+                        questionAnswer(
                             "🍱 When you get take-out food do you eat out of the container or transfer the food to dishes?",
                             userData.takeOutFood ?? "Ask me!"),
-                        _buildQuestion(
+                        questionAnswer(
                             "🏝 If you were deserted on an island what items would you bring with you?",
                             userData.desertedIsland ?? "Ask me!"),
-                        _buildQuestion(
+                        questionAnswer(
                             "💒 If you were to choose between a glamorous wedding or a small ceremony at the city hall, which would you choose?",
                             userData.wedding ?? "Ask me!"),
-                        _buildQuestion("🏡 Your place or mine?",
+                        questionAnswer("🏡 Your place or mine?",
                             userData.yourPlaceOrMine ?? "Ask me!"),
                         _buildStartChatBtn(userData),
                         //ANSWER MORE QUESTIONS BTN
@@ -317,50 +319,6 @@ class _MatchState extends State<Match> {
             return Loading();
           }
         });
-  }
-
-  Widget _buildInterests(String interest) {
-    return Container(
-        margin: EdgeInsets.only(right: 10),
-        child: OutlineButton(
-            child: Text(interest, style: TextStyle(color: Hexcolor("#8CC63E"))),
-            onPressed: null,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0))));
-  }
-
-  Widget _buildQuestion(String title, String body) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
-      child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(title,
-                style: TextStyle(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.bold,
-                )),
-            SizedBox(height: 5),
-            Text(body, style: TextStyle(fontSize: 16.0))
-          ]),
-    );
-  }
-
-  Widget _imageFullScreen(String src) {
-    return GestureDetector(
-      child: Center(
-        child: Hero(
-          tag: 'imageHero',
-          child: Image.network(
-            src,
-          ),
-        ),
-      ),
-      onTap: () {
-        Navigator.pop(context);
-      },
-    );
   }
 
   Widget _buildStartChatBtn(UserData userData) {
