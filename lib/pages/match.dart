@@ -25,6 +25,9 @@ class _MatchState extends State<Match> {
   int matches;
   bool isProfileCreated;
   bool limitBlur;
+  int lowAge;
+  int highAge;
+  String genderPreference;
 
   double sigmaX = 50;
   double sigmaY = 50;
@@ -42,6 +45,9 @@ class _MatchState extends State<Match> {
         chatID = doc['chatID'];
         matches = doc['matches'];
         limitBlur = doc['limitBlur'];
+        lowAge = doc['lowAge'];
+        highAge = doc['highAge'];
+        genderPreference = doc['genderPreference'];
       });
 
       //decrease blur of active messages if matches have been reset to zero and you are not a new user
@@ -641,6 +647,8 @@ class _MatchState extends State<Match> {
                                                 if (doc['fromID'] != user.uid)
                                                   {
                                                     //check doc['fromID'] gender is equal to my gender pref
+                                                    //ADD GENDER && AGE PREF HERE
+
                                                     Firestore.instance
                                                         .collection("messages")
                                                         .document(
