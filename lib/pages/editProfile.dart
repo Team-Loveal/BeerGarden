@@ -751,7 +751,8 @@ class _EditProfileState extends State<EditProfile> {
                                                               child: Text(value,
                                                                   style: TextStyle(
                                                                       fontSize:
-                                                                          20.0)),
+                                                                          20.0,
+                                                                  backgroundColor: Colors.black)),
                                                             );
                                                           }).toList(),
                                                         ),
