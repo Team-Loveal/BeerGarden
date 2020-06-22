@@ -180,28 +180,30 @@ class _MatchState extends State<Match> {
                                       fontWeight: FontWeight.bold,
                                     )),
                                 SizedBox(height: 5),
-                                Wrap(
-                                  children: <Widget>[
-                                    //WHEN REFACTORING CREATE SEPARATE WIDGET AND MAP THROUGH INTERESTS
-                                    if (userData.yodeling)
-                                      interests("Yodeling"),
-                                    if (userData.shopping)
-                                      interests("Shopping"),
-                                    if (userData.makingBalloonAnimals)
-                                      interests("Making Balloon Animals"),
-                                    if (userData.cooking)
-                                      interests("Cooking"),
-                                    if (userData.painting)
-                                      interests("Painting"),
-                                    if (userData.movies)
-                                      interests("Movies"),
-                                    if (userData.sports)
-                                      interests("Sports"),
-                                    if (userData.writing)
-                                      interests("Writing"),
-                                    if (userData.drinking)
-                                      interests("Drinking"),
-                                  ],
+                                Container(
+                                  margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+                                  height: 40,
+                                  child: ListView(
+                                    scrollDirection: Axis.horizontal,
+                                    children: <Widget>[
+                                      if (userData.yodeling)
+                                        interests("Yodeling"),
+                                      if (userData.shopping)
+                                        interests("Shopping"),
+                                      if (userData.makingBalloonAnimals)
+                                        interests("Making Balloon Animals"),
+                                      if (userData.cooking)
+                                        interests("Cooking"),
+                                      if (userData.painting)
+                                        interests("Painting"),
+                                      if (userData.movies) interests("Movies"),
+                                      if (userData.sports) interests("Sports"),
+                                      if (userData.writing)
+                                        interests("Writing"),
+                                      if (userData.drinking)
+                                        interests("Drinking"),
+                                    ],
+                                  ),
                                 )
                               ]),
                         ),
