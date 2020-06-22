@@ -55,7 +55,7 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 😸  Garrett Chun  -  [![alt text][1.1]][3]       [![alt text][1.2]][4]
 
-🌝  Yuya Harada - [![alt text][1.1]][5]
+🌝  Yuya Harada - [![alt text][1.1]][5]   [![alt text][1.2]][9]
 
 🐸  Riku Kawano - [![alt text][1.1]][6]
 
@@ -72,6 +72,7 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 [4]: http://www.twitter.com/KapakahiCoder
 
 [5]: https://github.com/yuya-h-29
+[9]: https://twitter.com/harahara_29
 
 [6]: https://github.com/rikukawano
 
