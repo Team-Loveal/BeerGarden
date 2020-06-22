@@ -7,15 +7,15 @@ Widget fullScreenImage(
     child: Center(
       child: Hero(
         tag: 'imageHero',
-        child: Container(
-          width: double.infinity,
-          height: double.infinity,
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: NetworkImage(src), fit: BoxFit.fitWidth)),
-          child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: sigmaX, sigmaY: sigmaY),
-              child: Container(color: Colors.black.withOpacity(0))),
+        child: Stack(
+          children: <Widget>[
+            Image(image: NetworkImage(src)),
+            Positioned.fill(
+              child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: sigmaX, sigmaY: sigmaY),
+                  child: Container(color: Colors.black.withOpacity(0))),
+            ),
+          ],
         ),
       ),
     ),
