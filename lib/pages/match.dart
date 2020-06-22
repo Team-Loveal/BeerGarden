@@ -31,6 +31,8 @@ class _MatchState extends State<Match> {
   double sigmaX = 50;
   double sigmaY = 50;
 
+
+
   @override
   void initState() {
     super.initState();
@@ -102,16 +104,30 @@ class _MatchState extends State<Match> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (_) {
-                          return fullScreenImage(context, userData.imgUrl);
-                        }));
-                      },
-                      child: CircleAvatar(
-                        radius: 70,
-                        backgroundImage: NetworkImage(userData.imgUrl),
-                      ),
+                    Stack(
+                      children: <Widget>[
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (_) {
+                              return fullScreenImage(context, userData.imgUrl);
+                            }));
+                          },
+                          child: CircleAvatar(
+                            radius: 70,
+                            backgroundImage: NetworkImage(userData.imgUrl),
+                          ),
+                        ),
+                        Positioned.fill(
+                            child: ClipOval(
+                              child: BackdropFilter(
+                                  filter: ImageFilter.blur(
+                                      sigmaX: 50,
+                                      sigmaY: 50),
+                                  child: Container(
+                                      color: Colors.black.withOpacity(0))),
+                            )),
+                      ],
+
                     ),
                     Text('${userData.nickname},  ${userData.age.toString()}',
                         style: TextStyle(
