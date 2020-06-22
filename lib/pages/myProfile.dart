@@ -8,6 +8,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:lovealapp/widgets/interests.dart';
 import 'package:lovealapp/widgets/questionAnswer.dart';
 import 'package:lovealapp/widgets/fullScreenImage.dart';
+import 'package:lovealapp/services/auth.dart';
 
 class MyProfile extends StatefulWidget {
   @override
@@ -34,10 +35,21 @@ class _MyProfileState extends State<MyProfile> {
                 height: 60.0,
                 child: AppBar(
                   backgroundColor: Hexcolor("#F4AA33"),
+                  title: Row(
+                    children: <Widget>[
+                      FlatButton(
+                        child: Text("Logout",
+                            style:
+                                TextStyle(fontSize: 15.0, color: Colors.white)),
+                        onPressed: () {
+                          showAlertDialog(context);
+                        },
+                      ),
+                    ],
+                  ),
                   actions: <Widget>[
                     FlatButton.icon(
-                      icon: Icon(MdiIcons.accountCog,
-                          size: 28.0, color: Colors.white),
+                      icon: Icon(MdiIcons.cog, size: 28.0, color: Colors.white),
                       label: Text(""),
                       onPressed: () async {
                         Navigator.of(context)
@@ -64,14 +76,14 @@ class _MyProfileState extends State<MyProfile> {
                     ),
                   ],
                   elevation: 0.0,
-                  centerTitle: true,
+                  centerTitle: false,
                   automaticallyImplyLeading: false,
                 ),
               ),
               GestureDetector(
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (_) {
-                    return fullScreenImage(context, userData.imgUrl);
+                    return fullScreenImage(context, userData.imgUrl, 0.0, 0.0);
                   }));
                 },
                 child: CircleAvatar(
@@ -230,5 +242,44 @@ class _MyProfileState extends State<MyProfile> {
     } else {
       return Loading();
     }
+  }
+
+  // displayed to confirm User's logout
+  showAlertDialog(BuildContext context) {
+    Widget cancelButton = FlatButton(
+      child: Text("Cancel",
+          style: TextStyle(
+              color: Hexcolor("#F4AA33"), fontWeight: FontWeight.bold)),
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+    );
+    Widget continueButton = FlatButton(
+      child: Text("Yes",
+          style: TextStyle(
+              color: Hexcolor("#F4AA33"), fontWeight: FontWeight.bold)),
+      onPressed: () async {
+        Navigator.of(context).popUntil((route) => route.isFirst);
+        await AuthService().signOut();
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+      title: Text("Are you sure?"),
+      actions: [
+        cancelButton,
+        continueButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
   }
 }
