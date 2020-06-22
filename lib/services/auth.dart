@@ -76,16 +76,22 @@ class AuthService {
   Future registerWithGoogle() async {
     try {
       GoogleSignIn googleSignIn = GoogleSignIn();
+      print('AAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
       GoogleSignInAccount account = await googleSignIn.signIn();
+      print('acccccounnnntttttttt: ${account}'
+      )
       if (account == null) return false;
+      print('BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB');
       AuthResult result =
           await _auth.signInWithCredential(GoogleAuthProvider.getCredential(
         idToken: (await account.authentication).idToken,
         accessToken: (await account.authentication).accessToken,
       ));
+      print('CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCc');
       FirebaseUser user = result.user;
       print('google login userID: ${user.uid}');
-      print('google login user: $user');
+      print('google login user: ${user}');
+      print('google account: ${account}');
       await DatabaseService(uid: user.uid).setUserData(account.email);
       return _userFromFirebaseUser(user);
     } catch (e) {
