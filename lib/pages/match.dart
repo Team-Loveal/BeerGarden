@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lovealapp/models/user.dart';
-import 'package:lovealapp/services/auth.dart';
 import 'package:lovealapp/services/database.dart';
 import 'package:lovealapp/shared/loading.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -10,6 +9,9 @@ import 'package:provider/provider.dart';
 import 'message.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:pimp_my_button/pimp_my_button.dart';
+import 'package:lovealapp/widgets/interests.dart';
+import 'package:lovealapp/widgets/questionAnswer.dart';
+import 'package:lovealapp/widgets/fullScreenImage.dart';
 
 //adding for transition animation
 import 'package:page_transition/page_transition.dart';
@@ -75,522 +77,163 @@ class _MatchState extends State<Match> {
                 .collection('users')
                 .document(user.uid)
                 .updateData({'limitBlur': true});
-            //TODO limitBlur to false again every day along with matches
+            //Todo limitBlur to false again every day along with matches
           });
         });
       }
     });
   }
 
+  void startChat() async {
+    Firestore.instance
+        .collection("messages")
+        .document(chatID)
+        .updateData({'matched': true});
+  }
+
   @override
   Widget build(BuildContext context) {
-    final AuthService _auth = AuthService();
     final myUserData = Provider.of<UserData>(context);
     print(limitBlur);
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: matchID).userData,
         builder: (context, snapshot) {
-          print('I AM MATCH ID $matchID');
           UserData userData = snapshot.data;
           if (snapshot.hasData && matches > 0) {
             return Scaffold(
-              body: Container(
-                height: double.infinity,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [Hexcolor("#FFF1BA"), Hexcolor("#F4AA33")],
-                  stops: [0.2, 0.7],
-                )),
-                child: ListView(
+              backgroundColor: Hexcolor("#F4AA33"),
+              appBar: PreferredSize(
+                preferredSize:
+                    Size.fromHeight(MediaQuery.of(context).size.height * 0.30),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    //TODAY'S MATCH
-                    Container(
-                        margin: const EdgeInsets.symmetric(
-                            vertical: 10.0, horizontal: 20.0),
-                        child: Row(
-                          children: <Widget>[
-                            Text("Today's Match",
-                                style: TextStyle(
-                                  fontSize: 40.0,
-                                  fontWeight: FontWeight.bold,
-                                )),
-                            //Adding logout icon to header
-                            FlatButton.icon(
-                              icon: Icon(Icons.person),
-                              label: Text("logout"),
-                              onPressed: () async {
-                                Navigator.of(context)
-                                    .popUntil((route) => route.isFirst);
-                                await _auth.signOut();
-                              },
-                            ),
-                          ],
-                        )),
-                    //NICKNAME AND LOCATION
-                    Center(
-                      child: Container(
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text('${userData.nickname}, ${userData.age}',
-                                  style: TextStyle(
-                                      fontSize: 28,
-                                      fontWeight: FontWeight.bold)),
-                              Row(
-                                children: <Widget>[
-                                  Icon(MdiIcons.mapMarker,
-                                      size: 18, color: Colors.grey),
-                                  Text('${userData.location}, Japan',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.grey))
-                                ],
-                              ),
-                            ]),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (_) {
+                          return fullScreenImage(context, userData.imgUrl);
+                        }));
+                      },
+                      child: CircleAvatar(
+                        radius: 70,
+                        backgroundImage: NetworkImage(userData.imgUrl),
                       ),
                     ),
-                    //IMAGE
+                    Text('${userData.nickname},  ${userData.age.toString()}',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 32,
+                            fontWeight: FontWeight.bold)),
                     Container(
-                      margin: EdgeInsets.symmetric(horizontal: 30.0),
-                      width: 380,
-                      height: 380,
-                      child: Stack(
+                      margin: EdgeInsets.only(top: 5.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Stack(
-                            children: <Widget>[
-                              Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  height: 380,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    child: Image.network(userData.imgUrl,
-                                        fit: BoxFit.cover),
-                                  )),
-                              Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  height: 380,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    child: BackdropFilter(
-                                        filter: ImageFilter.blur(
-                                            sigmaX: sigmaX, sigmaY: sigmaY),
-                                        child: Container(
-                                            color:
-                                                Colors.black.withOpacity(0))),
-                                  )),
-                            ],
-                          ),
+                          Icon(MdiIcons.mapMarker,
+                              size: 20.0, color: Colors.white),
+                          Text('${userData.location}, Japan',
+                              style: TextStyle(color: Colors.white))
                         ],
                       ),
                     ),
-                    //OCCUPATION
-                    Container(
-                      height: 50,
-                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text('Occupation',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                )),
-                            SizedBox(height: 5),
-                            Expanded(
-                              child: Text(userData.occupation,
-                                  style: TextStyle(fontSize: 16)),
-                            )
-                          ]),
-                    ),
-                    //INTERESTS
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text('Interests',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                )),
-                            SizedBox(height: 5),
-                            Wrap(
-                              children: <Widget>[
-                                //WHEN REFACTORING CREATE SEPARATE WIDGET AND MAP THROUGH INTERESTS
-                                if (userData.yodeling)
-                                  Container(
-                                      margin: EdgeInsets.only(right: 10),
-                                      child: OutlineButton(
-                                          child: Text("Yodeling",
-                                              style: TextStyle(
-                                                  color: Colors.pink)),
-                                          onPressed: null,
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                      10.0)))),
-                                if (userData.shopping)
-                                  Container(
-                                      margin: EdgeInsets.only(right: 10),
-                                      child: OutlineButton(
-                                          child: Text("Shopping",
-                                              style: TextStyle(
-                                                  color: Colors.pink)),
-                                          onPressed: null,
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                      10.0)))),
-                                if (userData.makingBalloonAnimals)
-                                  Container(
-                                      margin: EdgeInsets.only(right: 10),
-                                      child: OutlineButton(
-                                          child: Text("MakingBalloonAnimals",
-                                              style: TextStyle(
-                                                  color: Colors.pink)),
-                                          onPressed: null,
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                      10.0)))),
-                                if (userData.cooking)
-                                  Container(
-                                      margin: EdgeInsets.only(right: 10),
-                                      child: OutlineButton(
-                                          child: Text("Cooking",
-                                              style: TextStyle(
-                                                  color: Colors.pink)),
-                                          onPressed: null,
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                      10.0)))),
-                                if (userData.painting)
-                                  Container(
-                                      margin: EdgeInsets.only(right: 10),
-                                      child: OutlineButton(
-                                          child: Text("Painting",
-                                              style: TextStyle(
-                                                  color: Colors.pink)),
-                                          onPressed: null,
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                      10.0)))),
-                                if (userData.movies)
-                                  Container(
-                                      margin: EdgeInsets.only(right: 10),
-                                      child: OutlineButton(
-                                          child: Text("Movies",
-                                              style: TextStyle(
-                                                  color: Colors.pink)),
-                                          onPressed: null,
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                      10.0)))),
-                                if (userData.sports)
-                                  Container(
-                                      margin: EdgeInsets.only(right: 10),
-                                      child: OutlineButton(
-                                          child: Text("Sports",
-                                              style: TextStyle(
-                                                  color: Colors.pink)),
-                                          onPressed: null,
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                      10.0)))),
-                                if (userData.writing)
-                                  Container(
-                                      margin: EdgeInsets.only(right: 10),
-                                      child: OutlineButton(
-                                          child: Text("Writing",
-                                              style: TextStyle(
-                                                  color: Colors.pink)),
-                                          onPressed: null,
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                      10.0)))),
-                                if (userData.drinking)
-                                  Container(
-                                      margin: EdgeInsets.only(right: 10),
-                                      child: OutlineButton(
-                                          child: Text("Drinking",
-                                              style: TextStyle(
-                                                  color: Colors.pink)),
-                                          onPressed: null,
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                      10.0)))),
-                              ],
-                            )
-                          ]),
-                    ),
-                    //ABOUT ME
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text('About me',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                )),
-                            SizedBox(height: 5),
-                            Text(userData.about, style: TextStyle(fontSize: 16))
-                          ]),
-                    ),
-                    //ANSWERS
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text('🛌Do you make your bed in the morning?',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                )),
-                            SizedBox(height: 5),
-                            Text(
-                                userData.bed == ""
-                                    ? "start a conversation and ask!"
-                                    : userData.bed,
-                                style: TextStyle(fontSize: 16)),
-                          ]),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                      child: Wrap(children: <Widget>[
-                        Text('🤓Do you read reviews, or just go with your gut?',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            )),
-                        SizedBox(height: 5),
-                        Text(
-                            userData.reviews == ""
-                                ? "start a conversation and ask!"
-                                : userData.reviews,
-                            style: TextStyle(fontSize: 16)),
-                      ]),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                      child: Wrap(children: <Widget>[
-                        Text(
-                            '🌮If you could only eat one thing for the rest of your life, what would it be?',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            )),
-                        SizedBox(height: 5),
-                        Text(
-                            userData.foreverEat == ""
-                                ? "start a conversation and ask!"
-                                : userData.foreverEat,
-                            style: TextStyle(fontSize: 16)),
-                      ]),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                      child: Wrap(children: <Widget>[
-                        Text(
-                            "🌭If you're eating a meal do you save the best thing for last or eat it first?",
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            )),
-                        SizedBox(height: 5),
-                        Text(
-                            userData.bestForLast == ""
-                                ? "start a conversation and ask!"
-                                : userData.bestForLast,
-                            style: TextStyle(fontSize: 16)),
-                      ]),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text('👽Do you believe in aliens?',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                )),
-                            SizedBox(height: 5),
-                            Text(
-                                userData.aliens == ""
-                                    ? "start a conversation and ask!"
-                                    : userData.aliens,
-                                style: TextStyle(fontSize: 16))
-                          ]),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                                '🚽If you were a piece of furniture, what piece of furniture would you be?',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                )),
-                            SizedBox(height: 5),
-                            Text(
-                                userData.furniture ??
-                                    "start a conversation and ask!",
-                                style: TextStyle(fontSize: 16))
-                          ]),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                                'Would you rather have a home in the beach or the mountains?',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                )),
-                            SizedBox(height: 5),
-                            Text(
-                                userData.beachOrMountain ??
-                                    "start a conversation and ask!",
-                                style: TextStyle(fontSize: 16))
-                          ]),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                                '🍱When you get take-out food do you eat out of the container or transfer the food to dishes?',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                )),
-                            SizedBox(height: 5),
-                            Text(
-                                userData.takeOutFood ??
-                                    "start a conversation and ask!",
-                                style: TextStyle(fontSize: 16))
-                          ]),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                                '🏝If you were deserted on an island what items would you bring with you?',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                )),
-                            SizedBox(height: 5),
-                            Text(
-                                userData.desertedIsland ??
-                                    "start a conversation and ask!",
-                                style: TextStyle(fontSize: 16))
-                          ]),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                                '💒If you were to choose between a glamorous wedding or a small ceremony at the city hall, which would you choose?',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                )),
-                            SizedBox(height: 5),
-                            Text(
-                                userData.wedding ??
-                                    "start a conversation and ask!",
-                                style: TextStyle(fontSize: 16))
-                          ]),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text('🏡Your place or mine?',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                )),
-                            SizedBox(height: 5),
-                            Text(
-                                userData.yourPlaceOrMine ??
-                                    "start a conversation and ask!",
-                                style: TextStyle(fontSize: 16))
-                          ]),
-                    ),
-                    //START A CONVERSATION BUTTON
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(60, 5, 60, 30),
-                      child: ButtonTheme(
-                        height: 40.0,
-                        child: RaisedButton(
-                            child: Text('Share a 🍺 and chat!',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                )),
-                            color: Colors.lightGreen,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            onPressed: () => {
-                                  //set chatted to true in db
-                                  Firestore.instance
-                                      .collection("messages")
-                                      .document(chatID)
-                                      .updateData({'matched': true}),
-                                  Navigator.push(
-                                    context,
-                                    PageTransition(
-                                        type: PageTransitionType.rightToLeft,
-//                                        duration: Duration(seconds: 1),
-                                        child: Message(
-                                          chatRoomID: chatID,
-                                          matchID: matchID,
-                                          nickname: userData.nickname,
-                                          imgUrl: userData.imgUrl,
-                                        )),
-                                  )
-                                }),
-                      ),
-                    ),
                   ],
+                ),
+              ),
+              body: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30.0),
+                    topRight: Radius.circular(30.0),
+                  ),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30.0),
+                    topRight: Radius.circular(30.0),
+                  ),
+                  child: Container(
+                    height: double.infinity,
+                    width: double.infinity,
+                    child: ListView(
+                      children: <Widget>[
+                        questionAnswer("Occupation", userData.occupation),
+                        Container(
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 5.0),
+                          child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text('Interests',
+                                    style: TextStyle(
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.bold,
+                                    )),
+                                SizedBox(height: 5),
+                                Wrap(
+                                  children: <Widget>[
+                                    //WHEN REFACTORING CREATE SEPARATE WIDGET AND MAP THROUGH INTERESTS
+                                    if (userData.yodeling)
+                                      interests("Yodeling"),
+                                    if (userData.shopping)
+                                      interests("Shopping"),
+                                    if (userData.makingBalloonAnimals)
+                                      interests("Making Balloon Animals"),
+                                    if (userData.cooking)
+                                      interests("Cooking"),
+                                    if (userData.painting)
+                                      interests("Painting"),
+                                    if (userData.movies)
+                                      interests("Movies"),
+                                    if (userData.sports)
+                                      interests("Sports"),
+                                    if (userData.writing)
+                                      interests("Writing"),
+                                    if (userData.drinking)
+                                      interests("Drinking"),
+                                  ],
+                                )
+                              ]),
+                        ),
+                        questionAnswer("About me", userData.about),
+                        //ANSWERS
+                        questionAnswer(
+                            "🛌 Do you make your bed in the morning?",
+                            userData.bed ?? "Ask me!"),
+                        questionAnswer(
+                            "🤓 Do you read reviews, or just go with your gut?",
+                            userData.reviews ?? "Ask me!"),
+                        questionAnswer(
+                            "🌮 If you could only eat one thing for the rest of your life, what would it be?",
+                            userData.foreverEat),
+                        questionAnswer(
+                            "🌭 If you're eating a meal do you save the best thing for last or eat it first?",
+                            userData.bestForLast ?? "Ask me!"),
+                        questionAnswer("👽 Do you believe in aliens?",
+                            userData.aliens ?? "Ask me!"),
+                        questionAnswer(
+                            "🚽 If you were a piece of furniture, what piece of furniture would you be?",
+                            userData.furniture ?? "Ask me!"),
+                        questionAnswer(
+                            "🏠 Would you rather have a home in the beach or the mountains?",
+                            userData.beachOrMountain ?? "Ask me!"),
+                        questionAnswer(
+                            "🍱 When you get take-out food do you eat out of the container or transfer the food to dishes?",
+                            userData.takeOutFood ?? "Ask me!"),
+                        questionAnswer(
+                            "🏝 If you were deserted on an island what items would you bring with you?",
+                            userData.desertedIsland ?? "Ask me!"),
+                        questionAnswer(
+                            "💒 If you were to choose between a glamorous wedding or a small ceremony at the city hall, which would you choose?",
+                            userData.wedding ?? "Ask me!"),
+                        questionAnswer("🏡 Your place or mine?",
+                            userData.yourPlaceOrMine ?? "Ask me!"),
+                        _buildStartChatBtn(userData),
+                        //ANSWER MORE QUESTIONS BTN
+                      ],
+                    ),
+                  ),
                 ),
               ),
             );
@@ -695,5 +338,37 @@ class _MatchState extends State<Match> {
             return Loading();
           }
         });
+  }
+
+  Widget _buildStartChatBtn(UserData userData) {
+    return Container(
+      height: 60.0,
+      margin: EdgeInsets.symmetric(horizontal: 40.0, vertical: 30.0),
+      child: RaisedButton(
+          child: Text('Share a 🍺 and chat!',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              )),
+          color: Colors.lightGreen,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+          ),
+          onPressed: () => {
+                startChat(),
+                Navigator.push(
+                  context,
+                  PageTransition(
+                      type: PageTransitionType.rightToLeft,
+                      child: Message(
+                        chatRoomID: chatID,
+                        matchID: matchID,
+                        nickname: userData.nickname,
+                        imgUrl: userData.imgUrl,
+                      )),
+                ),
+              }),
+    );
   }
 }

@@ -172,66 +172,69 @@ class _MessageState extends State<Message> {
         backgroundColor: Hexcolor("#F4AA33"),
         appBar: PreferredSize(
           preferredSize:
-              Size.fromHeight(MediaQuery.of(context).size.height * 0.15),
-          child: AppBar(
-            backgroundColor: Hexcolor("#F4AA33"),
-            leading: IconButton(
-                onPressed: () {
+              Size.fromHeight(MediaQuery.of(context).size.height * 0.1),
+          child: Container(
+            margin: EdgeInsets.only(top: 10.0),
+            child: AppBar(
+              backgroundColor: Hexcolor("#F4AA33"),
+              leading: IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      PageTransition(
+                          type: PageTransitionType.scale,
+                          child: NavigationHome(newIdx: profileIndex)),
+                    );
+                  },
+                  icon: Icon(MdiIcons.arrowLeft)),
+              title: GestureDetector(
+                onTap: () {
                   Navigator.push(
-                    context,
-                    PageTransition(
-                        type: PageTransitionType.scale,
-                        child: NavigationHome(newIdx: profileIndex)),
-                  );
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Profile(
+                              userID: matchID,
+                              nickname: nickname,
+                              imgUrl: imgUrl,
+                              chatRoomID: chatRoomID)));
                 },
-                icon: Icon(MdiIcons.arrowLeft)),
-            flexibleSpace: GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => Profile(
-                            userID: matchID,
-                            nickname: nickname,
-                            imgUrl: imgUrl,
-                            chatRoomID: chatRoomID)));
-              },
-              child: Container(
-                child: Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Stack(
-                        children: <Widget>[
-                          CircleAvatar(
-                            radius: 29,
-                            backgroundImage: NetworkImage(imgUrl),
-                          ),
-                          Container(
-                              width: 58,
-                              height: 58,
-                              child: ClipOval(
-                                child: BackdropFilter(
-                                    filter: ImageFilter.blur(
-                                        sigmaX: sigmaX ?? 50,
-                                        sigmaY: sigmaY ?? 50),
-                                    child: Container(
-                                        color: Colors.black.withOpacity(0))),
-                              )),
-                        ],
-                      ),
-                      SizedBox(width: 10.0),
-                      Text(
-                        nickname,
-                        style: TextStyle(fontSize: 30, color: Colors.white),
-                      ),
-                    ],
+                child: Container(
+                  child: Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Stack(
+                          children: <Widget>[
+                            CircleAvatar(
+                              radius: 29,
+                              backgroundImage: NetworkImage(imgUrl),
+                            ),
+                            Container(
+                                width: 58,
+                                height: 58,
+                                child: ClipOval(
+                                  child: BackdropFilter(
+                                      filter: ImageFilter.blur(
+                                          sigmaX: sigmaX ?? 50,
+                                          sigmaY: sigmaY ?? 50),
+                                      child: Container(
+                                          color: Colors.black.withOpacity(0))),
+                                )),
+                          ],
+                        ),
+                        SizedBox(width: 10.0),
+                        Text(
+                          nickname,
+                          style: TextStyle(fontSize: 30, color: Colors.white),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
+              elevation: 0.0,
+              centerTitle: true,
             ),
-            elevation: 0.0,
-            centerTitle: true,
           ),
         ),
         body: GestureDetector(
