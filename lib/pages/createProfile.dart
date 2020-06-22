@@ -137,126 +137,191 @@ class _CreateProfileState extends State<CreateProfile> {
                                 Padding(
                                   padding: const EdgeInsets.all(5.0),
                                   child: Container(
-//                                    color: Colors.white,
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: <Widget>[
-
-                                        Text('Age'),
-                                        Expanded(
-                                          child: DropdownButtonFormField<int>(
-                                            validator: (value) => value == null
-                                                ? 'Please tell us your age'
-                                                : null,
-                                            value: age,
-                                            iconSize: 24,
-                                            onChanged: (int newValue) {
-                                              setState(() {
-                                                age = newValue;
-                                              });
-                                            },
-                                            items: <int>[
-                                              18,
-                                              19,
-                                              20,
-                                              21,
-                                              22,
-                                              23,
-                                              24,
-                                              25,
-                                              26,
-                                              27,
-                                              28,
-                                              29,
-                                              30,
-                                              31,
-                                              32,
-                                              33,
-                                              34,
-                                              35,
-                                              36,
-                                              37,
-                                              38,
-                                              39,
-                                              40,
-                                              41,
-                                              42,
-                                              43,
-                                              44,
-                                              45,
-                                              46,
-                                              47,
-                                              48,
-                                              49,
-                                              50,
-                                              51,
-                                              52,
-                                              53,
-                                              54,
-                                              55,
-                                              56,
-                                              57,
-                                              58,
-                                              59,
-                                              60,
-                                              61,
-                                              62,
-                                              63,
-                                              64,
-                                              65,
-                                              66,
-                                              67,
-                                              68,
-                                              69,
-                                              70,
-                                              71,
-                                              72,
-                                              73,
-                                              74,
-                                              75,
-                                              76,
-                                              77,
-                                              78,
-                                              79,
-                                              80
-                                            ].map<DropdownMenuItem<int>>(
-                                                (int value) {
-                                              return DropdownMenuItem<int>(
-                                                value: value,
-                                                child: Text(value.toString()),
-                                              );
-                                            }).toList(),
+                                        Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.30,
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(20),
+                                            ),
+                                          ),
+                                          child: Row(
+                                            children: <Widget>[
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Text('Age'),
+                                              ),
+                                              Expanded(
+                                                child: DropdownButtonFormField<
+                                                    int>(
+                                                  decoration: InputDecoration(
+                                                      enabledBorder: InputBorder.none,
+                                                  ),
+                                                  validator: (value) => value ==
+                                                          null
+                                                      ? 'Please tell us your age'
+                                                      : null,
+                                                  value: age,
+                                                  iconSize: 24,
+                                                  iconEnabledColor: Colors.orangeAccent,
+                                                  onChanged: (int newValue) {
+                                                    setState(() {
+                                                      age = newValue;
+                                                    });
+                                                  },
+                                                  items: <int>[
+                                                    18,
+                                                    19,
+                                                    20,
+                                                    21,
+                                                    22,
+                                                    23,
+                                                    24,
+                                                    25,
+                                                    26,
+                                                    27,
+                                                    28,
+                                                    29,
+                                                    30,
+                                                    31,
+                                                    32,
+                                                    33,
+                                                    34,
+                                                    35,
+                                                    36,
+                                                    37,
+                                                    38,
+                                                    39,
+                                                    40,
+                                                    41,
+                                                    42,
+                                                    43,
+                                                    44,
+                                                    45,
+                                                    46,
+                                                    47,
+                                                    48,
+                                                    49,
+                                                    50,
+                                                    51,
+                                                    52,
+                                                    53,
+                                                    54,
+                                                    55,
+                                                    56,
+                                                    57,
+                                                    58,
+                                                    59,
+                                                    60,
+                                                    61,
+                                                    62,
+                                                    63,
+                                                    64,
+                                                    65,
+                                                    66,
+                                                    67,
+                                                    68,
+                                                    69,
+                                                    70,
+                                                    71,
+                                                    72,
+                                                    73,
+                                                    74,
+                                                    75,
+                                                    76,
+                                                    77,
+                                                    78,
+                                                    79,
+                                                    80
+                                                  ].map<DropdownMenuItem<int>>(
+                                                      (int value) {
+                                                    return DropdownMenuItem<
+                                                        int>(
+                                                      value: value,
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                left: 10.0),
+                                                        child: Text(
+                                                            value.toString()),
+                                                      ),
+                                                    );
+                                                  }).toList(),
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
-                                        Text(
-                                          "Gender",
-                                        ),
-                                        Expanded(
-                                          child: DropdownButtonFormField<String>(
-                                            validator: (value) => value == null
-                                                ? 'Please tell us your gender'
-                                                : null,
-                                            value: gender,
-                                            iconSize: 24,
-                                            onChanged: (String newValue) {
-                                              setState(() {
-                                                gender = newValue;
-                                              });
-                                            },
-                                            items: <String>[
-                                              'Female',
-                                              'Male',
-                                              'Rather not say'
-                                            ].map<DropdownMenuItem<String>>(
-                                                (String value) {
-                                              return DropdownMenuItem<String>(
-                                                value: value,
-                                                child: Text(value),
-                                              );
-                                            }).toList(),
+                                        Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.5,
+                                         decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(20),
+                                            ),
                                           ),
-                                        ),
+                                          child: Row(
+                                            children: <Widget>[
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Text(
+                                                  "Gender",
+                                                ),
+                                              ),
+                                              Expanded(
+                                                child: DropdownButtonFormField<
+                                                    String>(
+                                                  decoration: InputDecoration(
+                                                    enabledBorder: InputBorder.none),
+                                                  validator: (value) => value ==
+                                                          null
+                                                      ? 'Please tell us your gender'
+                                                      : null,
+                                                  value: gender,
+                                                  iconSize: 24,
+                                                  iconEnabledColor: Colors.orangeAccent,
+                                                  onChanged: (String newValue) {
+                                                    setState(() {
+                                                      gender = newValue;
+                                                    });
+                                                  },
+                                                  items: <String>[
+                                                    'Female',
+                                                    'Male',
+                                                    'Rather not say'
+                                                  ].map<
+                                                          DropdownMenuItem<
+                                                              String>>(
+                                                      (String value) {
+                                                    return DropdownMenuItem<
+                                                        String>(
+                                                      value: value,
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(left: 10),
+                                                        child: Text(value),
+                                                      ),
+                                                    );
+                                                  }).toList(),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        )
                                       ],
                                     ),
                                   ),
@@ -387,7 +452,8 @@ class _CreateProfileState extends State<CreateProfile> {
                                           label: Text(
                                             'Games',
                                             style:
-                                                TextStyle(color: Colors.white),
+                                            yodeling ?
+                                                TextStyle(color: Colors.white) : TextStyle(color: Colors.black),
                                           ),
                                           selected: yodeling,
                                           onSelected: (isSelected) {
@@ -395,6 +461,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                               yodeling = isSelected;
                                             });
                                           },
+                                          backgroundColor: Colors.white,
                                           selectedColor: Hexcolor("#8CC63E"),
                                         ),
                                         FilterChip(
@@ -402,7 +469,8 @@ class _CreateProfileState extends State<CreateProfile> {
                                           label: Text(
                                             'Shopping',
                                             style:
-                                                TextStyle(color: Colors.white),
+                                            shopping ?
+                                                TextStyle(color: Colors.white) : TextStyle(color: Colors.black),
                                           ),
                                           selected: shopping,
                                           onSelected: (isSelected) {
@@ -410,14 +478,16 @@ class _CreateProfileState extends State<CreateProfile> {
                                               shopping = isSelected;
                                             });
                                           },
+                                          backgroundColor: Colors.white,
                                           selectedColor: Hexcolor("#8CC63E"),
                                         ),
                                         FilterChip(
                                           showCheckmark: false,
                                           label: Text(
                                             'Photography',
-                                            style:
-                                                TextStyle(color: Colors.white),
+                                              style:
+                                              makingBalloonAnimals ?
+                                              TextStyle(color: Colors.white) : TextStyle(color: Colors.black),
                                           ),
                                           selected: makingBalloonAnimals,
                                           onSelected: (isSelected) {
@@ -425,14 +495,15 @@ class _CreateProfileState extends State<CreateProfile> {
                                               makingBalloonAnimals = isSelected;
                                             });
                                           },
+                                          backgroundColor: Colors.white,
                                           selectedColor: Hexcolor("#8CC63E"),
                                         ),
                                         FilterChip(
                                           showCheckmark: false,
                                           label: Text(
                                             'Art',
-                                            style:
-                                                TextStyle(color: Colors.white),
+                                            style: painting ?
+                                            TextStyle(color: Colors.white) : TextStyle(color: Colors.black),
                                           ),
                                           selected: painting,
                                           onSelected: (isSelected) {
@@ -440,6 +511,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                               painting = isSelected;
                                             });
                                           },
+                                          backgroundColor: Colors.white,
                                           selectedColor: Hexcolor("#8CC63E"),
                                         ),
                                         FilterChip(
@@ -447,7 +519,8 @@ class _CreateProfileState extends State<CreateProfile> {
                                           label: Text(
                                             'Traveling',
                                             style:
-                                                TextStyle(color: Colors.white),
+                                            writing ?
+                                            TextStyle(color: Colors.white) : TextStyle(color: Colors.black),
                                           ),
                                           selected: writing,
                                           onSelected: (isSelected) {
@@ -455,6 +528,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                               writing = isSelected;
                                             });
                                           },
+                                          backgroundColor: Colors.white,
                                           selectedColor: Hexcolor("#8CC63E"),
                                         ),
                                         FilterChip(
@@ -462,7 +536,8 @@ class _CreateProfileState extends State<CreateProfile> {
                                           label: Text(
                                             'Sports',
                                             style:
-                                                TextStyle(color: Colors.white),
+                                            sports ?
+                                            TextStyle(color: Colors.white) : TextStyle(color: Colors.black),
                                           ),
                                           selected: sports,
                                           onSelected: (isSelected) {
@@ -470,6 +545,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                               sports = isSelected;
                                             });
                                           },
+                                          backgroundColor: Colors.white,
                                           selectedColor: Hexcolor("#8CC63E"),
                                         ),
                                         FilterChip(
@@ -477,7 +553,8 @@ class _CreateProfileState extends State<CreateProfile> {
                                           label: Text(
                                             'Movies',
                                             style:
-                                                TextStyle(color: Colors.white),
+                                            movies ?
+                                            TextStyle(color: Colors.white) : TextStyle(color: Colors.black),
                                           ),
                                           selected: movies,
                                           onSelected: (isSelected) {
@@ -485,6 +562,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                               movies = isSelected;
                                             });
                                           },
+                                          backgroundColor: Colors.white,
                                           selectedColor: Hexcolor("#8CC63E"),
                                         ),
                                         FilterChip(
@@ -492,7 +570,8 @@ class _CreateProfileState extends State<CreateProfile> {
                                           label: Text(
                                             'Drinking',
                                             style:
-                                                TextStyle(color: Colors.white),
+                                            drinking ?
+                                            TextStyle(color: Colors.white) : TextStyle(color: Colors.black),
                                           ),
                                           selected: drinking,
                                           onSelected: (isSelected) {
@@ -500,6 +579,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                               drinking = isSelected;
                                             });
                                           },
+                                          backgroundColor: Colors.white,
                                           selectedColor: Hexcolor("#8CC63E"),
                                         ),
                                         FilterChip(
@@ -507,7 +587,8 @@ class _CreateProfileState extends State<CreateProfile> {
                                           label: Text(
                                             'Karaoke',
                                             style:
-                                                TextStyle(color: Colors.white),
+                                            cooking?
+                                            TextStyle(color: Colors.white) : TextStyle(color: Colors.black),
                                           ),
                                           selected: cooking,
                                           onSelected: (isSelected) {
@@ -515,6 +596,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                               cooking = isSelected;
                                             });
                                           },
+                                          backgroundColor: Colors.white,
                                           selectedColor: Hexcolor("#8CC63E"),
                                         ),
                                       ],
@@ -528,32 +610,48 @@ class _CreateProfileState extends State<CreateProfile> {
                                     style: TextStyle(fontSize: 30.0),
                                   ),
                                 ),
-                                Text(
-                                  "Show Me",
-                                  style: TextStyle(fontSize: 20.0),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    "Show Me",
+                                    style: TextStyle(fontSize: 20.0),
+                                  ),
                                 ),
                                 Center(
-                                  child: DropdownButton<String>(
-                                    isExpanded: true,
-                                    value: genderPreference,
-                                    iconSize: 24,
-                                    onChanged: (String newValue) {
-                                      setState(() {
-                                        genderPreference = newValue;
-                                      });
-                                    },
-                                    items: <String>[
-                                      'Female',
-                                      'Male',
-                                      'Everyone'
-                                    ].map<DropdownMenuItem<String>>(
-                                        (String value) {
-                                      return DropdownMenuItem<String>(
-                                        value: value,
-                                        child: Text(value,
-                                            style: TextStyle(fontSize: 20.0)),
-                                      );
-                                    }).toList(),
+                                  child: Container(
+                                    width: MediaQuery.of(context).size.width * 0.7,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.all(Radius.circular(20),)
+                                    ),
+                                    child: DropdownButtonHideUnderline(
+                                      child: DropdownButton<String>(
+                                        isExpanded: true,
+                                        value: genderPreference,
+                                        iconSize: 24,
+                                        iconEnabledColor: Colors.orangeAccent,
+                                        onChanged: (String newValue) {
+                                          setState(() {
+                                            genderPreference = newValue;
+                                          });
+                                        },
+                                        items: <String>[
+                                          'Female',
+                                          'Male',
+                                          'Everyone'
+                                        ].map<DropdownMenuItem<String>>(
+                                            (String value) {
+                                          return DropdownMenuItem<String>(
+                                            value: value,
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(10.0),
+                                              child: Text(value,
+                                                  style: TextStyle(fontSize: 20.0)),
+                                            ),
+                                          );
+                                        }).toList(),
+                                      ),
+                                    ),
                                   ),
                                 ),
                                 Container(
