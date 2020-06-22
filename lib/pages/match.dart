@@ -92,7 +92,9 @@ class _MatchState extends State<Match> {
   @override
   Widget build(BuildContext context) {
     final myUserData = Provider.of<UserData>(context);
-    final FirebaseAuth _auth = FirebaseAuth.instance;
+    print(lowAge);
+    print(highAge);
+    print(genderPreference);
 
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: matchID).userData,
@@ -290,6 +292,10 @@ class _MatchState extends State<Match> {
                                                     {
                                                       //check doc['fromID'] gender is equal to my gender pref
                                                       //ADD GENDER && AGE PREF HERE
+//                                                       var matchPotential = Firestore.instance
+//                                                          .collection("users")
+//                                                          .where(doc.documentID, isEqualTo: doc['fromID'])
+//                                                          .getDocuments(),
 
                                                       Firestore.instance
                                                           .collection(
@@ -300,6 +306,7 @@ class _MatchState extends State<Match> {
                                                         'fromID': user.uid,
                                                         'toID': doc['fromID']
                                                       }),
+
                                                       Firestore.instance
                                                           .collection('users')
                                                           .document(user.uid)
@@ -309,7 +316,7 @@ class _MatchState extends State<Match> {
                                                         'chatID':
                                                             doc.documentID,
                                                         'matches': matches,
-                                                      }),
+                                                      })
                                                     }
                                                   else
                                                     {

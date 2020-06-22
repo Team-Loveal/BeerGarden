@@ -23,12 +23,6 @@ class _ProfilePreviewState extends State<ProfilePreview> {
 
   final File profileImg;
   bool loading = false;
-/*
-  void verifyCompletedProfile()async {
-    final user = Provider.of<User>(context, listen: false);
-    await DatabaseService(uid: user.uid)
-      .profileComplete(true);
-  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +39,7 @@ class _ProfilePreviewState extends State<ProfilePreview> {
               floatingActionButton: FloatingActionButton.extended(
                 onPressed: () async {
                   await DatabaseService(uid: user.uid).profileComplete(true);
-                  //  await verifyCompletedProfile();
+
                   DatabaseService(uid: user.uid).createMatches(
                       userData.genderPreference,
                       userData.lowAge,
@@ -59,17 +53,17 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                 backgroundColor: Colors.pink,
               ),
               floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerFloat,
+                  FloatingActionButtonLocation.centerFloat,
               body: Container(
                 height: double.infinity,
                 width: double.infinity,
                 decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [Hexcolor("#FFF1BA"), Hexcolor("#F4AA33")],
-                      stops: [0.2, 0.7],
-                    )),
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [Hexcolor("#FFF1BA"), Hexcolor("#F4AA33")],
+                  stops: [0.2, 0.7],
+                )),
                 child: ListView(
                   children: <Widget>[
                     Container(
@@ -91,7 +85,7 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                             flex: 3,
                             child: Column(
                                 mainAxisAlignment:
-                                MainAxisAlignment.spaceEvenly,
+                                    MainAxisAlignment.spaceEvenly,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   Text('${userData.nickname}, ${userData.age}',
@@ -140,7 +134,7 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                                             sigmaX: 0, sigmaY: 0),
                                         child: Container(
                                             color:
-                                            Colors.black.withOpacity(0))),
+                                                Colors.black.withOpacity(0))),
                                   )),
                             ],
                           ),
@@ -191,8 +185,8 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
-                                              BorderRadius.circular(
-                                                  10.0)))),
+                                                  BorderRadius.circular(
+                                                      10.0)))),
                                 if (userData.shopping)
                                   Container(
                                       margin: EdgeInsets.only(right: 10),
@@ -203,8 +197,8 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
-                                              BorderRadius.circular(
-                                                  10.0)))),
+                                                  BorderRadius.circular(
+                                                      10.0)))),
                                 if (userData.makingBalloonAnimals)
                                   Container(
                                       margin: EdgeInsets.only(right: 10),
@@ -215,8 +209,8 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
-                                              BorderRadius.circular(
-                                                  10.0)))),
+                                                  BorderRadius.circular(
+                                                      10.0)))),
                                 if (userData.cooking)
                                   Container(
                                       margin: EdgeInsets.only(right: 10),
@@ -227,8 +221,8 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
-                                              BorderRadius.circular(
-                                                  10.0)))),
+                                                  BorderRadius.circular(
+                                                      10.0)))),
                                 if (userData.painting)
                                   Container(
                                       margin: EdgeInsets.only(right: 10),
@@ -239,8 +233,8 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
-                                              BorderRadius.circular(
-                                                  10.0)))),
+                                                  BorderRadius.circular(
+                                                      10.0)))),
                                 if (userData.movies)
                                   Container(
                                       margin: EdgeInsets.only(right: 10),
@@ -251,8 +245,8 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
-                                              BorderRadius.circular(
-                                                  10.0)))),
+                                                  BorderRadius.circular(
+                                                      10.0)))),
                                 if (userData.sports)
                                   Container(
                                       margin: EdgeInsets.only(right: 10),
@@ -263,8 +257,8 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
-                                              BorderRadius.circular(
-                                                  10.0)))),
+                                                  BorderRadius.circular(
+                                                      10.0)))),
                                 if (userData.writing)
                                   Container(
                                       margin: EdgeInsets.only(right: 10),
@@ -275,8 +269,8 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
-                                              BorderRadius.circular(
-                                                  10.0)))),
+                                                  BorderRadius.circular(
+                                                      10.0)))),
                                 if (userData.drinking)
                                   Container(
                                       margin: EdgeInsets.only(right: 10),
@@ -287,8 +281,8 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
-                                              BorderRadius.circular(
-                                                  10.0)))),
+                                                  BorderRadius.circular(
+                                                      10.0)))),
                               ],
                             )
                           ]),
