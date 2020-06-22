@@ -27,63 +27,66 @@ class _MyProfileState extends State<MyProfile> {
         backgroundColor: Hexcolor("#F4AA33"),
         appBar: PreferredSize(
           preferredSize:
-              Size.fromHeight(MediaQuery.of(context).size.height * 0.30),
+              Size.fromHeight(MediaQuery.of(context).size.height * 0.35),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Container(
-                height: 60.0,
-                child: AppBar(
-                  backgroundColor: Hexcolor("#F4AA33"),
-                  title: Row(
-                    children: <Widget>[
-                      FlatButton(
-                        child: Text("Logout",
-                            style:
-                                TextStyle(fontSize: 15.0, color: Colors.white)),
-                        onPressed: () {
-                          showAlertDialog(context);
+              Expanded(
+                child: Container(
+                  height: 60.0,
+                  child: AppBar(
+                    backgroundColor: Hexcolor("#F4AA33"),
+                    title: Row(
+                      children: <Widget>[
+                        FlatButton(
+                          child: Text("Logout",
+                              style: TextStyle(
+                                  fontSize: 15.0, color: Colors.white)),
+                          onPressed: () {
+                            showAlertDialog(context);
+                          },
+                        ),
+                      ],
+                    ),
+                    actions: <Widget>[
+                      FlatButton.icon(
+                        icon:
+                            Icon(MdiIcons.cog, size: 28.0, color: Colors.white),
+                        label: Text(""),
+                        onPressed: () async {
+                          Navigator.of(context)
+                              .pushNamed('/editProfile', arguments: {
+                            'imgUrl': userData.imgUrl,
+                            'nicknameEdit': userData.nickname,
+                            'locationEdit': userData.location,
+                            'occupationEdit': userData.occupation,
+                            'aboutEdit': userData.about,
+                            'ageEdit': userData.age,
+                            'genderEdit': userData.gender,
+                            'yodelingEdit': userData.yodeling,
+                            'shoppingEdit': userData.shopping,
+                            'makingBalloonAnimalsEdit':
+                                userData.makingBalloonAnimals,
+                            'cookingEdit': userData.cooking,
+                            'paintingEdit': userData.painting,
+                            'moviesEdit': userData.movies,
+                            'sportsEdit': userData.sports,
+                            'writingEdit': userData.writing,
+                            'drinkingEdit': userData.drinking,
+                          });
                         },
                       ),
                     ],
+                    elevation: 0.0,
+                    centerTitle: false,
+                    automaticallyImplyLeading: false,
                   ),
-                  actions: <Widget>[
-                    FlatButton.icon(
-                      icon: Icon(MdiIcons.cog, size: 28.0, color: Colors.white),
-                      label: Text(""),
-                      onPressed: () async {
-                        Navigator.of(context)
-                            .pushNamed('/editProfile', arguments: {
-                          'imgUrl': userData.imgUrl,
-                          'nicknameEdit': userData.nickname,
-                          'locationEdit': userData.location,
-                          'occupationEdit': userData.occupation,
-                          'aboutEdit': userData.about,
-                          'ageEdit': userData.age,
-                          'genderEdit': userData.gender,
-                          'yodelingEdit': userData.yodeling,
-                          'shoppingEdit': userData.shopping,
-                          'makingBalloonAnimalsEdit':
-                              userData.makingBalloonAnimals,
-                          'cookingEdit': userData.cooking,
-                          'paintingEdit': userData.painting,
-                          'moviesEdit': userData.movies,
-                          'sportsEdit': userData.sports,
-                          'writingEdit': userData.writing,
-                          'drinkingEdit': userData.drinking,
-                        });
-                      },
-                    ),
-                  ],
-                  elevation: 0.0,
-                  centerTitle: false,
-                  automaticallyImplyLeading: false,
                 ),
               ),
               GestureDetector(
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (_) {
-                    return fullScreenImage(context, userData.imgUrl);
+                    return fullScreenImage(context, userData.imgUrl, 0.0, 0.0);
                   }));
                 },
                 child: CircleAvatar(

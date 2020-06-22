@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lovealapp/models/user.dart';
 import 'package:lovealapp/services/database.dart';
@@ -55,7 +54,6 @@ class _MatchState extends State<Match> {
 
       //decrease blur of active messages if matches have been reset to zero and you are not a new user
       if (doc['matches'] == 0 && doc['matchID'] != null && !doc['limitBlur']) {
-        print('I SHOULD BE RUNNING');
         Firestore.instance
             .collection('users')
             .document(user.uid)
@@ -92,10 +90,6 @@ class _MatchState extends State<Match> {
   @override
   Widget build(BuildContext context) {
     final myUserData = Provider.of<UserData>(context);
-    print(lowAge);
-    print(highAge);
-    print(genderPreference);
-
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: matchID).userData,
         builder: (context, snapshot) {
@@ -112,7 +106,8 @@ class _MatchState extends State<Match> {
                     GestureDetector(
                       onTap: () {
                         Navigator.push(context, MaterialPageRoute(builder: (_) {
-                          return fullScreenImage(context, userData.imgUrl);
+                          return fullScreenImage(
+                              context, userData.imgUrl, sigmaX, sigmaY);
                         }));
                       },
                       child: CircleAvatar(
@@ -290,13 +285,6 @@ class _MatchState extends State<Match> {
                                                   //set fromID to user.uid and toID to original fromID value
                                                   if (doc['fromID'] != user.uid)
                                                     {
-                                                      //check doc['fromID'] gender is equal to my gender pref
-                                                      //ADD GENDER && AGE PREF HERE
-//                                                       var matchPotential = Firestore.instance
-//                                                          .collection("users")
-//                                                          .where(doc.documentID, isEqualTo: doc['fromID'])
-//                                                          .getDocuments(),
-
                                                       Firestore.instance
                                                           .collection(
                                                               "messages")
@@ -306,7 +294,6 @@ class _MatchState extends State<Match> {
                                                         'fromID': user.uid,
                                                         'toID': doc['fromID']
                                                       }),
-
                                                       Firestore.instance
                                                           .collection('users')
                                                           .document(user.uid)
