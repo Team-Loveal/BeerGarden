@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lovealapp/models/user.dart';
 import 'package:lovealapp/services/database.dart';
@@ -27,9 +28,10 @@ class _MatchState extends State<Match> {
   int matches;
   bool isProfileCreated;
   bool limitBlur;
-  int lowAge;
-  int highAge;
+  double lowAge;
+  double highAge;
   String genderPreference;
+  bool outOfMatches;
 
   double sigmaX = 50;
   double sigmaY = 50;
@@ -47,13 +49,14 @@ class _MatchState extends State<Match> {
         chatID = doc['chatID'];
         matches = doc['matches'];
         limitBlur = doc['limitBlur'];
-        lowAge = doc['lowAge'];
-        highAge = doc['highAge'];
+        outOfMatches = doc['outOfMatches'];
+        lowAge = doc['lowAge'].toDouble();
+        highAge = doc['highAge'].toDouble();
         genderPreference = doc['genderPreference'];
       });
 
       //decrease blur of active messages if matches have been reset to zero and you are not a new user
-      if (doc['matches'] == 0 && doc['matchID'] != null && !limitBlur) {
+      if (doc['matches'] == 0 && doc['matchID'] != null && !doc['limitBlur']) {
         print(
             'Should run once as true and then this should not print again $limitBlur');
         Firestore.instance
@@ -71,15 +74,14 @@ class _MatchState extends State<Match> {
                 .collection("messages")
                 .document(documentID)
                 .updateData({'blur': blur});
-
-            //set limitBlur to true so blur decrease only runs once
-            Firestore.instance
-                .collection('users')
-                .document(user.uid)
-                .updateData({'limitBlur': true});
-            //Todo limitBlur to false again every day along with matches
           });
         });
+      } else {
+        print('I SHOULD BE RUNNING');
+        Firestore.instance
+            .collection('users')
+            .document(user.uid)
+            .updateData({'limitBlur': true, 'outOfMatches': false});
       }
     });
   }
@@ -94,7 +96,8 @@ class _MatchState extends State<Match> {
   @override
   Widget build(BuildContext context) {
     final myUserData = Provider.of<UserData>(context);
-    print(limitBlur);
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    print('LIMIT BLUR $limitBlur');
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: matchID).userData,
         builder: (context, snapshot) {
@@ -250,88 +253,126 @@ class _MatchState extends State<Match> {
                   colors: [Hexcolor("#FFF1BA"), Hexcolor("#F4AA33")],
                   stops: [0.2, 0.7],
                 )),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    //GET NEW MATCH BUTTON
-                    PimpedButton(
-                      particle: DemoParticle(),
-                      pimpedWidgetBuilder: (context, controller) {
-                        return Padding(
-                          padding: const EdgeInsets.all(30.0),
-                          child: FloatingActionButton.extended(
-                            shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(16.0))),
-                            label: Text("Meet someone new today! 🍺",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                )),
-                            onPressed: () async {
-                              controller.forward(from: 0.0);
+                child: outOfMatches == false
+                    ? Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          //GET NEW MATCH BUTTON
+                          PimpedButton(
+                            particle: DemoParticle(),
+                            pimpedWidgetBuilder: (context, controller) {
+                              return Padding(
+                                padding: const EdgeInsets.all(30.0),
+                                child: FloatingActionButton.extended(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(16.0))),
+                                  label: Text("Meet someone new today! 🍺",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                      )),
+                                  onPressed: () async {
+                                    controller.forward(from: 0.0);
 
-                              //add matches by one
-                              int matches = myUserData.matches + 1;
+                                    //add matches by one
+                                    int matches = myUserData.matches + 1;
 
-                              //find a user where matched is false
-                              await Firestore.instance
-                                  .collection("messages")
-                                  .where('matchedUsers',
-                                      arrayContains: user.uid)
-                                  .getDocuments()
-                                  .then((data) =>
-                                      data.documents.forEach((doc) => {
-                                            if (!doc['matched'])
-                                              {
-                                                //if fromID is not yours
-                                                //set fromID to user.uid and toID to original fromID value
-                                                if (doc['fromID'] != user.uid)
-                                                  {
-                                                    //check doc['fromID'] gender is equal to my gender pref
-                                                    //ADD GENDER && AGE PREF HERE
+                                    //find a user where matched is false
+                                    await Firestore.instance
+                                        .collection("messages")
+                                        .where('matchedUsers',
+                                            arrayContains: user.uid)
+                                        .getDocuments()
+                                        .then((data) =>
+                                            data.documents.forEach((doc) => {
+                                                  if (!doc['matched'])
+                                                    {
+                                                      //if fromID is not yours
+                                                      //set fromID to user.uid and toID to original fromID value
+                                                      if (doc['fromID'] !=
+                                                          user.uid)
+                                                        {
+                                                          //check doc['fromID'] gender is equal to my gender pref
+                                                          //ADD GENDER && AGE PREF HERE
 
-                                                    Firestore.instance
-                                                        .collection("messages")
-                                                        .document(
-                                                            doc.documentID)
-                                                        .updateData({
-                                                      'fromID': user.uid,
-                                                      'toID': doc['fromID']
-                                                    }),
-                                                    Firestore.instance
-                                                        .collection('users')
-                                                        .document(user.uid)
-                                                        .updateData({
-                                                      'matchID': doc['fromID'],
-                                                      'chatID': doc.documentID,
-                                                      'matches': matches,
-                                                    }),
-                                                  }
-                                                else
-                                                  {
-                                                    Firestore.instance
-                                                        .collection('users')
-                                                        .document(user.uid)
-                                                        .updateData({
-                                                      'matchID': doc['toID'],
-                                                      'chatID': doc.documentID,
-                                                      'matches': matches,
-                                                    }),
-                                                  }
-                                              }
-                                          }));
-                              //go to matched Profile page
-                              Navigator.of(context)
-                                  .pushNamed('/navigationHome');
+                                                          Firestore.instance
+                                                              .collection(
+                                                                  "messages")
+                                                              .document(doc
+                                                                  .documentID)
+                                                              .updateData({
+                                                            'fromID': user.uid,
+                                                            'toID':
+                                                                doc['fromID']
+                                                          }),
+                                                          Firestore.instance
+                                                              .collection(
+                                                                  'users')
+                                                              .document(
+                                                                  user.uid)
+                                                              .updateData({
+                                                            'matchID':
+                                                                doc['fromID'],
+                                                            'chatID':
+                                                                doc.documentID,
+                                                            'matches': matches,
+                                                          }),
+                                                        }
+                                                      else
+                                                        {
+                                                          Firestore.instance
+                                                              .collection(
+                                                                  'users')
+                                                              .document(
+                                                                  user.uid)
+                                                              .updateData({
+                                                            'matchID':
+                                                                doc['toID'],
+                                                            'chatID':
+                                                                doc.documentID,
+                                                            'matches': matches,
+                                                          }),
+                                                        }
+                                                    }
+                                                  else
+                                                    {
+                                                      Firestore.instance
+                                                          .collection('users')
+                                                          .document(user.uid)
+                                                          .updateData({
+                                                        'outOfMatches': true,
+                                                      }),
+                                                      //outOfMatches = true,
+                                                      print(
+                                                          'YOU ARE OUT OF MATCHES')
+                                                    }
+                                                }));
+                                    //go to matched Profile page
+                                    Navigator.of(context)
+                                        .pushNamed('/navigationHome');
+                                  },
+                                ),
+                              );
                             },
                           ),
-                        );
-                      },
-                    ),
-                  ],
-                ),
+                        ],
+                      )
+                    : Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            MaterialButton(
+                                child: Text('LOGOUT'),
+                                onPressed: () async {
+                                  await _auth.signOut();
+                                }),
+                            Text(
+                                'You are out of matches💔 Check back again in a bit🍺')
+                          ],
+                        ),
+                      ),
               ),
             );
           } else {

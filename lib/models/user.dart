@@ -46,6 +46,7 @@ class UserData {
   final double highAge;
   final double lowAge;
   final bool limitBlur;
+  final bool outOfMatches;
 
   UserData(
       {this.uid,
@@ -84,7 +85,8 @@ class UserData {
       this.genderPreference,
       this.highAge,
       this.lowAge,
-      this.limitBlur});
+      this.limitBlur,
+      this.outOfMatches});
 }
 
 class UserImg {
