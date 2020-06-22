@@ -54,7 +54,6 @@ class _MatchState extends State<Match> {
 
       //decrease blur of active messages if matches have been reset to zero and you are not a new user
       if (doc['matches'] == 0 && doc['matchID'] != null && !doc['limitBlur']) {
-        print('I SHOULD BE RUNNING');
         Firestore.instance
             .collection('users')
             .document(user.uid)
@@ -286,9 +285,6 @@ class _MatchState extends State<Match> {
                                                   //set fromID to user.uid and toID to original fromID value
                                                   if (doc['fromID'] != user.uid)
                                                     {
-                                                      //check doc['fromID'] gender is equal to my gender pref
-                                                      //ADD GENDER && AGE PREF HERE
-
                                                       Firestore.instance
                                                           .collection(
                                                               "messages")
@@ -307,7 +303,7 @@ class _MatchState extends State<Match> {
                                                         'chatID':
                                                             doc.documentID,
                                                         'matches': matches,
-                                                      }),
+                                                      })
                                                     }
                                                   else
                                                     {
