@@ -9,6 +9,7 @@ import 'package:lovealapp/widgets/interests.dart';
 import 'package:lovealapp/widgets/questionAnswer.dart';
 import 'package:lovealapp/widgets/fullScreenImage.dart';
 import 'package:lovealapp/services/auth.dart';
+import 'package:pimp_my_button/pimp_my_button.dart';
 
 class MyProfile extends StatefulWidget {
   @override
@@ -203,34 +204,42 @@ class _MyProfileState extends State<MyProfile> {
                     height: 60.0,
                     margin:
                         EdgeInsets.symmetric(horizontal: 30.0, vertical: 30.0),
-                    child: RaisedButton(
-                        child: Text('Answer some more questions!',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            )),
-                        color: Colors.lightGreen,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        onPressed: () => {
-                              Navigator.of(context)
-                                  .pushNamed('/moreQuestions', arguments: {
-                                'furniture': userData.furniture,
-                                'beachOrMountain': userData.beachOrMountain,
-                                'takeOutFood': userData.takeOutFood,
-                                'desertedIsland': userData.desertedIsland,
-                                'wedding': userData.wedding,
-                                'yourPlaceOrMine': userData.yourPlaceOrMine,
-                                'bed': userData.bed,
-                                'reviews': userData.reviews,
-                                'foreverEat': userData.foreverEat,
-                                'bestForLast': userData.bestForLast,
-                                'aliens': userData.aliens
-                              }),
-                              //Navigator.of(context).pushNamed('/moreQuestions')
-                            }),
+                    child: PimpedButton(
+                        particle: DemoParticle(),
+                        pimpedWidgetBuilder: (context, controller) {
+                          return RaisedButton(
+                              child: Text('Answer some more questions!',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                  )),
+                              color: Colors.lightGreen,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              onPressed: () => {
+                                    controller.forward(from: 0.0),
+                                    Navigator.of(context).pushNamed(
+                                        '/moreQuestions',
+                                        arguments: {
+                                          'furniture': userData.furniture,
+                                          'beachOrMountain':
+                                              userData.beachOrMountain,
+                                          'takeOutFood': userData.takeOutFood,
+                                          'desertedIsland':
+                                              userData.desertedIsland,
+                                          'wedding': userData.wedding,
+                                          'yourPlaceOrMine':
+                                              userData.yourPlaceOrMine,
+                                          'bed': userData.bed,
+                                          'reviews': userData.reviews,
+                                          'foreverEat': userData.foreverEat,
+                                          'bestForLast': userData.bestForLast,
+                                          'aliens': userData.aliens
+                                        }),
+                                  });
+                        }),
                   ),
                 ],
               ),

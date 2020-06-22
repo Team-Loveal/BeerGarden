@@ -9,10 +9,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 import 'message.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:pimp_my_button/pimp_my_button.dart';
 import 'package:lovealapp/widgets/interests.dart';
 import 'package:lovealapp/widgets/questionAnswer.dart';
 import 'package:lovealapp/widgets/fullScreenImage.dart';
+import 'package:pimp_my_button/pimp_my_button.dart';
 
 //adding for transition animation
 import 'package:page_transition/page_transition.dart';
@@ -92,7 +92,7 @@ class _MatchState extends State<Match> {
 
   @override
   Widget build(BuildContext context) {
-    final myUserData = Provider.of<UserData>(context);
+    //final myUserData = Provider.of<UserData>(context);
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: matchID).userData,
         builder: (context, snapshot) {
@@ -121,13 +121,12 @@ class _MatchState extends State<Match> {
                               backgroundImage: NetworkImage(userData.imgUrl)),
                           Positioned.fill(
                               child: ClipOval(
-                                child: BackdropFilter(
-                                    filter: ImageFilter.blur(
-                                        sigmaX: 50,
-                                        sigmaY: 50),
-                                    child: Container(
-                                        color: Colors.black.withOpacity(0))),
-                              )),
+                            child: BackdropFilter(
+                                filter:
+                                    ImageFilter.blur(sigmaX: 50, sigmaY: 50),
+                                child: Container(
+                                    color: Colors.black.withOpacity(0))),
+                          )),
                         ],
                       ),
                     ),
@@ -252,7 +251,7 @@ class _MatchState extends State<Match> {
               ),
             );
           } else if ((snapshot.hasData && matches == 0) || matchID == null) {
-            final user = Provider.of<User>(context);
+            //final user = Provider.of<User>(context);
             return Scaffold(
               body: Container(
                   height: double.infinity,
@@ -282,31 +281,36 @@ class _MatchState extends State<Match> {
     return Container(
       height: 60.0,
       margin: EdgeInsets.symmetric(horizontal: 40.0, vertical: 30.0),
-      child: RaisedButton(
-          child: Text('Share a 🍺 and chat!',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-              )),
-          color: Colors.lightGreen,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30),
-          ),
-          onPressed: () => {
-                startChat(),
-                Navigator.push(
-                  context,
-                  PageTransition(
-                      type: PageTransitionType.rightToLeft,
-                      child: Message(
-                        chatRoomID: chatID,
-                        matchID: matchID,
-                        nickname: userData.nickname,
-                        imgUrl: userData.imgUrl,
-                      )),
+      child: PimpedButton(
+          particle: DemoParticle(),
+          pimpedWidgetBuilder: (context, controller) {
+            return RaisedButton(
+                child: Text('Share a 🍺 and chat!',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    )),
+                color: Colors.lightGreen,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
                 ),
-              }),
+                onPressed: () => {
+                      controller.forward(from: 0.0),
+                      startChat(),
+                      Navigator.push(
+                        context,
+                        PageTransition(
+                            type: PageTransitionType.rightToLeft,
+                            child: Message(
+                              chatRoomID: chatID,
+                              matchID: matchID,
+                              nickname: userData.nickname,
+                              imgUrl: userData.imgUrl,
+                            )),
+                      ),
+                    });
+          }),
     );
   }
 }
