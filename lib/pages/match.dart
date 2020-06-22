@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lovealapp/models/user.dart';
 import 'package:lovealapp/services/database.dart';
 import 'package:lovealapp/shared/loading.dart';
+import 'package:lovealapp/widgets/buttonAnimation.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -15,6 +16,8 @@ import 'package:lovealapp/widgets/fullScreenImage.dart';
 
 //adding for transition animation
 import 'package:page_transition/page_transition.dart';
+
+//button animation
 
 class Match extends StatefulWidget {
   @override
@@ -252,83 +255,7 @@ class _MatchState extends State<Match> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       //GET NEW MATCH BUTTON
-                      PimpedButton(
-                        particle: DemoParticle(),
-                        pimpedWidgetBuilder: (context, controller) {
-                          return Padding(
-                            padding: const EdgeInsets.all(30.0),
-                            child: FloatingActionButton.extended(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(16.0))),
-                              label: Text("Meet someone new today! 🍺",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                  )),
-                              onPressed: () async {
-                                controller.forward(from: 0.0);
-
-                                //add matches by one
-                                int matches = myUserData.matches + 1;
-
-                                //find a user where matched is false
-                                await Firestore.instance
-                                    .collection("messages")
-                                    .where('matchedUsers',
-                                        arrayContains: user.uid)
-                                    .getDocuments()
-                                    .then((data) =>
-                                        data.documents.forEach((doc) => {
-                                              if (!doc['matched'])
-                                                {
-                                                  //if fromID is not yours
-                                                  //set fromID to user.uid and toID to original fromID value
-                                                  if (doc['fromID'] != user.uid)
-                                                    {
-                                                      Firestore.instance
-                                                          .collection(
-                                                              "messages")
-                                                          .document(
-                                                              doc.documentID)
-                                                          .updateData({
-                                                        'fromID': user.uid,
-                                                        'toID': doc['fromID']
-                                                      }),
-                                                      Firestore.instance
-                                                          .collection('users')
-                                                          .document(user.uid)
-                                                          .updateData({
-                                                        'matchID':
-                                                            doc['fromID'],
-                                                        'chatID':
-                                                            doc.documentID,
-                                                        'matches': matches,
-                                                      })
-                                                    }
-                                                  else
-                                                    {
-                                                      Firestore.instance
-                                                          .collection('users')
-                                                          .document(user.uid)
-                                                          .updateData({
-                                                        'matchID': doc['toID'],
-                                                        'chatID':
-                                                            doc.documentID,
-                                                        'matches': matches,
-                                                      }),
-                                                    }
-                                                }
-                                            }));
-                                //go to matched Profile page
-                                Navigator.of(context)
-                                    .pushNamed('/navigationHome');
-                              },
-                            ),
-                          );
-                        },
-                      ),
+                      Box(),
                     ],
                   )),
             );
