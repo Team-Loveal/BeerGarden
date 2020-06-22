@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lovealapp/models/user.dart';
 import 'package:lovealapp/services/database.dart';
@@ -92,8 +91,6 @@ class _MatchState extends State<Match> {
   @override
   Widget build(BuildContext context) {
     final myUserData = Provider.of<UserData>(context);
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: matchID).userData,
         builder: (context, snapshot) {
@@ -110,7 +107,8 @@ class _MatchState extends State<Match> {
                     GestureDetector(
                       onTap: () {
                         Navigator.push(context, MaterialPageRoute(builder: (_) {
-                          return fullScreenImage(context, userData.imgUrl);
+                          return fullScreenImage(
+                              context, userData.imgUrl, sigmaX, sigmaY);
                         }));
                       },
                       child: CircleAvatar(

@@ -83,7 +83,7 @@ class _MyProfileState extends State<MyProfile> {
               GestureDetector(
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (_) {
-                    return fullScreenImage(context, userData.imgUrl);
+                    return fullScreenImage(context, userData.imgUrl, 0.0, 0.0);
                   }));
                 },
                 child: CircleAvatar(
