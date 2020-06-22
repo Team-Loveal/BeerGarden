@@ -45,6 +45,48 @@ class _EditProfileState extends State<EditProfile> {
   //for back to MyProfile()
   int profileIndex = 2;
 
+  void onSave(User user, UserData userData) async {
+    await DatabaseService(uid: user.uid).editUserData(
+      nickname ?? userData.nickname,
+      location ?? userData.location,
+      age ?? userData.age,
+      gender ?? userData.gender,
+      occupation ?? userData.occupation,
+      about ?? userData.about,
+      yodeling ?? userData.yodeling,
+      shopping ?? userData.shopping,
+      makingBalloonAnimals ?? userData.makingBalloonAnimals,
+      cooking ?? userData.cooking,
+      painting ?? userData.painting,
+      movies ?? userData.movies,
+      sports ?? userData.sports,
+      writing ?? userData.writing,
+      drinking ?? userData.drinking,
+    );
+
+    //write preference into db
+    await DatabaseService(uid: user.uid).updatePreference(
+        _lowValue ?? userData.lowAge,
+        _highValue ?? userData.highAge,
+        genderPreference ?? userData.genderPreference);
+
+    // recreate matches with new preference
+    if (_lowValue != 18 ||
+        _highValue != 100 ||
+        userData.genderPreference != genderPreference) {
+      await DatabaseService(uid: user.uid).deleteMatches();
+      await DatabaseService(uid: user.uid).createMatches(
+          genderPreference ?? userData.genderPreference,
+          _lowValue ?? userData.lowAge,
+          _highValue ?? userData.highAge);
+      //try new routing
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => NavigationHome(newIdx: profileIndex)));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     data = ModalRoute.of(context).settings.arguments;
@@ -92,6 +134,18 @@ class _EditProfileState extends State<EditProfile> {
                       )),
                   elevation: 0.0,
                   centerTitle: true,
+                  actions: <Widget>[
+                    FlatButton(
+                      textColor: Colors.white,
+                      child: Text(
+                        "save",
+                        style: TextStyle(fontSize: 18.0),
+                      ),
+                      onPressed: () async {
+                        onSave(user, userData);
+                      },
+                    ),
+                  ],
                 ),
               ),
               body: Column(
@@ -785,129 +839,6 @@ class _EditProfileState extends State<EditProfile> {
                                                           ),
                                                         ],
                                                       )),
-                                                      Container(
-                                                          margin: EdgeInsets
-                                                              .symmetric(
-                                                                  vertical: 20),
-                                                          child: RaisedButton(
-                                                            padding: EdgeInsets
-                                                                .symmetric(
-                                                                    horizontal:
-                                                                        10.0),
-                                                            child: Text(
-                                                              'save',
-                                                              style: TextStyle(
-                                                                fontSize: 28.0,
-                                                                color: Colors
-                                                                    .white,
-                                                              ),
-                                                            ),
-                                                            color: Hexcolor(
-                                                                "#8CC63E"),
-                                                            shape: RoundedRectangleBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            30)),
-                                                            onPressed:
-                                                                () async {
-                                                              await DatabaseService(
-                                                                      uid: user
-                                                                          .uid)
-                                                                  .editUserData(
-                                                                nickname ??
-                                                                    userData
-                                                                        .nickname,
-                                                                location ??
-                                                                    userData
-                                                                        .location,
-                                                                age ??
-                                                                    userData
-                                                                        .age,
-                                                                gender ??
-                                                                    userData
-                                                                        .gender,
-                                                                occupation ??
-                                                                    userData
-                                                                        .occupation,
-                                                                about ??
-                                                                    userData
-                                                                        .about,
-                                                                yodeling ??
-                                                                    userData
-                                                                        .yodeling,
-                                                                shopping ??
-                                                                    userData
-                                                                        .shopping,
-                                                                makingBalloonAnimals ??
-                                                                    userData
-                                                                        .makingBalloonAnimals,
-                                                                cooking ??
-                                                                    userData
-                                                                        .cooking,
-                                                                painting ??
-                                                                    userData
-                                                                        .painting,
-                                                                movies ??
-                                                                    userData
-                                                                        .movies,
-                                                                sports ??
-                                                                    userData
-                                                                        .sports,
-                                                                writing ??
-                                                                    userData
-                                                                        .writing,
-                                                                drinking ??
-                                                                    userData
-                                                                        .drinking,
-                                                              );
-
-                                                              //write preference into db
-                                                              await DatabaseService(
-                                                                      uid: user
-                                                                          .uid)
-                                                                  .updatePreference(
-                                                                      _lowValue ??
-                                                                          userData
-                                                                              .lowAge,
-                                                                      _highValue ??
-                                                                          userData
-                                                                              .highAge,
-                                                                      genderPreference ??
-                                                                          userData
-                                                                              .genderPreference);
-
-                                                              // recreate matches with new preference
-                                                              if (_lowValue !=
-                                                                      18 ||
-                                                                  _highValue !=
-                                                                      100 ||
-                                                                  userData.genderPreference !=
-                                                                      genderPreference) {
-                                                                await DatabaseService(
-                                                                        uid: user
-                                                                            .uid)
-                                                                    .deleteMatches();
-                                                                await DatabaseService(uid: user.uid).createMatches(
-                                                                    genderPreference ??
-                                                                        userData
-                                                                            .genderPreference,
-                                                                    _lowValue ??
-                                                                        userData
-                                                                            .lowAge,
-                                                                    _highValue ??
-                                                                        userData
-                                                                            .highAge);
-                                                                //try new routing
-                                                                Navigator.push(
-                                                                    context,
-                                                                    MaterialPageRoute(
-                                                                        builder:
-                                                                            (context) =>
-                                                                                NavigationHome(newIdx: profileIndex)));
-                                                              }
-                                                            },
-                                                          ))
                                                     ],
                                                   ),
                                                 ),
