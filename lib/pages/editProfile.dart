@@ -80,10 +80,10 @@ class _EditProfileState extends State<EditProfile> {
     //       _lowValue ?? userData.lowAge,
     //       _highValue ?? userData.highAge);
     //   //try new routing
-    //   Navigator.push(
-    //       context,
-    //       MaterialPageRoute(
-    //           builder: (context) => NavigationHome(newIdx: profileIndex)));
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => NavigationHome(newIdx: profileIndex)));
     // }
   }
 

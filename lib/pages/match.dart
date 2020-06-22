@@ -71,7 +71,7 @@ class _MatchState extends State<Match> {
                 .collection('users')
                 .document(user.uid)
                 .updateData({'limitBlur': true});
-            //TODO limitBlur to false again every day along with matches
+            //Todo limitBlur to false again every day along with matches
           });
         });
       }
