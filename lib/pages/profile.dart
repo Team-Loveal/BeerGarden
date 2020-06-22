@@ -98,9 +98,7 @@ class _ProfileState extends State<Profile> {
                           CircleAvatar(
                               radius: 70,
                               backgroundImage: NetworkImage(userData.imgUrl)),
-                          Container(
-                              width: 140,
-                              height: 140,
+                          Positioned.fill(
                               child: ClipOval(
                                 child: BackdropFilter(
                                     filter: ImageFilter.blur(

@@ -113,9 +113,22 @@ class _MatchState extends State<Match> {
                               context, userData.imgUrl, sigmaX, sigmaY);
                         }));
                       },
-                      child: CircleAvatar(
-                        radius: 70,
-                        backgroundImage: NetworkImage(userData.imgUrl),
+                      child: Stack(
+                        alignment: AlignmentDirectional.center,
+                        children: <Widget>[
+                          CircleAvatar(
+                              radius: 70,
+                              backgroundImage: NetworkImage(userData.imgUrl)),
+                          Positioned.fill(
+                              child: ClipOval(
+                                child: BackdropFilter(
+                                    filter: ImageFilter.blur(
+                                        sigmaX: 50,
+                                        sigmaY: 50),
+                                    child: Container(
+                                        color: Colors.black.withOpacity(0))),
+                              )),
+                        ],
                       ),
                     ),
                     Text('${userData.nickname},  ${userData.age.toString()}',

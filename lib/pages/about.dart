@@ -51,7 +51,7 @@ class _AboutState extends State<About> {
                       ),
                     ),
                   ),
-                  Image(image: AssetImage('images/hedgedog.jpg')),
+                  Image(image: AssetImage('images/getamatch.png')),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
