@@ -88,7 +88,7 @@ Widget buildChatroom(DocumentSnapshot document, BuildContext context) {
                                 children: <Widget>[
                                   CircleAvatar(
                                     backgroundColor: unread
-                                        ? Hexcolor('#F4AA33')
+                                        ? Hexcolor("#8CC63E")
                                         : Hexcolor('#f1f4f5'),
                                     radius: 38,
                                     child: CircleAvatar(
@@ -148,7 +148,7 @@ Widget buildChatroom(DocumentSnapshot document, BuildContext context) {
                                       width: 40.0,
                                       height: 20.0,
                                       decoration: BoxDecoration(
-                                          color: Hexcolor("#F4AA33"),
+                                          color: Hexcolor("#8CC63E"),
                                           borderRadius:
                                               BorderRadius.circular(30.0)),
                                       alignment: Alignment.center,
