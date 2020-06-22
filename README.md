@@ -51,15 +51,15 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 ## Authors
 
-👻  Jeff Bentley - [![alt text][1.1]][1]       [![alt text][1.2]][2]
+👻  Jeff Bentley - [![alt text][1.1]][1]       [![alt text][1.5]][2]
 
-😸  Garrett Chun  -  [![alt text][1.1]][3]       [![alt text][1.2]][4]
+😸  Garrett Chun  -  [![alt text][1.1]][3]       [![alt text][1.5]][4]
 
-🌝  Yuya Harada - [![alt text][1.1]][5]
+🌝  Yuya Harada - [![alt text][1.1]][5]   [![alt text][1.5]][9]
 
 🐸  Riku Kawano - [![alt text][1.1]][6]
 
-🦄  Yurika Namba - [![alt text][1.1]][7]       [![alt text][1.2]][8]
+🦄  Yurika Namba - [![alt text][1.1]][7]       [![alt text][1.5]][8]
 
 [1.1]: http://i.imgur.com/9I6NRUm.png
 [1.2]: ./images/twitter.png
@@ -68,10 +68,11 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 [1]: https://github.com/jbentleyjp
 [2]: https://twitter.com/bentley449
 
-[3]: http://www.github.com/Kapakahi
+[3]: https://github.com/KapakahiCoder
 [4]: http://www.twitter.com/KapakahiCoder
 
 [5]: https://github.com/yuya-h-29
+[9]: https://twitter.com/harahara_29
 
 [6]: https://github.com/rikukawano
 
