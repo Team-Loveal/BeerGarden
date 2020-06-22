@@ -3,6 +3,7 @@ import 'package:lovealapp/models/user.dart';
 import 'package:lovealapp/services/database.dart';
 import 'package:lovealapp/shared/loading.dart';
 import 'package:lovealapp/widgets/buttonAnimation.dart';
+import 'package:lovealapp/widgets/flipTile.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -211,6 +212,19 @@ class _MatchState extends State<Match> {
                         ),
                         questionAnswer("About me", userData.about),
                         //ANSWERS
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            FlipCard(
+                                question:
+                                    "🛌 Do you make your bed in the morning?",
+                                answer: userData.bed ?? "Ask me!"),
+                            FlipCard(
+                                question:
+                                    "🤓 Do you read reviews, or just go with your gut?",
+                                answer: userData.reviews ?? "Ask me!"),
+                          ],
+                        ),
                         questionAnswer(
                             "🛌 Do you make your bed in the morning?",
                             userData.bed ?? "Ask me!"),
@@ -219,7 +233,7 @@ class _MatchState extends State<Match> {
                             userData.reviews ?? "Ask me!"),
                         questionAnswer(
                             "🌮 If you could only eat one thing for the rest of your life, what would it be?",
-                            userData.foreverEat),
+                            userData.foreverEat ?? "Ask me!"),
                         questionAnswer(
                             "🌭 If you're eating a meal do you save the best thing for last or eat it first?",
                             userData.bestForLast ?? "Ask me!"),

@@ -10,7 +10,6 @@ import 'package:lovealapp/widgets/questionAnswer.dart';
 import 'package:lovealapp/widgets/fullScreenImage.dart';
 import 'package:lovealapp/services/auth.dart';
 import 'package:pimp_my_button/pimp_my_button.dart';
-import 'package:flutter_flip_view/flutter_flip_view.dart';
 
 class MyProfile extends StatefulWidget {
   @override
