@@ -53,7 +53,7 @@ class _MyProfileState extends State<MyProfile> {
                           FlatButton(
                             child: Text("Logout",
                                 style: TextStyle(
-                                    fontSize: 15.0, color: Colors.white)),
+                                    fontSize: 15.0, fontWeight: FontWeight.bold, color: Colors.white)),
                             onPressed: () {
                               showAlertDialog(context);
                             },
