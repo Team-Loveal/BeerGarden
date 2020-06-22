@@ -28,7 +28,7 @@ class _MyProfileState extends State<MyProfile> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Container(
-                height: 70.0,
+                height: 60.0,
                 child: AppBar(
                   backgroundColor: Hexcolor("#F4AA33"),
                   actions: <Widget>[
@@ -62,6 +62,7 @@ class _MyProfileState extends State<MyProfile> {
                   ],
                   elevation: 0.0,
                   centerTitle: true,
+                  automaticallyImplyLeading: false,
                 ),
               ),
               GestureDetector(
