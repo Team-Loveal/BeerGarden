@@ -49,10 +49,6 @@ class _QuestionsState extends State<Questions> {
                     padding: const EdgeInsets.all(30),
                     child: Column(
                       children: <Widget>[
-                        Text(
-                          'Questions',
-                          style: TextStyle(fontSize: 30.0),
-                        ),
                         Padding(
                           padding: EdgeInsets.symmetric(vertical: 20.0),
                           child: Text(

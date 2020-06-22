@@ -10,7 +10,7 @@ Widget questionAnswer(String title, String body) {
         children: <Widget>[
           Text(title,
               style: TextStyle(
-                fontSize: 18.0,
+                fontSize: 16.0,
                 fontWeight: FontWeight.bold,
               )),
           SizedBox(height: 5),
