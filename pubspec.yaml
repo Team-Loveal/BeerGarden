@@ -50,6 +50,8 @@ dependencies:
   titled_navigation_bar: ^4.1.0
   http: ^0.12.1
   lite_rolling_switch: ^0.1.1
+  sa_stateless_animation: ^1.0.1
+  simple_animations: ^2.2.1
 
 dev_dependencies:
   flutter_test:

@@ -71,16 +71,18 @@ class _ProfileState extends State<Profile> {
               backgroundColor: Hexcolor("#F4AA33"),
               appBar: PreferredSize(
                 preferredSize:
-                    Size.fromHeight(MediaQuery.of(context).size.height * 0.30),
+                    Size.fromHeight(MediaQuery.of(context).size.height * 0.35),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Container(
-                      height: 60.0,
-                      child: AppBar(
-                        backgroundColor: Hexcolor("#F4AA33"),
-                        elevation: 0.0,
-                        centerTitle: true,
+                    Expanded(
+                      child: Container(
+                        height: 60.0,
+                        child: AppBar(
+                          backgroundColor: Hexcolor("#F4AA33"),
+                          elevation: 0.0,
+                          centerTitle: true,
+                        ),
                       ),
                     ),
                     GestureDetector(
@@ -96,9 +98,7 @@ class _ProfileState extends State<Profile> {
                           CircleAvatar(
                               radius: 70,
                               backgroundImage: NetworkImage(userData.imgUrl)),
-                          Container(
-                              width: 140,
-                              height: 140,
+                          Positioned.fill(
                               child: ClipOval(
                                 child: BackdropFilter(
                                     filter: ImageFilter.blur(
@@ -162,28 +162,30 @@ class _ProfileState extends State<Profile> {
                                       fontWeight: FontWeight.bold,
                                     )),
                                 SizedBox(height: 5),
-                                Wrap(
-                                  children: <Widget>[
-                                    //WHEN REFACTORING CREATE SEPARATE WIDGET AND MAP THROUGH INTERESTS
-                                    if (userData.yodeling)
-                                      interests("Yodeling"),
-                                    if (userData.shopping)
-                                      interests("Shopping"),
-                                    if (userData.makingBalloonAnimals)
-                                      interests("Making Balloon Animals"),
-                                    if (userData.cooking)
-                                      interests("Cooking"),
-                                    if (userData.painting)
-                                      interests("Painting"),
-                                    if (userData.movies)
-                                      interests("Movies"),
-                                    if (userData.sports)
-                                      interests("Sports"),
-                                    if (userData.writing)
-                                      interests("Writing"),
-                                    if (userData.drinking)
-                                      interests("Drinking"),
-                                  ],
+                                Container(
+                                  margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+                                  height: 40,
+                                  child: ListView(
+                                    scrollDirection: Axis.horizontal,
+                                    children: <Widget>[
+                                      if (userData.yodeling)
+                                        interests("Yodeling"),
+                                      if (userData.shopping)
+                                        interests("Shopping"),
+                                      if (userData.makingBalloonAnimals)
+                                        interests("Making Balloon Animals"),
+                                      if (userData.cooking)
+                                        interests("Cooking"),
+                                      if (userData.painting)
+                                        interests("Painting"),
+                                      if (userData.movies) interests("Movies"),
+                                      if (userData.sports) interests("Sports"),
+                                      if (userData.writing)
+                                        interests("Writing"),
+                                      if (userData.drinking)
+                                        interests("Drinking"),
+                                    ],
+                                  ),
                                 )
                               ]),
                         ),
