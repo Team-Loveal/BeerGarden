@@ -77,22 +77,34 @@ class AuthService {
     try {
       GoogleSignIn googleSignIn = GoogleSignIn();
       print('AAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
-      GoogleSignInAccount account = await googleSignIn.signIn();
-      print('acccccounnnntttttttt: ${account}'
-      )
+      //GoogleSignInAccount account = await googleSignIn.signIn();
+     /* print("crapppppppp");
+      print('acccccounnnntttttttt: ${account}');
       if (account == null) return false;
       print('BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB');
       AuthResult result =
           await _auth.signInWithCredential(GoogleAuthProvider.getCredential(
         idToken: (await account.authentication).idToken,
         accessToken: (await account.authentication).accessToken,
-      ));
+      ));*/
+      final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
+      final GoogleSignInAuthentication googleSignInAuthentication =
+      await googleSignInAccount.authentication;
+
+      final AuthCredential credential = GoogleAuthProvider.getCredential(
+        accessToken: googleSignInAuthentication.accessToken,
+        idToken: googleSignInAuthentication.idToken,
+      );
+
+      final AuthResult authResult = await _auth.signInWithCredential(credential);
+      final FirebaseUser user = authResult.user;
+
       print('CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCc');
-      FirebaseUser user = result.user;
+      //FirebaseUser user = result.user;
       print('google login userID: ${user.uid}');
       print('google login user: ${user}');
-      print('google account: ${account}');
-      await DatabaseService(uid: user.uid).setUserData(account.email);
+      print('google account: ${googleSignInAccount}');
+      await DatabaseService(uid: user.uid).setUserData(googleSignInAccount.email);
       return _userFromFirebaseUser(user);
     } catch (e) {
       print("Error logging with Google");
