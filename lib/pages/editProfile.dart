@@ -110,12 +110,12 @@ class _EditProfileState extends State<EditProfile> {
             UserData userData = snapshot.data;
 
             return Scaffold(
-              backgroundColor: Hexcolor("#F4AA33"),
+              backgroundColor: Hexcolor("#8CC63E"),
               appBar: PreferredSize(
                 preferredSize:
                     Size.fromHeight(MediaQuery.of(context).size.height * 0.08),
                 child: AppBar(
-                  backgroundColor: Hexcolor("#F4AA33"),
+                  backgroundColor: Hexcolor("#8CC63E"),
                   leading: IconButton(
                       onPressed: () {
                         Navigator.push(
