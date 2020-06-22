@@ -24,6 +24,7 @@ class _MatchState extends State<Match> {
   String chatID;
   int matches;
   bool isProfileCreated;
+  bool limitBlur;
 
   double sigmaX = 50;
   double sigmaY = 50;
@@ -40,10 +41,13 @@ class _MatchState extends State<Match> {
         matchID = doc['matchID'];
         chatID = doc['chatID'];
         matches = doc['matches'];
+        limitBlur = doc['limitBlur'];
       });
 
       //decrease blur of active messages if matches have been reset to zero and you are not a new user
-      if (doc['matches'] == 0 && doc['matchID'] != null) {
+      if (doc['matches'] == 0 && doc['matchID'] != null && !limitBlur) {
+        print(
+            'Should run once as true and then this should not print again $limitBlur');
         Firestore.instance
             .collection("messages")
             .where('fromID', isEqualTo: user.uid)
@@ -59,6 +63,13 @@ class _MatchState extends State<Match> {
                 .collection("messages")
                 .document(documentID)
                 .updateData({'blur': blur});
+
+            //set limitBlur to true so blur decrease only runs once
+            Firestore.instance
+                .collection('users')
+                .document(user.uid)
+                .updateData({'limitBlur': true});
+            //TODO limitBlur to false again every day along with matches
           });
         });
       }
@@ -69,7 +80,7 @@ class _MatchState extends State<Match> {
   Widget build(BuildContext context) {
     final AuthService _auth = AuthService();
     final myUserData = Provider.of<UserData>(context);
-
+    print(limitBlur);
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: matchID).userData,
         builder: (context, snapshot) {
