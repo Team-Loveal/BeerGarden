@@ -23,6 +23,7 @@ class DatabaseService {
       'occupation': "",
       'about': "",
       'isProfileCreated': false,
+      'limitBlur': false,
     });
   }
 
@@ -98,9 +99,7 @@ class DatabaseService {
     });
   }
 
-  Future profileComplete(
-      bool isProfileCompleted
-      ) async {
+  Future profileComplete(bool isProfileCompleted) async {
     return await usersCollection.document(uid).updateData({
       'isProfileCreated': isProfileCompleted,
     });
@@ -143,6 +142,7 @@ class DatabaseService {
       wedding: snapshot.data['wedding'],
       yourPlaceOrMine: snapshot.data['yourPlaceOrMine'],
       isProfileCreated: snapshot.data['isProfileCreated'],
+      limitBlur: snapshot.data['limitBlur'],
     );
   }
 

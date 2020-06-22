@@ -6,6 +6,7 @@ import 'package:lovealapp/pages/myProfile.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:lovealapp/services/database.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/services.dart';
 
 class NavigationHome extends StatefulWidget {
   final int newIdx;
@@ -30,6 +31,7 @@ class _NavigationHomeState extends State<NavigationHome> {
   ];
 
   void onTabTapped(int index) {
+    HapticFeedback.mediumImpact();
     setState(() {
       if (newIdx is int) {
         newIdx = null;
@@ -48,25 +50,24 @@ class _NavigationHomeState extends State<NavigationHome> {
         body: (newIdx == null) ? _children[_currentIndex] : _children[newIdx],
         bottomNavigationBar: BottomNavigationBar(
             // new
-            backgroundColor: Hexcolor("#8CC63E"),
+            backgroundColor: Hexcolor('#F4AA33'),
+            selectedItemColor: Colors.white,
+            unselectedItemColor: Hexcolor('#FFF1BA'),
             onTap: onTabTapped,
             currentIndex: _currentIndex,
             items: [
               BottomNavigationBarItem(
-                icon: new Icon(Icons.favorite, color: Colors.white),
-                title: new Text('Match',
-                    style: TextStyle(fontFamily: 'Alata', color: Colors.white)),
+                icon: new Icon(Icons.favorite),
+                title: new Text('Match', style: TextStyle(fontFamily: 'Alata')),
               ),
               BottomNavigationBarItem(
-                icon: new Icon(Icons.message, color: Colors.white),
-                title: new Text('Messages',
-                    style: TextStyle(fontFamily: 'Alata', color: Colors.white)),
+                icon: new Icon(Icons.message),
+                title:
+                    new Text('Messages', style: TextStyle(fontFamily: 'Alata')),
               ),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.person, color: Colors.white),
-                  title: Text('Profile',
-                      style:
-                          TextStyle(fontFamily: 'Alata', color: Colors.white)))
+                  icon: Icon(Icons.person),
+                  title: Text('Profile', style: TextStyle(fontFamily: 'Alata')))
             ]),
       ),
     );
