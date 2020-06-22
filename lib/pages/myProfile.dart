@@ -1,10 +1,8 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:lovealapp/models/user.dart';
-import 'package:lovealapp/services/auth.dart';
 import 'package:lovealapp/shared/loading.dart';
 import 'package:hexcolor/hexcolor.dart';
 
@@ -19,7 +17,6 @@ class _MyProfileState extends State<MyProfile> {
 
   @override
   Widget build(BuildContext context) {
-    final AuthService _auth = AuthService();
     final userData = Provider.of<UserData>(context);
     if (userData != null) {
       return Scaffold(
@@ -34,13 +31,6 @@ class _MyProfileState extends State<MyProfile> {
                 height: 70.0,
                 child: AppBar(
                   backgroundColor: Hexcolor("#F4AA33"),
-                  leading: IconButton(
-                      onPressed: () async {
-                        Navigator.of(context)
-                            .popUntil((route) => route.isFirst);
-                        await _auth.signOut();
-                      },
-                      icon: Icon(MdiIcons.arrowLeft)),
                   actions: <Widget>[
                     FlatButton.icon(
                       icon: Icon(MdiIcons.accountCog,
@@ -74,9 +64,16 @@ class _MyProfileState extends State<MyProfile> {
                   centerTitle: true,
                 ),
               ),
-              CircleAvatar(
-                radius: 70,
-                backgroundImage: NetworkImage(userData.imgUrl),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (_) {
+                    return _imageFullScreen(userData.imgUrl);
+                  }));
+                },
+                child: CircleAvatar(
+                  radius: 70,
+                  backgroundImage: NetworkImage(userData.imgUrl),
+                ),
               ),
               Text('${userData.nickname},  ${userData.age.toString()}',
                   style: TextStyle(
@@ -256,6 +253,22 @@ class _MyProfileState extends State<MyProfile> {
             SizedBox(height: 5),
             Text(body, style: TextStyle(fontSize: 16.0))
           ]),
+    );
+  }
+
+  Widget _imageFullScreen(String src) {
+    return GestureDetector(
+      child: Center(
+        child: Hero(
+          tag: 'imageHero',
+          child: Image.network(
+            src,
+          ),
+        ),
+      ),
+      onTap: () {
+        Navigator.pop(context);
+      },
     );
   }
 }
