@@ -92,18 +92,7 @@ class _UploadPhotoState extends State<UploadPhoto> {
                       Container(
                         child: _image != null
                             ? Center(
-                                child:
-//                                LiteRollingSwitch(
-//                                  value: isSwitched,
-//                                  textOn: 'On',
-//                                  textOff: 'Off',
-//                                  colorOn: Hexcolor("#8CC63E"),
-//                                  colorOff: Colors.blueGrey,
-//                                  iconOn: Icons.done,
-//                                  iconOff: Icons.remove_circle_outline,
-//                                ),
-//
-                                    Transform.scale(
+                                child: Transform.scale(
                                   scale: 0.8,
                                   child: LiteRollingSwitch(
                                     value: isSwitched,
@@ -121,20 +110,6 @@ class _UploadPhotoState extends State<UploadPhoto> {
                                     },
                                   ),
                                 ),
-
-//                                Transform.scale(
-//                                  scale: 1.5,
-//                                  child: Switch(
-//                                    value: isSwitched,
-//                                    onChanged: (value) {
-//                                      setState(() {
-//                                        isSwitched = value;
-//                                      });
-//                                    },
-//                                    activeTrackColor: Hexcolor("#8CC63E"),
-//                                    activeColor: Colors.green,
-//                                  ),
-//                                ),
                               )
                             : null,
                       ),
@@ -241,8 +216,6 @@ class _UploadPhotoState extends State<UploadPhoto> {
                       type: PageTransitionType.rotate,
                       duration: Duration(seconds: 1),
                       child: UploadPhoto()),
-//                  just keeping the original version
-//                  MaterialPageRoute(builder: (context) => UploadPhoto()),
                 );
               }),
           RaisedButton(
