@@ -92,51 +92,36 @@ class _UploadPhotoState extends State<UploadPhoto> {
                       Container(
                         child: _image != null
                             ? Center(
-                                child:
-//                                LiteRollingSwitch(
-//                                  value: isSwitched,
-//                                  textOn: 'On',
-//                                  textOff: 'Off',
-//                                  colorOn: Hexcolor("#8CC63E"),
-//                                  colorOff: Colors.blueGrey,
-//                                  iconOn: Icons.done,
-//                                  iconOff: Icons.remove_circle_outline,
-//                                ),
-//
-//                                    Transform.scale(
-//                                  scale: 0.8,
-//                                  child: LiteRollingSwitch(
-//                                    value: isSwitched,
-//                                    textOn: 'On',
-//                                    textOff: 'Off',
-//                                    colorOn: Hexcolor("#8CC63E"),
-//                                    colorOff: Colors.blueGrey,
-//                                    iconOn: Icons.done,
-//                                    iconOff: Icons.remove_circle_outline,
-//                                    onChanged: (value) {
-////                                      isSwitched = value;
-//                                      setState(() {
-//                                        isSwitched = value;
-//                                      });
-//                                    },
-//                                  ),
-//                                ),
-
-                                Transform.scale(
-                                  scale: 1.5,
-                                  child: Switch(
+                                child: Transform.scale(
+                                  scale: 0.8,
+                                  child: LiteRollingSwitch(
                                     value: isSwitched,
+                                    textOn: 'On',
+                                    textOff: 'Off',
+                                    colorOn: Hexcolor("#8CC63E"),
+                                    colorOff: Colors.blueGrey,
+                                    iconOn: Icons.done,
+                                    iconOff: Icons.remove_circle_outline,
                                     onChanged: (value) {
                                       setState(() {
                                         isSwitched = value;
                                       });
                                     },
-
-                                    activeTrackColor: Hexcolor("#8CC63E"),
-                                    activeColor: Colors.green,
-
                                   ),
                                 ),
+//                                Transform.scale(
+//                                  scale: 1.5,
+//                                  child: Switch(
+//                                    value: isSwitched,
+//                                    onChanged: (value) {
+//                                      setState(() {
+//                                        isSwitched = value;
+//                                      });
+//                                    },
+//                                    activeTrackColor: Hexcolor("#8CC63E"),
+//                                    activeColor: Colors.green,
+//                                  ),
+//                                ),
                               )
                             : null,
                       ),
