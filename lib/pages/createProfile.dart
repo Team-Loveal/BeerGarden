@@ -363,6 +363,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                 Padding(
                                   padding: const EdgeInsets.all(5.0),
                                   child: TextFormField(
+                                    cursorWidth: 3,
                                     onChanged: (val) {
                                       setState(() => occupation = val);
                                     },
@@ -399,6 +400,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                 Padding(
                                   padding: const EdgeInsets.all(5.0),
                                   child: TextFormField(
+                                    cursorWidth: 3,
                                     onChanged: (val) {
                                       setState(() => about = val);
                                     },
