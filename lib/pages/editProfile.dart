@@ -515,7 +515,7 @@ class _EditProfileState extends State<EditProfile> {
                                                             children: <Widget>[
                                                               FilterChip(
                                                                 label: Text(
-                                                                    'yodeling'),
+                                                                    'Games'),
                                                                 selected: data[
                                                                     'yodelingEdit'],
                                                                 onSelected:
@@ -536,7 +536,7 @@ class _EditProfileState extends State<EditProfile> {
                                                               ),
                                                               FilterChip(
                                                                 label: Text(
-                                                                    'shopping'),
+                                                                    'Shopping'),
                                                                 selected: data[
                                                                     'shoppingEdit'],
                                                                 onSelected:
@@ -557,7 +557,7 @@ class _EditProfileState extends State<EditProfile> {
                                                               ),
                                                               FilterChip(
                                                                 label: Text(
-                                                                    'making balloon animals'),
+                                                                    'Photography'),
                                                                 selected: data[
                                                                     'makingBalloonAnimalsEdit'],
                                                                 onSelected:
@@ -578,7 +578,7 @@ class _EditProfileState extends State<EditProfile> {
                                                               ),
                                                               FilterChip(
                                                                 label: Text(
-                                                                    'cooking'),
+                                                                    'Karaoke'),
                                                                 selected: data[
                                                                     'cookingEdit'],
                                                                 onSelected:
@@ -599,7 +599,7 @@ class _EditProfileState extends State<EditProfile> {
                                                               ),
                                                               FilterChip(
                                                                 label: Text(
-                                                                    'painting'),
+                                                                    'Art'),
                                                                 selected: data[
                                                                     'paintingEdit'],
                                                                 onSelected:
@@ -620,7 +620,7 @@ class _EditProfileState extends State<EditProfile> {
                                                               ),
                                                               FilterChip(
                                                                 label: Text(
-                                                                    'writing'),
+                                                                    'Traveling'),
                                                                 selected: data[
                                                                     'writingEdit'],
                                                                 onSelected:
@@ -641,7 +641,7 @@ class _EditProfileState extends State<EditProfile> {
                                                               ),
                                                               FilterChip(
                                                                 label: Text(
-                                                                    'sports'),
+                                                                    'Sports'),
                                                                 selected: data[
                                                                     'sportsEdit'],
                                                                 onSelected:
@@ -662,7 +662,7 @@ class _EditProfileState extends State<EditProfile> {
                                                               ),
                                                               FilterChip(
                                                                 label: Text(
-                                                                    'movies'),
+                                                                    'Movies'),
                                                                 selected: data[
                                                                     'moviesEdit'],
                                                                 onSelected:
@@ -683,7 +683,7 @@ class _EditProfileState extends State<EditProfile> {
                                                               ),
                                                               FilterChip(
                                                                 label: Text(
-                                                                    'drinking'),
+                                                                    'Drinking'),
                                                                 selected: data[
                                                                     'drinkingEdit'],
                                                                 onSelected:
