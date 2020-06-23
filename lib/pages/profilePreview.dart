@@ -50,7 +50,7 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 icon: Icon(Icons.check),
                 label: Text('CONFIRM'),
-                backgroundColor: Colors.pink,
+                backgroundColor: Hexcolor("#8CC63E"),
               ),
               floatingActionButtonLocation:
                   FloatingActionButtonLocation.centerFloat,
@@ -179,9 +179,9 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                                   Container(
                                       margin: EdgeInsets.only(right: 10),
                                       child: OutlineButton(
-                                          child: Text("Yodeling",
+                                          child: Text("Games",
                                               style: TextStyle(
-                                                  color: Colors.pink)),
+                                                  color: Colors.black)),
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
@@ -193,7 +193,7 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                                       child: OutlineButton(
                                           child: Text("Shopping",
                                               style: TextStyle(
-                                                  color: Colors.pink)),
+                                                  color: Colors.black)),
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
@@ -203,9 +203,9 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                                   Container(
                                       margin: EdgeInsets.only(right: 10),
                                       child: OutlineButton(
-                                          child: Text("MakingBalloonAnimals",
+                                          child: Text("Photography",
                                               style: TextStyle(
-                                                  color: Colors.pink)),
+                                                  color: Colors.black)),
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
@@ -215,9 +215,9 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                                   Container(
                                       margin: EdgeInsets.only(right: 10),
                                       child: OutlineButton(
-                                          child: Text("Cooking",
+                                          child: Text("Karaoke",
                                               style: TextStyle(
-                                                  color: Colors.pink)),
+                                                  color: Colors.black)),
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
@@ -227,9 +227,9 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                                   Container(
                                       margin: EdgeInsets.only(right: 10),
                                       child: OutlineButton(
-                                          child: Text("Painting",
+                                          child: Text("Art",
                                               style: TextStyle(
-                                                  color: Colors.pink)),
+                                                  color: Colors.black)),
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
@@ -241,7 +241,7 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                                       child: OutlineButton(
                                           child: Text("Movies",
                                               style: TextStyle(
-                                                  color: Colors.pink)),
+                                                  color: Colors.black)),
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
@@ -253,7 +253,7 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                                       child: OutlineButton(
                                           child: Text("Sports",
                                               style: TextStyle(
-                                                  color: Colors.pink)),
+                                                  color: Colors.black)),
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
@@ -263,9 +263,9 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                                   Container(
                                       margin: EdgeInsets.only(right: 10),
                                       child: OutlineButton(
-                                          child: Text("Writing",
+                                          child: Text("Traveling",
                                               style: TextStyle(
-                                                  color: Colors.pink)),
+                                                  color: Colors.black)),
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
@@ -277,7 +277,7 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                                       child: OutlineButton(
                                           child: Text("Drinking",
                                               style: TextStyle(
-                                                  color: Colors.pink)),
+                                                  color: Colors.black)),
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:

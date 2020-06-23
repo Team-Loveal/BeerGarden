@@ -179,19 +179,19 @@ class _ProfileState extends State<Profile> {
                                       scrollDirection: Axis.horizontal,
                                       children: <Widget>[
                                         if (userData.yodeling)
-                                          interests("Yodeling"),
+                                          interests("Games"),
                                         if (userData.shopping)
                                           interests("Shopping"),
                                         if (userData.makingBalloonAnimals)
-                                          interests("Making Balloon Animals"),
+                                          interests("Photography"),
                                         if (userData.cooking)
-                                          interests("Cooking"),
+                                          interests("Karaoke"),
                                         if (userData.painting)
-                                          interests("Painting"),
+                                          interests("Art"),
                                         if (userData.movies) interests("Movies"),
                                         if (userData.sports) interests("Sports"),
                                         if (userData.writing)
-                                          interests("Writing"),
+                                          interests("Traveling"),
                                         if (userData.drinking)
                                           interests("Drinking"),
                                       ],
