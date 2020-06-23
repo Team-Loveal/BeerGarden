@@ -8,9 +8,6 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:provider/provider.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-//CHANGE LOCATION TO DROPDOWN OF PREFECTURES IN JAPAN
-
-// change the color green to white and get rid of the check mark
 
 class CreateProfile extends StatefulWidget {
   @override
@@ -366,6 +363,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                 Padding(
                                   padding: const EdgeInsets.all(5.0),
                                   child: TextFormField(
+                                    cursorWidth: 3,
                                     onChanged: (val) {
                                       setState(() => occupation = val);
                                     },
@@ -402,6 +400,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                 Padding(
                                   padding: const EdgeInsets.all(5.0),
                                   child: TextFormField(
+                                    cursorWidth: 3,
                                     onChanged: (val) {
                                       setState(() => about = val);
                                     },
@@ -727,7 +726,6 @@ class _CreateProfileState extends State<CreateProfile> {
                                           _highValue,
                                           genderPreference,
                                         );
-
                                         Navigator.of(context)
                                             .pushNamed('/questions');
                                       }

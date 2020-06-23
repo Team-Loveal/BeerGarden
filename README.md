@@ -50,18 +50,18 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 ## Authors
 
-👻  Jeff Bentley - [![alt text][1.1]][1]       [![alt text][1.5]][2]
+👻  Jeff Bentley - [![alt text][1.1]][1]       [![alt text][1.2]][2]
 
-😸  Garrett Chun  -  [![alt text][1.1]][3]       [![alt text][1.5]][4]
+😸  Garrett Chun  -  [![alt text][1.1]][3]       [![alt text][1.2]][4]
 
-🌝  Yuya Harada - [![alt text][1.1]][5]   [![alt text][1.5]][9]
+🌝  Yuya Harada - [![alt text][1.1]][5]   [![alt text][1.2]][9]
 
 🐸  Riku Kawano - [![alt text][1.1]][6]
 
-🦄  Yurika Namba - [![alt text][1.1]][7]       [![alt text][1.5]][8]
+🦄  Yurika Namba - [![alt text][1.1]][7]       [![alt text][1.2]][8]
 
 [1.1]: http://i.imgur.com/9I6NRUm.png
-[1.2]: ./images/twitter.png
+[1.2]: ./images/twitter20.png
 [1.5]: http://i.imgur.com/wWzX9uB.png
 
 [1]: https://github.com/jbentleyjp

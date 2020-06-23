@@ -55,6 +55,7 @@ dependencies:
   simple_animations: ^2.2.1
   confetti: ^0.5.2
   flutter_flip_view: ^1.0.3
+  fancy_on_boarding: ^1.6.0
 
 dev_dependencies:
   flutter_test:
