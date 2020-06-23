@@ -51,7 +51,7 @@ class _AboutState extends State<About> {
                       ),
                     ),
                   ),
-                  Image(image: AssetImage('images/hedgedog.jpg')),
+                  Image(image: AssetImage('images/getamatch.png')),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
@@ -64,7 +64,7 @@ class _AboutState extends State<About> {
                       ),
                     ),
                   ),
-                  Image(image: AssetImage('images/bird.jpg')),
+                  Image(image: AssetImage('images/100%blur.png')),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
@@ -77,7 +77,7 @@ class _AboutState extends State<About> {
                       ),
                     ),
                   ),
-                  Image(image: AssetImage('images/dinojeff.jpg')),
+                  Image(image: AssetImage('images/40%blur.png')),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
@@ -90,7 +90,7 @@ class _AboutState extends State<About> {
                       ),
                     ),
                   ),
-                  Image(image: AssetImage('images/listen.jpg')),
+                  Image(image: AssetImage('images/0blur.png')),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(

@@ -168,152 +168,164 @@ class _MessageState extends State<Message> {
   Widget build(BuildContext context) {
     user = Provider.of<User>(context);
 
-    return Scaffold(
-        backgroundColor: Hexcolor("#F4AA33"),
-        appBar: PreferredSize(
-          preferredSize:
-              Size.fromHeight(MediaQuery.of(context).size.height * 0.1),
-          child: Container(
-            margin: EdgeInsets.only(top: 10.0),
-            child: AppBar(
-              backgroundColor: Hexcolor("#F4AA33"),
-              leading: IconButton(
-                  onPressed: () {
+    return Container(
+      height: double.infinity,
+      width: double.infinity,
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [Hexcolor("#FFF1BA"), Hexcolor("#F4AA33")],
+        stops: [0.01, 0.1],
+      )),
+      child: Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: PreferredSize(
+            preferredSize:
+                Size.fromHeight(MediaQuery.of(context).size.height * 0.1),
+            child: Container(
+              margin: EdgeInsets.only(top: 10.0),
+              child: AppBar(
+                backgroundColor: Colors.transparent,
+                leading: IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        PageTransition(
+                            type: PageTransitionType.scale,
+                            child: NavigationHome(newIdx: profileIndex)),
+                      );
+                    },
+                    icon: Icon(MdiIcons.arrowLeft)),
+                title: GestureDetector(
+                  onTap: () {
                     Navigator.push(
-                      context,
-                      PageTransition(
-                          type: PageTransitionType.scale,
-                          child: NavigationHome(newIdx: profileIndex)),
-                    );
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Profile(
+                                userID: matchID,
+                                nickname: nickname,
+                                imgUrl: imgUrl,
+                                chatRoomID: chatRoomID)));
                   },
-                  icon: Icon(MdiIcons.arrowLeft)),
-              title: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => Profile(
-                              userID: matchID,
-                              nickname: nickname,
-                              imgUrl: imgUrl,
-                              chatRoomID: chatRoomID)));
-                },
-                child: Container(
-                  child: Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                  child: Container(
+                    child: Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Stack(
+                            children: <Widget>[
+                              CircleAvatar(
+                                radius: 29,
+                                backgroundImage: NetworkImage(imgUrl),
+                              ),
+                              Container(
+                                  width: 58,
+                                  height: 58,
+                                  child: ClipOval(
+                                    child: BackdropFilter(
+                                        filter: ImageFilter.blur(
+                                            sigmaX: sigmaX ?? 50,
+                                            sigmaY: sigmaY ?? 50),
+                                        child: Container(
+                                            color:
+                                                Colors.black.withOpacity(0))),
+                                  )),
+                            ],
+                          ),
+                          SizedBox(width: 10.0),
+                          Text(
+                            nickname,
+                            style: TextStyle(fontSize: 30, color: Colors.white),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                elevation: 0.0,
+                centerTitle: true,
+              ),
+            ),
+          ),
+          body: GestureDetector(
+            onTap: () => FocusScope.of(context).unfocus(),
+            child: Column(
+              children: <Widget>[
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.pink,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30.0),
+                        topRight: Radius.circular(30.0),
+                      ),
+                    ),
+                    child: Column(
+                      //LIST OF MESSAGES
                       children: <Widget>[
-                        Stack(
-                          children: <Widget>[
-                            CircleAvatar(
-                              radius: 29,
-                              backgroundImage: NetworkImage(imgUrl),
-                            ),
-                            Container(
-                                width: 58,
-                                height: 58,
-                                child: ClipOval(
-                                  child: BackdropFilter(
-                                      filter: ImageFilter.blur(
-                                          sigmaX: sigmaX ?? 50,
-                                          sigmaY: sigmaY ?? 50),
-                                      child: Container(
-                                          color: Colors.black.withOpacity(0))),
-                                )),
-                          ],
+                        Expanded(
+                          child: Container(
+                              decoration: BoxDecoration(
+                                color: Hexcolor('#f1f4f5'),
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(30.0),
+                                  topRight: Radius.circular(30.0),
+                                ),
+                              ),
+                              // builds a list of messages from database
+                              // updated in realtime with stream
+                              child: StreamBuilder(
+                                  stream: dbRef
+                                      .collection('messages')
+                                      .document(chatRoomID)
+                                      .collection('chatroom')
+                                      .orderBy('timestamp', descending: true)
+                                      .limit(20)
+                                      .snapshots(),
+                                  builder: (context, snapshot) {
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: Loading(),
+                                      );
+                                    } else {
+                                      return ClipRRect(
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(30.0),
+                                          topRight: Radius.circular(30.0),
+                                        ),
+                                        child: ListView.builder(
+                                          padding: EdgeInsets.all(8.0),
+                                          reverse: true,
+                                          // builds widget for each message in the database
+                                          itemBuilder: (context, index) =>
+                                              _chatBubble(
+                                                  snapshot
+                                                      .data.documents[index],
+                                                  context),
+                                          itemCount:
+                                              snapshot.data.documents.length,
+                                        ),
+                                      );
+                                    }
+                                  })),
                         ),
-                        SizedBox(width: 10.0),
-                        Text(
-                          nickname,
-                          style: TextStyle(fontSize: 30, color: Colors.white),
+                        //INPUT MESSAGE FIELD
+                        Container(
+                          decoration:
+                              BoxDecoration(color: Theme.of(context).cardColor),
+                          child: _buildTextInput(),
                         ),
                       ],
                     ),
                   ),
                 ),
-              ),
-              elevation: 0.0,
-              centerTitle: true,
+              ],
             ),
-          ),
-        ),
-        body: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
-          child: Column(
-            children: <Widget>[
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.pink,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(30.0),
-                      topRight: Radius.circular(30.0),
-                    ),
-                  ),
-                  child: Column(
-                    //LIST OF MESSAGES
-                    children: <Widget>[
-                      Expanded(
-                        child: Container(
-                            decoration: BoxDecoration(
-                              color: Hexcolor('#f1f4f5'),
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(30.0),
-                                topRight: Radius.circular(30.0),
-                              ),
-                            ),
-                            // builds a list of messages from database
-                            // updated in realtime with stream
-                            child: StreamBuilder(
-                                stream: dbRef
-                                    .collection('messages')
-                                    .document(chatRoomID)
-                                    .collection('chatroom')
-                                    .orderBy('timestamp', descending: true)
-                                    .limit(20)
-                                    .snapshots(),
-                                builder: (context, snapshot) {
-                                  if (!snapshot.hasData) {
-                                    return Center(
-                                      child: Loading(),
-                                    );
-                                  } else {
-                                    return ClipRRect(
-                                      borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(30.0),
-                                        topRight: Radius.circular(30.0),
-                                      ),
-                                      child: ListView.builder(
-                                        padding: EdgeInsets.all(8.0),
-                                        reverse: true,
-                                        // builds widget for each message in the database
-                                        itemBuilder: (context, index) =>
-                                            _chatBubble(
-                                                snapshot.data.documents[index],
-                                                context),
-                                        itemCount:
-                                            snapshot.data.documents.length,
-                                      ),
-                                    );
-                                  }
-                                })),
-                      ),
-                      //INPUT MESSAGE FIELD
-                      Container(
-                        decoration:
-                            BoxDecoration(color: Theme.of(context).cardColor),
-                        child: _buildTextInput(),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ));
+          )),
+    );
   }
 
-  // MESSAGE INPUT AND SEND
   Widget _buildTextInput() {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 8.0),
@@ -394,7 +406,7 @@ class _MessageState extends State<Message> {
                   : Container(),
               document['text'] == 'sendBeer'
                   ? Container(
-                      child: Image.asset('images/cheers.gif',
+                      child: Image.asset('images/cheers2.gif',
                           width: 100.0, height: 100.0, fit: BoxFit.fitWidth))
                   : Container(
                       padding: const EdgeInsets.all(15.0),

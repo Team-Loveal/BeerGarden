@@ -37,7 +37,8 @@ class _EditProfileState extends State<EditProfile> {
   bool drinking = false;
 
   //preferences
-  var ageList = new List<int>.generate(80, (i) => i + 1);
+  var ageList = [for (var i = 18; i < 81; i+=1) i];
+
   String genderPreference;
   double _lowValue = 18;
   double _highValue = 80;
@@ -70,21 +71,10 @@ class _EditProfileState extends State<EditProfile> {
         _highValue ?? userData.highAge,
         genderPreference ?? userData.genderPreference);
 
-    // recreate matches with new preference
-    // if (_lowValue != 18 ||
-    //     _highValue != 100 ||
-    //     userData.genderPreference != genderPreference) {
-    //   await DatabaseService(uid: user.uid).deleteMatches();
-    //   await DatabaseService(uid: user.uid).createMatches(
-    //       genderPreference ?? userData.genderPreference,
-    //       _lowValue ?? userData.lowAge,
-    //       _highValue ?? userData.highAge);
-    //   //try new routing
     Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) => NavigationHome(newIdx: profileIndex)));
-    // }
   }
 
   @override
@@ -514,7 +504,7 @@ class _EditProfileState extends State<EditProfile> {
                                                             children: <Widget>[
                                                               FilterChip(
                                                                 label: Text(
-                                                                    'yodeling'),
+                                                                    'Games'),
                                                                 selected: data[
                                                                     'yodelingEdit'],
                                                                 onSelected:
@@ -535,7 +525,7 @@ class _EditProfileState extends State<EditProfile> {
                                                               ),
                                                               FilterChip(
                                                                 label: Text(
-                                                                    'shopping'),
+                                                                    'Shopping'),
                                                                 selected: data[
                                                                     'shoppingEdit'],
                                                                 onSelected:
@@ -556,7 +546,7 @@ class _EditProfileState extends State<EditProfile> {
                                                               ),
                                                               FilterChip(
                                                                 label: Text(
-                                                                    'making balloon animals'),
+                                                                    'Photography'),
                                                                 selected: data[
                                                                     'makingBalloonAnimalsEdit'],
                                                                 onSelected:
@@ -577,7 +567,7 @@ class _EditProfileState extends State<EditProfile> {
                                                               ),
                                                               FilterChip(
                                                                 label: Text(
-                                                                    'cooking'),
+                                                                    'Karaoke'),
                                                                 selected: data[
                                                                     'cookingEdit'],
                                                                 onSelected:
@@ -598,7 +588,7 @@ class _EditProfileState extends State<EditProfile> {
                                                               ),
                                                               FilterChip(
                                                                 label: Text(
-                                                                    'painting'),
+                                                                    'Art'),
                                                                 selected: data[
                                                                     'paintingEdit'],
                                                                 onSelected:
@@ -619,7 +609,7 @@ class _EditProfileState extends State<EditProfile> {
                                                               ),
                                                               FilterChip(
                                                                 label: Text(
-                                                                    'writing'),
+                                                                    'Traveling'),
                                                                 selected: data[
                                                                     'writingEdit'],
                                                                 onSelected:
@@ -640,7 +630,7 @@ class _EditProfileState extends State<EditProfile> {
                                                               ),
                                                               FilterChip(
                                                                 label: Text(
-                                                                    'sports'),
+                                                                    'Sports'),
                                                                 selected: data[
                                                                     'sportsEdit'],
                                                                 onSelected:
@@ -661,7 +651,7 @@ class _EditProfileState extends State<EditProfile> {
                                                               ),
                                                               FilterChip(
                                                                 label: Text(
-                                                                    'movies'),
+                                                                    'Movies'),
                                                                 selected: data[
                                                                     'moviesEdit'],
                                                                 onSelected:
@@ -682,7 +672,7 @@ class _EditProfileState extends State<EditProfile> {
                                                               ),
                                                               FilterChip(
                                                                 label: Text(
-                                                                    'drinking'),
+                                                                    'Drinking'),
                                                                 selected: data[
                                                                     'drinkingEdit'],
                                                                 onSelected:
@@ -751,7 +741,9 @@ class _EditProfileState extends State<EditProfile> {
                                                               child: Text(value,
                                                                   style: TextStyle(
                                                                       fontSize:
-                                                                          20.0)),
+                                                                          20.0,
+                                                                    color: Colors.red
+                                                                  )),
                                                             );
                                                           }).toList(),
                                                         ),

@@ -15,6 +15,9 @@ import 'profilePreview.dart';
 //adding for transition animation
 import 'package:page_transition/page_transition.dart';
 
+// for switch animation
+import 'package:lite_rolling_switch/lite_rolling_switch.dart';
+
 class UploadPhoto extends StatefulWidget {
   @override
   _UploadPhotoState createState() => _UploadPhotoState();
@@ -89,7 +92,37 @@ class _UploadPhotoState extends State<UploadPhoto> {
                       Container(
                         child: _image != null
                             ? Center(
-                                child: Transform.scale(
+                                child:
+//                                LiteRollingSwitch(
+//                                  value: isSwitched,
+//                                  textOn: 'On',
+//                                  textOff: 'Off',
+//                                  colorOn: Hexcolor("#8CC63E"),
+//                                  colorOff: Colors.blueGrey,
+//                                  iconOn: Icons.done,
+//                                  iconOff: Icons.remove_circle_outline,
+//                                ),
+//
+//                                    Transform.scale(
+//                                  scale: 0.8,
+//                                  child: LiteRollingSwitch(
+//                                    value: isSwitched,
+//                                    textOn: 'On',
+//                                    textOff: 'Off',
+//                                    colorOn: Hexcolor("#8CC63E"),
+//                                    colorOff: Colors.blueGrey,
+//                                    iconOn: Icons.done,
+//                                    iconOff: Icons.remove_circle_outline,
+//                                    onChanged: (value) {
+////                                      isSwitched = value;
+//                                      setState(() {
+//                                        isSwitched = value;
+//                                      });
+//                                    },
+//                                  ),
+//                                ),
+
+                                Transform.scale(
                                   scale: 1.5,
                                   child: Switch(
                                     value: isSwitched,
@@ -98,8 +131,10 @@ class _UploadPhotoState extends State<UploadPhoto> {
                                         isSwitched = value;
                                       });
                                     },
+
                                     activeTrackColor: Hexcolor("#8CC63E"),
                                     activeColor: Colors.green,
+
                                   ),
                                 ),
                               )
@@ -193,10 +228,10 @@ class _UploadPhotoState extends State<UploadPhoto> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           RaisedButton(
-              color: Colors.pinkAccent,
+              color: Hexcolor("#8CC63E"),
               child: Text(
                 'Select again',
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
               ),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
@@ -208,15 +243,13 @@ class _UploadPhotoState extends State<UploadPhoto> {
                       type: PageTransitionType.rotate,
                       duration: Duration(seconds: 1),
                       child: UploadPhoto()),
-//                  just keeping the original version
-//                  MaterialPageRoute(builder: (context) => UploadPhoto()),
                 );
               }),
           RaisedButton(
             color: Hexcolor("#8CC63E"),
             child: Text(
               'Next',
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
             ),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),

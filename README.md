@@ -11,25 +11,24 @@ Meet a new person everyday with both your photos blurred. As you build your new 
 
 Available NOW at Google Play store 👉 [BeerGarden](https://play.google.com/store/)
 
-### Here's a preview of the intro screen:
+### Here's a preview of the welcome screen:
 
-![BeerGarden1](./images/welcome.jpg)
+![BeerGarden1](./images/welcome.png)
 
-### This is a preview of the result screen:
+### This is a preview of the create profile screen:
 
-![BeerGarden2](./images/match.jpg)
+![BeerGarden2](./images/create.png)
+
+### This is a preview of the messages screen:
+
+![BeerGarden3](./images/messages.jpg)
 
 
 ## Installation
 
-1. Please clone the repository.
+1. Go to Google Play and download the app
 
-2. Install packages
-
-```bash
-yarn install
-yarn start
-```
+2.  Take a great selfie
 
 3.  Create a profile
 
@@ -68,7 +67,7 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 [1]: https://github.com/jbentleyjp
 [2]: https://twitter.com/bentley449
 
-[3]: http://www.github.com/Kapakahi
+[3]: https://github.com/KapakahiCoder
 [4]: http://www.twitter.com/KapakahiCoder
 
 [5]: https://github.com/yuya-h-29
