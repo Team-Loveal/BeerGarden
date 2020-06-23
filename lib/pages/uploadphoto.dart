@@ -131,8 +131,10 @@ class _UploadPhotoState extends State<UploadPhoto> {
                                         isSwitched = value;
                                       });
                                     },
+
                                     activeTrackColor: Hexcolor("#8CC63E"),
                                     activeColor: Colors.green,
+
                                   ),
                                 ),
                               )
@@ -226,10 +228,10 @@ class _UploadPhotoState extends State<UploadPhoto> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           RaisedButton(
-              color: Colors.pinkAccent,
+              color: Hexcolor("#8CC63E"),
               child: Text(
                 'Select again',
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
               ),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
@@ -241,15 +243,13 @@ class _UploadPhotoState extends State<UploadPhoto> {
                       type: PageTransitionType.rotate,
                       duration: Duration(seconds: 1),
                       child: UploadPhoto()),
-//                  just keeping the original version
-//                  MaterialPageRoute(builder: (context) => UploadPhoto()),
                 );
               }),
           RaisedButton(
             color: Hexcolor("#8CC63E"),
             child: Text(
               'Next',
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
             ),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),

@@ -53,6 +53,7 @@ dependencies:
   lite_rolling_switch: ^0.1.1
   sa_stateless_animation: ^1.0.1
   simple_animations: ^2.2.1
+  flutter_flip_view: ^1.0.3
 
 dev_dependencies:
   flutter_test:
