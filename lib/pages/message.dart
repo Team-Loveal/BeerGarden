@@ -173,11 +173,11 @@ class _MessageState extends State<Message> {
       width: double.infinity,
       decoration: BoxDecoration(
           gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [Hexcolor("#FFF1BA"), Hexcolor("#F4AA33")],
-            stops: [0.01, 0.1],
-          )),
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [Hexcolor("#FFF1BA"), Hexcolor("#F4AA33")],
+        stops: [0.01, 0.1],
+      )),
       child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: PreferredSize(
@@ -228,7 +228,8 @@ class _MessageState extends State<Message> {
                                             sigmaX: sigmaX ?? 50,
                                             sigmaY: sigmaY ?? 50),
                                         child: Container(
-                                            color: Colors.black.withOpacity(0))),
+                                            color:
+                                                Colors.black.withOpacity(0))),
                                   )),
                             ],
                           ),
@@ -299,7 +300,8 @@ class _MessageState extends State<Message> {
                                           // builds widget for each message in the database
                                           itemBuilder: (context, index) =>
                                               _chatBubble(
-                                                  snapshot.data.documents[index],
+                                                  snapshot
+                                                      .data.documents[index],
                                                   context),
                                           itemCount:
                                               snapshot.data.documents.length,
@@ -324,7 +326,6 @@ class _MessageState extends State<Message> {
     );
   }
 
-  // MESSAGE INPUT AND SEND
   Widget _buildTextInput() {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 8.0),
@@ -405,7 +406,7 @@ class _MessageState extends State<Message> {
                   : Container(),
               document['text'] == 'sendBeer'
                   ? Container(
-                      child: Image.asset('images/cheers.gif',
+                      child: Image.asset('images/cheers2.gif',
                           width: 100.0, height: 100.0, fit: BoxFit.fitWidth))
                   : Container(
                       padding: const EdgeInsets.all(15.0),
