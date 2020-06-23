@@ -52,7 +52,10 @@ class _QuestionsState extends State<Questions> {
                         Padding(
                           padding: EdgeInsets.symmetric(vertical: 20.0),
                           child: Text(
-                              "The more questions you answer about yourself, the more likely someone will buy you a drink🍺 You'll have a chance to answer more questions later too!"),
+                              "The more questions you answer about yourself, the more likely someone will buy you a drink🍺 You'll have a chance to answer more questions later too!",
+                            style: TextStyle(fontSize: 22.0),
+                          ),
+
                         ),
                         Form(
                           key: _formKey,
@@ -61,7 +64,7 @@ class _QuestionsState extends State<Questions> {
                             children: <Widget>[
                               Text(
                                 '🛌Do you make your bed in the morning?',
-                                style: TextStyle(fontSize: 15.0),
+                                style: TextStyle(fontSize: 20.0),
                               ),
                               TextFormField(
                                 cursorWidth: 3,
@@ -78,7 +81,9 @@ class _QuestionsState extends State<Questions> {
                               ),
                               SizedBox(height: 20.0),
                               Text(
-                                  '🤓Do you read reviews, or just go with your gut?'),
+                                  '🤓Do you read reviews, or just go with your gut?',
+                                style: TextStyle(fontSize: 20.0),
+                              ),
                               TextFormField(
                                 cursorWidth: 3,
                                 onChanged: (val) {
@@ -94,7 +99,10 @@ class _QuestionsState extends State<Questions> {
                               ),
                               SizedBox(height: 20.0),
                               Text(
-                                  '🌮If you could only eat one thing for the rest of your life, what would it be?'),
+                                  '🌮If you could only eat one thing for the rest of your life, what would it be?',
+                                style: TextStyle(fontSize: 20.0),
+
+                              ),
                               TextFormField(
                                 cursorWidth: 3,
                                 onChanged: (val) {
@@ -110,7 +118,9 @@ class _QuestionsState extends State<Questions> {
                               ),
                               SizedBox(height: 20.0),
                               Text(
-                                  "🌭If you're eating a meal do you save the best thing for last or eat it first?"),
+                                  "🌭If you're eating a meal do you save the best thing for last or eat it first?",
+                                style: TextStyle(fontSize: 20.0),
+                              ),
                               TextFormField(
                                 cursorWidth: 3,
                                 onChanged: (val) {
@@ -128,7 +138,9 @@ class _QuestionsState extends State<Questions> {
                                 },
                               ),
                               SizedBox(height: 20.0),
-                              Text("👽Do you believe in aliens?"),
+                              Text("👽Do you believe in aliens?",
+                                style: TextStyle(fontSize: 20.0),
+                              ),
                               TextFormField(
                                 cursorWidth: 3,
                                 onChanged: (val) {
