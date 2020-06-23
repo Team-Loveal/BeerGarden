@@ -131,8 +131,10 @@ class _UploadPhotoState extends State<UploadPhoto> {
                                         isSwitched = value;
                                       });
                                     },
+
                                     activeTrackColor: Hexcolor("#8CC63E"),
                                     activeColor: Colors.green,
+
                                   ),
                                 ),
                               )
@@ -241,8 +243,6 @@ class _UploadPhotoState extends State<UploadPhoto> {
                       type: PageTransitionType.rotate,
                       duration: Duration(seconds: 1),
                       child: UploadPhoto()),
-//                  just keeping the original version
-//                  MaterialPageRoute(builder: (context) => UploadPhoto()),
                 );
               }),
           RaisedButton(
