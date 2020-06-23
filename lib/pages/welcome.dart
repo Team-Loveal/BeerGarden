@@ -28,17 +28,17 @@ class _WelcomeState extends State<Welcome> {
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.fromLTRB(260, 15, 15, 0),
-                  child: MaterialButton(
-                      child: Text('About',
-                          style: TextStyle(
-                              color: Colors.grey[900],
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15)),
-                      color: Colors.white,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)),
-                      onPressed: () =>
-                          {Navigator.of(context).pushNamed('/about')}),
+//                  child: MaterialButton(
+//                      child: Text('About',
+//                          style: TextStyle(
+//                              color: Colors.grey[900],
+//                              fontWeight: FontWeight.bold,
+//                              fontSize: 15)),
+//                      color: Colors.white,
+//                      shape: RoundedRectangleBorder(
+//                          borderRadius: BorderRadius.circular(20)),
+//                      onPressed: () =>
+//                          {Navigator.of(context).pushNamed('/about')}),
                 ),
                 Spacer(flex: 2),
                 Image(
@@ -96,16 +96,7 @@ Widget _aboutButton() {
         text: TextSpan(
           children: [
             TextSpan(
-              text: 'Learn about the BeerGarden in ',
-              style: TextStyle(
-                color: Colors.white,
-                fontFamily: 'Alata',
-                fontSize: 17.0,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-            TextSpan(
-              text: 'Info',
+              text: 'How it works ',
               style: TextStyle(
                 color: Colors.white,
                 fontFamily: 'Alata',
@@ -113,6 +104,15 @@ Widget _aboutButton() {
                 fontWeight: FontWeight.bold,
               ),
             ),
+//            TextSpan(
+//              text: 'Info',
+//              style: TextStyle(
+//                color: Colors.white,
+//                fontFamily: 'Alata',
+//                fontSize: 17.0,
+//                fontWeight: FontWeight.bold,
+//              ),
+//            ),
           ],
         ),
       ),

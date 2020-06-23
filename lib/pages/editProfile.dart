@@ -37,7 +37,8 @@ class _EditProfileState extends State<EditProfile> {
   bool drinking = false;
 
   //preferences
-  var ageList = new List<int>.generate(80, (i) => i + 1);
+  var ageList = [for (var i = 18; i < 81; i+=1) i];
+
   String genderPreference;
   double _lowValue = 18;
   double _highValue = 80;
@@ -740,7 +741,9 @@ class _EditProfileState extends State<EditProfile> {
                                                               child: Text(value,
                                                                   style: TextStyle(
                                                                       fontSize:
-                                                                          20.0)),
+                                                                          20.0,
+                                                                    color: Colors.red
+                                                                  )),
                                                             );
                                                           }).toList(),
                                                         ),

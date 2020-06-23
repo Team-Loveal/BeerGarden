@@ -17,84 +17,95 @@ class _MessagesState extends State<Messages> {
   Widget build(BuildContext context) {
     final user = Provider.of<UserData>(context);
 
-    return Scaffold(
-        backgroundColor: Hexcolor("#F4AA33"),
-        appBar: PreferredSize(
-          preferredSize:
-              Size.fromHeight(MediaQuery.of(context).size.height * 0.15),
-          child: AppBar(
-            backgroundColor: Hexcolor("#F4AA33"),
-            flexibleSpace: Container(
-              child: Center(
-                child: Text('Messages',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 38.0)),
+    return Container(
+      height: double.infinity,
+      width: double.infinity,
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Hexcolor("#FFF1BA"), Hexcolor("#F4AA33")],
+            stops: [0.01, 0.15],
+          )),
+      child: Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: PreferredSize(
+            preferredSize:
+                Size.fromHeight(MediaQuery.of(context).size.height * 0.15),
+            child: AppBar(
+              backgroundColor: Colors.transparent,
+              flexibleSpace: Container(
+                child: Center(
+                  child: Text('Messages',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 38.0)),
+                ),
               ),
+              elevation: 0.0,
+              automaticallyImplyLeading: false,
             ),
-            elevation: 0.0,
-            automaticallyImplyLeading: false,
           ),
-        ),
-        body: Column(
-          children: <Widget>[
-            Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30.0),
-                    topRight: Radius.circular(30.0),
+          body: Column(
+            children: <Widget>[
+              Expanded(
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(30.0),
+                      topRight: Radius.circular(30.0),
+                    ),
+                  ),
+                  child: Column(
+                    children: <Widget>[
+                      Expanded(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(30.0),
+                              topRight: Radius.circular(30.0),
+                            ),
+                          ),
+                          child: StreamBuilder(
+                              stream: Firestore.instance
+                                  .collection('messages')
+                                  .where('matchedUsers', arrayContains: user.uid)
+                                  .where('matched', isEqualTo: true)
+                                  .where('active', isEqualTo: true)
+                                  .snapshots(),
+                              builder: (context, snapshot) {
+                                if (!snapshot.hasData) {
+                                  return Center(
+                                    child: Loading(),
+                                  );
+                                } else {
+                                  return ClipRRect(
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(30.0),
+                                      topRight: Radius.circular(30.0),
+                                    ),
+                                    child: ListView.builder(
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.vertical,
+                                      itemBuilder: (context, index) =>
+                                          buildChatroom(
+                                              snapshot.data.documents[index],
+                                              context),
+                                      itemCount: snapshot.data.documents.length,
+                                    ),
+                                  );
+                                }
+                              }),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                child: Column(
-                  children: <Widget>[
-                    Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(30.0),
-                            topRight: Radius.circular(30.0),
-                          ),
-                        ),
-                        child: StreamBuilder(
-                            stream: Firestore.instance
-                                .collection('messages')
-                                .where('matchedUsers', arrayContains: user.uid)
-                                .where('matched', isEqualTo: true)
-                                .where('active', isEqualTo: true)
-                                .snapshots(),
-                            builder: (context, snapshot) {
-                              if (!snapshot.hasData) {
-                                return Center(
-                                  child: Loading(),
-                                );
-                              } else {
-                                return ClipRRect(
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(30.0),
-                                    topRight: Radius.circular(30.0),
-                                  ),
-                                  child: ListView.builder(
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.vertical,
-                                    itemBuilder: (context, index) =>
-                                        buildChatroom(
-                                            snapshot.data.documents[index],
-                                            context),
-                                    itemCount: snapshot.data.documents.length,
-                                  ),
-                                );
-                              }
-                            }),
-                      ),
-                    ),
-                  ],
-                ),
               ),
-            ),
-          ],
-        ));
+            ],
+          )),
+    );
   }
 }
