@@ -48,8 +48,9 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                 },
                 isExtended: true,
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                icon: Icon(Icons.check),
-                label: Text('CONFIRM'),
+                icon: Icon(Icons.check, color: Colors.white),
+                label: Text('CONFIRM',
+                style: TextStyle(color: Colors.white),),
                 backgroundColor: Hexcolor("#8CC63E"),
               ),
               floatingActionButtonLocation:
@@ -181,108 +182,108 @@ class _ProfilePreviewState extends State<ProfilePreview> {
                                       child: OutlineButton(
                                           child: Text("Games",
                                               style: TextStyle(
-                                                  color: Colors.black)),
+                                                  color: Hexcolor("#8CC63E"))),
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
                                                   BorderRadius.circular(
-                                                      10.0)))),
+                                                      30.0)))),
                                 if (userData.shopping)
                                   Container(
                                       margin: EdgeInsets.only(right: 10),
                                       child: OutlineButton(
                                           child: Text("Shopping",
                                               style: TextStyle(
-                                                  color: Colors.black)),
+                                                  color: Hexcolor("#8CC63E"))),
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
                                                   BorderRadius.circular(
-                                                      10.0)))),
+                                                      30.0)))),
                                 if (userData.makingBalloonAnimals)
                                   Container(
                                       margin: EdgeInsets.only(right: 10),
                                       child: OutlineButton(
                                           child: Text("Photography",
                                               style: TextStyle(
-                                                  color: Colors.black)),
+                                                  color: Hexcolor("#8CC63E"))),
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
                                                   BorderRadius.circular(
-                                                      10.0)))),
+                                                      30.0)))),
                                 if (userData.cooking)
                                   Container(
                                       margin: EdgeInsets.only(right: 10),
                                       child: OutlineButton(
                                           child: Text("Karaoke",
                                               style: TextStyle(
-                                                  color: Colors.black)),
+                                                  color: Hexcolor("#8CC63E"))),
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
                                                   BorderRadius.circular(
-                                                      10.0)))),
+                                                      30)))),
                                 if (userData.painting)
                                   Container(
                                       margin: EdgeInsets.only(right: 10),
                                       child: OutlineButton(
                                           child: Text("Art",
                                               style: TextStyle(
-                                                  color: Colors.black)),
+                                                  color: Hexcolor("#8CC63E"))),
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
                                                   BorderRadius.circular(
-                                                      10.0)))),
+                                                      30.0)))),
                                 if (userData.movies)
                                   Container(
                                       margin: EdgeInsets.only(right: 10),
                                       child: OutlineButton(
                                           child: Text("Movies",
                                               style: TextStyle(
-                                                  color: Colors.black)),
+                                                  color: Hexcolor("#8CC63E"))),
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
                                                   BorderRadius.circular(
-                                                      10.0)))),
+                                                      30.0)))),
                                 if (userData.sports)
                                   Container(
                                       margin: EdgeInsets.only(right: 10),
                                       child: OutlineButton(
                                           child: Text("Sports",
                                               style: TextStyle(
-                                                  color: Colors.black)),
+                                                  color: Hexcolor("#8CC63E"))),
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
                                                   BorderRadius.circular(
-                                                      10.0)))),
+                                                      30.0)))),
                                 if (userData.writing)
                                   Container(
                                       margin: EdgeInsets.only(right: 10),
                                       child: OutlineButton(
                                           child: Text("Traveling",
                                               style: TextStyle(
-                                                  color: Colors.black)),
+                                                  color: Hexcolor("#8CC63E"))),
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
                                                   BorderRadius.circular(
-                                                      10.0)))),
+                                                      30.0)))),
                                 if (userData.drinking)
                                   Container(
                                       margin: EdgeInsets.only(right: 10),
                                       child: OutlineButton(
                                           child: Text("Drinking",
                                               style: TextStyle(
-                                                  color: Colors.black)),
+                                                  color: Hexcolor("#8CC63E"))),
                                           onPressed: null,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
                                                   BorderRadius.circular(
-                                                      10.0)))),
+                                                      30.0)))),
                               ],
                             )
                           ]),
