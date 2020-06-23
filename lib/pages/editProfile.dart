@@ -70,21 +70,10 @@ class _EditProfileState extends State<EditProfile> {
         _highValue ?? userData.highAge,
         genderPreference ?? userData.genderPreference);
 
-    // recreate matches with new preference
-    // if (_lowValue != 18 ||
-    //     _highValue != 100 ||
-    //     userData.genderPreference != genderPreference) {
-    //   await DatabaseService(uid: user.uid).deleteMatches();
-    //   await DatabaseService(uid: user.uid).createMatches(
-    //       genderPreference ?? userData.genderPreference,
-    //       _lowValue ?? userData.lowAge,
-    //       _highValue ?? userData.highAge);
-    //   //try new routing
     Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) => NavigationHome(newIdx: profileIndex)));
-    // }
   }
 
   @override

@@ -298,7 +298,6 @@ class _MessageState extends State<Message> {
                                   }
                                 })),
                       ),
-                      //INPUT MESSAGE FIELD
                       Container(
                         decoration:
                             BoxDecoration(color: Theme.of(context).cardColor),
@@ -313,7 +312,6 @@ class _MessageState extends State<Message> {
         ));
   }
 
-  // MESSAGE INPUT AND SEND
   Widget _buildTextInput() {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 8.0),
@@ -394,7 +392,7 @@ class _MessageState extends State<Message> {
                   : Container(),
               document['text'] == 'sendBeer'
                   ? Container(
-                      child: Image.asset('images/cheers.gif',
+                      child: Image.asset('images/cheers2.gif',
                           width: 100.0, height: 100.0, fit: BoxFit.fitWidth))
                   : Container(
                       padding: const EdgeInsets.all(15.0),

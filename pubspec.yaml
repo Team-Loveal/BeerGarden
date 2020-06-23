@@ -49,6 +49,7 @@ dependencies:
   page_transition: ^1.1.5
   titled_navigation_bar: ^4.1.0
   http: ^0.12.1
+  curved_navigation_bar: ^0.3.3
 
 dev_dependencies:
   flutter_test:
