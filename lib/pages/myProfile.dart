@@ -168,15 +168,15 @@ class _MyProfileState extends State<MyProfile> {
                               child: ListView(
                                 scrollDirection: Axis.horizontal,
                                 children: <Widget>[
-                                  if (userData.yodeling) interests("Yodeling"),
+                                  if (userData.yodeling) interests("Games"),
                                   if (userData.shopping) interests("Shopping"),
                                   if (userData.makingBalloonAnimals)
-                                    interests("Making Balloon Animals"),
-                                  if (userData.cooking) interests("Cooking"),
-                                  if (userData.painting) interests("Painting"),
+                                    interests("Photography"),
+                                  if (userData.cooking) interests("Karaoke"),
+                                  if (userData.painting) interests("Art"),
                                   if (userData.movies) interests("Movies"),
                                   if (userData.sports) interests("Sports"),
-                                  if (userData.writing) interests("Writing"),
+                                  if (userData.writing) interests("Traveling"),
                                   if (userData.drinking) interests("Drinking"),
                                 ],
                               ),
