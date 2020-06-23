@@ -38,15 +38,11 @@ class Box extends StatelessWidget {
                 width: width,
                 height: height,
                 child: isEnoughRoomForTypewriter(width)
-                    ? TypewriterText("Meet someone new")
+                    ? TypewriterText("Meet someone NEW ")
                     : Container(),
               ),
               onTap: () async {
-                print("Click event on Container");
-                //add matches by one
                 int matches = myUserData.matches + 1;
-
-                //find a user where matched is false
                 await Firestore.instance
                     .collection("messages")
                     .where('matchedUsers', arrayContains: user.uid)
@@ -54,8 +50,6 @@ class Box extends StatelessWidget {
                     .then((data) => data.documents.forEach((doc) => {
                           if (!doc['matched'])
                             {
-                              //if fromID is not yours
-                              //set fromID to user.uid and toID to original fromID value
                               if (doc['fromID'] != user.uid)
                                 {
                                   Firestore.instance
@@ -72,6 +66,7 @@ class Box extends StatelessWidget {
                                     'matchID': doc['fromID'],
                                     'chatID': doc.documentID,
                                     'matches': matches,
+                                    'confetti': true,
                                   })
                                 }
                               else
@@ -83,11 +78,11 @@ class Box extends StatelessWidget {
                                     'matchID': doc['toID'],
                                     'chatID': doc.documentID,
                                     'matches': matches,
+                                    'confetti': true,
                                   }),
                                 }
                             }
                         }));
-                //go to matched Profile page
                 Navigator.of(context).pushNamed('/navigationHome');
               },
             );

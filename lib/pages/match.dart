@@ -13,11 +13,10 @@ import 'package:lovealapp/widgets/interests.dart';
 import 'package:lovealapp/widgets/questionAnswer.dart';
 import 'package:lovealapp/widgets/fullScreenImage.dart';
 import 'package:pimp_my_button/pimp_my_button.dart';
+import 'package:confetti/confetti.dart';
 
 //adding for transition animation
 import 'package:page_transition/page_transition.dart';
-
-//button animation
 
 class Match extends StatefulWidget {
   @override
@@ -33,16 +32,21 @@ class _MatchState extends State<Match> {
   double lowAge;
   double highAge;
   String genderPreference;
+  bool playConfetti;
 
   double sigmaX = 50;
   double sigmaY = 50;
+
+  ConfettiController _confettiController;
 
   @override
   void initState() {
     super.initState();
     final user = Provider.of<User>(context, listen: false);
 
-    //get matches, matchID and chatID from db
+    _confettiController =
+        ConfettiController(duration: const Duration(seconds: 5));
+
     Firestore.instance.collection('users').document(user.uid).get().then((doc) {
       //get values for the widget build
       setState(() {
@@ -53,6 +57,7 @@ class _MatchState extends State<Match> {
         lowAge = doc['lowAge'].toDouble();
         highAge = doc['highAge'].toDouble();
         genderPreference = doc['genderPreference'];
+        playConfetti = doc['confetti'];
       });
 
       //decrease blur of active messages if matches have been reset to zero and you are not a new user
@@ -83,7 +88,14 @@ class _MatchState extends State<Match> {
     });
   }
 
-  void startChat() async {
+  _confettiOff() async {
+    final user = Provider.of<User>(context, listen: false);
+    Firestore.instance.collection('users').document(user.uid).updateData({
+      'confetti': false,
+    });
+  }
+
+  startChat() async {
     Firestore.instance
         .collection("messages")
         .document(chatID)
@@ -92,12 +104,15 @@ class _MatchState extends State<Match> {
 
   @override
   Widget build(BuildContext context) {
-    //final myUserData = Provider.of<UserData>(context);
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: matchID).userData,
         builder: (context, snapshot) {
           UserData userData = snapshot.data;
           if (snapshot.hasData && matches > 0) {
+            if (playConfetti) {
+              _confettiController.play();
+              _confettiOff();
+            }
             return Container(
               height: double.infinity,
               width: double.infinity,
@@ -116,6 +131,19 @@ class _MatchState extends State<Match> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
+                      ConfettiWidget(
+                        confettiController: _confettiController,
+                        blastDirectionality: BlastDirectionality
+                            .explosive, // don't specify a direction, blast randomly
+                        shouldLoop:
+                            false, // start again as soon as the animation is finished
+                        colors: const [
+                          Colors.lightGreen,
+                          Colors.orange,
+                          Colors.yellow,
+                          Colors.white
+                        ],
+                      ),
                       GestureDetector(
                         onTap: () {
                           Navigator.push(context,
@@ -266,7 +294,6 @@ class _MatchState extends State<Match> {
               ),
             );
           } else if ((snapshot.hasData && matches == 0) || matchID == null) {
-            //final user = Provider.of<User>(context);
             return Scaffold(
               body: Container(
                   height: double.infinity,

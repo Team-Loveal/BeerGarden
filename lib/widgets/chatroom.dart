@@ -66,7 +66,7 @@ Widget buildChatroom(DocumentSnapshot document, BuildContext context) {
                       .snapshots(),
                   builder: (context, messages) {
                     if (!messages.hasData) {
-                      return Center(child: CircularProgressIndicator());
+                      return Center();
                     } else {
                       // Format timestamp to "Month Day"
                       date = new DateTime.fromMillisecondsSinceEpoch(
