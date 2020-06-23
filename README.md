@@ -13,11 +13,11 @@ Available NOW at Google Play store 👉 [BeerGarden](https://play.google.com/sto
 
 ### Here's a preview of the welcome screen:
 
-![BeerGarden1](./images/welcome.jpg)
+![BeerGarden1](./images/welcome.png)
 
 ### This is a preview of the create profile screen:
 
-![BeerGarden2](./images/create.jpg)
+![BeerGarden2](./images/create.png)
 
 ### This is a preview of the messages screen:
 
