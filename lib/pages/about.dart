@@ -69,7 +69,7 @@ class _AboutState extends State<About> {
       body: Padding(
         padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
         child: Text(
-            "Your phone isn't dying and there are no errors with the image. At BeerGarden, we intentionally made peoples photos blurry to help develop more meaningful relationships based on things like conversation, personality, and (digital) BEERS! Somewhat inspired by the idea of beer goggles, the more you drink, the better a person may look to you; in BeerGarden as you continue to communicate, build your relationships and 'drink' with other users, their profile picture will gradually become clearer to you, and yours to them as well.",
+            "Your phone isn't dying! At BeerGarden, we intentionally make photos blurry to help develop more meaningful relationships based on things like conversation, personality, and (digital) BEERS! Inspired by the idea of beer goggles; the more you drink, the better a person may look to you. In BeerGarden as you continue to communicate and 'drink' with other users, their profile picture will gradually become clearer to you, and yours to them.",
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Colors.white,
@@ -92,7 +92,7 @@ class _AboutState extends State<About> {
       body: Padding(
         padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
         child: Text(
-            "And time both users profile pictures will become 100% visible. At BeerGarden, we hope that users will be able to build stronger relationships by having genuine conversations opposed to instantly judging people only based on their image. Please enjoy the BeerGarden, and grow your relationships over a beer!",
+            "and time both users profile pictures will become 100% visible. At BeerGarden, we hope that users will be able to build stronger relationships by having genuine conversations opposed to instantly judging people only based on their image. Please enjoy the BeerGarden, and grow your relationships over a beer!",
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Colors.white,
