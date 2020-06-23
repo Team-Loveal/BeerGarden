@@ -13,7 +13,7 @@ class _AboutState extends State<About> {
   final pageList = [
     PageModel(
         color: Hexcolor("#F4AA33"),
-        heroAssetPath: 'images/logo.png',
+        heroAssetPath: 'images/cheers.gif',
         title: Text("BeerGarden",
             style: TextStyle(
               fontSize: 34.0,
