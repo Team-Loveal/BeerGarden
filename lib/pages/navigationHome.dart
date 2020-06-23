@@ -33,7 +33,6 @@ class _NavigationHomeState extends State<NavigationHome> {
 
   void onTabTapped(int index) {
     HapticFeedback.heavyImpact();
-   // HapticFeedback.mediumImpact();
     setState(() {
       if (newIdx is int) {
         newIdx = null;

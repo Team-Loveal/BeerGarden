@@ -92,7 +92,6 @@ class _MatchState extends State<Match> {
 
   @override
   Widget build(BuildContext context) {
-    //final myUserData = Provider.of<UserData>(context);
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: matchID).userData,
         builder: (context, snapshot) {
@@ -103,22 +102,23 @@ class _MatchState extends State<Match> {
               width: double.infinity,
               decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [Hexcolor("#FFF1BA"), Hexcolor("#F4AA33")],
-                    stops: [0.01, 0.2],
-                  )),
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [Hexcolor("#FFF1BA"), Hexcolor("#F4AA33")],
+                stops: [0.01, 0.2],
+              )),
               child: Scaffold(
                 backgroundColor: Colors.transparent,
                 appBar: PreferredSize(
-                  preferredSize:
-                      Size.fromHeight(MediaQuery.of(context).size.height * 0.30),
+                  preferredSize: Size.fromHeight(
+                      MediaQuery.of(context).size.height * 0.30),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (_) {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (_) {
                             return fullScreenImage(
                                 context, userData.imgUrl, sigmaX, sigmaY);
                           }));
@@ -183,7 +183,8 @@ class _MatchState extends State<Match> {
                             margin: const EdgeInsets.symmetric(
                                 horizontal: 20.0, vertical: 5.0),
                             child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   Text('Interests',
@@ -193,7 +194,8 @@ class _MatchState extends State<Match> {
                                       )),
                                   SizedBox(height: 5),
                                   Container(
-                                    margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+                                    margin:
+                                        const EdgeInsets.fromLTRB(0, 5, 0, 5),
                                     height: 40,
                                     child: ListView(
                                       scrollDirection: Axis.horizontal,
@@ -208,8 +210,10 @@ class _MatchState extends State<Match> {
                                           interests("Cooking"),
                                         if (userData.painting)
                                           interests("Painting"),
-                                        if (userData.movies) interests("Movies"),
-                                        if (userData.sports) interests("Sports"),
+                                        if (userData.movies)
+                                          interests("Movies"),
+                                        if (userData.sports)
+                                          interests("Sports"),
                                         if (userData.writing)
                                           interests("Writing"),
                                         if (userData.drinking)
