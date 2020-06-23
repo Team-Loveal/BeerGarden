@@ -5,11 +5,9 @@ Widget fullScreenImage(
     BuildContext context, String src, double sigmaX, sigmaY) {
   return GestureDetector(
     child: Center(
-      child: Hero(
-        tag: 'imageHero',
         child: Stack(
           children: <Widget>[
-            Image(image: NetworkImage(src)),
+        Image(image: NetworkImage(src)),
             Positioned.fill(
               child: BackdropFilter(
                   filter: ImageFilter.blur(sigmaX: sigmaX, sigmaY: sigmaY),
@@ -17,7 +15,7 @@ Widget fullScreenImage(
             ),
           ],
         ),
-      ),
+
     ),
     onTap: () {
       Navigator.pop(context);
