@@ -14,7 +14,7 @@ Widget fullScreenImage(
         child: Stack(
           children: <Widget>[
             Image(image: NetworkImage(src)),
-            Positioned.fill(
+            Positioned(
                 //Container(
                 //width: MediaQuery.of(context).size.width,
                 //height: MediaQuery.of(context).size.height,
