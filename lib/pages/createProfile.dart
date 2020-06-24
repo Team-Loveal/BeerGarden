@@ -7,7 +7,7 @@ import 'package:lovealapp/shared/loading.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:hexcolor/hexcolor.dart';
-
+import 'package:flutter_range_slider/flutter_range_slider.dart' as frs;
 
 class CreateProfile extends StatefulWidget {
   @override
@@ -657,6 +657,83 @@ class _CreateProfileState extends State<CreateProfile> {
                                     child: Column(
                                   children: <Widget>[
                                     Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment
+                                        .spaceBetween,
+                                      children: <Widget>[
+                                        Padding(
+                                          padding:
+                                          const EdgeInsets
+                                              .all(
+                                              30.0),
+                                          child: Text(
+                                            'Age',
+                                            style: TextStyle(
+                                                fontSize:
+                                                20.0),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                          const EdgeInsets
+                                              .all(
+                                              30.0),
+                                          child: Text(
+                                            //'18 - 100',
+                                            '${_lowValue.toInt()} - ${_highValue.toInt()}',
+                                            style: TextStyle(
+                                                fontSize:
+                                                20.0),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    SliderTheme(
+                                      data:
+                                      SliderTheme.of(
+                                          context)
+                                          .copyWith(
+                                        overlayColor:
+                                        Colors.white,
+                                        activeTrackColor:
+                                        Hexcolor(
+                                            "#8CC63E"),
+                                        inactiveTrackColor:
+                                        Hexcolor(
+                                            '#FFF1BA'),
+                                        thumbColor:
+                                        Hexcolor(
+                                            "#8CC63E"),
+                                        valueIndicatorColor:
+                                        Hexcolor(
+                                            "#8CC63E"),
+                                      ),
+                                      child:
+                                      frs.RangeSlider(
+                                        min: 18,
+                                        max: 100,
+                                        lowerValue:
+                                        _lowValue,
+                                        upperValue:
+                                        _highValue,
+                                        divisions: 82,
+                                        showValueIndicator:
+                                        true,
+                                        valueIndicatorMaxDecimals:
+                                        0,
+                                        onChanged: (double
+                                        newLowerValue,
+                                            double
+                                            newUpperValue) {
+                                          setState(() {
+                                            _lowValue =
+                                                newLowerValue;
+                                            _highValue =
+                                                newUpperValue;
+                                          });
+                                        },
+                                      ),
+                                    /*Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: <Widget>[
@@ -690,8 +767,8 @@ class _CreateProfileState extends State<CreateProfile> {
                                               _highValue = _range.end
                                             });
                                       },
-                                    ),
-                                  ],
+                                    ),*/
+                                    )],
                                 )),
                                 Container(
                                   padding: EdgeInsets.fromLTRB(30, 10, 20, 0),

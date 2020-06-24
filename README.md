@@ -26,7 +26,7 @@ Available NOW at Google Play store 👉 [BeerGarden](https://play.google.com/sto
 
 ## Installation
 
-1. Go to Google Play and download the app
+1.  Go to Google Play and download the app
 
 2.  Take a great selfie
 
