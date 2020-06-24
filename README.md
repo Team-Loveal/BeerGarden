@@ -32,7 +32,7 @@ Meet a new person everyday with both you and your match's photo blurred. As you 
 
 ![BeerGarden](./images/messages.jpg)
 
-#### **See you at BeerGarden!** 👉 [BeerGarden](https://play.google.com/store/apps/details?id=yurikanamba.lovealapp&hl=en) 🌱
+### **See you at BeerGarden!** 👉 [BeerGarden](https://play.google.com/store/apps/details?id=yurikanamba.lovealapp&hl=en) 🌱
 
 
 
