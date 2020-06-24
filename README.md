@@ -7,7 +7,7 @@ Beer Garden is a dating app with a twist ✨ It's an online beer garden where yo
 
 Meet a new person everyday with both you and your match's photo blurred. As you build your new relationship through conversations, the photos will gradually reveal itself! 🎉
 
-*Find true love ♥️ It all starts with a hearty** ***cheers!*** 🍻 
+*Find true love ♥️ It all starts with a hearty* ***cheers!*** 🍻 
 
 **Available NOW at Google Play store** 👉 [BeerGarden](https://play.google.com/store/apps/details?id=yurikanamba.lovealapp&hl=en) 🌱
 
