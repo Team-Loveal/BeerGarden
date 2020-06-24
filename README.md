@@ -9,7 +9,7 @@ Meet a new person everyday with both you and your match's photo blurred. As you 
 
 *Find true love ♥️ It all starts with a hearty** ***cheers!*** 🍻 
 
-**Available NOW at Google Play store** 👉 [BeerGarden](https://play.google.com/store/)🌱
+**Available NOW at Google Play store** 👉 [BeerGarden](https://play.google.com/store/apps/details?id=yurikanamba.lovealapp&hl=en) 🌱
 
 ## 👀 App Preview
 #### Welcome screen
@@ -32,7 +32,7 @@ Meet a new person everyday with both you and your match's photo blurred. As you 
 
 ![BeerGarden](./images/messages.jpg)
 
-#### Chatroom
+#### **See you at BeerGarden!** 👉 [BeerGarden](https://play.google.com/store/apps/details?id=yurikanamba.lovealapp&hl=en) 🌱
 
 
 
