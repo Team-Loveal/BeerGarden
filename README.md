@@ -1,13 +1,13 @@
 # Beer Garden 🌱
-### Grow your relationships over a beer 🍻
+### *Grow your relationships over a beer* 🍻
 
 ###### This was created during our time as students at Code Chrysalis.
 
 Beer Garden is a dating app with a twist ✨ It's an online beer garden where you can meet new people and make wonderful relationships *through conversations rather than by looks*!
 
-Meet a new person everyday with both your photos blurred. As you build your new relationship through conversations, the photos will gradually reveal itself! 🎉
+Meet a new person everyday with both you and your match's photo blurred. As you build your new relationship through conversations, the photos will gradually reveal itself! 🎉
 
-**Find true love ♥️ It all starts with a hearty** ***cheers!***🍻 
+**Find true love ♥️ It all starts with a hearty** ***cheers!*** 🍻 
 
 Available NOW at Google Play store 👉 [BeerGarden](https://play.google.com/store/)
 
