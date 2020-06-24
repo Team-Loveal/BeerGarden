@@ -12,21 +12,27 @@ Meet a new person everyday with both you and your match's photo blurred. As you 
 **Available NOW at Google Play store** 👉 [BeerGarden](https://play.google.com/store/)🌱
 
 ## 👀 App Preview
-##### Welcome screen
+#### Welcome screen
 
-![BeerGarden1](./images/welcome.png)
+![BeerGarden](./images/welcome_screen.jpg)
 
-##### User Profile
+#### User Profile
 
-![BeerGarden2](./images/create.png)
+![BeerGarden](./images/user_profile.jpg)
 
-##### Today's Match
+#### Today's Match
 
-##### Messages
+![BeerGarden](./images/todays_match.jpg)
 
-![BeerGarden3](./images/messages.jpg)
+#### Match's Profile
 
-##### Chatroom
+![BeerGarden](./images/match_preview.jpg)
+
+#### Messages
+
+![BeerGarden](./images/messages.jpg)
+
+#### Chatroom
 
 
 
