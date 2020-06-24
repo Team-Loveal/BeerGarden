@@ -1,4 +1,4 @@
-# 🌱 Beer Garden
+# 🌱 BeerGarden
 ### *Grow your relationships over a beer* 🍻
 
 ###### This was created during our time as students at Code Chrysalis.
